@@ -4,6 +4,7 @@ coverage
 coverage.json
 scripts/@types
 .eslintcache
+*-archive/
 
 #Hardhat files
 cache
