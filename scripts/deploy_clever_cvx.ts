@@ -24,8 +24,8 @@ const HARVEST_BOUNTY_PERCENTAGE = 1e7; // 1%
 const REPAY_FEE_PERCENTAGE = 5e7; // 5%
 const RESERVE_RATE = 5e8; // 50%
 const STAKE_PERCENTAGE = 8e8; // 80%
-const STAKE_THRESHOLD = ethers.utils.parseEther("10");
-const MINT_CEILING = ethers.utils.parseEther("1000000");
+const STAKE_THRESHOLD = ethers.parseEther("10");
+const MINT_CEILING = ethers.parseEther("1000000");
 const CVX = ADDRESS.CVX;
 const CVXCRV = ADDRESS.CVXCRV;
 

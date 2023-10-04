@@ -34,7 +34,7 @@ const PLATFORM_FEE_PERCENTAGE = 2e7; // 2%
 const HARVEST_BOUNTY_PERCENTAGE = 1e7; // 1%
 const REPAY_FEE_PERCENTAGE = 5e7; // 5%
 const RESERVE_RATE = 5e8; // 50%
-const MINT_CEILING = ethers.utils.parseEther("10000000");
+const MINT_CEILING = ethers.parseEther("10000000");
 const CRV = ADDRESS.CRV;
 
 let proxyAdmin: ProxyAdmin;

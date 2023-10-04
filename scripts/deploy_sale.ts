@@ -7,17 +7,17 @@ import { ADDRESS, DEPLOYED_CONTRACTS, ZAP_ROUTES } from "./utils";
 const config: {
   time: { WhitelistStartTime: number; PublicStartTime: number; SaleDuration: number };
   price: {
-    InitialPrice: BigNumber;
-    UpRatio: BigNumber;
-    Variation: BigNumber;
+    InitialPrice: BigInt;
+    UpRatio: BigInt;
+    Variation: BigInt;
   };
   TokenSale: string;
 } = {
   time: { WhitelistStartTime: 1664978400 - 1, PublicStartTime: 1664978400, SaleDuration: 86400 * 7 },
   price: {
-    InitialPrice: ethers.utils.parseEther("1"),
-    UpRatio: ethers.utils.parseUnits("0", 9),
-    Variation: ethers.utils.parseEther("10000"),
+    InitialPrice: ethers.parseEther("1"),
+    UpRatio: ethers.parseUnits("0", 9),
+    Variation: ethers.parseEther("10000"),
   },
   TokenSale: "0x07867298d99B95772008583bd603cfA68B8C75E7",
 };
@@ -36,7 +36,7 @@ async function main() {
     console.log("Found TokenSale at:", sale.address);
   } else {
     const TokenSale = await ethers.getContractFactory("TokenSale", deployer);
-    sale = await TokenSale.deploy(WETH, CVX, DEPLOYED_CONTRACTS.AladdinZap, ethers.utils.parseEther("100000"));
+    sale = await TokenSale.deploy(WETH, CVX, DEPLOYED_CONTRACTS.AladdinZap, ethers.parseEther("100000"));
     await sale.deployed();
     config.TokenSale = sale.address;
     console.log("Deploy TokenSale at:", sale.address);

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { BigNumber, constants, Contract } from "ethers";
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { Contract } from "ethers";
 import { ethers } from "hardhat";
 import {
   AladdinETH,
@@ -55,18 +55,18 @@ interface IConcentratorInterface {
 }
 
 interface ICLeverAMOInterface {
-  initialRatio: BigNumber;
+  initialRatio: BigInt;
   feeRatio: {
     harvest: number;
     platform: number;
   };
   AMORatio: {
-    min: BigNumber;
-    max: BigNumber;
+    min: BigInt;
+    max: BigInt;
   };
   LPRatio: {
-    min: BigNumber;
-    max: BigNumber;
+    min: BigInt;
+    max: BigInt;
   };
   strategy: string;
   amo: {
@@ -266,18 +266,18 @@ const config: {
     },
   },
   abcCVX: {
-    initialRatio: ethers.utils.parseUnits("99", 10),
+    initialRatio: ethers.parseUnits("99", 10),
     feeRatio: {
       harvest: 1e7, // 1%
       platform: 0,
     },
     AMORatio: {
-      min: ethers.utils.parseUnits("1", 10),
-      max: ethers.utils.parseUnits("5", 10),
+      min: ethers.parseUnits("1", 10),
+      max: ethers.parseUnits("5", 10),
     },
     LPRatio: {
-      min: ethers.utils.parseUnits("1", 10),
-      max: ethers.utils.parseUnits("99.9", 10),
+      min: ethers.parseUnits("1", 10),
+      max: ethers.parseUnits("99.9", 10),
     },
     strategy: "0x29E56d5E68b4819FC4a997b91fc9F4f8818ef1B4",
     amo: {
@@ -1022,16 +1022,16 @@ async function deployAbcCVX() {
     console.log(
       `Update amo config`,
       "AMORatio:",
-      `[${ethers.utils.formatUnits(amoConfig.minAMO, 10)}-${ethers.utils.formatUnits(amoConfig.maxAMO, 10)}]`,
+      `[${ethers.formatUnits(amoConfig.minAMO, 10)}-${ethers.formatUnits(amoConfig.maxAMO, 10)}]`,
       "=>",
-      `[${ethers.utils.formatUnits(cvxConfig.AMORatio.min, 10)}-${ethers.utils.formatUnits(
+      `[${ethers.formatUnits(cvxConfig.AMORatio.min, 10)}-${ethers.formatUnits(
         cvxConfig.AMORatio.max,
         10
       )}],`,
       "LPRatio:",
-      `[${ethers.utils.formatUnits(amoConfig.minLPRatio, 10)}-${ethers.utils.formatUnits(amoConfig.maxLPRatio, 10)}]`,
+      `[${ethers.formatUnits(amoConfig.minLPRatio, 10)}-${ethers.formatUnits(amoConfig.maxLPRatio, 10)}]`,
       "=>",
-      `[${ethers.utils.formatUnits(cvxConfig.LPRatio.min, 10)}-${ethers.utils.formatUnits(
+      `[${ethers.formatUnits(cvxConfig.LPRatio.min, 10)}-${ethers.formatUnits(
         cvxConfig.LPRatio.max,
         10
       )}],`,
@@ -1045,9 +1045,9 @@ async function deployAbcCVX() {
     const tx = await acvx.updateBountyPercentage(cvxConfig.feeRatio.harvest);
     console.log(
       `update harvest bounty ratio`,
-      `${ethers.utils.formatUnits(await acvx.bountyPercentage(), 9)}`,
+      `${ethers.formatUnits(await acvx.bountyPercentage(), 9)}`,
       "=>",
-      `${ethers.utils.formatUnits(cvxConfig.feeRatio.harvest, 9)}`,
+      `${ethers.formatUnits(cvxConfig.feeRatio.harvest, 9)}`,
       `hash: ${tx.hash}`
     );
     const receipt = await tx.wait();
@@ -1064,9 +1064,9 @@ async function deployAbcCVX() {
     );
     console.log(
       `update platform fee ratio`,
-      `${ethers.utils.formatUnits(await acvx.platformPercentage(), 9)}`,
+      `${ethers.formatUnits(await acvx.platformPercentage(), 9)}`,
       "=>",
-      `${ethers.utils.formatUnits(cvxConfig.feeRatio.platform, 9)},`,
+      `${ethers.formatUnits(cvxConfig.feeRatio.platform, 9)},`,
       `hash: ${tx.hash}`
     );
     const receipt = await tx.wait();
@@ -1317,19 +1317,19 @@ async function deployConcentratorStakeDAO() {
     console.log(
       "sdCRVVault.updateFeeInfo",
       `platform[${vaultFeeInfo.platform}=>${DEPLOYED_CONTRACTS.Concentrator.Treasury}]`,
-      `withdrawRatio[${ethers.utils.formatUnits(vaultFeeInfo.withdrawPercentage, 7)}=>${ethers.utils.formatUnits(
+      `withdrawRatio[${ethers.formatUnits(vaultFeeInfo.withdrawPercentage, 7)}=>${ethers.formatUnits(
         deployConfig.StakeDAOCRVVault.ratio.withdraw,
         7
       )}]`,
-      `bountyRatio[${ethers.utils.formatUnits(vaultFeeInfo.bountyPercentage, 7)}=>${ethers.utils.formatUnits(
+      `bountyRatio[${ethers.formatUnits(vaultFeeInfo.bountyPercentage, 7)}=>${ethers.formatUnits(
         deployConfig.StakeDAOCRVVault.ratio.harvest,
         7
       )}]`,
-      `platformRatio[${ethers.utils.formatUnits(vaultFeeInfo.platformPercentage, 7)}=>${ethers.utils.formatUnits(
+      `platformRatio[${ethers.formatUnits(vaultFeeInfo.platformPercentage, 7)}=>${ethers.formatUnits(
         deployConfig.StakeDAOCRVVault.ratio.platform,
         7
       )}]`,
-      `boostRatio[${ethers.utils.formatUnits(vaultFeeInfo.boostPercentage, 7)}=>${ethers.utils.formatUnits(
+      `boostRatio[${ethers.formatUnits(vaultFeeInfo.boostPercentage, 7)}=>${ethers.formatUnits(
         deployConfig.StakeDAOCRVVault.ratio.boost,
         7
       )}]`,
@@ -1367,15 +1367,15 @@ async function deployConcentratorStakeDAO() {
     console.log(
       "asdCRV.updateFeeInfo",
       `platform[${asdCRVFeeInfo.platform}=>${DEPLOYED_CONTRACTS.Concentrator.Treasury}]`,
-      `withdrawRatio[${ethers.utils.formatUnits(asdCRVFeeInfo.withdrawPercentage, 9)}=>${ethers.utils.formatUnits(
+      `withdrawRatio[${ethers.formatUnits(asdCRVFeeInfo.withdrawPercentage, 9)}=>${ethers.formatUnits(
         deployConfig.AladdinSdCRV.ratio.withdraw,
         9
       )}]`,
-      `bountyRatio[${ethers.utils.formatUnits(asdCRVFeeInfo.bountyPercentage, 9)}=>${ethers.utils.formatUnits(
+      `bountyRatio[${ethers.formatUnits(asdCRVFeeInfo.bountyPercentage, 9)}=>${ethers.formatUnits(
         deployConfig.AladdinSdCRV.ratio.harvest,
         9
       )}]`,
-      `platformRatio[${ethers.utils.formatUnits(asdCRVFeeInfo.platformPercentage, 9)}=>${ethers.utils.formatUnits(
+      `platformRatio[${ethers.formatUnits(asdCRVFeeInfo.platformPercentage, 9)}=>${ethers.formatUnits(
         deployConfig.AladdinSdCRV.ratio.platform,
         9
       )}]`,

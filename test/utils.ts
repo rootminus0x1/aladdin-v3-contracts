@@ -1,6 +1,6 @@
 import { Assertion } from "chai";
 import { config as dotEnvConfig } from "dotenv";
-import { BigNumber, BigNumberish } from "ethers";
+import { BigNumberish } from "ethers";
 import * as hre from "hardhat";
 
 dotEnvConfig();
@@ -29,7 +29,7 @@ export async function request_fork(blockNumber: number, accounts: string[]) {
 Assertion.addMethod("closeToBn", function (expected: BigNumberish, delta: BigNumberish) {
   const obj = this._obj;
   this.assert(
-    BigNumber.from(expected).sub(obj).abs().lte(delta),
+    Math.abs(Number(expected) - obj) <= Number(delta),
     `expected ${obj} to be close to ${expected} +/- ${delta}`,
     `expected ${obj} not to be close to ${expected} +/- ${delta}`,
     expected,

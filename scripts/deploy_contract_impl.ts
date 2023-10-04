@@ -7,8 +7,8 @@ const maxPriorityFeePerGas = 1.2e9;
 
 async function main() {
   const overrides = {
-    maxFeePerGas: BigNumber.from(maxFeePerGas),
-    maxPriorityFeePerGas: BigNumber.from(maxPriorityFeePerGas),
+    maxFeePerGas: BigInt.from(maxFeePerGas),
+    maxPriorityFeePerGas: BigInt.from(maxPriorityFeePerGas),
   };
 
   const [deployer] = await ethers.getSigners();

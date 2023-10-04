@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { constants } from "ethers";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../scripts/utils";
+import { TOKENS } from "../../scripts/utils/tokens";
 import { ChainlinkPriceOracle, CurveBasePoolPriceOracle } from "../../typechain";
 import { request_fork } from "../utils";
 
@@ -25,11 +25,11 @@ describe("CurveBasePoolPriceOracle.spec", async () => {
 
     const ChainlinkPriceOracle = await ethers.getContractFactory("ChainlinkPriceOracle", deployer);
     baseOracle = await ChainlinkPriceOracle.deploy();
-    await baseOracle.deployed();
+    await baseOracle.waitForDeployment();
 
     const CurveBasePoolPriceOracle = await ethers.getContractFactory("CurveBasePoolPriceOracle", deployer);
     oracle = await CurveBasePoolPriceOracle.deploy(baseOracle.address);
-    await oracle.deployed();
+    await oracle.waitForDeployment();
 
     await baseOracle.setFeeds([TOKENS.USDC.address], ["0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6"]);
     await baseOracle.setFeeds([TOKENS.USDT.address], ["0x3E7d1eAB13ad0104d2750B8863b489D65364e32D"]);
@@ -77,8 +77,8 @@ describe("CurveBasePoolPriceOracle.spec", async () => {
     });
 
     it("should succeed", async () => {
-      console.log("3CRV", ethers.utils.formatEther(await oracle.price(TOKENS.TRICRV.address)));
-      console.log("crvFRAX", ethers.utils.formatEther(await oracle.price(TOKENS.crvFRAX.address)));
+      console.log("3CRV", ethers.formatEther(await oracle.price(TOKENS.TRICRV.address)));
+      console.log("crvFRAX", ethers.formatEther(await oracle.price(TOKENS.crvFRAX.address)));
     });
   });
 });

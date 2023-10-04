@@ -77,7 +77,7 @@ async function addLiquidity() {
     const tx = await crv.approve(aCRV.address, constants.MaxUint256);
     console.log("approve, tx:", tx.hash);
   }
-  // await aCRV.depositWithCRV(deployer.address, ethers.utils.parseEther("50000"));
+  // await aCRV.depositWithCRV(deployer.address, ethers.parseEther("50000"));
   if ((await aCRV.allowance(deployer.address, vault.address)).eq(constants.Zero)) {
     const tx = await aCRV.approve(vault.address, constants.MaxUint256);
     console.log("approve, tx:", tx.hash);
@@ -96,7 +96,7 @@ async function addLiquidity() {
         maxAmountsIn: [constants.MaxUint256, constants.MaxUint256],
         userData: defaultAbiCoder.encode(
           ["uint8", "uint256[]"],
-          [0, [ethers.utils.parseEther("37800"), ethers.utils.parseEther("771.4285714")]]
+          [0, [ethers.parseEther("37800"), ethers.parseEther("771.4285714")]]
         ),
         fromInternalBalance: false,
       },

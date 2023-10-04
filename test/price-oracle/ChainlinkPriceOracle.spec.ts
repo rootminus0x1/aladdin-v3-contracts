@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { constants } from "ethers";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../scripts/utils";
+import { TOKENS } from "../../scripts/utils/tokens";
 import { ChainlinkPriceOracle } from "../../typechain";
 import { request_fork } from "../utils";
 
@@ -34,7 +34,7 @@ describe("ChainlinkPriceOracle.spec", async () => {
 
     const ChainlinkPriceOracle = await ethers.getContractFactory("ChainlinkPriceOracle", deployer);
     oracle = await ChainlinkPriceOracle.deploy();
-    await oracle.deployed();
+    await oracle.waitForDeployment();
   });
 
   context("auth", async () => {
@@ -68,7 +68,7 @@ describe("ChainlinkPriceOracle.spec", async () => {
       for (const symbol of Object.keys(FEEDS)) {
         const gas = await oracle.estimateGas.price(TOKENS[symbol].address);
         console.log(
-          `price of ${symbol}: ${ethers.utils.formatEther(await oracle.price(TOKENS[symbol].address))},`,
+          `price of ${symbol}: ${ethers.formatEther(await oracle.price(TOKENS[symbol].address))},`,
           "gas usage:",
           gas.toString()
         );

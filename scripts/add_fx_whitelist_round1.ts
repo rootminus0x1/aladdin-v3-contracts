@@ -1687,7 +1687,7 @@ async function main() {
     deployer
   )) as any as TokenSale;
 
-  const caps: BigNumber[] = lists.map((_) => ethers.utils.parseEther("20000"));
+  const caps: BigInt[] = lists.map((_) => ethers.parseEther("20000"));
   const step = 420;
 
   let nonce = await deployer.getTransactionCount();
@@ -1697,8 +1697,8 @@ async function main() {
     console.log("estimate gas:", estimateGas.toString());
     const tx = await sale.updateWhitelistCap(lists.slice(start, end), caps.slice(start, end), {
       gasLimit: estimateGas.mul(11).div(10),
-      maxFeePerGas: ethers.utils.parseUnits("40", "gwei"),
-      maxPriorityFeePerGas: ethers.utils.parseUnits("1", "gwei"),
+      maxFeePerGas: ethers.parseUnits("40", "gwei"),
+      maxPriorityFeePerGas: ethers.parseUnits("1", "gwei"),
       nonce: nonce,
     });
     console.log("run update whitelists, hash:", tx.hash);

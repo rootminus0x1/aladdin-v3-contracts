@@ -3,8 +3,12 @@ node_modules
 coverage
 coverage.json
 scripts/@types
+typechain/
 .eslintcache
-*-archive/
+archive-*/
+
+#yarn files
+yarn-error.log
 
 #Hardhat files
 cache

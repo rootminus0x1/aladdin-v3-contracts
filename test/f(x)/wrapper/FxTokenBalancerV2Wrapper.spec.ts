@@ -1,14 +1,13 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../../scripts/utils";
+import { TOKENS } from "../../../scripts/utils/tokens";
 import { FxTokenBalancerV2Wrapper, MockERC20, WETH9 } from "../../../typechain";
 // eslint-disable-next-line camelcase
 import { request_fork } from "../../utils";
-import { constants } from "ethers";
-import { defaultAbiCoder } from "ethers/lib/utils";
+import { AbiCoder, MaxUint256 } from "ethers";
 
 const FOKR_HEIGHT = 17796350;
 
@@ -20,89 +19,100 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
   let deployer: SignerWithAddress;
 
   let weth: WETH9;
+  let wethAddress: string;
   let src: MockERC20;
+  let srcAddress: string;
   let dst: MockERC20;
+  let dstAddress: string;
   let wrapper: FxTokenBalancerV2Wrapper;
+  let wrapperAddress: string;
 
   beforeEach(async () => {
     request_fork(FOKR_HEIGHT, [DEPLOYER]);
     deployer = await ethers.getSigner(DEPLOYER);
 
     weth = await ethers.getContractAt("WETH9", TOKENS.WETH.address, deployer);
+    wethAddress = TOKENS.WETH.address;
+
     const balancer = await ethers.getContractAt("IBalancerVault", BALANCER_VAULT, deployer);
+    const balancerAddress = BALANCER_VAULT;
+
     const factory = await ethers.getContractAt("IBalancerWeightedPoolFactory", BALANCER_POOL_FACTORY, deployer);
 
     const MockERC20 = await ethers.getContractFactory("MockERC20", deployer);
     src = await MockERC20.deploy("FX", "FX", 18);
-    await src.deployed();
+    await src.waitForDeployment();
+    srcAddress = await src.getAddress();
 
     const poolAddress = await factory.callStatic.create(
       "X",
       "Y",
-      src.address.toLowerCase() < weth.address.toLowerCase()
-        ? [src.address, weth.address]
-        : [weth.address, src.address],
-      src.address.toLowerCase() < weth.address.toLowerCase()
-        ? [ethers.utils.parseEther("0.80"), ethers.utils.parseEther("0.20")]
-        : [ethers.utils.parseEther("0.20"), ethers.utils.parseEther("0.80")],
+      srcAddress.toLowerCase() < wethAddress.toLowerCase()
+        ? [srcAddress, wethAddress]
+        : [wethAddress, srcAddress],
+      srcAddress.toLowerCase() < wethAddress.toLowerCase()
+        ? [ethers.parseEther("0.80"), ethers.parseEther("0.20")]
+        : [ethers.parseEther("0.20"), ethers.parseEther("0.80")],
       1e12,
       deployer.address
     );
     await factory.create(
       "X",
       "Y",
-      src.address.toLowerCase() < weth.address.toLowerCase()
-        ? [src.address, weth.address]
-        : [weth.address, src.address],
-      src.address.toLowerCase() < weth.address.toLowerCase()
-        ? [ethers.utils.parseEther("0.80"), ethers.utils.parseEther("0.20")]
-        : [ethers.utils.parseEther("0.20"), ethers.utils.parseEther("0.80")],
+      srcAddress.toLowerCase() < wethAddress.toLowerCase()
+        ? [srcAddress, wethAddress]
+        : [wethAddress, srcAddress],
+      srcAddress.toLowerCase() < wethAddress.toLowerCase()
+        ? [ethers.parseEther("0.80"), ethers.parseEther("0.20")]
+        : [ethers.parseEther("0.20"), ethers.parseEther("0.80")],
       1e12,
       deployer.address
     );
     dst = await ethers.getContractAt("MockERC20", poolAddress, deployer);
+    dstAddress = poolAddress;
     const pool = await ethers.getContractAt("IBalancerPool", poolAddress, deployer);
     const poolId = await pool.getPoolId();
 
-    await src.approve(balancer.address, constants.MaxUint256);
-    await weth.approve(balancer.address, constants.MaxUint256);
-    await src.mint(deployer.address, ethers.utils.parseEther("80"));
-    await weth.deposit({ value: ethers.utils.parseEther("20") });
+    await src.approve(balancerAddress, MaxUint256);
+    await weth.approve(balancerAddress, MaxUint256);
+    await src.mint(deployer.address, ethers.parseEther("80"));
+    await weth.deposit({ value: ethers.parseEther("20") });
     await balancer.joinPool(poolId, deployer.address, deployer.address, {
       assets:
-        src.address.toLowerCase() < weth.address.toLowerCase()
-          ? [src.address, weth.address]
-          : [weth.address, src.address],
-      maxAmountsIn: [constants.MaxUint256, constants.MaxUint256],
-      userData: defaultAbiCoder.encode(
+        srcAddress.toLowerCase() < wethAddress.toLowerCase()
+          ? [srcAddress, wethAddress]
+          : [wethAddress, srcAddress],
+      maxAmountsIn: [MaxUint256, MaxUint256],
+      userData: AbiCoder.defaultAbiCoder().encode(
         ["uint8", "uint256[]"],
         [
           0,
-          src.address.toLowerCase() < weth.address.toLowerCase()
-            ? [ethers.utils.parseEther("80"), ethers.utils.parseEther("20")]
-            : [ethers.utils.parseEther("20"), ethers.utils.parseEther("80")],
+          srcAddress.toLowerCase() < wethAddress.toLowerCase()
+            ? [ethers.parseEther("80"), ethers.parseEther("20")]
+            : [ethers.parseEther("20"), ethers.parseEther("80")],
         ]
       ),
       fromInternalBalance: false,
     });
 
     const FxTokenBalancerV2Wrapper = await ethers.getContractFactory("FxTokenBalancerV2Wrapper", deployer);
-    wrapper = await FxTokenBalancerV2Wrapper.deploy(src.address, dst.address);
-    await wrapper.deployed();
+    wrapper = await FxTokenBalancerV2Wrapper.deploy(srcAddress, dstAddress);
+    await wrapper.waitForDeployment();
+    wrapperAddress = await wrapper.getAddress();
   });
 
   it("should succeed when wrap", async () => {
-    await src.mint(wrapper.address, ethers.utils.parseEther("10"));
+    await src.mint(wrapperAddress, ethers.parseEther("10"));
     const before = await dst.balanceOf(deployer.address);
-    await wrapper.wrap(ethers.utils.parseEther("10"));
+    await wrapper.wrap(ethers.parseEther("10"));
     const after = await dst.balanceOf(deployer.address);
     expect(after).to.gt(before);
   });
 
   it("should succeed when unwrap", async () => {
-    await dst.transfer(wrapper.address, ethers.utils.parseEther("1"));
+    await dst.transfer(wrapperAddress, ethers.parseEther("1"));
     const before = await src.balanceOf(deployer.address);
-    await wrapper.unwrap(ethers.utils.parseEther("1"));
+    await wrapper.unwrap(ethers.parseEther("1"));
     const after = await src.balanceOf(deployer.address);
     expect(after).to.gt(before);
   });

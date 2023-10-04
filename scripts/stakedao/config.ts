@@ -5,7 +5,7 @@ import path from "path";
 interface IClaimParam {
   token: string;
   index: number;
-  amount: BigNumberish;
+  amount: BigIntish;
   merkleProof: string[];
 }
 

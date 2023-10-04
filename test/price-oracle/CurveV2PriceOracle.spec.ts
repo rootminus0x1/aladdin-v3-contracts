@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
-import { constants } from "ethers";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../scripts/utils";
+import { TOKENS } from "../../scripts/utils/tokens";
 import { ChainlinkPriceOracle, CurveBasePoolPriceOracle, CurveV2PriceOracle } from "../../typechain";
 import { request_fork } from "../utils";
 
@@ -50,7 +49,9 @@ describe("CurveV2PriceOracle.spec", async () => {
   let deployer: SignerWithAddress;
   let other: SignerWithAddress;
   let baseOracleChainlink: ChainlinkPriceOracle;
+  let baseOracleChainlinkAddress: string;
   let baseOracleCurveBasePool: CurveBasePoolPriceOracle;
+  let baseOracleCurveBasePoolAddress: string;
   let oracleWETH: CurveV2PriceOracle;
   let oracleUSDC: CurveV2PriceOracle;
   let oracleFraxBP: CurveV2PriceOracle;
@@ -63,24 +64,26 @@ describe("CurveV2PriceOracle.spec", async () => {
 
     const ChainlinkPriceOracle = await ethers.getContractFactory("ChainlinkPriceOracle", deployer);
     baseOracleChainlink = await ChainlinkPriceOracle.deploy();
-    await baseOracleChainlink.deployed();
+    await baseOracleChainlink.waitForDeployment();
+    baseOracleChainlinkAddress = await baseOracleChainlink.getAddress();
 
     const CurveBasePoolPriceOracle = await ethers.getContractFactory("CurveBasePoolPriceOracle", deployer);
-    baseOracleCurveBasePool = await CurveBasePoolPriceOracle.deploy(baseOracleChainlink.address);
-    await baseOracleCurveBasePool.deployed();
+    baseOracleCurveBasePool = await CurveBasePoolPriceOracle.deploy(baseOracleChainlinkAddress);
+    await baseOracleCurveBasePool.waitForDeployment();
+    baseOracleCurveBasePoolAddress = await baseOracleCurveBasePool.getAddress();
 
     const CurveV2PriceOracle = await ethers.getContractFactory("CurveV2PriceOracle", deployer);
-    oracleWETH = await CurveV2PriceOracle.deploy(baseOracleChainlink.address, TOKENS.WETH.address);
-    await oracleWETH.deployed();
+    oracleWETH = await CurveV2PriceOracle.deploy(baseOracleChainlinkAddress, TOKENS.WETH.address);
+    await oracleWETH.waitForDeployment();
 
-    oracleUSDC = await CurveV2PriceOracle.deploy(baseOracleChainlink.address, TOKENS.USDC.address);
-    await oracleUSDC.deployed();
+    oracleUSDC = await CurveV2PriceOracle.deploy(baseOracleChainlinkAddress, TOKENS.USDC.address);
+    await oracleUSDC.waitForDeployment();
 
-    oracleFraxBP = await CurveV2PriceOracle.deploy(baseOracleCurveBasePool.address, TOKENS.crvFRAX.address);
-    await oracleFraxBP.deployed();
+    oracleFraxBP = await CurveV2PriceOracle.deploy(baseOracleCurveBasePoolAddress, TOKENS.crvFRAX.address);
+    await oracleFraxBP.waitForDeployment();
 
-    oracle3CRV = await CurveV2PriceOracle.deploy(baseOracleCurveBasePool.address, TOKENS.TRICRV.address);
-    await oracle3CRV.deployed();
+    oracle3CRV = await CurveV2PriceOracle.deploy(baseOracleCurveBasePoolAddress, TOKENS.TRICRV.address);
+    await oracle3CRV.waitForDeployment();
 
     await baseOracleChainlink.setFeeds([TOKENS.WETH.address], ["0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"]);
     await baseOracleChainlink.setFeeds([TOKENS.USDC.address], ["0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6"]);
@@ -130,7 +133,7 @@ describe("CurveV2PriceOracle.spec", async () => {
       for (const symbol of Object.keys(WETH_POOLS)) {
         const gas = await oracleWETH.estimateGas.price(TOKENS[symbol].address);
         console.log(
-          `price of ${symbol}: ${ethers.utils.formatEther(await oracleWETH.price(TOKENS[symbol].address))},`,
+          `price of ${symbol}: ${ethers.formatEther(await oracleWETH.price(TOKENS[symbol].address))},`,
           "gas usage:",
           gas.toString()
         );
@@ -150,7 +153,7 @@ describe("CurveV2PriceOracle.spec", async () => {
       for (const symbol of Object.keys(USDC_POOLS)) {
         const gas = await oracleUSDC.estimateGas.price(TOKENS[symbol].address);
         console.log(
-          `price of ${symbol}: ${ethers.utils.formatEther(await oracleUSDC.price(TOKENS[symbol].address))},`,
+          `price of ${symbol}: ${ethers.formatEther(await oracleUSDC.price(TOKENS[symbol].address))},`,
           "gas usage:",
           gas.toString()
         );
@@ -170,7 +173,7 @@ describe("CurveV2PriceOracle.spec", async () => {
       for (const symbol of Object.keys(FRAXBP_POOLS)) {
         const gas = await oracleFraxBP.estimateGas.price(TOKENS[symbol].address);
         console.log(
-          `price of ${symbol}: ${ethers.utils.formatEther(await oracleFraxBP.price(TOKENS[symbol].address))},`,
+          `price of ${symbol}: ${ethers.formatEther(await oracleFraxBP.price(TOKENS[symbol].address))},`,
           "gas usage:",
           gas.toString()
         );
@@ -190,7 +193,7 @@ describe("CurveV2PriceOracle.spec", async () => {
       for (const symbol of Object.keys(TRICRV_POOLS)) {
         const gas = await oracle3CRV.estimateGas.price(TOKENS[symbol].address);
         console.log(
-          `price of ${symbol}: ${ethers.utils.formatEther(await oracle3CRV.price(TOKENS[symbol].address))},`,
+          `price of ${symbol}: ${ethers.formatEther(await oracle3CRV.price(TOKENS[symbol].address))},`,
           "gas usage:",
           gas.toString()
         );

@@ -5,7 +5,6 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-verify";
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-chai-matchers";
-import "@nomiclabs/hardhat-vyper";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
@@ -45,9 +44,6 @@ const config: HardhatUserConfig = {
       },
     ],
   },
-  vyper: {
-    compilers: [{ version: "0.3.1" }, { version: "0.2.7" }],
-  },
   networks: {
     mainnet: {
       url: process.env.MAINNET_URL || "https://rpc.ankr.com/eth",
@@ -83,7 +79,7 @@ const config: HardhatUserConfig = {
     },
   },
   typechain: {
-    outDir: "./scripts/@types",
+    outDir: "./typechain",
     target: "ethers-v6",
   },
   gasReporter: {

@@ -44,7 +44,7 @@ const config: {
       acrv: {
         clever: string;
         reserveRate: number;
-        mintCeiling: BigNumber;
+        mintCeiling: BigInt;
         strategies: {
           aCRV: string;
         };
@@ -67,7 +67,7 @@ const config: {
         repayFeePercentage: number;
         platformFeePercentage: number;
         harvestBountyPercentage: number;
-        mintCeiling: BigNumber;
+        mintCeiling: BigInt;
         concentratorPID: number;
         strategies: { [name: string]: string };
       };
@@ -125,7 +125,7 @@ const config: {
       acrv: {
         clever: "0x9C7e0b181474124641b37d2269C1652397532B61",
         reserveRate: 5e8, // 50%
-        mintCeiling: ethers.utils.parseEther("10000000"),
+        mintCeiling: ethers.parseEther("10000000"),
         strategies: {
           aCRV: "0xd9635E412ea7eAd5e3ABAd608E8077DA0A54996f",
         },
@@ -148,7 +148,7 @@ const config: {
         repayFeePercentage: 0e7, // 0%
         platformFeePercentage: 1e8, // 10%
         harvestBountyPercentage: 0, // 0%
-        mintCeiling: ethers.utils.parseEther("50000"),
+        mintCeiling: ethers.parseEther("50000"),
         concentratorPID: 15,
         strategies: {
           FRAXUSDC_100: "0xAdC6A89d6Df7374629eA3cFd0737843709d29F66", // 100% aCRV are zapped to FRAX
@@ -162,7 +162,7 @@ const config: {
         repayFeePercentage: 0e7, // 0%
         platformFeePercentage: 10e7, // 10%
         harvestBountyPercentage: 0, // 0%
-        mintCeiling: ethers.utils.parseEther("35000"),
+        mintCeiling: ethers.parseEther("35000"),
         concentratorPID: 30,
         strategies: {
           LUSDFRAXBP_100: "0xC65D58A33D9917Df3e1a4033eD73506D9b6aCE6c", // 100% aCRV are zapped to FRAX
@@ -176,7 +176,7 @@ const config: {
         repayFeePercentage: 0e7, // 0.5%
         platformFeePercentage: 10e7, // 10%
         harvestBountyPercentage: 0, // 0%
-        mintCeiling: ethers.utils.parseEther("35000"),
+        mintCeiling: ethers.parseEther("35000"),
         concentratorPID: 29,
         strategies: {
           TUSDFRAXBP_100: "0xa7625Dd9F2D8a95a0D1Ac7E8671547197e9fcAf0", // 100% aCRV are zapped to FRAX
@@ -190,7 +190,7 @@ const config: {
         repayFeePercentage: 0e7, // 0%
         platformFeePercentage: 10e7, // 10%
         harvestBountyPercentage: 0, // 0%
-        mintCeiling: ethers.utils.parseEther("120000"),
+        mintCeiling: ethers.parseEther("120000"),
         concentratorPID: 38,
         strategies: {
           clevUSDFRAXBP_100: "0x5432526e75d45369970b8616F54b25c831d1e2b2", // 100% aCRV are zapped to FRAX
@@ -502,11 +502,11 @@ async function deployFRAX() {
         console.log(
           `Setup fees in FRAX_Furnace, hash: ${tx.hash}`,
           `platform: ${feeInfo.platform} => ${platform}`,
-          `platformPercentage: ${ethers.utils.formatUnits(feeInfo.platformPercentage, 9)} => ${ethers.utils.formatUnits(
+          `platformPercentage: ${ethers.formatUnits(feeInfo.platformPercentage, 9)} => ${ethers.formatUnits(
             platformPercentage,
             9
           )}`,
-          `bountyPercentage: ${ethers.utils.formatUnits(feeInfo.bountyPercentage, 9)} => ${ethers.utils.formatUnits(
+          `bountyPercentage: ${ethers.formatUnits(feeInfo.bountyPercentage, 9)} => ${ethers.formatUnits(
             bountyPercentage,
             9
           )}`
@@ -576,7 +576,7 @@ async function deployFRAX() {
         console.log(
           `Setup reserve rate for CLever_${underlying}, hash:`,
           tx.hash,
-          `rate: ${ethers.utils.formatUnits(currentReserveRate, 9)} => ${ethers.utils.formatUnits(
+          `rate: ${ethers.formatUnits(currentReserveRate, 9)} => ${ethers.formatUnits(
             expectedReserveRate,
             9
           )}`
@@ -602,15 +602,15 @@ async function deployFRAX() {
         console.log(
           `Setup fees in CLever_${underlying}, hash: ${tx.hash}`,
           `platform: ${feeInfo.platform} => ${platform}`,
-          `platformPercentage: ${ethers.utils.formatUnits(feeInfo.platformPercentage, 9)} => ${ethers.utils.formatUnits(
+          `platformPercentage: ${ethers.formatUnits(feeInfo.platformPercentage, 9)} => ${ethers.formatUnits(
             platformPercentage,
             9
           )}`,
-          `bountyPercentage: ${ethers.utils.formatUnits(feeInfo.bountyPercentage, 9)} => ${ethers.utils.formatUnits(
+          `bountyPercentage: ${ethers.formatUnits(feeInfo.bountyPercentage, 9)} => ${ethers.formatUnits(
             bountyPercentage,
             9
           )}`,
-          `repayPercentage: ${ethers.utils.formatUnits(feeInfo.repayPercentage, 9)} => ${ethers.utils.formatUnits(
+          `repayPercentage: ${ethers.formatUnits(feeInfo.repayPercentage, 9)} => ${ethers.formatUnits(
             repayPercentage,
             9
           )}`
@@ -793,7 +793,7 @@ async function deployGauge() {
   const clev = await ethers.getContractAt("IERC20", config.CLEV, deployer);
   const weth = await ethers.getContractAt("IERC20", ADDRESS.WETH, deployer);
 
-  console.log("WETH:", ethers.utils.formatEther(await weth.balanceOf(deployer.address)));
+  console.log("WETH:", ethers.formatEther(await weth.balanceOf(deployer.address)));
 
   // Deploy Curve CLEV/ETH Crypto Pool
   if (config.Gauge.Curve_CLEV_ETH.token === "") {
@@ -840,13 +840,13 @@ async function deployGauge() {
     config.Gauge.Curve_CLEV_ETH.token = token;
   } else {
     const pool = await ethers.getContractAt("ICurveCryptoPool", config.Gauge.Curve_CLEV_ETH.pool, deployer);
-    console.log("clev in pool:", ethers.utils.formatEther(await clev.balanceOf(pool.address)));
+    console.log("clev in pool:", ethers.formatEther(await clev.balanceOf(pool.address)));
     if ((await clev.balanceOf(pool.address)).eq(constants.Zero)) {
       console.log("clev allowance", (await clev.allowance(deployer.address, pool.address)).toString());
       console.log("weth allowance", (await weth.allowance(deployer.address, pool.address)).toString());
       // await clev.approve(pool.address, constants.MaxUint256);
       // await weth.approve(pool.address, constants.MaxUint256);
-      await pool.add_liquidity([ethers.utils.parseEther("0.43203125"), ethers.utils.parseEther("100")], 0, {
+      await pool.add_liquidity([ethers.parseEther("0.43203125"), ethers.parseEther("100")], 0, {
         gasLimit: 2000000,
       });
     }
@@ -1008,7 +1008,7 @@ async function deployIDO() {
       ADDRESS.WETH,
       ADDRESS.CVX,
       DEPLOYED_CONTRACTS.AladdinZap,
-      ethers.utils.parseEther("100000")
+      ethers.parseEther("100000")
     );
     await sale.deployed();
     config.sale = sale.address;

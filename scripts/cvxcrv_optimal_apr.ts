@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
 import axios from "axios";
-import { BigNumber, constants } from "ethers";
 import * as hre from "hardhat";
-import "@nomiclabs/hardhat-ethers";
+import "@nomicfoundation/hardhat-ethers";
 import { IConvexBasicRewards, IConvexToken, ICvxCrvStakingWrapper, IMulticall2 } from "../typechain";
 import { TOKENS } from "./utils";
-import { Interface, Result } from "ethers/lib/utils";
+import { BytesLike, Interface, Result } from "ethers";
 import { Command } from "commander";
 import { plot } from "asciichart";
+import assert from "assert";
 
 const program = new Command();
 program.version("1.0.0");
@@ -16,6 +16,7 @@ program.version("1.0.0");
 const ethers = hre.ethers;
 const MULLTICALL2 = "0x5ba1e12693dc8f9c48aad8770482f4739beed696";
 const STAKED_CVXCRV = "0xaa0C3f5F7DFD688C6E646F66CD2a6B66ACdbE434";
+const HALFPRECISION: bigint = 10n ** 9n;
 
 interface ICoinGeckoResponse {
   [symbol: string]: {
@@ -23,14 +24,14 @@ interface ICoinGeckoResponse {
   };
 }
 
-const MaxSupply = BigNumber.from(10).pow(18 + 2 + 6);
+const MaxSupply = 10n ** (18n + 2n + 6n);
 
-function ratio(a: BigNumber, b: BigNumber): number {
-  return a.mul(1e9).div(b).toNumber() / 1e9;
+function ratio(a: bigint, b: bigint): number {
+  return Number(a * HALFPRECISION / b / HALFPRECISION); // TODO: is this functiom needed with bigint?
 }
 
-function as_float(x: BigNumber): number {
-  return parseFloat(ethers.utils.formatEther(x));
+function as_float(x: BigInt): number {
+  return parseFloat(ethers.formatEther(Number(x)));
 }
 
 async function doMulticall(
@@ -47,40 +48,41 @@ async function doMulticall(
     }),
     { blockTag: block }
   );
-  return results.map((r, index) => {
+  return results.map((r: BytesLike, index: number) => {
     const call = calls[index];
     return call.interface.decodeFunctionResult(call.method, r);
   });
 }
 
-async function computeCVX(amount: BigNumber, contract: IConvexToken, block: number): Promise<BigNumber> {
+async function computeCVX(amount: bigint, contract: IConvexToken, block: number): Promise<bigint> {
+  const contractAddress = await contract.getAddress();
   const results = await doMulticall(
     [
-      { target: contract.address, interface: contract.interface, method: "totalSupply", param: [] },
-      { target: contract.address, interface: contract.interface, method: "reductionPerCliff", param: [] },
-      { target: contract.address, interface: contract.interface, method: "totalCliffs", param: [] },
+      { target: contractAddress, interface: contract.interface, method: "totalSupply", param: [] },
+      { target: contractAddress, interface: contract.interface, method: "reductionPerCliff", param: [] },
+      { target: contractAddress, interface: contract.interface, method: "totalCliffs", param: [] },
     ],
     block
   );
 
-  const supply: BigNumber = results[0][0];
-  const reductionPerCliff: BigNumber = results[1][0];
-  const totalCliffs: BigNumber = results[2][0];
+  const supply: bigint = results[0][0];
+  const reductionPerCliff: bigint = results[1][0];
+  const totalCliffs: bigint = results[2][0];
 
-  if (supply.isZero()) return amount;
+  if (supply == 0n) return amount;
 
-  const cliff = supply.div(reductionPerCliff);
-  if (cliff.lt(totalCliffs)) {
-    const reduction = totalCliffs.sub(cliff);
-    amount = amount.mul(reduction).div(totalCliffs);
-    const amtTillMax = MaxSupply.sub(supply);
-    if (amount.gt(amtTillMax)) {
+  const cliff = supply / reductionPerCliff;
+  if (cliff < totalCliffs) {
+    const reduction = totalCliffs - cliff;
+    amount = amount * reduction /totalCliffs;
+    const amtTillMax = MaxSupply - supply;
+    if (amount > amtTillMax) {
       amount = amtTillMax;
     }
 
     return amount;
   } else {
-    return constants.Zero;
+    return 0n;
   }
 }
 
@@ -88,32 +90,33 @@ async function computeRewardsInDay(
   contract: IConvexBasicRewards,
   block: number,
   timestamp: number
-): Promise<BigNumber> {
+): Promise<bigint> {
+  const contractAddress = await contract.getAddress();
   const results = await doMulticall(
     [
-      { target: contract.address, interface: contract.interface, method: "periodFinish", param: [] },
-      { target: contract.address, interface: contract.interface, method: "rewardRate", param: [] },
+      { target: contractAddress, interface: contract.interface, method: "periodFinish", param: [] },
+      { target: contractAddress, interface: contract.interface, method: "rewardRate", param: [] },
       {
-        target: contract.address,
+        target: contractAddress,
         interface: contract.interface,
         method: "balanceOf",
         param: [STAKED_CVXCRV],
       },
-      { target: contract.address, interface: contract.interface, method: "totalSupply", param: [] },
+      { target: contractAddress, interface: contract.interface, method: "totalSupply", param: [] },
     ],
     block
   );
 
-  const periodFinish: BigNumber = results[0][0];
-  const rewardRate: BigNumber = results[1][0];
-  const balanceOf: BigNumber = results[2][0];
-  const totalSupply: BigNumber = results[3][0];
+  const periodFinish = results[0][0];
+  const rewardRate = results[1][0];
+  const balanceOf = results[2][0];
+  const totalSupply = results[3][0];
 
-  if (periodFinish.lte(timestamp)) return constants.Zero;
-  let duration = periodFinish.sub(timestamp).toNumber();
+  if (periodFinish <= timestamp) return 0n;
+  let duration = periodFinish - timestamp;
   // if (duration > 86400) duration = 86400;
   duration = 86400;
-  return rewardRate.mul(duration).mul(balanceOf).div(totalSupply);
+  return BigInt(rewardRate * duration * balanceOf / totalSupply);
 }
 
 async function main(holder: string) {
@@ -133,6 +136,7 @@ async function main(holder: string) {
   const stakedCvxCrv = (await ethers.getContractAt("ICvxCrvStakingWrapper", STAKED_CVXCRV)) as ICvxCrvStakingWrapper;
 
   const block = await ethers.provider.getBlock("latest");
+  assert(block != null);
 
   // fetch rewards
   const amountCRV = await computeRewardsInDay(crvRewards, block.number, block.timestamp);
@@ -142,13 +146,13 @@ async function main(holder: string) {
 
   console.log(
     "CRV rewards:",
-    ethers.utils.formatEther(amountCRV),
+    ethers.formatEther(amountCRV),
     "3CRV rewards:",
-    ethers.utils.formatEther(amount3CRV),
+    ethers.formatEther(amount3CRV),
     "CVX rewards:",
-    ethers.utils.formatEther(amountCVX),
+    ethers.formatEther(amountCVX),
     "extra CVX rewards:",
-    ethers.utils.formatEther(amountExtraCVX)
+    ethers.formatEther(amountExtraCVX)
   );
 
   // fetch price
@@ -203,12 +207,12 @@ async function main(holder: string) {
     ],
     block.number
   );
-  const supply0: BigNumber = results[0][0];
-  const supply1: BigNumber = results[1][0];
-  const bal_me: BigNumber = results[2][0];
-  const weight_me: BigNumber = results[3][0];
-  const bal0_me: BigNumber = results[4][0];
-  const bal1_me: BigNumber = results[5][0];
+  const supply0: bigint = results[0][0];
+  const supply1: bigint = results[1][0];
+  const bal_me: bigint = results[2][0];
+  const weight_me: bigint = results[3][0];
+  const bal0_me: bigint = results[4][0];
+  const bal1_me: bigint = results[5][0];
 
   const reward0USD =
     as_float(amountCRV) * priceCRV + as_float(amountCVX) * priceCVX + as_float(amountExtraCVX) * priceCVX;
@@ -218,12 +222,12 @@ async function main(holder: string) {
   console.log("block:", block.number);
   console.log("holder:", holder);
   console.log("\nCurrent Status:");
-  console.log(" + totalSupplyGroup0:", ethers.utils.formatEther(supply0));
-  console.log(" + totalSupplyGroup1:", ethers.utils.formatEther(supply1));
-  console.log(" + holderBalanceOf:", ethers.utils.formatEther(bal_me));
-  console.log(" + holderWeight:", (weight_me.toNumber() / 10000).toFixed(4));
-  console.log(" + holderBalanceGroup0:", ethers.utils.formatEther(bal0_me), "ratio:", ratio(bal0_me, supply0));
-  console.log(" + holderBalanceGroup1:", ethers.utils.formatEther(bal1_me), "ratio:", ratio(bal1_me, supply1));
+  console.log(" + totalSupplyGroup0:", ethers.formatEther(supply0));
+  console.log(" + totalSupplyGroup1:", ethers.formatEther(supply1));
+  console.log(" + holderBalanceOf:", ethers.formatEther(bal_me));
+  console.log(" + holderWeight:", (Number(weight_me) / 10000).toFixed(4));
+  console.log(" + holderBalanceGroup0:", ethers.formatEther(bal0_me), "ratio:", ratio(bal0_me, supply0));
+  console.log(" + holderBalanceGroup1:", ethers.formatEther(bal1_me), "ratio:", ratio(bal1_me, supply1));
   console.log(
     ` + dailyRewardUSD: ${currentDailyRewardUSD.toFixed(4)},`,
     `daily APR: ${((currentDailyRewardUSD / balanceUSD) * 100).toFixed(4)}%,`,
@@ -232,33 +236,33 @@ async function main(holder: string) {
   );
 
   // do adjust computation
-  const S0 = as_float(supply0.sub(bal0_me));
-  const S1 = as_float(supply1.sub(bal1_me));
+  const S0 = as_float(supply0 - bal0_me);
+  const S1 = as_float(supply1 - bal1_me);
   const k = Math.sqrt((reward1USD * S1) / (reward0USD * S0));
   let w = (k * (as_float(bal_me) + S0) - S1) / ((1 + k) * as_float(bal_me));
   if (w < 0) w = 0;
   if (w > 1) w = 1;
 
-  const adjusted_bal0_me = bal_me.mul(Math.floor((1 - w) * 10000)).div(10000);
-  const adjusted_bal1_me = bal_me.sub(adjusted_bal0_me);
-  const adjusted_supply0 = supply0.sub(bal0_me).add(adjusted_bal0_me);
-  const adjusted_supply1 = supply1.sub(bal1_me).add(adjusted_bal1_me);
+  const adjusted_bal0_me = bal_me * BigInt(Math.floor((1 - w) * 10000)) / 10000n;
+  const adjusted_bal1_me = bal_me - adjusted_bal0_me;
+  const adjusted_supply0 = supply0 - bal0_me + adjusted_bal0_me;
+  const adjusted_supply1 = supply1 - bal1_me + adjusted_bal1_me;
   const adjustedCurrentDailyRewardUSD =
     ratio(adjusted_bal0_me, adjusted_supply0) * reward0USD + ratio(adjusted_bal1_me, adjusted_supply1) * reward1USD;
   console.log("\nAdjusted Status:");
-  console.log(" + totalSupplyGroup0:", ethers.utils.formatEther(adjusted_supply0));
-  console.log(" + totalSupplyGroup1:", ethers.utils.formatEther(adjusted_supply1));
-  console.log(" + holderBalanceOf:", ethers.utils.formatEther(bal_me));
+  console.log(" + totalSupplyGroup0:", ethers.formatEther(adjusted_supply0));
+  console.log(" + totalSupplyGroup1:", ethers.formatEther(adjusted_supply1));
+  console.log(" + holderBalanceOf:", ethers.formatEther(bal_me));
   console.log(" + holderWeight:", w.toFixed(4));
   console.log(
     " + holderBalanceGroup0:",
-    ethers.utils.formatEther(adjusted_bal0_me),
+    ethers.formatEther(adjusted_bal0_me),
     "ratio:",
     ratio(adjusted_bal0_me, adjusted_supply0)
   );
   console.log(
     " + holderBalanceGroup1:",
-    ethers.utils.formatEther(adjusted_bal1_me),
+    ethers.formatEther(adjusted_bal1_me),
     "ratio:",
     ratio(adjusted_bal1_me, adjusted_supply1)
   );
@@ -270,10 +274,10 @@ async function main(holder: string) {
   );
 
   const getApy = (weight: number) => {
-    const adjusted_bal0_me = bal_me.mul(Math.floor((1 - weight) * 10000)).div(10000);
-    const adjusted_bal1_me = bal_me.sub(adjusted_bal0_me);
-    const adjusted_supply0 = supply0.sub(bal0_me).add(adjusted_bal0_me);
-    const adjusted_supply1 = supply1.sub(bal1_me).add(adjusted_bal1_me);
+    const adjusted_bal0_me = bal_me * BigInt(Math.floor((1 - weight) * 10000)) / 10000n;
+    const adjusted_bal1_me = bal_me -adjusted_bal0_me;
+    const adjusted_supply0 = supply0 - bal0_me + adjusted_bal0_me;
+    const adjusted_supply1 = supply1 - bal1_me + adjusted_bal1_me;
     const adjustedCurrentDailyRewardUSD =
       ratio(adjusted_bal0_me, adjusted_supply0) * reward0USD + ratio(adjusted_bal1_me, adjusted_supply1) * reward1USD;
     return (adjustedCurrentDailyRewardUSD / balanceUSD) * 100 * 365;
