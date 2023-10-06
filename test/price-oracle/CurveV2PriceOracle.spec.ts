@@ -2,10 +2,11 @@
 /* eslint-disable node/no-missing-import */
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
+import { ZeroAddress } from "ethers";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../scripts/utils/tokens";
-import { ChainlinkPriceOracle, CurveBasePoolPriceOracle, CurveV2PriceOracle } from "../../typechain";
-import { request_fork } from "../utils";
+import { TOKENS } from "@/utils/tokens";
+import { ChainlinkPriceOracle, CurveBasePoolPriceOracle, CurveV2PriceOracle } from "@types";
+import { createFork, impersonateAccounts } from "test/network";
 
 const FORK_HEIGHT = 16485890;
 const DEPLOYER = "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf";
@@ -58,9 +59,10 @@ describe("CurveV2PriceOracle.spec", async () => {
   let oracle3CRV: CurveV2PriceOracle;
 
   beforeEach(async () => {
-    request_fork(FORK_HEIGHT, [DEPLOYER, OTHER]);
+    await createFork(FORK_HEIGHT);
     deployer = await ethers.getSigner(DEPLOYER);
     other = await ethers.getSigner(OTHER);
+    await impersonateAccounts([DEPLOYER, OTHER]);
 
     const ChainlinkPriceOracle = await ethers.getContractFactory("ChainlinkPriceOracle", deployer);
     baseOracleChainlink = await ChainlinkPriceOracle.deploy();
@@ -100,12 +102,12 @@ describe("CurveV2PriceOracle.spec", async () => {
     });
 
     it("should revert, when length mismatch", async () => {
-      await expect(oracleUSDC.setPools([], [constants.AddressZero])).to.revertedWith("length mismatch");
-      await expect(oracleUSDC.setPools([constants.AddressZero], [])).to.revertedWith("length mismatch");
+      await expect(oracleUSDC.setPools([], [ZeroAddress])).to.revertedWith("length mismatch");
+      await expect(oracleUSDC.setPools([ZeroAddress], [])).to.revertedWith("length mismatch");
     });
 
     it("should succeed, when base is coin0", async () => {
-      expect((await oracleUSDC.pools(TOKENS.EURS.address)).pool).to.eq(constants.AddressZero);
+      expect((await oracleUSDC.pools(TOKENS.EURS.address)).pool).to.eq(ZeroAddress);
       expect((await oracleUSDC.pools(TOKENS.EURS.address)).baseIndex).to.eq(0);
       await oracleUSDC.setPools([TOKENS.EURS.address], [USDC_POOLS.EURS]);
       expect((await oracleUSDC.pools(TOKENS.EURS.address)).pool).to.eq(USDC_POOLS.EURS);
@@ -113,7 +115,7 @@ describe("CurveV2PriceOracle.spec", async () => {
     });
 
     it("should succeed, when base is coin1", async () => {
-      expect((await oracleUSDC.pools(TOKENS.STG.address)).pool).to.eq(constants.AddressZero);
+      expect((await oracleUSDC.pools(TOKENS.STG.address)).pool).to.eq(ZeroAddress);
       expect((await oracleUSDC.pools(TOKENS.STG.address)).baseIndex).to.eq(0);
       await oracleUSDC.setPools([TOKENS.STG.address], [USDC_POOLS.STG]);
       expect((await oracleUSDC.pools(TOKENS.STG.address)).pool).to.eq(USDC_POOLS.STG);
@@ -131,7 +133,7 @@ describe("CurveV2PriceOracle.spec", async () => {
 
     it("should succeed", async () => {
       for (const symbol of Object.keys(WETH_POOLS)) {
-        const gas = await oracleWETH.estimateGas.price(TOKENS[symbol].address);
+        const gas = await oracleWETH.price.estimateGas(TOKENS[symbol].address);
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracleWETH.price(TOKENS[symbol].address))},`,
           "gas usage:",
@@ -151,7 +153,7 @@ describe("CurveV2PriceOracle.spec", async () => {
 
     it("should succeed", async () => {
       for (const symbol of Object.keys(USDC_POOLS)) {
-        const gas = await oracleUSDC.estimateGas.price(TOKENS[symbol].address);
+        const gas = await oracleUSDC.price.estimateGas(TOKENS[symbol].address);
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracleUSDC.price(TOKENS[symbol].address))},`,
           "gas usage:",
@@ -171,7 +173,7 @@ describe("CurveV2PriceOracle.spec", async () => {
 
     it("should succeed", async () => {
       for (const symbol of Object.keys(FRAXBP_POOLS)) {
-        const gas = await oracleFraxBP.estimateGas.price(TOKENS[symbol].address);
+        const gas = await oracleFraxBP.price.estimateGas(TOKENS[symbol].address);
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracleFraxBP.price(TOKENS[symbol].address))},`,
           "gas usage:",
@@ -191,7 +193,7 @@ describe("CurveV2PriceOracle.spec", async () => {
 
     it("should succeed", async () => {
       for (const symbol of Object.keys(TRICRV_POOLS)) {
-        const gas = await oracle3CRV.estimateGas.price(TOKENS[symbol].address);
+        const gas = await oracle3CRV.price.estimateGas(TOKENS[symbol].address);
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracle3CRV.price(TOKENS[symbol].address))},`,
           "gas usage:",

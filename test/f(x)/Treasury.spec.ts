@@ -2,9 +2,8 @@
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { LeveragedToken, FractionalToken, Treasury, WETH9, MockTwapOracle } from "../../typechain";
+import { LeveragedToken, FractionalToken, Treasury, WETH9, MockFxPriceOracle } from "@types";
 import { ZeroAddress } from "ethers";
-import "../utils";
 
 const PRECISION = 10n ** 18n;
 
@@ -15,7 +14,7 @@ describe("Treasury.spec", async () => {
 
   let weth: WETH9;
   let wethAddress: string;
-  let oracle: MockTwapOracle;
+  let oracle: MockFxPriceOracle;
   let oracleAddress: string;
   let fToken: FractionalToken;
   let fTokenAddress: string;
@@ -32,8 +31,8 @@ describe("Treasury.spec", async () => {
     await weth.waitForDeployment();
     wethAddress = await weth.getAddress();
 
-    const MockTwapOracle = await ethers.getContractFactory("MockTwapOracle", deployer);
-    oracle = await MockTwapOracle.deploy();
+    const MockFxPriceOracle = await ethers.getContractFactory("MockFxPriceOracle", deployer);
+    oracle = await MockFxPriceOracle.deploy();
     await oracle.waitForDeployment();
     oracleAddress = await oracle.getAddress();
 
@@ -62,7 +61,8 @@ describe("Treasury.spec", async () => {
       xTokenAddress,
       oracleAddress,
       ethers.parseEther("0.1"),
-      ethers.parseEther("1000")
+      ethers.parseEther("1000"),
+      ZeroAddress
     );
 
     await weth.deposit({ value: ethers.parseEther("100") });
@@ -79,7 +79,8 @@ describe("Treasury.spec", async () => {
           xTokenAddress,
           oracleAddress,
           ethers.parseEther("0.1"),
-          ethers.parseEther("1000")
+          ethers.parseEther("1000"),
+          ZeroAddress
         )
       ).to.revertedWith("Initializable: contract is already initialized");
     });
@@ -271,7 +272,7 @@ describe("Treasury.spec", async () => {
       [maxBaseIn, maxFTokenMintable] = await treasury.maxMintableFToken(ethers.parseEther("1.5"));
       expect(maxBaseIn).to.eq(ethers.parseEther(".622727272727272727"));
       await treasury.connect(market).mint(maxBaseIn, signer.address, 1);
-      expect(await fToken.balanceOf(signer.address)).to.closeToBn(maxFTokenMintable, 10000);
+      expect(await fToken.balanceOf(signer.address)).to.be.closeTo(maxFTokenMintable, 10000);
       expect(await treasury.collateralRatio()).to.eq(ethers.parseEther("1.5"));
     });
 
@@ -297,8 +298,8 @@ describe("Treasury.spec", async () => {
       expect(maxBaseIn).to.eq(ethers.parseEther(".377272727272727272"));
 
       await treasury.connect(market).mint(maxBaseIn, signer.address, 2);
-      expect(await xToken.balanceOf(signer.address)).to.closeToBn(maxXTokenMintable, 10000);
-      expect(await treasury.collateralRatio()).to.closeToBn(ethers.parseEther("3"), 100);
+      expect(await xToken.balanceOf(signer.address)).to.be.closeTo(maxXTokenMintable, 10000);
+      expect(await treasury.collateralRatio()).to.be.closeTo(ethers.parseEther("3"), 100);
     });
   });
 
@@ -377,8 +378,8 @@ describe("Treasury.spec", async () => {
       expect(maxXTokenRedeemable).to.eq(ethers.parseEther("205.445544554455445544"));
 
       await treasury.connect(market).redeem(maxXTokenRedeemable, 0n, deployer.address);
-      expect(await weth.balanceOf(market.address)).to.closeToBn(maxBaseOut, 10000);
-      expect(await treasury.collateralRatio()).to.closeToBn(ethers.parseEther("3"), 100);
+      expect(await weth.balanceOf(market.address)).to.be.closeTo(maxBaseOut, 10000);
+      expect(await treasury.collateralRatio()).to.be.closeTo(ethers.parseEther("3"), 100);
     });
 
     it("should compute #maxRedeemableXToken correctly", async () => {
@@ -403,8 +404,8 @@ describe("Treasury.spec", async () => {
       expect(maxXTokenRedeemable).to.eq(ethers.parseEther("287.815126050420168067"));
 
       await treasury.connect(market).redeem(0n, maxXTokenRedeemable, deployer.address);
-      expect(await weth.balanceOf(market.address)).to.closeToBn(maxBaseOut, 10000);
-      expect(await treasury.collateralRatio()).to.closeToBn(ethers.parseEther("1.5"), 100);
+      expect(await weth.balanceOf(market.address)).to.be.closeTo(maxBaseOut, 10000);
+      expect(await treasury.collateralRatio()).to.be.closeTo(ethers.parseEther("1.5"), 100);
     });
   });
 
@@ -448,11 +449,11 @@ describe("Treasury.spec", async () => {
         .connect(market)
         .addBaseToken(ethers.parseEther("1"), ethers.parseEther("0.1"), signer.address);
       expect(await treasury.totalBaseToken()).to.eq(ethers.parseEther("2"));
-      expect(await xToken.balanceOf(signer.address)).to.closeToBn(
+      expect(await xToken.balanceOf(signer.address)).to.be.closeTo(
         ethers.parseEther("1016.806722689075630251"),
         100
       );
-      expect(await fToken.nav()).to.closeToBn(ethers.parseEther(".782178217821782180"), 100);
+      expect(await fToken.nav()).to.be.closeTo(ethers.parseEther(".782178217821782180"), 100);
     });
 
     it("should compute #maxMintableXTokenWithIncentive correctly, no incentive", async () => {
@@ -483,8 +484,8 @@ describe("Treasury.spec", async () => {
       expect(maxBaseIn).to.eq(ethers.parseEther(".377272727272727272"));
 
       await treasury.connect(market).addBaseToken(maxBaseIn, 0n, signer.address);
-      expect(await xToken.balanceOf(signer.address)).to.closeToBn(maxXTokenMintable, 10000);
-      expect(await treasury.collateralRatio()).to.closeToBn(ethers.parseEther("3"), 100);
+      expect(await xToken.balanceOf(signer.address)).to.be.closeTo(maxXTokenMintable, 10000);
+      expect(await treasury.collateralRatio()).to.be.closeTo(ethers.parseEther("3"), 100);
     });
 
     it("should compute #maxMintableXTokenWithIncentive correctly, 10% incentive", async () => {
@@ -515,8 +516,8 @@ describe("Treasury.spec", async () => {
       expect(maxBaseIn).to.eq(ethers.parseEther(".290209790209790209"));
 
       await treasury.connect(market).addBaseToken(maxBaseIn, ethers.parseEther("0.1"), signer.address);
-      expect(await xToken.balanceOf(signer.address)).to.closeToBn(maxXTokenMintable, 10000);
-      expect(await treasury.collateralRatio()).to.closeToBn(ethers.parseEther("3"), 100);
+      expect(await xToken.balanceOf(signer.address)).to.be.closeTo(maxXTokenMintable, 10000);
+      expect(await treasury.collateralRatio()).to.be.closeTo(ethers.parseEther("3"), 100);
       expect(await fToken.nav()).to.eq(ethers.parseEther("0.936785986290936787"));
     });
   });
@@ -574,7 +575,7 @@ describe("Treasury.spec", async () => {
       expect(await xToken.balanceOf(deployer.address)).to.eq(ethers.parseEther("500"));
       expect(await weth.balanceOf(market.address)).to.eq(ethers.parseEther(".101"));
       expect(await treasury.totalBaseToken()).to.eq(ethers.parseEther(".899"));
-      expect(await fToken.nav()).to.closeToBn(ethers.parseEther("0.975"), 100);
+      expect(await fToken.nav()).to.be.closeTo(ethers.parseEther("0.975"), 100);
     });
 
     it("should compute #maxLiquidatable correctly, no incentive", async () => {
@@ -605,8 +606,8 @@ describe("Treasury.spec", async () => {
       expect(maxFTokenLiquidatable).to.eq(ethers.parseEther("205.445544554455445544"));
 
       await treasury.connect(market).liquidate(maxFTokenLiquidatable, 0n, deployer.address);
-      expect(await weth.balanceOf(market.address)).to.closeToBn(maxBaseOut, 10000);
-      expect(await treasury.collateralRatio()).to.closeToBn(ethers.parseEther("3"), 100);
+      expect(await weth.balanceOf(market.address)).to.be.closeTo(maxBaseOut, 10000);
+      expect(await treasury.collateralRatio()).to.be.closeTo(ethers.parseEther("3"), 100);
     });
 
     it("should compute #maxLiquidatable correctly, 10% incentive", async () => {
@@ -637,18 +638,18 @@ describe("Treasury.spec", async () => {
       expect(maxFTokenLiquidatable).to.eq(ethers.parseEther("186.768676867686768676"));
 
       await treasury.connect(market).liquidate(maxFTokenLiquidatable, ethers.parseEther("0.1"), deployer.address);
-      expect(await weth.balanceOf(market.address)).to.closeToBn(maxBaseOut, 10000);
-      expect(await treasury.collateralRatio()).to.closeToBn(ethers.parseEther("3"), 100);
+      expect(await weth.balanceOf(market.address)).to.be.closeTo(maxBaseOut, 10000);
+      expect(await treasury.collateralRatio()).to.be.closeTo(ethers.parseEther("3"), 100);
       expect(await fToken.nav()).to.eq(ethers.parseEther("0.940373563218390804"));
       expect((await treasury.getCurrentNav())._baseNav).to.eq(ethers.parseEther("1100"));
       expect((await treasury.getCurrentNav())._fNav).to.eq(ethers.parseEther("0.949777298850574712"));
-      expect((await treasury.getCurrentNav())._xNav).to.closeToBn(ethers.parseEther("1.19"), 100);
+      expect((await treasury.getCurrentNav())._xNav).to.be.closeTo(ethers.parseEther("1.19"), 100);
     });
   });
 
   context("#selfLiquidate", async () => {
     it("should revert, when non-market call", async () => {
-      await expect(treasury.selfLiquidate(0n, 0n, ZeroAddress, "0x")).to.revertedWith(
+      await expect(treasury.liquidate(0n, 0n, ZeroAddress)).to.revertedWith(
         "Only market"
       );
     });

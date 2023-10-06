@@ -143,13 +143,13 @@ async function main() {
     console.log("✅ Done, gas used", receipt.gasUsed.toString());
   }
 
-  console.log(await guageUSDC.callStatic.claimable_tokens("0xb9a1649b31FC2De6bbE78672A3d6EbecFa69B56b"));
+  console.log(await guageUSDC.claimable_tokens.staticCall("0xb9a1649b31FC2De6bbE78672A3d6EbecFa69B56b"));
   const tx = await guageUSDC["claim_rewards(address)"]("0xb9a1649b31FC2De6bbE78672A3d6EbecFa69B56b");
   const receipt = await tx.wait();
   for (const log of receipt.logs) {
     console.log(log);
   }
-  console.log(await guageUSDC.callStatic.claimable_tokens("0xb9a1649b31FC2De6bbE78672A3d6EbecFa69B56b"));
+  console.log(await guageUSDC.claimable_tokens.staticCall("0xb9a1649b31FC2De6bbE78672A3d6EbecFa69B56b"));
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 // eslint-disable-next-line node/no-missing-import
-import { TokenSale } from "../typechain";
-import { BigNumber } from "ethers";
+import { TokenSale } from "@types";
+//import { BigNumber } from "ethers";
 
 const lists = [
   "0x02c0c2714756e9a5696df367439b192983cb26e6",

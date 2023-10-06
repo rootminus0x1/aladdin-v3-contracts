@@ -2,11 +2,11 @@
 /* eslint-disable node/no-missing-import */
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
-import { constants } from "ethers";
+import { ZeroAddress } from "ethers";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../scripts/utils/tokens";
-import { ChainlinkPriceOracle, CurveBasePoolPriceOracle } from "../../typechain";
-import { request_fork } from "../utils";
+import { TOKENS } from "@/utils/tokens";
+import { ChainlinkPriceOracle, CurveBasePoolPriceOracle } from "@types";
+import { createFork, impersonateAccounts } from "test/network";
 
 const FORK_HEIGHT = 16485890;
 const DEPLOYER = "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf";
@@ -16,19 +16,22 @@ describe("CurveBasePoolPriceOracle.spec", async () => {
   let deployer: SignerWithAddress;
   let other: SignerWithAddress;
   let baseOracle: ChainlinkPriceOracle;
+  let baseOracleAddress: string;
   let oracle: CurveBasePoolPriceOracle;
 
   beforeEach(async () => {
-    request_fork(FORK_HEIGHT, [DEPLOYER, OTHER]);
+    await createFork(FORK_HEIGHT);
     deployer = await ethers.getSigner(DEPLOYER);
     other = await ethers.getSigner(OTHER);
+    await impersonateAccounts([DEPLOYER, OTHER]);
 
     const ChainlinkPriceOracle = await ethers.getContractFactory("ChainlinkPriceOracle", deployer);
     baseOracle = await ChainlinkPriceOracle.deploy();
     await baseOracle.waitForDeployment();
+    baseOracleAddress = await baseOracle.getAddress()
 
     const CurveBasePoolPriceOracle = await ethers.getContractFactory("CurveBasePoolPriceOracle", deployer);
-    oracle = await CurveBasePoolPriceOracle.deploy(baseOracle.address);
+    oracle = await CurveBasePoolPriceOracle.deploy(baseOracleAddress);
     await oracle.waitForDeployment();
 
     await baseOracle.setFeeds([TOKENS.USDC.address], ["0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6"]);
@@ -43,13 +46,13 @@ describe("CurveBasePoolPriceOracle.spec", async () => {
     });
 
     it("should revert, when length mismatch", async () => {
-      await expect(oracle.setPools([], [constants.AddressZero])).to.revertedWith("length mismatch");
-      await expect(oracle.setPools([constants.AddressZero], [])).to.revertedWith("length mismatch");
+      await expect(oracle.setPools([], [ZeroAddress])).to.revertedWith("length mismatch");
+      await expect(oracle.setPools([ZeroAddress], [])).to.revertedWith("length mismatch");
     });
 
     it("should succeed", async () => {
-      expect(await oracle.pools(TOKENS.TRICRV.address)).to.eq(constants.AddressZero);
-      expect(await oracle.pools(TOKENS.crvFRAX.address)).to.eq(constants.AddressZero);
+      expect(await oracle.pools(TOKENS.TRICRV.address)).to.eq(ZeroAddress);
+      expect(await oracle.pools(TOKENS.crvFRAX.address)).to.eq(ZeroAddress);
       await expect(oracle.underlyings(TOKENS.TRICRV.address, 0)).to.reverted;
       await expect(oracle.underlyings(TOKENS.crvFRAX.address, 0)).to.reverted;
       await oracle.setPools(

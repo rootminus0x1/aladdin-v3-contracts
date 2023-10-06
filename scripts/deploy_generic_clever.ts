@@ -236,7 +236,7 @@ const config: {
     },
     CRV: {
       start: 0,
-      address: constants.AddressZero,
+      address: ZeroAddress,
     },
   },
   PlatformFeeDistributor: "0xD6eFa5B63531e9ae61e225b02CbACD59092a35bE",
@@ -802,7 +802,7 @@ async function deployGauge() {
       "0xf18056bbd320e96a48e3fbf8bc061322531aac99",
       deployer
     );
-    const pool = await factory.callStatic.deploy_pool(
+    const pool = await factory.deploy_pool.staticCall(
       "CLEV/ETH",
       "CLEVETH",
       [ADDRESS.WETH, config.CLEV],
@@ -867,7 +867,7 @@ async function deployGauge() {
     )}]}`
   );
   console.log(
-    `  {"symbol": "ETH", "address": "${constants.AddressZero}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVETH_TOKEN.map(
+    `  {"symbol": "ETH", "address": "${ZeroAddress}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVETH_TOKEN.map(
       (x) => `"${x.toHexString()}"`
     )}]}`
   );
@@ -909,7 +909,7 @@ async function deployGauge() {
     )}]}`
   );
   console.log(
-    `  {"symbol": "ETH", "address": "${constants.AddressZero}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVCVX_TOKEN.map(
+    `  {"symbol": "ETH", "address": "${ZeroAddress}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVCVX_TOKEN.map(
       (x) => `"${x.toHexString()}"`
     )}]}`
   );
@@ -942,7 +942,7 @@ async function deployGauge() {
     )}]}`
   );
   console.log(
-    `  {"symbol": "ETH", "address": "${constants.AddressZero}", "routes": [${ZAP_ROUTES.WETH.CVX.map(
+    `  {"symbol": "ETH", "address": "${ZeroAddress}", "routes": [${ZAP_ROUTES.WETH.CVX.map(
       (x) => `"${x.toHexString()}"`
     )}]}`
   );

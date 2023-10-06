@@ -2,7 +2,7 @@
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { FractionalToken } from "../../typechain";
+import { FractionalToken } from "@types";
 import { ZeroAddress, ZeroHash } from "ethers";
 
 const PRECISION = 10n ** 18n;

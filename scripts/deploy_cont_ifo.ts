@@ -52,7 +52,7 @@ const config: {
   SmartWalletWhitelist: "0x3557bD058D674DD0981a3FF10515432159F63318",
   BalancerLPGauge: "0x33e411ebE366D72d058F3eF22F1D0Cf8077fDaB0",
   BalancerLPGaugeGateway: "0xb44f8Ba6CD9FfeE97F8482D064E62Ba55edD4D72",
-  veCTRFeeDistributor: constants.AddressZero,
+  veCTRFeeDistributor: ZeroAddress,
 };
 
 let ctr: CTR;
@@ -94,7 +94,7 @@ async function addLiquidity() {
       {
         assets: [DEPLOYED_CONTRACTS.Concentrator.cvxCRV.aCRV, ctr.address],
         maxAmountsIn: [constants.MaxUint256, constants.MaxUint256],
-        userData: defaultAbiCoder.encode(
+        userData: defaultAbiCoder().encode(
           ["uint8", "uint256[]"],
           [0, [ethers.parseEther("37800"), ethers.parseEther("771.4285714")]]
         ),
@@ -220,7 +220,7 @@ async function main() {
     console.log("Deploy CTR at:", ctr.address);
   }
 
-  if ((await ctr.minter()) === constants.AddressZero) {
+  if ((await ctr.minter()) === ZeroAddress) {
     const tx = await ctr.set_minter(concentratorIFOVault.address);
     console.log("CTR set minter to ConcentratorIFOVault, hash:", tx.hash);
     await tx.wait();
@@ -293,7 +293,7 @@ async function main() {
     gauge = await ethers.getContractAt("ICurveGaugeV4V5", config.BalancerLPGauge, deployer);
     console.log("Found BalancerLPGauge at:", gauge.address);
   } else {
-    const gaugeAddress = await gaugeFactory.callStatic.deploy_gauge(config.BalancerPoolAddress, { gasLimit: 500000 });
+    const gaugeAddress = await gaugeFactory.deploy_gauge.staticCall(config.BalancerPoolAddress, { gasLimit: 500000 });
     await gaugeFactory.deploy_gauge(config.BalancerPoolAddress, { gasLimit: 500000 });
     gauge = await ethers.getContractAt("ICurveGaugeV4V5", gaugeAddress, deployer);
     console.log("Deploy BalancerLPGauge at:", gauge.address);
@@ -320,7 +320,7 @@ async function main() {
     console.log("PlatformFeeDistributor update gauge to GaugeRewardDistributor, hash:", tx.hash);
     await tx.wait();
   }
-  if ((await gaugeRewardDistributor.distributor()) === constants.AddressZero) {
+  if ((await gaugeRewardDistributor.distributor()) === ZeroAddress) {
     const tx = await gaugeRewardDistributor.updateDistributor(platformFeeDistributor.address);
     console.log("GaugeRewardDistributor set distributor to PlatformFeeDistributor, hash:", tx.hash);
     await tx.wait();
@@ -335,7 +335,7 @@ async function main() {
     console.log("GaugeRewardDistributor add reward token, hash:", tx.hash);
     await tx.wait();
   }
-  if ((await gauge.reward_data(ctr.address)).distributor === constants.AddressZero) {
+  if ((await gauge.reward_data(ctr.address)).distributor === ZeroAddress) {
     const tx = await gauge.add_reward(ctr.address, gaugeRewardDistributor.address);
     console.log("Gauge add reward token, hash:", tx.hash);
     await tx.wait();

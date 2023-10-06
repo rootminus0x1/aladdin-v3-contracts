@@ -7,12 +7,11 @@ import {
   FractionalToken,
   Treasury,
   WETH9,
-  MockTwapOracle,
+  MockFxPriceOracle,
   Market,
   RebalancePool,
   MockTokenWrapper,
-} from "../../typechain";
-import "../utils";
+} from "@types";
 import { MaxUint256, ZeroAddress } from "ethers";
 
 describe("RebalancePool.spec", async () => {
@@ -25,7 +24,7 @@ describe("RebalancePool.spec", async () => {
 
   let weth: WETH9;
   let wethAddress: string;
-  let oracle: MockTwapOracle;
+  let oracle: MockFxPriceOracle;
   let oracleAddress: string;
   let fToken: FractionalToken;
   let fTokenAddress: string;
@@ -53,8 +52,8 @@ describe("RebalancePool.spec", async () => {
     await wrapper.waitForDeployment();
     wrapperAddress = await wrapper.getAddress();
 
-    const MockTwapOracle = await ethers.getContractFactory("MockTwapOracle", deployer);
-    oracle = await MockTwapOracle.deploy();
+    const MockFxPriceOracle = await ethers.getContractFactory("MockFxPriceOracle", deployer);
+    oracle = await MockFxPriceOracle.deploy();
     await oracle.waitForDeployment();
     oracleAddress = await oracle.getAddress();
 
@@ -92,7 +91,9 @@ describe("RebalancePool.spec", async () => {
       fTokenAddress,
       xTokenAddress,
       oracleAddress,
-      ethers.parseEther("0.1")
+      ethers.parseEther("0.1"),
+      ethers.parseEther("1000"),
+      ZeroAddress
     );
 
     await market.initialize(treasuryAddress, platform.address);
@@ -332,15 +333,15 @@ describe("RebalancePool.spec", async () => {
         .to.emit(stabilityPool, "Liquidate")
         .withArgs(ethers.parseEther("200"), ethers.parseEther("0.2"));
       expect(await stabilityPool.totalSupply()).to.eq(amountIn - ethers.parseEther("200"));
-      expect(await stabilityPool.balanceOf(signer.address)).to.closeToBn(
+      expect(await stabilityPool.balanceOf(signer.address)).to.be.closeTo(
         amountIn - ethers.parseEther("200"),
         1e6
       );
-      expect((await stabilityPool.epochState()).prod).to.closeToBn(ethers.parseEther("0.98"), 100);
+      expect((await stabilityPool.epochState()).prod).to.be.closeTo(ethers.parseEther("0.98"), 100);
       expect((await stabilityPool.epochState()).epoch).to.eq(0);
       expect((await stabilityPool.epochState()).scale).to.eq(0);
 
-      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.closeToBn(
+      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2"),
         1000000
       );
@@ -351,11 +352,11 @@ describe("RebalancePool.spec", async () => {
         "UserDepositChange"
       );
       expect(await stabilityPool.totalSupply()).to.eq(amountIn - ethers.parseEther("100"));
-      expect(await stabilityPool.balanceOf(signer.address)).to.closeToBn(
+      expect(await stabilityPool.balanceOf(signer.address)).to.be.closeTo(
         amountIn - ethers.parseEther("100"),
         1e6
       );
-      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.closeToBn(
+      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2"),
         1000000
       );
@@ -365,7 +366,7 @@ describe("RebalancePool.spec", async () => {
         stabilityPool,
         "Claim"
       );
-      expect(await weth.balanceOf(signer.address)).to.closeToBn(ethers.parseEther("0.2"), 100000);
+      expect(await weth.balanceOf(signer.address)).to.be.closeTo(ethers.parseEther("0.2"), 100000);
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.eq(0n);
     });
 
@@ -388,26 +389,26 @@ describe("RebalancePool.spec", async () => {
         .to.emit(stabilityPool, "Liquidate")
         .withArgs(ethers.parseEther("200"), ethers.parseEther("0.2"));
       expect(await stabilityPool.totalSupply()).to.eq(amountIn1 + amountIn2 - ethers.parseEther("200"));
-      expect(await stabilityPool.balanceOf(signer.address)).to.closeToBn(
+      expect(await stabilityPool.balanceOf(signer.address)).to.be.closeTo(
         amountIn1 - (ethers.parseEther("200") * amountIn1 / (amountIn1 + amountIn2)),
         1e6
       );
-      expect(await stabilityPool.balanceOf(deployer.address)).to.closeToBn(
+      expect(await stabilityPool.balanceOf(deployer.address)).to.be.closeTo(
         amountIn2 - (ethers.parseEther("200") * amountIn2 / (amountIn1 + amountIn2)),
         1e6
       );
-      expect((await stabilityPool.epochState()).prod).to.closeToBn(
+      expect((await stabilityPool.epochState()).prod).to.be.closeTo(
         ethers.parseEther("0.981818181818181818"), // 108/110
         100
       );
       expect((await stabilityPool.epochState()).epoch).to.eq(0);
       expect((await stabilityPool.epochState()).scale).to.eq(0);
 
-      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.closeToBn(
+      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2") * amountIn1 / (amountIn1 + amountIn2),
         1000000
       );
-      expect(await stabilityPool.claimable(deployer.address, wethAddress)).to.closeToBn(
+      expect(await stabilityPool.claimable(deployer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2") * amountIn2 / (amountIn1 + amountIn2),
         1000000
       );
@@ -456,18 +457,18 @@ describe("RebalancePool.spec", async () => {
       await expect(stabilityPool.connect(liquidator).liquidate(ethers.parseEther("200"), 0))
         .to.emit(stabilityPool, "Liquidate")
         .withArgs(ethers.parseEther("200"), ethers.parseEther("0.2"));
-      expect(await stabilityPool.totalSupply()).to.closeToBn((amountIn - unlockAmount) * 98n / 100n, 1e6);
-      expect(await stabilityPool.totalUnlocking()).to.closeToBn(unlockAmount * 98n / 100n, 1e6);
-      expect(await stabilityPool.balanceOf(signer.address)).to.closeToBn(
+      expect(await stabilityPool.totalSupply()).to.be.closeTo((amountIn - unlockAmount) * 98n / 100n, 1e6);
+      expect(await stabilityPool.totalUnlocking()).to.be.closeTo(unlockAmount * 98n / 100n, 1e6);
+      expect(await stabilityPool.balanceOf(signer.address)).to.be.closeTo(
         (amountIn - unlockAmount) * 98n / 100n,
         1e6
       );
-      expect(await stabilityPool.unlockedBalanceOf(signer.address)).to.closeToBn(unlockAmount * 98n / 100n, 1e6);
-      expect((await stabilityPool.epochState()).prod).to.closeToBn(ethers.parseEther("0.98"), 100);
+      expect(await stabilityPool.unlockedBalanceOf(signer.address)).to.be.closeTo(unlockAmount * 98n / 100n, 1e6);
+      expect((await stabilityPool.epochState()).prod).to.be.closeTo(ethers.parseEther("0.98"), 100);
       expect((await stabilityPool.epochState()).epoch).to.eq(0);
       expect((await stabilityPool.epochState()).scale).to.eq(0);
 
-      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.closeToBn(
+      expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2"),
         1000000
       );
@@ -477,7 +478,7 @@ describe("RebalancePool.spec", async () => {
         stabilityPool,
         "Claim"
       );
-      expect(await weth.balanceOf(signer.address)).to.closeToBn(ethers.parseEther("0.2"), 100000);
+      expect(await weth.balanceOf(signer.address)).to.be.closeTo(ethers.parseEther("0.2"), 100000);
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.eq(0n);
 
       // withdraw unlocked
@@ -485,9 +486,9 @@ describe("RebalancePool.spec", async () => {
         stabilityPool,
         "WithdrawUnlocked"
       );
-      expect(await fToken.balanceOf(signer.address)).to.closeToBn(unlockAmount * 98n / 100n, 1e6);
-      expect(await stabilityPool.totalUnlocking()).to.closeToBn(0n, 1e6);
-      expect(await stabilityPool.unlockedBalanceOf(signer.address)).to.closeToBn(0n, 1e6);
+      expect(await fToken.balanceOf(signer.address)).to.be.closeTo(unlockAmount * 98n / 100n, 1e6);
+      expect(await stabilityPool.totalUnlocking()).to.be.closeTo(0n, 1e6);
+      expect(await stabilityPool.unlockedBalanceOf(signer.address)).to.be.closeTo(0n, 1e6);
     });
 
     it("should succeed, when multiple deposit, unlock half, liquidate partial", async () => {
@@ -537,30 +538,30 @@ describe("RebalancePool.spec", async () => {
       await expect(stabilityPool.connect(liquidator).liquidate(ethers.parseEther("200"), 0))
         .to.emit(stabilityPool, "Liquidate")
         .withArgs(ethers.parseEther("200"), ethers.parseEther("0.2"));
-      expect(await stabilityPool.totalSupply()).to.closeToBn(
+      expect(await stabilityPool.totalSupply()).to.be.closeTo(
         (amountInA + amountInB - unlockAmountA - unlockAmountB) * 99n / 100n,
         1e6
       );
-      expect(await stabilityPool.totalUnlocking()).to.closeToBn((unlockAmountA + unlockAmountB) * 99n / 100n, 1e6);
-      expect(await stabilityPool.balanceOf(userA.address)).to.closeToBn(
+      expect(await stabilityPool.totalUnlocking()).to.be.closeTo((unlockAmountA + unlockAmountB) * 99n / 100n, 1e6);
+      expect(await stabilityPool.balanceOf(userA.address)).to.be.closeTo(
         (amountInA - unlockAmountA) * 99n / 100n,
         1e6
       );
-      expect(await stabilityPool.balanceOf(userB.address)).to.closeToBn(
+      expect(await stabilityPool.balanceOf(userB.address)).to.be.closeTo(
         (amountInB - unlockAmountB) * 99n / 100n,
         1e6
       );
-      expect(await stabilityPool.unlockedBalanceOf(userA.address)).to.closeToBn(unlockAmountA * 99n / 100n, 1e6);
-      expect(await stabilityPool.unlockedBalanceOf(userB.address)).to.closeToBn(unlockAmountB * 99n / 100n, 1e6);
-      expect((await stabilityPool.epochState()).prod).to.closeToBn(ethers.parseEther("0.99"), 100);
+      expect(await stabilityPool.unlockedBalanceOf(userA.address)).to.be.closeTo(unlockAmountA * 99n / 100n, 1e6);
+      expect(await stabilityPool.unlockedBalanceOf(userB.address)).to.be.closeTo(unlockAmountB * 99n / 100n, 1e6);
+      expect((await stabilityPool.epochState()).prod).to.be.closeTo(ethers.parseEther("0.99"), 100);
       expect((await stabilityPool.epochState()).epoch).to.eq(0);
       expect((await stabilityPool.epochState()).scale).to.eq(0);
 
-      expect(await stabilityPool.claimable(userA.address, wethAddress)).to.closeToBn(
+      expect(await stabilityPool.claimable(userA.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2") * 11n / 20n,
         1000000
       );
-      expect(await stabilityPool.claimable(userB.address, wethAddress)).to.closeToBn(
+      expect(await stabilityPool.claimable(userB.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2") * 9n / 20n,
         1000000
       );

@@ -144,10 +144,10 @@ const config: {
     factory: "0x23384DD4380b3677b829C6c88c0Ea9cc41C099bb",
     impls: {
       AutoCompoundingConvexFraxStrategy: "0x6Cc546cE582b0dD106c231181f7782C79Ef401da",
-      AutoCompoundingConvexCurveStrategy: constants.AddressZero,
+      AutoCompoundingConvexCurveStrategy: ZeroAddress,
       ManualCompoundingConvexCurveStrategy: "0xE25f0E29060AeC19a0559A2EF8366a5AF086222e",
       ManualCompoundingCurveGaugeStrategy: "0x188bd82BF11cC321F7872acdCa4B1a3Bf9a802dE",
-      CLeverGaugeStrategy: constants.AddressZero,
+      CLeverGaugeStrategy: ZeroAddress,
       AMOConvexCurveStrategy: "0x2be5B652836C630E15c3530bf642b544ae901239",
     },
   },
@@ -173,13 +173,13 @@ const config: {
         name: "Aladdin steCRV",
         symbol: "astETH",
         rewards: ["CVX", "CRV", "LDO"],
-        proxy: constants.AddressZero,
-        impl: constants.AddressZero,
-        strategy: constants.AddressZero,
+        proxy: ZeroAddress,
+        impl: ZeroAddress,
+        strategy: ZeroAddress,
       },
       vault: {
-        impl: constants.AddressZero,
-        proxy: constants.AddressZero,
+        impl: ZeroAddress,
+        proxy: ZeroAddress,
       },
     },
     frxeth: {
@@ -198,8 +198,8 @@ const config: {
         impl: "0xd3B15898d10B63Ddc309c287f7B68b768Afb777c",
       },
       vault: {
-        proxy: constants.AddressZero,
-        impl: constants.AddressZero,
+        proxy: ZeroAddress,
+        impl: ZeroAddress,
       },
     },
   },
@@ -421,7 +421,7 @@ async function addVaults(
     let strategy: Contract;
     const underlying = ADDRESS[`${vaultConfig.token}_TOKEN`];
     {
-      const address = await factory.callStatic.createStrategy(config.Strategy.impls[strategyName]);
+      const address = await factory.createStrategy.staticCall(config.Strategy.impls[strategyName]);
       const tx = await factory.createStrategy(config.Strategy.impls[strategyName], {
         gasLimit: 1000000,
         maxFeePerGas,
@@ -521,7 +521,7 @@ async function deployConcentratorFXS() {
     if (from === "WETH") {
       console.log(
         `zap ETH => ${to}:`,
-        `from[${constants.AddressZero}]`,
+        `from[${ZeroAddress}]`,
         `to[${ADDRESS[to]}]`,
         `routes[${ZAP_ROUTES[from][to].map((r) => `"${r.toHexString()}"`)}]`
       );
@@ -530,7 +530,7 @@ async function deployConcentratorFXS() {
       console.log(
         `zap ${from} => ETH:`,
         `from[${ADDRESS[from]}]`,
-        `to[${constants.AddressZero}]`,
+        `to[${ZeroAddress}]`,
         `routes[${ZAP_ROUTES[from][to].map((r) => `"${r.toHexString()}"`)}]`
       );
     }
@@ -728,7 +728,7 @@ async function deployConcentratorETH() {
       );
       console.log(`Found AutoCompoundingConvexCurveStrategy for ${compounderName} at:`, strategy.address);
     } else {
-      const address = await factory.callStatic.createStrategy(config.Strategy.impls.AutoCompoundingConvexCurveStrategy);
+      const address = await factory.createStrategy.staticCall(config.Strategy.impls.AutoCompoundingConvexCurveStrategy);
       const tx = await factory.createStrategy(config.Strategy.impls.AutoCompoundingConvexCurveStrategy);
       console.log(`Deploying AutoCompoundingConvexCurveStrategy for ${compounderName}, hash:`, tx.hash);
       const receipt = await tx.wait();
@@ -765,7 +765,7 @@ async function deployConcentratorETH() {
       config.ConcentratorETHInConvexCurve[name].compounder.proxy = compounder.address;
     }
 
-    if ((await strategy.operator()) === constants.AddressZero) {
+    if ((await strategy.operator()) === ZeroAddress) {
       const tx = await strategy.initialize(
         compounder.address,
         underlying,
@@ -777,7 +777,7 @@ async function deployConcentratorETH() {
       console.log("✅ Done, gas used:", receipt.gasUsed.toString());
     }
 
-    if ((await compounder.strategy()) === constants.AddressZero) {
+    if ((await compounder.strategy()) === ZeroAddress) {
       const tx = await compounder.initialize(
         DEPLOYED_CONTRACTS.AladdinZap,
         underlying,
@@ -817,7 +817,7 @@ async function deployConcentratorETH() {
       );
       console.log(`Found AutoCompoundingConvexFraxStrategy for ${compounderName}, at:`, strategy.address);
     } else {
-      const address = await factory.callStatic.createStrategy(config.Strategy.impls.AutoCompoundingConvexFraxStrategy);
+      const address = await factory.createStrategy.staticCall(config.Strategy.impls.AutoCompoundingConvexFraxStrategy);
       const tx = await factory.createStrategy(config.Strategy.impls.AutoCompoundingConvexFraxStrategy);
       console.log(`Deploying AutoCompoundingConvexFraxStrategy for ${compounderName}, hash:`, tx.hash);
       const receipt = await tx.wait();
@@ -854,7 +854,7 @@ async function deployConcentratorETH() {
       compounderConfig.compounder.proxy = compounder.address;
     }
 
-    if ((await strategy.operator()) === constants.AddressZero) {
+    if ((await strategy.operator()) === ZeroAddress) {
       const tx = await strategy.initialize(
         compounder.address,
         underlying,
@@ -866,7 +866,7 @@ async function deployConcentratorETH() {
       console.log("✅ Done, gas used:", receipt.gasUsed.toString());
     }
 
-    if ((await compounder.strategy()) === constants.AddressZero) {
+    if ((await compounder.strategy()) === ZeroAddress) {
       const tx = await compounder.initialize(
         DEPLOYED_CONTRACTS.AladdinZap,
         underlying,
@@ -934,7 +934,7 @@ async function deployAbcCVX() {
     strategy = await ethers.getContractAt("AMOConvexCurveStrategy", cvxConfig.strategy, deployer);
     console.log(`Found AMOConvexCurveStrategy for abcCVX, at:`, strategy.address);
   } else {
-    const address = await factory.callStatic.createStrategy(config.Strategy.impls.AMOConvexCurveStrategy);
+    const address = await factory.createStrategy.staticCall(config.Strategy.impls.AMOConvexCurveStrategy);
     const tx = await factory.createStrategy(config.Strategy.impls.AMOConvexCurveStrategy);
     console.log(`Deploying AMOConvexCurveStrategy for abcCVX, hash:`, tx.hash);
     const receipt = await tx.wait();
@@ -994,7 +994,7 @@ async function deployAbcCVX() {
     cvxConfig.gauge = gauge.address;
   }
 
-  if ((await strategy.operator()) === constants.AddressZero) {
+  if ((await strategy.operator()) === ZeroAddress) {
     const tx = await strategy.initialize(
       acvx.address,
       DEPLOYED_CONTRACTS.CLever.Gauge.Curve_clevCVX_CVX.token,
@@ -1467,7 +1467,7 @@ async function deployPriceOracle() {
     const symbols: string[] = [];
     for (const symbol of ["WETH", "USDC", "DAI", "USDT", "FRAX"]) {
       const feed = (await oracle.feeds(TOKENS[symbol].address)).feed;
-      if (feed === constants.AddressZero) {
+      if (feed === ZeroAddress) {
         symbols.push(symbol);
       } else {
         console.log(`Found feed for ChainlinkPriceOracle/${symbol} at ${feed}`);
@@ -1497,7 +1497,7 @@ async function deployPriceOracle() {
     const symbols: string[] = [];
     for (const symbol of ["TRICRV", "crvFRAX"]) {
       const pool = await oracle.pools(TOKENS[symbol].address);
-      if (pool === constants.AddressZero) {
+      if (pool === ZeroAddress) {
         symbols.push(symbol);
       } else {
         console.log(`Found pool for CurveBasePoolPriceOracle/${symbol} at ${pool}`);
@@ -1529,7 +1529,7 @@ async function deployPriceOracle() {
     const symbols: string[] = [];
     for (const symbol of ["CRV", "CVX"]) {
       const pool = (await oracle.pools(TOKENS[symbol].address)).pool;
-      if (pool === constants.AddressZero) {
+      if (pool === ZeroAddress) {
         symbols.push(symbol);
       } else {
         console.log(`Found pool for CurveV2PriceOracle.WETH/${symbol} at ${pool}`);
@@ -1561,7 +1561,7 @@ async function deployPriceOracle() {
     const symbols: string[] = [];
     for (const symbol of ["cvxCRV"]) {
       const pool = (await oracle.pools(TOKENS[symbol].address)).pool;
-      if (pool === constants.AddressZero) {
+      if (pool === ZeroAddress) {
         symbols.push(symbol);
       } else {
         console.log(`Found pool for CurveV2PriceOracle.crvFRAX/${symbol} at ${pool}`);
@@ -1589,7 +1589,7 @@ async function deployPriceOracle() {
     const symbols: string[] = [];
     for (const symbol of ["CRV", "CVX", "cvxCRV", "TRICRV"]) {
       const source = await oracle.sources(TOKENS[symbol].address);
-      if (source === constants.AddressZero) {
+      if (source === ZeroAddress) {
         symbols.push(symbol);
       } else {
         console.log(`Found source for AladdinPriceOracle/${symbol} at ${source}`);
@@ -1653,7 +1653,7 @@ async function deployConcentratorHarvester() {
     }
     diamond = await Diamond.deploy(diamondCuts, {
       owner: deployer.address,
-      init: constants.AddressZero,
+      init: ZeroAddress,
       initCalldata: "0x",
     });
     console.log(`Deploying ConcentratorHarvester Diamond, hash:`, diamond.deployTransaction.hash);

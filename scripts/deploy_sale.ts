@@ -69,7 +69,7 @@ async function main() {
     console.log("✅ Done, gas used:", receipt.gasUsed.toString());
   }
   if (!(await sale.isSupported(WETH))) {
-    const tx = await sale.updateSupportedTokens([WETH, constants.AddressZero, USDC, CVX], true);
+    const tx = await sale.updateSupportedTokens([WETH, ZeroAddress, USDC, CVX], true);
     console.log("Update Supported Tokens, hash:", tx.hash);
     const receipt = await tx.wait();
     console.log("✅ Done, gas used:", receipt.gasUsed.toString());

@@ -1,14 +1,15 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { impersonateAccount } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../../scripts/utils/tokens";
-import { WstETHWrapper } from "../../../typechain";
+import { TOKENS } from "@/utils/tokens";
+import { WstETHWrapper } from "@types";
 // eslint-disable-next-line camelcase
-import { request_fork } from "../../utils";
+import { createFork, impersonateAccounts } from "test/network";
 
-const FOKR_HEIGHT = 17620650;
+const FORK_HEIGHT = 17620650;
 
 const stETH = TOKENS.stETH.address;
 const stETH_HOLDER = "0x611F97d450042418E7338CBDd19202711563DF01";
@@ -23,7 +24,9 @@ describe("wstETHWrapper.spec", async () => {
   let wrapperAddress: string;
 
   beforeEach(async () => {
-    request_fork(FOKR_HEIGHT, [DEPLOYER, stETH_HOLDER, wstETH_HOLDER]);
+    await createFork(FORK_HEIGHT);
+    await impersonateAccounts([DEPLOYER, stETH_HOLDER, wstETH_HOLDER]);
+
     deployer = await ethers.getSigner(DEPLOYER);
 
     await deployer.sendTransaction({ to: stETH_HOLDER, value: ethers.parseEther("10") });

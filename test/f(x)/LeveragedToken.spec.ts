@@ -2,7 +2,7 @@
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { LeveragedToken, FractionalToken } from "../../typechain";
+import { LeveragedToken, FractionalToken } from "@types";
 import { ZeroAddress } from "ethers"
 
 describe("LeveragedToken.spec", async () => {

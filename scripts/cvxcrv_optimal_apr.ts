@@ -39,7 +39,7 @@ async function doMulticall(
   block: number
 ): Promise<Result[]> {
   const multicall = (await ethers.getContractAt("IMulticall2", MULLTICALL2)) as IMulticall2;
-  const [, results] = await multicall.callStatic.aggregate(
+  const [, results] = await multicall.aggregate.staticCall(
     calls.map((x) => {
       return {
         target: x.target,

@@ -2,11 +2,11 @@
 /* eslint-disable node/no-missing-import */
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
-import { constants } from "ethers";
+import { ZeroAddress } from "ethers";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../scripts/utils/tokens";
-import { ChainlinkPriceOracle } from "../../typechain";
-import { request_fork } from "../utils";
+import { TOKENS } from "@/utils/tokens";
+import { ChainlinkPriceOracle } from "@types";
+import { createFork, impersonateAccounts } from "test/network";
 
 const FORK_HEIGHT = 16485890;
 const DEPLOYER = "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf";
@@ -28,9 +28,10 @@ describe("ChainlinkPriceOracle.spec", async () => {
   let oracle: ChainlinkPriceOracle;
 
   beforeEach(async () => {
-    request_fork(FORK_HEIGHT, [DEPLOYER, OTHER]);
+    await createFork(FORK_HEIGHT);
     deployer = await ethers.getSigner(DEPLOYER);
     other = await ethers.getSigner(OTHER);
+    await impersonateAccounts([DEPLOYER, OTHER]);
 
     const ChainlinkPriceOracle = await ethers.getContractFactory("ChainlinkPriceOracle", deployer);
     oracle = await ChainlinkPriceOracle.deploy();
@@ -43,12 +44,12 @@ describe("ChainlinkPriceOracle.spec", async () => {
     });
 
     it("should revert, when length mismatch", async () => {
-      await expect(oracle.setFeeds([], [constants.AddressZero])).to.revertedWith("length mismatch");
-      await expect(oracle.setFeeds([constants.AddressZero], [])).to.revertedWith("length mismatch");
+      await expect(oracle.setFeeds([], [ZeroAddress])).to.revertedWith("length mismatch");
+      await expect(oracle.setFeeds([ZeroAddress], [])).to.revertedWith("length mismatch");
     });
 
     it("should succeed", async () => {
-      expect((await oracle.feeds(TOKENS.CRV.address)).feed).to.eq(constants.AddressZero);
+      expect((await oracle.feeds(TOKENS.CRV.address)).feed).to.eq(ZeroAddress);
       expect((await oracle.feeds(TOKENS.CRV.address)).decimal).to.eq(0);
       await oracle.setFeeds([TOKENS.CRV.address], [FEEDS.CRV]);
       expect((await oracle.feeds(TOKENS.CRV.address)).feed).to.eq(FEEDS.CRV);
@@ -66,7 +67,7 @@ describe("ChainlinkPriceOracle.spec", async () => {
 
     it("should succeed", async () => {
       for (const symbol of Object.keys(FEEDS)) {
-        const gas = await oracle.estimateGas.price(TOKENS[symbol].address);
+        const gas = await oracle.price.estimateGas(TOKENS[symbol].address);
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracle.price(TOKENS[symbol].address))},`,
           "gas usage:",

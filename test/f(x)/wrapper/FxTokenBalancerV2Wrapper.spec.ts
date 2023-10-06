@@ -1,15 +1,16 @@
 /* eslint-disable camelcase */
 /* eslint-disable node/no-missing-import */
+
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { TOKENS } from "../../../scripts/utils/tokens";
-import { FxTokenBalancerV2Wrapper, MockERC20, WETH9 } from "../../../typechain";
+import { TOKENS } from "@/utils/tokens";
+import { FxTokenBalancerV2Wrapper, MockERC20, WETH9 } from "@types";
 // eslint-disable-next-line camelcase
-import { request_fork } from "../../utils";
+import { createFork, impersonateAccounts} from "test/network";
 import { AbiCoder, MaxUint256 } from "ethers";
 
-const FOKR_HEIGHT = 17796350;
+const FORK_HEIGHT = 17796350;
 
 const BALANCER_POOL_FACTORY = "0x8E9aa87E45e92bad84D5F8DD1bff34Fb92637dE9";
 const BALANCER_VAULT = "0xBA12222222228d8Ba445958a75a0704d566BF2C8";
@@ -28,8 +29,10 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
   let wrapperAddress: string;
 
   beforeEach(async () => {
-    request_fork(FOKR_HEIGHT, [DEPLOYER]);
+    await createFork(FORK_HEIGHT);
+
     deployer = await ethers.getSigner(DEPLOYER);
+    await impersonateAccounts([deployer.address]);
 
     weth = await ethers.getContractAt("WETH9", TOKENS.WETH.address, deployer);
     wethAddress = TOKENS.WETH.address;
@@ -44,7 +47,7 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
     await src.waitForDeployment();
     srcAddress = await src.getAddress();
 
-    const poolAddress = await factory.callStatic.create(
+    const poolAddress = await factory.create.staticCall(
       "X",
       "Y",
       srcAddress.toLowerCase() < wethAddress.toLowerCase()

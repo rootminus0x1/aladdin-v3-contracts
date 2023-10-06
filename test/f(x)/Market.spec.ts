@@ -2,7 +2,8 @@
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { LeveragedToken, FractionalToken, Treasury, WETH9, MockTwapOracle, Market } from "../../typechain";
+// TODO: change mocks to use this: import {deployMockContract } from "@ethereum-waffle/mock-contract";
+import { LeveragedToken, FractionalToken, Treasury, WETH9, MockFxPriceOracle, Market } from "@types";
 import { ZeroAddress, ZeroHash, MaxUint256 } from "ethers";
 
 const PRECISION = 10n ** 18n;
@@ -14,7 +15,7 @@ describe("Market.spec", async () => {
 
   let weth: WETH9;
   let wethAddress: string;
-  let oracle: MockTwapOracle;
+  let oracle: MockFxPriceOracle;
   let oracleAddress: string;
   let fToken: FractionalToken;
   let fTokenAddress: string;
@@ -33,8 +34,8 @@ describe("Market.spec", async () => {
     await weth.waitForDeployment();
     wethAddress = await weth.getAddress();
 
-    const MockTwapOracle = await ethers.getContractFactory("MockTwapOracle", deployer);
-    oracle = await MockTwapOracle.deploy();
+    const MockFxPriceOracle = await ethers.getContractFactory("MockFxPriceOracle", deployer);
+    oracle = await MockFxPriceOracle.deploy();
     await oracle.waitForDeployment();
     oracleAddress = await oracle.getAddress();
 
@@ -67,7 +68,9 @@ describe("Market.spec", async () => {
       fTokenAddress,
       xTokenAddress,
       oracleAddress,
-      ethers.parseEther("0.1")
+      ethers.parseEther("0.1"),
+      ethers.parseEther("1000"),
+      ZeroAddress
     );
 
     await market.initialize(treasuryAddress, platform.address);
@@ -80,17 +83,11 @@ describe("Market.spec", async () => {
   });
 
   context("auth", async () => {
-    /* TODO: find out why this has become out-of-synch with reality
-       reality: there's nothing in the initialize function that wopuld revert if called twice
-       second TODO: why is there an initialize() function in the first place?
-       no, not that it's spelled with a z instead of an s, but why is it not a constructor call
-       which ensures it's not called twice
     it("should revert, when intialize again", async () => {
       await expect(market.initialize(treasuryAddress, platform.address)).to.revertedWith(
         "Initializable: contract is already initialized"
       );
     });
-    */
 
     it("should initialize correctly", async () => {
       expect(await market.treasury()).to.eq(treasuryAddress);
@@ -394,7 +391,7 @@ describe("Market.spec", async () => {
     });
 
     it("should revert, when mint zero amount", async () => {
-      await expect(market.mint(ZeroAddress, signer.address, 0, 0)).to.revertedWith("mint zero amount");
+      await expect(market.mint(ethers.parseEther("0"), signer.address, 0n, 0n)).to.revertedWith("mint zero amount");
     });
 
     it("should revert, when initialize multiple times", async () => {
