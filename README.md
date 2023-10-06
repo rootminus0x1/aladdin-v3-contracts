@@ -1,4 +1,4 @@
-# Aladdin DAO Concentrator Contracts
+# Aladdin DAO F(x) Contracts
 
 ### What is Concentrator?
 
@@ -6,7 +6,7 @@ Concentrator is a yield enhancement product by AladdinDAO built for smart farmer
 
 ### How does it work?
 
-Farmers deposit their Convex vault LP tokens in Concentrator.  Yields from those vaults are harvested, swapped to CRV and then staked on behalf of the farmer in the Convex CRV vault where they autocompound.  Users may withdraw any or all of their deposit and yield at any time in CRV or (zap to) CVX! 
+Farmers deposit their Convex vault LP tokens in Concentrator.  Yields from those vaults are harvested, swapped to CRV and then staked on behalf of the farmer in the Convex CRV vault where they autocompound.  Users may withdraw any or all of their deposit and yield at any time in CRV or (zap to) CVX!
 
 ### Is it an autocompounder?
 
@@ -31,13 +31,60 @@ yarn install
 ### compile contract
 
 ```bash
-npx hardhat compile
+yarn hardhat compile
 ```
 
 ### unit test
 
 ```bash
-npx hardhat test
+yarn hardhat test
+```
+
+## Contract relationships
+
+``` mermaid
+---
+title: f(x) Contracts and relationships
+---
+classDiagram
+  class ERC20{
+    +name
+    +symbol
+    +totalSupply
+  }
+
+  class FXVault{
+    +fxRatio
+    +totalFxToken
+    +totalLpToken
+    +deposit()
+    +redeem()
+    #rebalance()
+    #updateWrapper()
+  }
+
+  note for FXVault "lpToken"
+  note for FXVault "fxToken"
+  note for FXVault "wrapper"
+
+  class Treasury
+  class HarvestableTreasury{
+    +harvestBountyRatio
+    +stabilityPoolRatio
+    +harvest()
+    #updateStabilityPool()
+    #updateRewardRatio()
+  }
+  HarvestableTreasury --|> Treasury
+  note for HarvestableTreasury "platform"
+  note for HarvestableTreasury "stabilityPool"
+
+  class FractionalToken{
+    +nav
+  }
+  FractionalToken ..> Treasury
+  FractionalToken --|> ERC20
+
 ```
 
 ## Deployment
