@@ -23,28 +23,35 @@ Check out the audit [here](./audit-reports/SECBIT_Concentrator_Report.pdf).
 ## Development
 
 ### install dependency
+install yarn
 
-```bash
+```
 yarn install
 ```
 
 ### compile contract
 
-```bash
+```
 yarn hardhat compile
 ```
 
 ### unit test
 
-```bash
+```
 yarn hardhat test
 ```
+
+### visual studio code
+add the following extensions:
+* Markdown Preview Mermaid Support (for the diagrams in readme.md)
+* vscode-pdf (to see the whitepapers)
+* Solidity (nomic foundation one)
 
 ## Contract relationships
 
 ``` mermaid
 ---
-title: f(x) Contracts and relationships
+title: f(x) contracts and relationships
 ---
 classDiagram
   class ERC20{
