@@ -2,7 +2,7 @@ import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-import { FxVault, MockERC20, MockTokenWrapper } from "@/types/index";
+import { FxVault, MockERC20, MockTokenWrapper } from "@types";
 import { ZeroAddress } from "ethers";
 
 describe("FxVault.spec", async () => {
