@@ -1,5 +1,7 @@
 /* eslint-disable node/no-missing-import */
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
+import { time } from "@nomicfoundation/hardhat-network-helpers";
+
 import { expect } from "chai";
 import { ethers, network } from "hardhat";
 import {
@@ -435,7 +437,7 @@ describe("RebalancePool.spec", async () => {
 
       // unlock
       await stabilityPool.connect(signer).unlock(unlockAmount);
-      const timestamp = (await ethers.provider.getBlock("latest")).timestamp;
+      const timestamp = await time.latest(); // (await ethers.provider.getBlock("latest")).timestamp;
       expect(await stabilityPool.balanceOf(signer.address)).to.eq(amountIn - unlockAmount);
       expect(await stabilityPool.unlockedBalanceOf(signer.address)).to.eq(0n);
       expect((await stabilityPool.unlockingBalanceOf(signer.address))._balance).to.eq(unlockAmount);
@@ -504,7 +506,7 @@ describe("RebalancePool.spec", async () => {
 
       // A unlock
       await stabilityPool.connect(userA).unlock(unlockAmountA);
-      const timestampA = (await ethers.provider.getBlock("latest")).timestamp;
+      const timestampA = await time.latest(); // (await ethers.provider.getBlock("latest")).timestamp;
       expect(await stabilityPool.balanceOf(userA.address)).to.eq(amountInA - unlockAmountA);
       expect(await stabilityPool.unlockedBalanceOf(userA.address)).to.eq(0n);
       expect((await stabilityPool.unlockingBalanceOf(userA.address))._balance).to.eq(unlockAmountA);
@@ -514,7 +516,7 @@ describe("RebalancePool.spec", async () => {
 
       // B unlock
       await stabilityPool.connect(userB).unlock(unlockAmountB);
-      const timestampB = (await ethers.provider.getBlock("latest")).timestamp;
+      const timestampB = await time.latest(); // (await ethers.provider.getBlock("latest")).timestamp;
       expect(await stabilityPool.balanceOf(userB.address)).to.eq(amountInB - unlockAmountB);
       expect(await stabilityPool.unlockedBalanceOf(userB.address)).to.eq(0n);
       expect((await stabilityPool.unlockingBalanceOf(userB.address))._balance).to.eq(unlockAmountB);

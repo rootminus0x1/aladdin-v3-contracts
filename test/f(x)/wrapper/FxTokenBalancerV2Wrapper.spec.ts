@@ -119,4 +119,9 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
     const after = await src.balanceOf(deployer.address);
     expect(after).to.gt(before);
   });
+
+  it("should fail when wrap with insufficient balance", async () => {
+    await expect(wrapper.wrap(ethers.parseEther("100"))).to.be.revertedWith("ERC20: transfer amount exceeds balance");
+  });
+
 });
