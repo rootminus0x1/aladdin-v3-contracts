@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
 import { ERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
 import { IFractionalToken } from "./interfaces/IFractionalToken.sol";
 
 contract FractionalToken is ERC20Upgradeable, IFractionalToken {
-  using SafeMathUpgradeable for uint256;
+  using SafeMath for uint256;
 
   /**********
    * Events *

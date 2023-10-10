@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -50,7 +50,7 @@ contract CurveBasePoolPriceOracle is Ownable, IPriceOracle {
 
     address[] storage _underlyings = underlyings[_token];
     uint256 n = _underlyings.length;
-    uint256 minPx = uint256(-1);
+    uint256 minPx = type(uint256).max;
     for (uint256 i = 0; i < n; i++) {
       uint256 _price = IPriceOracle(baseOracle).price(_underlyings[i]);
       if (_price < minPx) minPx = _price;

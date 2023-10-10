@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 import { IRateProvider } from "../interfaces/IRateProvider.sol";
 import { AggregatorV3Interface } from "../../price-oracle/interfaces/AggregatorV3Interface.sol";

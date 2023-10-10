@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { ITokenWrapper } from "../interfaces/ITokenWrapper.sol";
 import { ILidoWstETH } from "../../interfaces/ILidoWstETH.sol";
@@ -29,7 +29,7 @@ contract wstETHWrapper is ITokenWrapper {
    ***************/
 
   constructor() {
-    IERC20(src).safeApprove(dst, uint256(-1));
+    IERC20(src).approve(dst, type(uint256).max);
   }
 
   /****************************

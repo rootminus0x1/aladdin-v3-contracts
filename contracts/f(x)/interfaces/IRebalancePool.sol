@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 interface IRebalancePool {
   /**********
@@ -85,7 +85,7 @@ interface IRebalancePool {
    ****************************/
 
   /// @notice Deposit some asset to this contract.
-  /// @dev Use `amount=uint256(-1)` if you want to deposit all asset held.
+  /// @dev Use `amount=type(uint256).max` if you want to deposit all asset held.
   /// @param amount The amount of asset to deposit.
   /// @param recipient The address of receiver for the deposited asset.
   function deposit(uint256 amount, address recipient) external;

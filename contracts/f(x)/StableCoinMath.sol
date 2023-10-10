@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 pragma abicoder v2;
 
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
 
 library StableCoinMath {
-  using SafeMathUpgradeable for uint256;
+  using SafeMath for uint256;
 
   /*************
    * Constants *

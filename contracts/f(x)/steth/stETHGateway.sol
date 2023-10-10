@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { ILidoStETH } from "../../interfaces/ILidoStETH.sol";
 import { IMarket } from "../interfaces/IMarket.sol";
@@ -42,9 +42,9 @@ contract stETHGateway {
     fToken = _fToken;
     xToken = _xToken;
 
-    IERC20(stETH).safeApprove(_market, uint256(-1));
-    IERC20(_fToken).safeApprove(_market, uint256(-1));
-    IERC20(_xToken).safeApprove(_market, uint256(-1));
+    IERC20(stETH).approve(_market, type(uint256).max);
+    IERC20(_fToken).approve(_market, type(uint256).max);
+    IERC20(_xToken).approve(_market, type(uint256).max);
   }
 
   receive() external payable {}
@@ -96,7 +96,7 @@ contract stETHGateway {
   /// @param _amount The amount of token to transfer.
   /// @return uint256 The amount of token transfered.
   function _transferTokenIn(address _token, uint256 _amount) internal returns (uint256) {
-    if (_amount == uint256(-1)) {
+    if (_amount == type(uint256).max) {
       _amount = IERC20(_token).balanceOf(msg.sender);
     }
 

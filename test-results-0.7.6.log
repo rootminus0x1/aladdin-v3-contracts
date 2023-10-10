@@ -1,0 +1,430 @@
+tfras@Fraser17:~/github/rootminus0x1/aladdin-v3-contracts$ yarn hardhat clean
+yarn run v1.22.19
+$ /home/tfras/github/rootminus0x1/aladdin-v3-contracts/node_modules/.bin/hardhat clean
+Done in 0.71s.
+tfras@Fraser17:~/github/rootminus0x1/aladdin-v3-contracts$ yarn hardhat compile
+yarn run v1.22.19
+$ /home/tfras/github/rootminus0x1/aladdin-v3-contracts/node_modules/.bin/hardhat compile
+Generating typings for: 144 artifacts in dir: ./typechain-types for target: ethers-v6
+Successfully generated 324 typings!
+Compiled 123 Solidity files successfully
+Done in 7.05s.
+tfras@Fraser17:~/github/rootminus0x1/aladdin-v3-contracts$ yarn hardhat test
+yarn run v1.22.19
+$ /home/tfras/github/rootminus0x1/aladdin-v3-contracts/node_modules/.bin/hardhat test
+Compiled 123 Solidity files successfully
+
+
+  FractionalToken.spec
+    auth
+      ✔ should revert, when intialize again
+      ✔ should initialize correctly
+    #updateNav
+      ✔ should revert, when non-treasury call
+      ✔ should revert, when multiple too small
+      ✔ should revert, when multiple too large
+      ✔ should succeed
+    #setNav
+      ✔ should revert, when non-treasury call
+      ✔ should succeed
+    #mint
+      ✔ should revert, when non-treasury call
+      ✔ should succeed
+    #burn
+      ✔ should revert, when non-treasury call
+      ✔ should succeed
+
+  FxVault.spec
+    run with fxRatio = 0%
+      ✔ should initialize correctly
+      auth
+        #updateWrapper
+          ✔ should revert, when non-owner call
+          ✔ should revert, when src mismatch
+          ✔ should revert, when dst mismatch
+          ✔ should succeed
+      deposit in the first time
+        ✔ should revert, when deposit zero amount
+        ✔ should revert, when mint zero share
+        ✔ should succeed, when deposit with equal ratio (54ms)
+        ✔ should succeed, when deposit with more FX token (56ms)
+      deposit multiple times
+        ✔ should succeed, when deposit with equal ratio (57ms)
+        ✔ should succeed, when deposit with more FX token (50ms)
+      redeem
+        ✔ should revert, when redeem zero share
+        ✔ should revert, when redeem exceeds allowance
+        ✔ should succeed (38ms)
+    run with fxRatio = 20%
+      ✔ should initialize correctly
+      auth
+        #updateWrapper
+          ✔ should revert, when non-owner call
+          ✔ should revert, when src mismatch
+          ✔ should revert, when dst mismatch
+          ✔ should succeed
+      deposit in the first time
+        ✔ should revert, when deposit zero amount
+        ✔ should revert, when mint zero share
+        ✔ should succeed, when deposit with equal ratio (51ms)
+        ✔ should succeed, when deposit with more FX token (51ms)
+        ✔ should succeed, when deposit with more LP token (50ms)
+      deposit multiple times
+        ✔ should succeed, when deposit with equal ratio (53ms)
+        ✔ should succeed, when deposit with more FX token (51ms)
+        ✔ should succeed, when deposit with more LP token (49ms)
+      redeem
+        ✔ should revert, when redeem zero share
+        ✔ should revert, when redeem exceeds allowance
+        ✔ should succeed (43ms)
+    run with fxRatio = 50%
+      ✔ should initialize correctly
+      auth
+        #updateWrapper
+          ✔ should revert, when non-owner call
+          ✔ should revert, when src mismatch
+          ✔ should revert, when dst mismatch
+          ✔ should succeed
+      deposit in the first time
+        ✔ should revert, when deposit zero amount
+        ✔ should revert, when mint zero share
+        ✔ should succeed, when deposit with equal ratio (51ms)
+        ✔ should succeed, when deposit with more FX token (47ms)
+        ✔ should succeed, when deposit with more LP token (50ms)
+      deposit multiple times
+        ✔ should succeed, when deposit with equal ratio (51ms)
+        ✔ should succeed, when deposit with more FX token (52ms)
+        ✔ should succeed, when deposit with more LP token (60ms)
+      redeem
+        ✔ should revert, when redeem zero share
+        ✔ should revert, when redeem exceeds allowance
+        ✔ should succeed (40ms)
+    run with fxRatio = 80%
+      ✔ should initialize correctly
+      auth
+        #updateWrapper
+          ✔ should revert, when non-owner call
+          ✔ should revert, when src mismatch
+          ✔ should revert, when dst mismatch
+          ✔ should succeed
+      deposit in the first time
+        ✔ should revert, when deposit zero amount
+        ✔ should revert, when mint zero share
+        ✔ should succeed, when deposit with equal ratio (55ms)
+        ✔ should succeed, when deposit with more FX token (49ms)
+        ✔ should succeed, when deposit with more LP token (51ms)
+      deposit multiple times
+        ✔ should succeed, when deposit with equal ratio (49ms)
+        ✔ should succeed, when deposit with more FX token (49ms)
+        ✔ should succeed, when deposit with more LP token (53ms)
+      redeem
+        ✔ should revert, when redeem zero share
+        ✔ should revert, when redeem exceeds allowance
+        ✔ should succeed (40ms)
+    run with fxRatio = 100%
+      ✔ should initialize correctly
+      auth
+        #updateWrapper
+          ✔ should revert, when non-owner call
+          ✔ should revert, when src mismatch
+          ✔ should revert, when dst mismatch
+          ✔ should succeed
+      deposit in the first time
+        ✔ should revert, when deposit zero amount
+        ✔ should revert, when mint zero share
+        ✔ should succeed, when deposit with equal ratio (48ms)
+        ✔ should succeed, when deposit with more LP token (48ms)
+      deposit multiple times
+        ✔ should succeed, when deposit with equal ratio (49ms)
+        ✔ should succeed, when deposit with more LP token (49ms)
+      redeem
+        ✔ should revert, when redeem zero share
+        ✔ should revert, when redeem exceeds allowance
+        ✔ should succeed (38ms)
+    rebalance from 0% to 20% to 50% to 80% to 100%
+      ✔ should revert, when non-owner call
+      ✔ should revert, when fxRatio out of bound
+      ✔ should revert, when insufficient LP token
+      ✔ should revert, when insufficient output
+      ✔ should succeed (146ms)
+    rebalance from 100% to 80% to 50% to 20% to 0%
+      ✔ should revert, when non-owner call
+      ✔ should revert, when fxRatio out of bound
+      ✔ should revert, when insufficient FX token
+      ✔ should revert, when insufficient output
+      ✔ should succeed (144ms)
+
+  LeveragedToken.spec
+    auth
+      ✔ should revert, when intialize again
+      ✔ should initialize correctly
+    #mint
+      ✔ should revert, when non-treasury call
+      ✔ should succeed
+    #burn
+      ✔ should revert, when non-treasury call
+      ✔ should succeed
+
+  Market.spec
+    auth
+      ✔ should revert, when intialize again
+      ✔ should initialize correctly
+      #updateRedeemFeeRatio
+        ✔ should revert, when non-owner call
+        ✔ should revert, when default fee too large
+        ✔ should revert, when delta fee too small
+        ✔ should revert, when total fee too large
+        ✔ should succeed when update for fToken
+        ✔ should succeed when update for xToken
+      #updateMintFeeRatio
+        ✔ should revert, when non-owner call
+        ✔ should revert, when default fee too large
+        ✔ should revert, when delta fee too small
+        ✔ should revert, when total fee too large
+        ✔ should succeed when update for fToken
+        ✔ should succeed when update for xToken
+      #updateMarketConfig
+        ✔ should revert, when non-owner call
+        ✔ should revert, when invalid param
+        ✔ should succeed
+      #updateIncentiveConfig
+        ✔ should revert, when non-owner call
+        ✔ should revert, when incentive too small
+        ✔ should revert, when invalid incentive config
+        ✔ should succeed
+      #updatePlatform
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #updateLiquidationWhitelist
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #pauseMint
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #pauseRedeem
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #pauseFTokenMintInSystemStabilityMode
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #pauseXTokenRedeemInSystemStabilityMode
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+    mint both
+      ✔ should revert, when mint zero amount
+      ✔ should revert, when initialize multiple times
+      ✔ should succeed
+    mint fToken
+      ✔ should revert, when mint zero amount
+      ✔ should revert, when mint paused
+      ✔ should succeed
+    mint xToken
+      ✔ should revert, when mint zero amount
+      ✔ should revert, when mint paused
+      ✔ should succeed
+
+  RebalancePool.spec
+    auth
+      ✔ should revert, when intialize again
+      ✔ should initialize correctly
+      #updateLiquidator
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #updateWrapper
+        ✔ should revert, when non-owner call
+        ✔ should revert, when src mismatch
+        ✔ should revert, when dst mismatch
+        ✔ should succeed
+      #updateLiquidatableCollateralRatio
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #updateUnlockDuration
+        ✔ should revert, when non-owner call
+        ✔ should revert, when unlockDuration too small
+        ✔ should succeed
+      #addReward
+        ✔ should revert, when non-owner call
+        ✔ should revert, when duplicated reward token
+        ✔ should revert, when zero manager address
+        ✔ should revert, when zero period length
+        ✔ should succeed
+      #updateReward
+        ✔ should revert, when non-owner call
+        ✔ should revert, when no such reward token
+        ✔ should revert, when zero manager address
+        ✔ should revert, when zero period length
+        ✔ should succeed
+    deposit and claim
+      ✔ should revert, when deposit zero amount
+      ✔ should succeed, when single deposit
+      ✔ should succeed, when single deposit and liquidate (171ms)
+      ✔ should succed, when multiple deposit and liquidate (132ms)
+    deposit, unlock and liquidate and withdraw
+      ✔ should succeed, when single deposit, unlock half, liquidate partial, withdraw (216ms)
+      ✔ should succeed, when multiple deposit, unlock half, liquidate partial (237ms)
+
+  Treasury.spec
+    auth
+      ✔ should revert, when intialize again
+      ✔ should initialize correctly
+      #initializePrice
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #updateStrategy
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #updateBeta
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #updatePriceOracle
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+      #updateSettleWhitelist
+        ✔ should revert, when non-owner call
+        ✔ should succeed
+    #mint
+      ✔ should revert, when non-market call
+      ✔ should succeed when mint both
+      ✔ should succeed, when mint fToken (43ms)
+      ✔ should succeed, when mint xToken (43ms)
+      ✔ should succeed, mint both => price move up => mint fToken (78ms)
+      ✔ should succeed, mint both => price move up => mint xToken (77ms)
+      ✔ should compute #maxMintableFToken correctly (121ms)
+      ✔ should compute #maxMintableXToken correctly (113ms)
+    #redeem
+      ✔ should revert, when non-market call
+      ✔ should succeed, mint both => price move up => redeem fToken (96ms)
+      ✔ should succeed, mint both => price move up => redeem xToken (98ms)
+      ✔ should compute #maxRedeemableFToken correctly (120ms)
+      ✔ should compute #maxRedeemableXToken correctly (119ms)
+    #addBaseToken
+      ✔ should revert, when non-market call
+      ✔ should succeed, mint both => price move up => add base token, no incentive (79ms)
+      ✔ should succeed, mint both => price move up => add base token, 10% incentive (79ms)
+      ✔ should compute #maxMintableXTokenWithIncentive correctly, no incentive (117ms)
+      ✔ should compute #maxMintableXTokenWithIncentive correctly, 10% incentive (127ms)
+    #liquidate
+      ✔ should revert, when non-market call
+      ✔ should succeed, mint both => price move up => liquidate fToken, no incentive (95ms)
+      ✔ should succeed, mint both => price move up => liquidate fToken, 10% incentive (101ms)
+      ✔ should compute #maxLiquidatable correctly, no incentive (131ms)
+      ✔ should compute #maxLiquidatable correctly, 10% incentive (155ms)
+    #selfLiquidate
+      ✔ should revert, when non-market call
+    #protocolSettle
+      ✔ should revert, when non-whitelist call
+      ✔ should succeed (48ms)
+
+  FxTokenBalancerV2Wrapper.spec
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+    ✔ should succeed when wrap (75ms)
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+    ✔ should succeed when unwrap (71ms)
+
+  wstETHWrapper.spec
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+    ✔ should succeed when wrap (3004ms)
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+    ✔ should succeed when unwrap (470ms)
+
+  AladdinPriceOracle.spec
+    auth
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when non-owner call (220ms)
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when length mismatch
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should succeed
+    price
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+price of CRV: 0.9930768, gas usage: 48576
+price of CVX: 4.975, gas usage: 48576
+price of DAI: 0.99977551, gas usage: 48576
+price of USDC: 1.0, gas usage: 48576
+price of USDT: 1.00019845, gas usage: 48576
+price of FRAX: 1.00099599, gas usage: 48576
+price of WETH: 1554.55188, gas usage: 48576
+      ✔ should succeed (6457ms)
+
+  ChainlinkPriceOracle.spec
+    auth
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when non-owner call
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when length mismatch
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should succeed
+    price
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+price of CRV: 0.9930768, gas usage: 42795
+price of CVX: 4.975, gas usage: 42795
+price of DAI: 0.99977551, gas usage: 42795
+price of USDC: 1.0, gas usage: 42795
+price of USDT: 1.00019845, gas usage: 42795
+price of FRAX: 1.00099599, gas usage: 42795
+price of WETH: 1554.55188, gas usage: 42795
+      ✔ should succeed (180ms)
+
+  CurveBasePoolPriceOracle.spec
+    auth
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when non-owner call
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when length mismatch
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should succeed (1735ms)
+    price
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+3CRV 1.023333219378694941
+crvFRAX 1.001098947017075578
+      ✔ should succeed (3147ms)
+
+  CurveV2PriceOracle.spec
+    auth
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when non-owner call
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should revert, when length mismatch
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should succeed, when base is coin0 (490ms)
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+      ✔ should succeed, when base is coin1 (1042ms)
+    price with WETH base
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+price of CRV: 0.995504512716867652, gas usage: 54811
+price of CVX: 4.958331837180898107, gas usage: 54703
+price of LDO: 2.405262211000853228, gas usage: 76305
+price of YFI: 7310.373607815908486309, gas usage: 76305
+price of KP3R: 77.6692330560756907, gas usage: 76305
+price of cbETH: 1551.199582266517871657, gas usage: 75687
+price of T: 0.049194779345778688, gas usage: 72687
+price of GEAR: 0.015121617071343342, gas usage: 76339
+      ✔ should succeed (6852ms)
+    price with USDC base
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+price of STG: 0.59753368591763948, gas usage: 76339
+price of EURS: 1.08505874142523621, gas usage: 54654
+price of FIDU: 0.947356692728724985, gas usage: 76326
+      ✔ should succeed (2510ms)
+    price with FraxBP base
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+price of cvxFXS: 8.568064211036731694, gas usage: 136145
+price of RSR: 0.004240096098241671, gas usage: 136196
+price of cvxCRV: 0.882249007279502211, gas usage: 136196
+price of CVX: 4.991855899080216207, gas usage: 136196
+price of BADGER: 2.814045010507694011, gas usage: 134950
+price of agEUR: 1.089096191716244046, gas usage: 136196
+price of SDT: 0.376832266247482473, gas usage: 136196
+price of ALCX: 18.118341087226384746, gas usage: 136196
+      ✔ should succeed (9880ms)
+    price with 3CRV base
+forking https://mainnet.infura.io/v3/3c643042a2094395bfe38f5cd1f4bc90
+price of EURT: 1.084294892756146839, gas usage: 146612
+price of DCHF: 1.111290454951240075, gas usage: 168081
+price of EUROC: 1.0853064106930893, gas usage: 153017
+      ✔ should succeed (3203ms)
+
+
+  237 passing (3m)
+
+Done in 160.45s.

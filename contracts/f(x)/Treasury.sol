@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 pragma abicoder v2;
 
 import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
-import { SignedSafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SignedSafeMathUpgradeable.sol";
-import { IERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
-import { SafeERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
+import { SignedSafeMath } from "./compatibility8/SignedSafeMath.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { IFxPriceOracle } from "./interfaces/IFxPriceOracle.sol";
 import { IAssetStrategy } from "./interfaces/IAssetStrategy.sol";
@@ -23,9 +23,9 @@ import { StableCoinMath } from "./StableCoinMath.sol";
 // solhint-disable not-rely-on-time
 
 contract Treasury is OwnableUpgradeable, ITreasury {
-  using SafeERC20Upgradeable for IERC20Upgradeable;
-  using SafeMathUpgradeable for uint256;
-  using SignedSafeMathUpgradeable for int256;
+  using SafeERC20 for IERC20;
+  using SafeMath for uint256;
+  using SignedSafeMath for int256;
   using StableCoinMath for StableCoinMath.SwapState;
 
   /**********
@@ -447,7 +447,7 @@ contract Treasury is OwnableUpgradeable, ITreasury {
 
   /// @inheritdoc ITreasury
   function transferToStrategy(uint256 _amount) external override onlyStrategy {
-    IERC20Upgradeable(baseToken).safeTransfer(strategy, _amount);
+    IERC20(baseToken).safeTransfer(strategy, _amount);
     strategyUnderlying += _amount;
   }
 
@@ -530,20 +530,20 @@ contract Treasury is OwnableUpgradeable, ITreasury {
     _amount = convertToWrapped(_amount);
 
     address _baseToken = baseToken;
-    uint256 _balance = IERC20Upgradeable(_baseToken).balanceOf(address(this));
+    uint256 _balance = IERC20(_baseToken).balanceOf(address(this));
     if (_balance < _amount) {
       uint256 _diff = _amount - _balance;
       IAssetStrategy(strategy).withdrawToTreasury(_diff);
       strategyUnderlying = strategyUnderlying.sub(_diff);
 
       // consider possible slippage here.
-      _balance = IERC20Upgradeable(_baseToken).balanceOf(address(this));
+      _balance = IERC20(_baseToken).balanceOf(address(this));
       if (_amount > _balance) {
         _amount = _balance;
       }
     }
 
-    IERC20Upgradeable(_baseToken).safeTransfer(_recipient, _amount);
+    IERC20(_baseToken).safeTransfer(_recipient, _amount);
 
     return _amount;
   }
@@ -559,10 +559,10 @@ contract Treasury is OwnableUpgradeable, ITreasury {
     } else {
       _state.fMultiple = _computeMultiple(_state.baseNav);
       address _fToken = fToken;
-      _state.fSupply = IERC20Upgradeable(_fToken).totalSupply();
+      _state.fSupply = IERC20(_fToken).totalSupply();
       _state.fNav = IFractionalToken(_fToken).getNav(_state.fMultiple);
 
-      _state.xSupply = IERC20Upgradeable(xToken).totalSupply();
+      _state.xSupply = IERC20(xToken).totalSupply();
       if (_state.xSupply == 0) {
         // no xToken, treat the nav of xToken as 1.0
         _state.xNav = PRECISION;

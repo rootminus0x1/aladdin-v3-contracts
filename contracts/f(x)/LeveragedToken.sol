@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
 import { ERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
 import { IFractionalToken } from "./interfaces/IFractionalToken.sol";
@@ -10,7 +10,7 @@ import { ILeveragedToken } from "./interfaces/ILeveragedToken.sol";
 import { ITreasury } from "./interfaces/ITreasury.sol";
 
 contract LeveragedToken is ERC20Upgradeable, ILeveragedToken {
-  using SafeMathUpgradeable for uint256;
+  using SafeMath for uint256;
 
   /*************
    * Constants *

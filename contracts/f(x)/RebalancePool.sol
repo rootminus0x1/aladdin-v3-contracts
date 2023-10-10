@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 pragma abicoder v2;
 
 import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
-import { IERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
-import { SafeERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { IMarket } from "./interfaces/IMarket.sol";
 import { IRebalancePool } from "./interfaces/IRebalancePool.sol";
@@ -58,8 +58,8 @@ import { ITreasury } from "./interfaces/ITreasury.sol";
 /// There are possibilities that all assets are liquidated. In such case, we will reset the P[i] to 1, scale[i] = 0,
 /// and increase current epoch by 1.
 contract RebalancePool is OwnableUpgradeable, IRebalancePool {
-  using SafeERC20Upgradeable for IERC20Upgradeable;
-  using SafeMathUpgradeable for uint256;
+  using SafeERC20 for IERC20;
+  using SafeMath for uint256;
 
   /**********
    * Events *
@@ -355,11 +355,11 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
   function deposit(uint256 _amount, address _recipient) external override {
     // transfer asset token to this contract
     address _asset = asset;
-    if (_amount == uint256(-1)) {
-      _amount = IERC20Upgradeable(_asset).balanceOf(msg.sender);
+    if (_amount == type(uint256).max) {
+      _amount = IERC20(_asset).balanceOf(msg.sender);
     }
     require(_amount > 0, "deposit zero amount");
-    IERC20Upgradeable(_asset).safeTransferFrom(msg.sender, address(this), _amount);
+    IERC20(_asset).safeTransferFrom(msg.sender, address(this), _amount);
 
     // distribute pending extraRewards
     _distributeRewards(_recipient);
@@ -434,7 +434,7 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
 
       emit UserUnlockChange(msg.sender, 0, 0);
 
-      IERC20Upgradeable(asset).safeTransfer(msg.sender, _unlock.amount);
+      IERC20(asset).safeTransfer(msg.sender, _unlock.amount);
     }
 
     emit WithdrawUnlocked(msg.sender, _unlock.amount);
@@ -499,16 +499,15 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
     address _market = market;
     address _wrapper = wrapper;
 
-    _liquidated = IERC20Upgradeable(_asset).balanceOf(address(this));
+    _liquidated = IERC20(_asset).balanceOf(address(this));
     if (_amount > _liquidated) {
       // cannot liquidate more than assets in this contract.
       _amount = _liquidated;
     }
-    IERC20Upgradeable(_asset).safeApprove(_market, 0);
-    IERC20Upgradeable(_asset).safeApprove(_market, _amount);
+    IERC20(_asset).forceApprove(_market, _amount);
 
     _baseOut = IMarket(_market).redeem(_amount, 0, _wrapper, _minBaseOut);
-    _liquidated = _liquidated.sub(IERC20Upgradeable(_asset).balanceOf(address(this)));
+    _liquidated = _liquidated.sub(IERC20(_asset).balanceOf(address(this)));
 
     emit Liquidate(_liquidated, _baseOut);
 
@@ -529,9 +528,9 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
 
   /// @inheritdoc IRebalancePool
   function depositReward(address _token, uint256 _amount) external override onlyRewardManager(_token) {
-    uint256 _balance = IERC20Upgradeable(_token).balanceOf(address(this));
-    IERC20Upgradeable(_token).safeTransferFrom(msg.sender, address(this), _amount);
-    _amount = IERC20Upgradeable(_token).balanceOf(address(this)).sub(_balance);
+    uint256 _balance = IERC20(_token).balanceOf(address(this));
+    IERC20(_token).safeTransferFrom(msg.sender, address(this), _amount);
+    _amount = IERC20(_token).balanceOf(address(this)).sub(_balance);
     require(_amount > 0, "reward amount zero");
 
     _distributeReward(_token);
@@ -907,12 +906,12 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
 
     address _wrapper = wrapper;
     if (_wrapper != address(this) && _unwrap && _token == ITokenWrapper(_wrapper).dst()) {
-      IERC20Upgradeable(_token).safeTransfer(_wrapper, _rewards);
+      IERC20(_token).safeTransfer(_wrapper, _rewards);
       _rewards = ITokenWrapper(_wrapper).unwrap(_rewards);
       _token = ITokenWrapper(_wrapper).src();
     }
 
-    IERC20Upgradeable(_token).safeTransfer(_account, _rewards);
+    IERC20(_token).safeTransfer(_account, _rewards);
 
     emit Claim(_account, _token, _rewards);
   }

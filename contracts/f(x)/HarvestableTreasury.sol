@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
-import { IERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
-import { SafeERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { Treasury } from "./Treasury.sol";
 
@@ -13,8 +13,8 @@ import { Treasury } from "./Treasury.sol";
 // solhint-disable no-empty-blocks
 
 abstract contract HarvestableTreasury is Treasury {
-  using SafeERC20Upgradeable for IERC20Upgradeable;
-  using SafeMathUpgradeable for uint256;
+  using SafeERC20 for IERC20;
+  using SafeMath for uint256;
 
   /**********
    * Events *
@@ -80,7 +80,7 @@ abstract contract HarvestableTreasury is Treasury {
   function harvest() external {
     address _baseToken = baseToken;
 
-    uint256 _totalRewards = IERC20Upgradeable(_baseToken).balanceOf(address(this)).sub(
+    uint256 _totalRewards = IERC20(_baseToken).balanceOf(address(this)).sub(
       convertToWrapped(totalBaseToken)
     );
     uint256 _harvestBounty = (harvestBountyRatio * _totalRewards) / PRECISION;
@@ -91,7 +91,7 @@ abstract contract HarvestableTreasury is Treasury {
     if (_harvestBounty > 0) {
       _totalRewards = _totalRewards - _harvestBounty;
 
-      IERC20Upgradeable(_baseToken).safeTransfer(msg.sender, _harvestBounty);
+      IERC20(_baseToken).safeTransfer(msg.sender, _harvestBounty);
     }
 
     if (_stabilityPoolRewards > 0) {
@@ -101,7 +101,7 @@ abstract contract HarvestableTreasury is Treasury {
     }
 
     if (_totalRewards > 0) {
-      IERC20Upgradeable(_baseToken).safeTransfer(platform, _totalRewards);
+      IERC20(_baseToken).safeTransfer(platform, _totalRewards);
     }
   }
 
@@ -151,7 +151,6 @@ abstract contract HarvestableTreasury is Treasury {
     address _spender,
     uint256 _amount
   ) internal {
-    IERC20Upgradeable(_token).safeApprove(_spender, 0);
-    IERC20Upgradeable(_token).safeApprove(_spender, _amount);
+    IERC20(_token).forceApprove(_spender, _amount);
   }
 }

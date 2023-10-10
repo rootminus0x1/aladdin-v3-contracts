@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 interface IMarket {
   /**********
@@ -79,7 +79,7 @@ interface IMarket {
   ) external returns (uint256 fTokenMinted, uint256 xTokenMinted);
 
   /// @notice Mint some fToken with some base token.
-  /// @param baseIn The amount of base token supplied, use `uint256(-1)` to supply all base token.
+  /// @param baseIn The amount of base token supplied, use `type(uint256).max` to supply all base token.
   /// @param recipient The address of receiver for fToken.
   /// @param minFTokenMinted The minimum amount of fToken should be received.
   /// @return fTokenMinted The amount of fToken should be received.
@@ -90,7 +90,7 @@ interface IMarket {
   ) external returns (uint256 fTokenMinted);
 
   /// @notice Mint some xToken with some base token.
-  /// @param baseIn The amount of base token supplied, use `uint256(-1)` to supply all base token.
+  /// @param baseIn The amount of base token supplied, use `type(uint256).max` to supply all base token.
   /// @param recipient The address of receiver for xToken.
   /// @param minXTokenMinted The minimum amount of xToken should be received.
   /// @return xTokenMinted The amount of xToken should be received.
@@ -102,7 +102,7 @@ interface IMarket {
   ) external returns (uint256 xTokenMinted, uint256 bonus);
 
   /// @notice Mint some xToken by add some base token as collateral.
-  /// @param baseIn The amount of base token supplied, use `uint256(-1)` to supply all base token.
+  /// @param baseIn The amount of base token supplied, use `type(uint256).max` to supply all base token.
   /// @param recipient The address of receiver for xToken.
   /// @param minXTokenMinted The minimum amount of xToken should be received.
   /// @return xTokenMinted The amount of xToken should be received.
@@ -113,8 +113,8 @@ interface IMarket {
   ) external returns (uint256 xTokenMinted);
 
   /// @notice Redeem base token with fToken and xToken.
-  /// @param fTokenIn the amount of fToken to redeem, use `uint256(-1)` to redeem all fToken.
-  /// @param xTokenIn the amount of xToken to redeem, use `uint256(-1)` to redeem all xToken.
+  /// @param fTokenIn the amount of fToken to redeem, use `type(uint256).max` to redeem all fToken.
+  /// @param xTokenIn the amount of xToken to redeem, use `type(uint256).max` to redeem all xToken.
   /// @param recipient The address of receiver for base token.
   /// @param minBaseOut The minimum amount of base token should be received.
   /// @return baseOut The amount of base token should be received.
@@ -126,7 +126,7 @@ interface IMarket {
   ) external returns (uint256 baseOut);
 
   /// @notice Permissionless liquidate some fToken to increase the collateral ratio.
-  /// @param fTokenIn the amount of fToken to supply, use `uint256(-1)` to liquidate all fToken.
+  /// @param fTokenIn the amount of fToken to supply, use `type(uint256).max` to liquidate all fToken.
   /// @param recipient The address of receiver for base token.
   /// @param minBaseOut The minimum amount of base token should be received.
   /// @return baseOut The amount of base token should be received.

@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
-import { IERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { ERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
-import { SafeERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { OwnableUpgradeable } from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 import { ITokenWrapper } from "./interfaces/ITokenWrapper.sol";
 
 contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
-  using SafeERC20Upgradeable for IERC20Upgradeable;
-  using SafeMathUpgradeable for uint256;
+  using SafeERC20 for IERC20;
+  using SafeMath for uint256;
 
   /**********
    * Events *
@@ -103,7 +103,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
 
     __Context_init();
     __ERC20_init("f(x) Balancer FX/ETH&FX", "FXVault");
-    __Ownable_init();
+    __Ownable_init(msg.sender);
 
     fxToken = _fxToken;
     lpToken = _lpToken;
@@ -120,8 +120,8 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
 
   /// @notice Deposit assets into this contract.
   /// @dev Make sure that the `fxToken` and `lpToken` are not fee on transfer token.
-  /// @param _fxAmount The amount of FX token to deposit. Use `uint256(-1)` if user want to deposit all FX token.
-  /// @param _lpAmount The amount of LP token to deposit. Use `uint256(-1)` if user want to deposit all LP token.
+  /// @param _fxAmount The amount of FX token to deposit. Use `type(uint256).max` if user want to deposit all FX token.
+  /// @param _lpAmount The amount of LP token to deposit. Use `type(uint256).max` if user want to deposit all LP token.
   /// @param _receiver The address of account who will receive the pool share.
   /// @return _shares The amount of pool shares received.
   function deposit(
@@ -129,11 +129,11 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
     uint256 _lpAmount,
     address _receiver
   ) external returns (uint256 _shares) {
-    if (_fxAmount == uint256(-1)) {
-      _fxAmount = IERC20Upgradeable(fxToken).balanceOf(msg.sender);
+    if (_fxAmount == type(uint256).max) {
+      _fxAmount = IERC20(fxToken).balanceOf(msg.sender);
     }
-    if (_lpAmount == uint256(-1)) {
-      _lpAmount = IERC20Upgradeable(lpToken).balanceOf(msg.sender);
+    if (_lpAmount == type(uint256).max) {
+      _lpAmount = IERC20(lpToken).balanceOf(msg.sender);
     }
     require(_fxAmount > 0 || _lpAmount > 0, "deposit zero amount");
 
@@ -196,7 +196,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
   }
 
   /// @notice Redeem assets from this contract.
-  /// @param _shares The amount of pool shares to burn.  Use `uint256(-1)` if user want to redeem all pool shares.
+  /// @param _shares The amount of pool shares to burn.  Use `type(uint256).max` if user want to redeem all pool shares.
   /// @param _receiver The address of account who will receive the assets.
   /// @param _owner The address of user to withdraw from.
   /// @return _fxAmount The amount of FX token withdrawn.
@@ -206,7 +206,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
     address _receiver,
     address _owner
   ) external returns (uint256 _fxAmount, uint256 _lpAmount) {
-    if (_shares == uint256(-1)) {
+    if (_shares == type(uint256).max) {
       _shares = balanceOf(_owner);
     }
     require(_shares > 0, "redeem zero share");
@@ -214,7 +214,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
     if (msg.sender != _owner) {
       uint256 _allowance = allowance(_owner, msg.sender);
       require(_allowance >= _shares, "redeem exceeds allowance");
-      if (_allowance != uint256(-1)) {
+      if (_allowance != type(uint256).max) {
         // decrease allowance if it is not max
         _approve(_owner, msg.sender, _allowance - _shares);
       }
@@ -322,7 +322,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
   /// @param _amount The amount of FX token to deposit.
   function _depositFxToken(address _sender, uint256 _amount) internal virtual {
     if (_sender != address(this)) {
-      IERC20Upgradeable(fxToken).safeTransferFrom(_sender, address(this), _amount);
+      IERC20(fxToken).safeTransferFrom(_sender, address(this), _amount);
     }
   }
 
@@ -331,7 +331,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
   /// @param _amount The amount of LP token to deposit.
   function _depositLpToken(address _sender, uint256 _amount) internal virtual {
     if (_sender != address(this)) {
-      IERC20Upgradeable(lpToken).safeTransferFrom(_sender, address(this), _amount);
+      IERC20(lpToken).safeTransferFrom(_sender, address(this), _amount);
     }
   }
 
@@ -339,13 +339,13 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
   /// @param _amount The amount of FX token to withdraw.
   /// @param _receiver The address of recipient of the FX token.
   function _withdrawFxToken(uint256 _amount, address _receiver) internal virtual {
-    IERC20Upgradeable(fxToken).safeTransfer(_receiver, _amount);
+    IERC20(fxToken).safeTransfer(_receiver, _amount);
   }
 
   /// @dev Internal function to withdraw LP token.
   /// @param _amount The amount of LP token to withdraw.
   /// @param _receiver The address of recipient of the LP token.
   function _withdrawLpToken(uint256 _amount, address _receiver) internal virtual {
-    IERC20Upgradeable(lpToken).safeTransfer(_receiver, _amount);
+    IERC20(lpToken).safeTransfer(_receiver, _amount);
   }
 }

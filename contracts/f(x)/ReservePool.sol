@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 pragma abicoder v2;
 
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
-import { SafeMath } from "@openzeppelin/contracts/math/SafeMath.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { IReservePool } from "./interfaces/IReservePool.sol";
 import { IMarket } from "./interfaces/IMarket.sol";
@@ -68,7 +68,7 @@ contract ReservePool is AccessControl, IReservePool {
     market = _market;
     fToken = _fToken;
 
-    _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
   }
 
   /****************************

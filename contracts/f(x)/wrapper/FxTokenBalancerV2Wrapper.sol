@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 pragma abicoder v2;
 
-import { SafeMath } from "@openzeppelin/contracts/math/SafeMath.sol";
+import { SafeMath } from "../compatibility8/SafeMath.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { IBalancerVault } from "../../interfaces/IBalancerVault.sol";
 import { IBalancerPool } from "../../interfaces/IBalancerPool.sol";
@@ -44,7 +44,7 @@ contract FxTokenBalancerV2Wrapper is ITokenWrapper {
    ***************/
 
   constructor(address _src, address _dst) {
-    IERC20(_src).safeApprove(BALANCER_VAULT, uint256(-1));
+    IERC20(_src).approve(BALANCER_VAULT, type(uint256).max);
 
     bytes32 _poolId = IBalancerPool(_dst).getPoolId();
     (address[] memory _assets, , ) = IBalancerVault(BALANCER_VAULT).getPoolTokens(_poolId);
@@ -96,7 +96,7 @@ contract FxTokenBalancerV2Wrapper is ITokenWrapper {
     IBalancerVault(BALANCER_VAULT).exitPool(
       poolId,
       address(this),
-      msg.sender,
+      payable(msg.sender),
       IBalancerVault.ExitPoolRequest({
         assets: _assets,
         minAmountsOut: _amounts,

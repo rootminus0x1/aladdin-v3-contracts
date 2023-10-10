@@ -49,16 +49,187 @@ add the following extensions:
 
 ## Contract relationships
 
+### Test setup
+``` mermaid
+---
+title: Treasury
+---
+graph TB
+
+WETH9[WETH9:ERC20]
+PriceOracle(FxPriceOracle)
+Market[market:address]
+anyone[anyone:address]
+owner[owner:address]
+user[user:address]
+
+FractionalToken(FractionalToken)
+LeveragedToken(LeveragedToken)
+
+FractionalToken -. nav .-> anyone
+FractionalToken -. 500 .-> user
+LeveragedToken -. 500 .-> user
+
+owner -. beta<br>initializePrice()<br>updateStrategy(address)<br>updateSettleWhitelist(address)<br>updatePriceOracle(address) .-> Treasury
+
+Treasury(Treasury)
+Treasury --> Market
+Market -. mint(amount,user) .-> Treasury
+Treasury --> WETH9
+Treasury --> LeveragedToken
+Treasury --> FractionalToken
+Treasury --> PriceOracle
+PriceOracle -. price of baseToken .-> Treasury
+
+Treasury -. amount of baseToken .-> user
+
+WETH9 -.-> Treasury
+
+
+```
+
+### High level 2
 ``` mermaid
 ---
 title: f(x) contracts and relationships
+---
+graph TB
+
+  %%ERC20[ERC20]
+
+  FractionalToken(FractionalToken)
+  %%FractionalToken -.-> ERC20
+  FractionalToken --> Treasury
+
+  LeveragedToken(LeveragedToken)
+  %%LeveragedToken -.-> ERC20
+  LeveragedToken --> Treasury
+  LeveragedToken --> FractionalToken
+
+  Treasury(Treasury)
+  %%Treasury -.-> ITreasury
+  Treasury --> IMarket
+  Treasury --> baseToken
+  Treasury --> lpToken
+  Treasury --> fxToken
+
+  HarvestableTreasury(HarvestableTreasury)
+  HarvestableTreasury -.-> Treasury
+  HarvestableTreasury --> platform
+  HarvestableTreasury --> RebalancePool
+
+  %%lpToken -.-> ERC20
+  %%fxToken -.-> ERC20
+  %%baseToken -.-> ERC20
+
+  FXVault --> lpToken
+  FXVault --> fxToken
+  FXVault --> ITokenWrapper
+
+  RebalancePool -.-> IRebalancePool
+
+  RebalancePool --> Treasury
+  RebalancePool --> IMarket
+  RebalancePool --> baseToken
+  RebalancePool --> ITokenWrapper
+
+  FxTokenBalancerV2Wrapper -.-> ITokenWrapper
+  FxTokenBalancerV2Wrapper --> IBalancerVault
+
+
+  classDef external fill:#fff,stroke:#333,stroke-width:2px
+  class ERC20 external
+
+
+```
+
+
+
+### High Level 1
+
+``` mermaid
+---
+title: f(x) contracts and relationships
+config:
+    class:
+        defaultRenderer: elk // dagre-d3
+---
+classDiagram
+
+  FractionalToken --* Treasury
+  class FractionalToken {
+    ERC20
+  }
+
+  LeveragedToken --* Treasury
+  LeveragedToken --* FractionalToken
+  class LeveragedToken {
+    ERC20
+  }
+
+  FXVault --* lpToken-ERC20
+  FXVault --* fxToken-ERC20
+  FXVault --* ITokenWrapper
+
+  class Treasury {
+    ITreasury
+  }
+  Treasury --* IMarket
+  Treasury --* baseToken-ERC20
+  Treasury --* lpToken-ERC20
+  Treasury --* fxToken-ERC20
+
+  HarvestableTreasury --|> Treasury
+  HarvestableTreasury --* platform
+  HarvestableTreasury --* RebalancePool
+
+  class RebalancePool {
+    IRebalancePool
+  }
+  RebalancePool --* Treasury
+  RebalancePool --* IMarket
+  RebalancePool --* baseToken-ERC20
+  RebalancePool --* ITokenWrapper
+
+  FxTokenBalancerV2Wrapper --|> ITokenWrapper
+  FxTokenBalancerV2Wrapper --* IBalancerVault
+
+
+```
+
+### Detail
+
+``` mermaid
+---
+title: f(x) contracts and relationships
+config:
+    class:
+        defaultRenderer: elk // dagre-d3
 ---
 classDiagram
   class ERC20{
     +name
     +symbol
     +totalSupply
+    +balanceOf(address)
+    +transfer(recipient, amount)
+    +transferFrom(sender, recipient, amount)
+    +allowance(owner, spender)
+    +approve(spender, amount)
   }
+
+  class FractionalToken{
+    +nav
+  }
+  FractionalToken --* ITreasury:treasury
+  FractionalToken --|> ERC20
+
+  class LeveragedToken {
+    +nav()
+  }
+  LeveragedToken --* ITreasury:treasury
+  LeveragedToken --* ERC20:fToken
+  LeveragedToken --|> ERC20
 
   class FXVault{
     +fxRatio
@@ -70,11 +241,76 @@ classDiagram
     #updateWrapper()
   }
 
-  note for FXVault "lpToken"
-  note for FXVault "fxToken"
-  note for FXVault "wrapper"
+  class ITokenWrapper{
+    +src():address
+    +dst():address
+    +wrap(srcAmount):dstAmount
+    +unwrap(dstAmount):srcAmount
+  }
 
-  class Treasury
+  FXVault --* ERC20:lpToken
+  FXVault --* ERC20:fxToken
+  FXVault --* ITokenWrapper: wrapper
+
+  class ITreasury {
+    +baseToken()
+    +fToken()
+    +xToken()
+    lastPermissionedPrice()
+    +totalBaseToken()
+    +strategyUnderlying()
+    +collateralRatio()
+    +convertToWrapped(amount):wrappedAmount
+    +convertToUnwrapped(wrappedAmount):amount
+    +getCurrentNav():(baseNav,fNav,xNav)
+    +maxMintableFToken(newCollateralRatio):(maxBaseAmount, maxFTokenMintable)
+    +maxMintableFTokenWithIncentive(newCollateralRatio,incentiveRatio):(maxBaseAmount, maxFTokenMintable)
+    +maxMintableXToken(newCollateralRatio):(maxBaseAmount, maxXTokenMintable)
+    +maxMintableXTokenWithIncentive(newCollateralRatio,incentiveRatio):(maxBaseAmount, maxXTokenMintable)
+    +maxRedeemableFToken(newCollateralRatio):(maxBaseOut,maxFTokenRedeemable)
+    +maxRedeemableXToken(uint256 newCollateralRatio):(maxBaseOut,maxXTokenRedeemable)
+    +maxLiquidatable(newCollateralRatio,incentiveRatio):(maxBaseOut,maxFTokenLiquidatable)
+    +mint(baseAmount,recipient,MintOption):(fTokenOut,xTokenOut)
+    +redeem(fTokenAmount,xTokenAmount,owner):baseAmount
+    +addBaseToken(baseAmount,incentiveRatio,recipient):xTokenAmpount
+    +liquidate(fTokenAmount,incentiveRatio,owner):baseAmount
+    +protocolSettle()
+    +transferToStrategy(amount)
+    +notifyStrategyProfit(amount)
+  }
+
+  class Treasury {
+    +collateralRatio()
+    +getCurrentNav()
+    +convertToWrapped(amount):wrappedAmount
+    +convertToUnwrapped(wrappedAmount):amount
+    #transferToStrategy()
+    #notifyStrategyProfit()
+    #initialisePrice()
+    #updateStrategy()
+    #updateBeta()
+    #updatePriceOracle()
+    #updateRateProvider()
+    #updateSettleWhitelist()
+    #updateBaseTokenCap()
+
+    +priceOracle
+    +beta
+    +lastPermissionedPrice
+    +baseTokenCap
+    +totalBaseToken
+    +strategy
+    +strategyUnderlying
+    +SettleWhitelist
+    +rateProvider
+
+  }
+  Treasury --|> ITreasury
+  Treasury --* IMarket: market
+  Treasury --* ERC20: baseToken
+  Treasury --* ERC20:lpToken
+  Treasury --* ERC20:fxToken
+
   class HarvestableTreasury{
     +harvestBountyRatio
     +stabilityPoolRatio
@@ -83,14 +319,48 @@ classDiagram
     #updateRewardRatio()
   }
   HarvestableTreasury --|> Treasury
-  note for HarvestableTreasury "platform"
-  note for HarvestableTreasury "stabilityPool"
+  HarvestableTreasury --* platform
+  HarvestableTreasury --* IRebalancePool:stabilityPool
 
-  class FractionalToken{
-    +nav
+  class IRebalancePool {
+    +asset():address
+    +totalSupply():amount
+    +balanceOf(account):amount
+    +unlockedBalanceOf(account):amount
+    +unlockingBalanceOf(account):(balance, unlockAt)
+    +claimable(account,token):amount
+    +deposit(amount,recipient)
+    +unlock(amount)
+    +withdrawUnlocked(claim?,unwrap?)
+    +claim(token,unwrap?)
+    +claim(tokens,unwrap?)
+    +liquidate(maxAmount,minBaseOut):(liquidated,baseOut)
+    +updateAccountSnapshot(account)
+    +depositReward(token,amount)
   }
-  FractionalToken ..> Treasury
-  FractionalToken --|> ERC20
+  class RebalancePool {
+    +totalUnlocking
+    +liquidator:address
+    #updateLiquidator(liquidator)
+    +liquidatableCollateralRatio
+  }
+  RebalancePool --|> IRebalancePool
+  RebalancePool --* ITreasury: treasury
+  RebalancePool --* IMarket: market
+  RebalancePool --* ERC20: baseToken
+  RebalancePool --* ITokenWrapper: wrapper
+
+
+  class FxTokenBalancerV2Wrapper {
+    +src
+    +dst
+    +srcIndex
+    +poolId
+    -weth
+  }
+  FxTokenBalancerV2Wrapper --|> ITokenWrapper
+  FxTokenBalancerV2Wrapper --* IBalancerVault:balancerVault
+
 
 ```
 

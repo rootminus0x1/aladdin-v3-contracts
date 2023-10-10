@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 import { IRebalancePool } from "../interfaces/IRebalancePool.sol";
 
@@ -17,13 +17,13 @@ contract RebalanceWithBonusToken is Ownable {
 
   uint256 public bonus;
 
-  constructor(address _stabilityPool, address _bonusToken) {
+  constructor(address _stabilityPool, address _bonusToken) Ownable(msg.sender){
     stabilityPool = _stabilityPool;
     bonusToken = _bonusToken;
   }
 
   function liquidate(uint256 _minBaseOut) external {
-    IRebalancePool(stabilityPool).liquidate(uint256(-1), _minBaseOut);
+    IRebalancePool(stabilityPool).liquidate(type(uint256).max, _minBaseOut);
 
     IERC20(bonusToken).safeTransfer(msg.sender, bonus);
   }

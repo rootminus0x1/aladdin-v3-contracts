@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.20;
 
 import { AccessControlUpgradeable } from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import { SafeMathUpgradeable } from "@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
-import { IERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
-import { SafeERC20Upgradeable } from "@openzeppelin/contracts-upgradeable/token/ERC20/SafeERC20Upgradeable.sol";
+import { SafeMath } from "./compatibility8/SafeMath.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { ReentrancyGuardUpgradeable } from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 
 import { IMarket } from "./interfaces/IMarket.sol";
@@ -15,8 +15,8 @@ import { ITreasury } from "./interfaces/ITreasury.sol";
 // solhint-disable max-states-count
 
 contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket {
-  using SafeERC20Upgradeable for IERC20Upgradeable;
-  using SafeMathUpgradeable for uint256;
+  using SafeERC20 for IERC20;
+  using SafeMath for uint256;
 
   /**********
    * Events *
@@ -212,7 +212,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
   function initialize(address _treasury, address _platform) external initializer {
     AccessControlUpgradeable.__AccessControl_init();
     ReentrancyGuardUpgradeable.__ReentrancyGuard_init();
-    _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
 
     treasury = _treasury;
     platform = _platform;
@@ -234,15 +234,15 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     uint256 _minXTokenMinted
   ) external override nonReentrant returns (uint256 _fTokenMinted, uint256 _xTokenMinted) {
     address _baseToken = baseToken;
-    if (_baseIn == uint256(-1)) {
-      _baseIn = IERC20Upgradeable(_baseToken).balanceOf(msg.sender);
+    if (_baseIn == type(uint256).max) {
+      _baseIn = IERC20(_baseToken).balanceOf(msg.sender);
     }
     require(_baseIn > 0, "mint zero amount");
 
     ITreasury _treasury = ITreasury(treasury);
     require(_treasury.totalBaseToken() == 0, "only initialize once");
 
-    IERC20Upgradeable(_baseToken).safeTransferFrom(msg.sender, address(_treasury), _baseIn);
+    IERC20(_baseToken).safeTransferFrom(msg.sender, address(_treasury), _baseIn);
     (_fTokenMinted, _xTokenMinted) = _treasury.mint(
       _treasury.convertToUnwrapped(_baseIn),
       _recipient,
@@ -264,8 +264,8 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     require(!mintPaused, "mint is paused");
 
     address _baseToken = baseToken;
-    if (_baseIn == uint256(-1)) {
-      _baseIn = IERC20Upgradeable(_baseToken).balanceOf(msg.sender);
+    if (_baseIn == type(uint256).max) {
+      _baseIn = IERC20(_baseToken).balanceOf(msg.sender);
     }
     require(_baseIn > 0, "mint zero amount");
 
@@ -285,7 +285,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
 
     uint256 _amountWithoutFee = _deductFTokenMintFee(_baseIn, fTokenMintFeeRatio, _maxBaseInBeforeSystemStabilityMode);
 
-    IERC20Upgradeable(_baseToken).safeTransferFrom(msg.sender, address(_treasury), _amountWithoutFee);
+    IERC20(_baseToken).safeTransferFrom(msg.sender, address(_treasury), _amountWithoutFee);
     (_fTokenMinted, ) = _treasury.mint(
       _treasury.convertToUnwrapped(_amountWithoutFee),
       _recipient,
@@ -305,8 +305,8 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     require(!mintPaused, "mint is paused");
 
     address _baseToken = baseToken;
-    if (_baseIn == uint256(-1)) {
-      _baseIn = IERC20Upgradeable(_baseToken).balanceOf(msg.sender);
+    if (_baseIn == type(uint256).max) {
+      _baseIn = IERC20(_baseToken).balanceOf(msg.sender);
     }
     require(_baseIn > 0, "mint zero amount");
 
@@ -316,7 +316,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
 
     uint256 _amountWithoutFee = _deductXTokenMintFee(_baseIn, xTokenMintFeeRatio, _maxBaseInBeforeSystemStabilityMode);
 
-    IERC20Upgradeable(_baseToken).safeTransferFrom(msg.sender, address(_treasury), _amountWithoutFee);
+    IERC20(_baseToken).safeTransferFrom(msg.sender, address(_treasury), _amountWithoutFee);
     (, _xTokenMinted) = _treasury.mint(
       _treasury.convertToUnwrapped(_amountWithoutFee),
       _recipient,
@@ -367,11 +367,11 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     // take fee to platform
     if (_feeRatio > 0) {
       uint256 _fee = (_baseIn * _feeRatio) / PRECISION;
-      IERC20Upgradeable(baseToken).safeTransferFrom(msg.sender, platform, _fee);
+      IERC20(baseToken).safeTransferFrom(msg.sender, platform, _fee);
       _baseIn = _baseIn - _fee;
     }
 
-    IERC20Upgradeable(baseToken).safeTransferFrom(msg.sender, address(_treasury), _baseIn);
+    IERC20(baseToken).safeTransferFrom(msg.sender, address(_treasury), _baseIn);
     _xTokenMinted = _treasury.addBaseToken(
       _treasury.convertToUnwrapped(_baseIn),
       incentiveConfig.stabilityIncentiveRatio,
@@ -391,11 +391,11 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
   ) external override nonReentrant returns (uint256 _baseOut) {
     require(!redeemPaused, "redeem is paused");
 
-    if (_fTokenIn == uint256(-1)) {
-      _fTokenIn = IERC20Upgradeable(fToken).balanceOf(msg.sender);
+    if (_fTokenIn == type(uint256).max) {
+      _fTokenIn = IERC20(fToken).balanceOf(msg.sender);
     }
-    if (_xTokenIn == uint256(-1)) {
-      _xTokenIn = IERC20Upgradeable(xToken).balanceOf(msg.sender);
+    if (_xTokenIn == type(uint256).max) {
+      _xTokenIn = IERC20(xToken).balanceOf(msg.sender);
     }
     require(_fTokenIn > 0 || _xTokenIn > 0, "redeem zero amount");
     require(_fTokenIn == 0 || _xTokenIn == 0, "only redeem single side");
@@ -425,7 +425,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
 
     _baseOut = _treasury.redeem(_fTokenIn, _xTokenIn, msg.sender);
     _baseOut = _treasury.convertToWrapped(_baseOut);
-    uint256 _balance = IERC20Upgradeable(baseToken).balanceOf(address(this));
+    uint256 _balance = IERC20(baseToken).balanceOf(address(this));
     // consider possible slippage
     if (_balance < _baseOut) {
       _baseOut = _balance;
@@ -433,12 +433,12 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
 
     uint256 _fee = (_baseOut * _feeRatio) / PRECISION;
     if (_fee > 0) {
-      IERC20Upgradeable(baseToken).safeTransfer(platform, _fee);
+      IERC20(baseToken).safeTransfer(platform, _fee);
       _baseOut = _baseOut - _fee;
     }
     require(_baseOut >= _minBaseOut, "insufficient base output");
 
-    IERC20Upgradeable(baseToken).safeTransfer(_recipient, _baseOut);
+    IERC20(baseToken).safeTransfer(_recipient, _baseOut);
 
     emit Redeem(msg.sender, _recipient, _fTokenIn, _xTokenIn, _baseOut, _fee);
   }
@@ -471,7 +471,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
 
     _baseOut = _treasury.liquidate(_fTokenIn, incentiveConfig.liquidationIncentiveRatio, msg.sender);
     _baseOut = _treasury.convertToWrapped(_baseOut);
-    uint256 _balance = IERC20Upgradeable(baseToken).balanceOf(address(this));
+    uint256 _balance = IERC20(baseToken).balanceOf(address(this));
     // consider possible slippage
     if (_balance < _baseOut) {
       _baseOut = _balance;
@@ -485,12 +485,12 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     }
     uint256 _fee = (_baseOut * _feeRatio) / PRECISION;
     if (_fee > 0) {
-      IERC20Upgradeable(baseToken).safeTransfer(platform, _fee);
+      IERC20(baseToken).safeTransfer(platform, _fee);
       _baseOut = _baseOut - _fee;
     }
     require(_baseOut >= _minBaseOut, "insufficient base output");
 
-    IERC20Upgradeable(baseToken).safeTransfer(_recipient, _baseOut);
+    IERC20(baseToken).safeTransfer(_recipient, _baseOut);
 
     emit UserLiquidate(msg.sender, _recipient, _fTokenIn, _baseOut);
   }
@@ -714,7 +714,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     _baseInWithoutFee = _baseIn.sub(_fee);
     // take fee to platform
     if (_fee > 0) {
-      IERC20Upgradeable(baseToken).safeTransferFrom(msg.sender, platform, _fee);
+      IERC20(baseToken).safeTransferFrom(msg.sender, platform, _fee);
     }
   }
 
