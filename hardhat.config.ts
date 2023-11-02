@@ -72,6 +72,11 @@ const config: HardhatUserConfig = {
     ],
   },
   networks: {
+    hardhat: {
+      accounts: {
+        accountsBalance: "1000000000000000000000000", // 1,000,000 eth
+      }
+    },
     mainnet: {
       url: process.env.MAINNET_URL || "https://rpc.ankr.com/eth",
       chainId: 1,
