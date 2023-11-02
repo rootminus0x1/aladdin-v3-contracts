@@ -3,10 +3,10 @@ import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-import { ConverterRegistry, GeneralTokenConverter } from "@/types/index";
+import { ConverterRegistry, GeneralTokenConverter } from "@types";
 import { Action, ADDRESS, encodePoolHintV3, PoolTypeV3, TOKENS } from "@/utils/index";
 
-import { request_fork } from "../../../utils";
+import { createFork, impersonateAccounts} from "test/network";
 
 interface ISwapForkConfig {
   tokenIn: string;
@@ -1327,8 +1327,10 @@ describe("GeneralTokenConverter.spec", async () => {
 
     describe(swap_name, async () => {
       beforeEach(async () => {
-        request_fork(swap.fork, [swap.deployer, swap.holder]);
+
+        await createFork(swap.fork);
         deployer = await ethers.getSigner(swap.deployer);
+        impersonateAccounts([swap.deployer, swap.holder])
 
         const ConverterRegistry = await ethers.getContractFactory("ConverterRegistry", deployer);
         registry = await ConverterRegistry.deploy();
