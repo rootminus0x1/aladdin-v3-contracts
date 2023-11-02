@@ -41,6 +41,7 @@ export interface FxStETHDeployment {
   FxETHTwapOracle: string;
   FxGateway: string;
   ReservePool: string;
+  RebalanceWithBonusToken: string;
 }
 
 const ChainlinkPriceFeed: { [name: string]: string } = {
@@ -50,6 +51,7 @@ const ChainlinkPriceFeed: { [name: string]: string } = {
 
 export async function deploy(deployer: HardhatEthersSigner, overrides?: Overrides): Promise<FxStETHDeployment> {
   const admin = await ProxyAdmin.deploy(deployer);
+  const governance = await FxGovernance.deploy(deployer, overrides);
 
   console.log("");
   const deployment = selectDeployments(network.name, "Fx.stETH");
@@ -181,6 +183,20 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
     console.log(`Found ReservePool at:`, deployment.get("ReservePool"));
   }
 
+  // deploy ReservePool
+  if (!deployment.get("RebalanceWithBonusToken")) {
+    const address = await contractDeploy(
+      deployer,
+      "RebalanceWithBonusToken",
+      "RebalanceWithBonusToken",
+      [deployment.get("RebalancePool.proxy"), governance.FXN],
+      overrides
+    );
+    deployment.set("RebalanceWithBonusToken", address);
+  } else {
+    console.log(`Found RebalanceWithBonusToken at:`, deployment.get("RebalanceWithBonusToken"));
+  }
+
   return deployment.toObject() as FxStETHDeployment;
 }
 
@@ -194,6 +210,11 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
   const reservePool = await ethers.getContractAt("ReservePool", deployment.ReservePool, deployer);
   const gateway = await ethers.getContractAt("FxGateway", deployment.FxGateway, deployer);
   const spliter = await ethers.getContractAt("PlatformFeeSpliter", governance.PlatformFeeSpliter, deployer);
+  const rebalancer = await ethers.getContractAt(
+    "RebalanceWithBonusToken",
+    deployment.RebalanceWithBonusToken,
+    deployer
+  );
 
   // upgrade proxy
   for (const name of ["FractionalToken", "LeveragedToken", "stETHTreasury", "Market", "RebalancePool"]) {
@@ -301,7 +322,34 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       spliter as unknown as Contract,
       "PlatformFeeSpliter add stETH",
       "addRewardToken",
-      [TOKENS.stETH.address, governance.FeeDistributor, 0n, ethers.parseUnits("0.25", 9), ethers.parseUnits("0.75", 9)],
+      [
+        TOKENS.stETH.address,
+        governance.FeeDistributor.stETH,
+        0n,
+        ethers.parseUnits("0.25", 9),
+        ethers.parseUnits("0.75", 9),
+      ],
+      overrides
+    );
+  }
+  if ((await spliter.burners(TOKENS.stETH.address)) !== governance.Burner.PlatformFeeBurner) {
+    await ownerContractCall(
+      spliter as unknown as Contract,
+      "PlatformFeeSpliter set burner for stETH",
+      "updateRewardTokenBurner",
+      [TOKENS.stETH.address, governance.Burner.PlatformFeeBurner],
+      overrides
+    );
+  }
+
+  // initialize RebalanceWithBonusToken
+  if ((await rebalancer.bonus()) !== ethers.parseEther("2")) {
+    await rebalancer.updateBonus(ethers.parseEther("2"));
+    await ownerContractCall(
+      rebalancer as unknown as Contract,
+      "RebalanceWithBonusToken set bonus to 2 FXN",
+      "updateBonus",
+      [ethers.parseEther("2")],
       overrides
     );
   }

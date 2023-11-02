@@ -1,7 +1,8 @@
 node_modules
 .env
 coverage
-coverage.json
+coverage*.json
+scripts/@types
 typechain-types/
 .eslintcache
 archive-*/
@@ -16,3 +17,5 @@ cache
 artifacts
 
 .store
+
+deployments/fork*
