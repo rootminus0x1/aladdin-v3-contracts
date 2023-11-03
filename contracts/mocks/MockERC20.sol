@@ -35,7 +35,7 @@ contract MockERC20 is ERC20 {
   // log mint(0, x), burns(x, 0) & transfers(x, y)
   function _update(address from, address to, uint256 amount) internal override {
     if (logging) {
-      console.log("%s:", msg.sender);
+      console.log("%s:", _msgSender());
       console.log("  MockERC20._beforeTokenTransfer(%s, %s, %s)", from, to, amount);
     }
     super._update(from, to, amount);
@@ -44,7 +44,7 @@ contract MockERC20 is ERC20 {
   // log approvals
   function approve(address spender, uint256 amount) public virtual override returns (bool) {
     if (logging) {
-      console.log("%s:", msg.sender);
+      console.log("%s:", _msgSender());
       console.log("  MockERC20.approve(%s, %s)", spender, amount);
     }
     _approve(_msgSender(), spender, amount);

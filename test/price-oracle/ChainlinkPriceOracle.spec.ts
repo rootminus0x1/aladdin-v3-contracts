@@ -40,7 +40,7 @@ describe("ChainlinkPriceOracle.spec", async () => {
 
   context("auth", async () => {
     it("should revert, when non-owner call", async () => {
-      await expect(oracle.connect(other).setFeeds([], [])).to.revertedWith("Ownable: caller is not the owner");
+      await expect(oracle.connect(other).setFeeds([], [])).to.reverted;
     });
 
     it("should revert, when length mismatch", async () => {

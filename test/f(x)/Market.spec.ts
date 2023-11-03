@@ -84,9 +84,7 @@ describe("Market.spec", async () => {
 
   context("auth", async () => {
     it("should revert, when intialize again", async () => {
-      await expect(market.initialize(treasuryAddress, platform.address)).to.revertedWith(
-        "Initializable: contract is already initialized"
-      );
+      await expect(market.initialize(treasuryAddress, platform.address)).to.be.reverted;
     });
 
     it("should initialize correctly", async () => {

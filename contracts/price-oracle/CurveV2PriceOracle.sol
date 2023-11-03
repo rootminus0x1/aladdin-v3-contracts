@@ -47,7 +47,7 @@ contract CurveV2PriceOracle is Ownable, IPriceOracle {
    * Constructor *
    ***************/
 
-  constructor(address _baseOracle, address _base, address initialOwner) Ownable(initialOwner) {
+  constructor(address _baseOracle, address _base) Ownable(_msgSender()) {
     baseOracle = _baseOracle;
     base = _base;
   }

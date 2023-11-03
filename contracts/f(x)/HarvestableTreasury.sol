@@ -86,12 +86,12 @@ abstract contract HarvestableTreasury is Treasury {
     uint256 _harvestBounty = (harvestBountyRatio * _totalRewards) / PRECISION;
     uint256 _stabilityPoolRewards = (stabilityPoolRatio * _totalRewards) / PRECISION;
 
-    emit Harvest(msg.sender, _totalRewards, _stabilityPoolRewards, _harvestBounty);
+    emit Harvest(_msgSender(), _totalRewards, _stabilityPoolRewards, _harvestBounty);
 
     if (_harvestBounty > 0) {
       _totalRewards = _totalRewards - _harvestBounty;
 
-      IERC20(_baseToken).safeTransfer(msg.sender, _harvestBounty);
+      IERC20(_baseToken).safeTransfer(_msgSender(), _harvestBounty);
     }
 
     if (_stabilityPoolRewards > 0) {

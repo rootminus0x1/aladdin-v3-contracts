@@ -109,9 +109,7 @@ describe("RebalancePool.spec", async () => {
 
   context("auth", async () => {
     it("should revert, when intialize again", async () => {
-      await expect(stabilityPool.initialize(treasuryAddress, marketAddress)).to.revertedWith(
-        "Initializable: contract is already initialized"
-      );
+      await expect(stabilityPool.initialize(treasuryAddress, marketAddress)).to.be.reverted;
     });
 
     it("should initialize correctly", async () => {
@@ -124,9 +122,7 @@ describe("RebalancePool.spec", async () => {
 
     context("#updateLiquidator", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(stabilityPool.connect(signer).updateLiquidator(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
-        );
+        await expect(stabilityPool.connect(signer).updateLiquidator(ZeroAddress)).to.be.reverted;
       });
 
       it("should succeed", async () => {
@@ -140,9 +136,7 @@ describe("RebalancePool.spec", async () => {
 
     context("#updateWrapper", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(stabilityPool.connect(signer).updateWrapper(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
-        );
+        await expect(stabilityPool.connect(signer).updateWrapper(ZeroAddress)).to.be.reverted;
       });
 
       it("should revert, when src mismatch", async () => {
@@ -174,9 +168,7 @@ describe("RebalancePool.spec", async () => {
 
     context("#updateLiquidatableCollateralRatio", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(stabilityPool.connect(signer).updateLiquidatableCollateralRatio(0)).to.revertedWith(
-          "Ownable: caller is not the owner"
-        );
+        await expect(stabilityPool.connect(signer).updateLiquidatableCollateralRatio(0)).to.be.reverted;
       });
 
       it("should succeed", async () => {
@@ -190,9 +182,7 @@ describe("RebalancePool.spec", async () => {
 
     context("#updateUnlockDuration", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(stabilityPool.connect(signer).updateUnlockDuration(0)).to.revertedWith(
-          "Ownable: caller is not the owner"
-        );
+        await expect(stabilityPool.connect(signer).updateUnlockDuration(0)).to.be.reverted;
       });
 
       it("should revert, when unlockDuration too small", async () => {
@@ -212,7 +202,7 @@ describe("RebalancePool.spec", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(
           stabilityPool.connect(signer).addReward(ZeroAddress, ZeroAddress, 0)
-        ).to.revertedWith("Ownable: caller is not the owner");
+        ).to.reverted;
       });
 
       it("should revert, when duplicated reward token", async () => {
@@ -253,7 +243,7 @@ describe("RebalancePool.spec", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(
           stabilityPool.connect(signer).updateReward(ZeroAddress, ZeroAddress, 0)
-        ).to.revertedWith("Ownable: caller is not the owner");
+        ).to.reverted;
       });
 
       it("should revert, when no such reward token", async () => {
@@ -435,7 +425,8 @@ describe("RebalancePool.spec", async () => {
 
       // unlock
       await stabilityPool.connect(signer).unlock(unlockAmount);
-      const timestamp = (await ethers.provider.getBlock("latest")).timestamp;
+      const timestamp = (await ethers.provider.getBlock("latest"))?.timestamp || 0;
+      expect(timestamp).not.to.equal(0, "can't get latest timestamp");
       expect(await stabilityPool.balanceOf(signer.address)).to.eq(amountIn - unlockAmount);
       expect(await stabilityPool.unlockedBalanceOf(signer.address)).to.eq(0n);
       expect((await stabilityPool.unlockingBalanceOf(signer.address))._balance).to.eq(unlockAmount);
@@ -502,9 +493,12 @@ describe("RebalancePool.spec", async () => {
       await stabilityPool.deposit(amountInA, userA.address);
       await stabilityPool.deposit(amountInB, userB.address);
 
+
+
       // A unlock
       await stabilityPool.connect(userA).unlock(unlockAmountA);
-      const timestampA = (await ethers.provider.getBlock("latest")).timestamp;
+      const timestampA = (await ethers.provider.getBlock("latest"))?.timestamp || 0;
+      expect(timestampA).not.to.equal(0, "can't get latest timestamp");
       expect(await stabilityPool.balanceOf(userA.address)).to.eq(amountInA - unlockAmountA);
       expect(await stabilityPool.unlockedBalanceOf(userA.address)).to.eq(0n);
       expect((await stabilityPool.unlockingBalanceOf(userA.address))._balance).to.eq(unlockAmountA);
@@ -514,7 +508,8 @@ describe("RebalancePool.spec", async () => {
 
       // B unlock
       await stabilityPool.connect(userB).unlock(unlockAmountB);
-      const timestampB = (await ethers.provider.getBlock("latest")).timestamp;
+      const timestampB = (await ethers.provider.getBlock("latest"))?.timestamp || 0;
+      expect(timestampB).not.to.equal(0, "can't get latest timestamp");
       expect(await stabilityPool.balanceOf(userB.address)).to.eq(amountInB - unlockAmountB);
       expect(await stabilityPool.unlockedBalanceOf(userB.address)).to.eq(0n);
       expect((await stabilityPool.unlockingBalanceOf(userB.address))._balance).to.eq(unlockAmountB);

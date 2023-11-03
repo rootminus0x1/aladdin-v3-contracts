@@ -41,7 +41,7 @@ contract FractionalToken is ERC20Upgradeable, IFractionalToken {
    *************/
 
   modifier onlyTreasury() {
-    require(msg.sender == treasury, "Only treasury");
+    require(_msgSender() == treasury, "Only treasury");
     _;
   }
 

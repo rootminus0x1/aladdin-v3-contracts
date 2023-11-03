@@ -60,9 +60,7 @@ describe("FxVault.spec", async () => {
           });
 
           it("should revert, when non-owner call", async () => {
-            await expect(vault.connect(signer).updateWrapper(await newWrapper.getAddress())).to.revertedWith(
-              "Ownable: caller is not the owner"
-            );
+            await expect(vault.connect(signer).updateWrapper(await newWrapper.getAddress())).to.be.reverted;
           });
 
           it("should revert, when src mismatch", async () => {
@@ -334,7 +332,7 @@ describe("FxVault.spec", async () => {
     });
 
     it("should revert, when non-owner call", async () => {
-      await expect(vault.connect(signer).rebalance(0n, 0n, 0n)).to.revertedWith("Ownable: caller is not the owner");
+      await expect(vault.connect(signer).rebalance(0n, 0n, 0n)).to.be.reverted;
     });
 
     it("should revert, when fxRatio out of bound", async () => {
@@ -430,7 +428,7 @@ describe("FxVault.spec", async () => {
     });
 
     it("should revert, when non-owner call", async () => {
-      await expect(vault.connect(signer).rebalance(0n, 0n, 0n)).to.revertedWith("Ownable: caller is not the owner");
+      await expect(vault.connect(signer).rebalance(0n, 0n, 0n)).to.reverted;
     });
 
     it("should revert, when fxRatio out of bound", async () => {

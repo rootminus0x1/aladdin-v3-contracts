@@ -231,7 +231,7 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
    ************/
 
   modifier onlyRewardManager(address _token) {
-    require(rewardManager[_token] == msg.sender, "only reward manager");
+    require(rewardManager[_token] == _msgSender(), "only reward manager");
     _;
   }
 
@@ -239,8 +239,8 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
    * Constructor *
    ***************/
 
-  function initialize(address _treasury, address _market, address _initialOwner) external initializer {
-    OwnableUpgradeable.__Ownable_init(_initialOwner);
+  function initialize(address _treasury, address _market) external initializer {
+    OwnableUpgradeable.__Ownable_init(_msgSender());
 
     treasury = _treasury;
     market = _market;
@@ -356,10 +356,10 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
     // transfer asset token to this contract
     address _asset = asset;
     if (_amount == type(uint256).max) {
-      _amount = IERC20(_asset).balanceOf(msg.sender);
+      _amount = IERC20(_asset).balanceOf(_msgSender());
     }
     require(_amount > 0, "deposit zero amount");
-    IERC20(_asset).safeTransferFrom(msg.sender, address(this), _amount);
+    IERC20(_asset).safeTransferFrom(_msgSender(), address(this), _amount);
 
     // distribute pending extraRewards
     _distributeRewards(_recipient);
@@ -377,78 +377,78 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
 
     emit UserDepositChange(_recipient, _newDeposit, 0);
 
-    emit Deposit(msg.sender, _recipient, _amount);
+    emit Deposit(_msgSender(), _recipient, _amount);
   }
 
   /// @inheritdoc IRebalancePool
   function unlock(uint256 _amount) external override {
     require(_amount > 0, "unlock zero amount");
-    require(snapshots[msg.sender].initialDeposit > 0, "user has no deposit");
+    require(snapshots[_msgSender()].initialDeposit > 0, "user has no deposit");
 
     // distribute pending extraRewards
-    _distributeRewards(msg.sender);
+    _distributeRewards(_msgSender());
 
     // update deposit snapshot
     // @note the snapshot is updated in `_distributeRewards` once, the value of `initialDeposit` is correct.
-    uint256 _compoundedDeposit = snapshots[msg.sender].initialDeposit;
+    uint256 _compoundedDeposit = snapshots[_msgSender()].initialDeposit;
     if (_amount > _compoundedDeposit) {
       _amount = _compoundedDeposit;
     }
     uint256 _newDeposit = _compoundedDeposit.sub(_amount);
-    emit UserDepositChange(msg.sender, _newDeposit, 0);
+    emit UserDepositChange(_msgSender(), _newDeposit, 0);
 
     // @note the snapshot is updated in `_distributeRewards` once, the value of `unlock.amount` is correct.
-    UserUnlock memory _unlock = snapshots[msg.sender].initialUnlock;
+    UserUnlock memory _unlock = snapshots[_msgSender()].initialUnlock;
     require(_unlock.amount == 0 || _unlock.unlockAt > block.timestamp, "nonzero unlocked token");
 
     _unlock.amount = uint128(_amount.add(_unlock.amount));
-    emit UserUnlockChange(msg.sender, _unlock.amount, 0);
+    emit UserUnlockChange(_msgSender(), _unlock.amount, 0);
 
     uint256 _unlockAt = block.timestamp + unlockDuration;
     if (_unlockAt < _unlock.unlockAt) {
       _unlockAt = _unlock.unlockAt;
     }
-    snapshots[msg.sender].initialUnlock.unlockAt = uint128(_unlockAt);
+    snapshots[_msgSender()].initialUnlock.unlockAt = uint128(_unlockAt);
 
-    _takeAccountSnapshot(msg.sender, _newDeposit, _unlock.amount);
+    _takeAccountSnapshot(_msgSender(), _newDeposit, _unlock.amount);
 
     totalSupply = totalSupply.sub(_amount);
     totalUnlocking = totalUnlocking.add(_amount);
 
-    emit Unlock(msg.sender, _amount, _unlockAt);
+    emit Unlock(_msgSender(), _amount, _unlockAt);
   }
 
   /// @inheritdoc IRebalancePool
   function withdrawUnlocked(bool _doClaim, bool _unwrap) external override {
     // distribute pending extraRewards
-    _distributeRewards(msg.sender);
+    _distributeRewards(_msgSender());
 
     // withdraw unlocked
-    UserUnlock memory _unlock = snapshots[msg.sender].initialUnlock;
+    UserUnlock memory _unlock = snapshots[_msgSender()].initialUnlock;
     require(_unlock.unlockAt <= block.timestamp, "no unlocks");
 
     // @note the snapshot is updated in `_distributeRewards` once, the value of `unlock.amount` is correct.
     if (_unlock.amount > 0) {
       totalUnlocking = totalUnlocking.sub(_unlock.amount);
-      delete snapshots[msg.sender].initialUnlock;
+      delete snapshots[_msgSender()].initialUnlock;
 
-      emit UserUnlockChange(msg.sender, 0, 0);
+      emit UserUnlockChange(_msgSender(), 0, 0);
 
-      IERC20(asset).safeTransfer(msg.sender, _unlock.amount);
+      IERC20(asset).safeTransfer(_msgSender(), _unlock.amount);
     }
 
-    emit WithdrawUnlocked(msg.sender, _unlock.amount);
+    emit WithdrawUnlocked(_msgSender(), _unlock.amount);
 
     if (_doClaim) {
       address _baseRewardToken = baseRewardToken();
-      _claim(msg.sender, _baseRewardToken, _unwrap);
+      _claim(_msgSender(), _baseRewardToken, _unwrap);
 
       // claim all extraRewards
       uint256 length = extraRewards.length;
       for (uint256 i = 0; i < length; i++) {
         address _extraRewardToken = extraRewards[i];
         if (_baseRewardToken != _extraRewardToken) {
-          _claim(msg.sender, _extraRewardToken, false);
+          _claim(_msgSender(), _extraRewardToken, false);
         }
       }
     }
@@ -457,20 +457,20 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
   /// @inheritdoc IRebalancePool
   function claim(address _token, bool _unwrap) external override {
     // distribute pending extraRewards
-    _distributeRewards(msg.sender);
+    _distributeRewards(_msgSender());
 
     // claim single token
-    _claim(msg.sender, _token, _unwrap);
+    _claim(_msgSender(), _token, _unwrap);
   }
 
   /// @inheritdoc IRebalancePool
   function claim(address[] memory _tokens, bool _unwrap) external override {
     // distribute pending extraRewards
-    _distributeRewards(msg.sender);
+    _distributeRewards(_msgSender());
 
     // claim multiple tokens
     for (uint256 i = 0; i < _tokens.length; i++) {
-      _claim(msg.sender, _tokens[i], _unwrap);
+      _claim(_msgSender(), _tokens[i], _unwrap);
     }
   }
 
@@ -480,7 +480,7 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
     override
     returns (uint256 _liquidated, uint256 _baseOut)
   {
-    require(liquidator == msg.sender, "only liquidator");
+    require(liquidator == _msgSender(), "only liquidator");
 
     // distribute pending extraRewards
     _distributeRewards(address(0));
@@ -529,7 +529,7 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
   /// @inheritdoc IRebalancePool
   function depositReward(address _token, uint256 _amount) external override onlyRewardManager(_token) {
     uint256 _balance = IERC20(_token).balanceOf(address(this));
-    IERC20(_token).safeTransferFrom(msg.sender, address(this), _amount);
+    IERC20(_token).safeTransferFrom(_msgSender(), address(this), _amount);
     _amount = IERC20(_token).balanceOf(address(this)).sub(_balance);
     require(_amount > 0, "reward amount zero");
 

@@ -34,7 +34,7 @@ contract LeveragedToken is ERC20Upgradeable, ILeveragedToken {
    *************/
 
   modifier onlyTreasury() {
-    require(msg.sender == treasury, "Only treasury");
+    require(_msgSender() == treasury, "Only treasury");
     _;
   }
 

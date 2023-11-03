@@ -103,7 +103,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
 
     __Context_init();
     __ERC20_init("f(x) Balancer FX/ETH&FX", "FXVault");
-    __Ownable_init(msg.sender);
+    __Ownable_init(_msgSender());
 
     fxToken = _fxToken;
     lpToken = _lpToken;
@@ -130,10 +130,10 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
     address _receiver
   ) external returns (uint256 _shares) {
     if (_fxAmount == type(uint256).max) {
-      _fxAmount = IERC20(fxToken).balanceOf(msg.sender);
+      _fxAmount = IERC20(fxToken).balanceOf(_msgSender());
     }
     if (_lpAmount == type(uint256).max) {
-      _lpAmount = IERC20(lpToken).balanceOf(msg.sender);
+      _lpAmount = IERC20(lpToken).balanceOf(_msgSender());
     }
     require(_fxAmount > 0 || _lpAmount > 0, "deposit zero amount");
 
@@ -189,10 +189,10 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
     }
     _mint(_receiver, _shares);
 
-    emit Deposit(msg.sender, _receiver, _fxAmount, _lpAmount, _shares);
+    emit Deposit(_msgSender(), _receiver, _fxAmount, _lpAmount, _shares);
 
-    _depositFxToken(msg.sender, _fxAmount);
-    _depositLpToken(msg.sender, _lpAmount);
+    _depositFxToken(_msgSender(), _fxAmount);
+    _depositLpToken(_msgSender(), _lpAmount);
   }
 
   /// @notice Redeem assets from this contract.
@@ -211,12 +211,12 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
     }
     require(_shares > 0, "redeem zero share");
 
-    if (msg.sender != _owner) {
-      uint256 _allowance = allowance(_owner, msg.sender);
+    if (_msgSender() != _owner) {
+      uint256 _allowance = allowance(_owner, _msgSender());
       require(_allowance >= _shares, "redeem exceeds allowance");
       if (_allowance != type(uint256).max) {
         // decrease allowance if it is not max
-        _approve(_owner, msg.sender, _allowance - _shares);
+        _approve(_owner, _msgSender(), _allowance - _shares);
       }
     }
 
@@ -224,7 +224,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
     uint256 _fxBalance = totalFxToken;
     uint256 _lpBalance = totalLpToken;
 
-    _burn(msg.sender, _shares);
+    _burn(_msgSender(), _shares);
 
     _fxAmount = _fxBalance.mul(_shares).div(_totalSupply);
     _lpAmount = _lpBalance.mul(_shares).div(_totalSupply);
@@ -236,7 +236,7 @@ contract FxVault is ERC20Upgradeable, OwnableUpgradeable {
       totalLpToken = _lpBalance.sub(_lpAmount);
     }
 
-    emit Withdraw(msg.sender, _receiver, _owner, _fxAmount, _lpAmount, _shares);
+    emit Withdraw(_msgSender(), _receiver, _owner, _fxAmount, _lpAmount, _shares);
 
     _withdrawFxToken(_fxAmount, _receiver);
     _withdrawLpToken(_lpAmount, _receiver);

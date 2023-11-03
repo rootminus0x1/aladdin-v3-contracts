@@ -43,8 +43,7 @@ contract ChainlinkTwapOracleV3 is ITwapOracle, Ownable {
     address chainlinkAggregator_,
     uint256 chainlinkMinMessageCount_,
     uint256 chainlinkMessageExpiration_,
-    string memory symbol_,
-    address initialOwner) Ownable(initialOwner) {
+    string memory symbol_) Ownable(_msgSender()) {
     chainlinkAggregator = chainlinkAggregator_;
     require(chainlinkMinMessageCount_ > 0);
     chainlinkMinMessageCount = chainlinkMinMessageCount_;

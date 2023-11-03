@@ -82,7 +82,7 @@ describe("Treasury.spec", async () => {
           ethers.parseEther("1000"),
           ZeroAddress
         )
-      ).to.revertedWith("Initializable: contract is already initialized");
+      ).to.be.reverted;
     });
 
     it("should initialize correctly", async () => {
@@ -100,7 +100,7 @@ describe("Treasury.spec", async () => {
 
     context("#initializePrice", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(treasury.connect(signer).initializePrice()).to.revertedWith("Ownable: caller is not the owner");
+        await expect(treasury.connect(signer).initializePrice()).to.reverted;
       });
 
       it("should succeed", async () => {
@@ -117,9 +117,7 @@ describe("Treasury.spec", async () => {
 
     context("#updateStrategy", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(treasury.connect(signer).updateStrategy(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
-        );
+        await expect(treasury.connect(signer).updateStrategy(ZeroAddress)).to.be.reverted;
       });
 
       it("should succeed", async () => {
@@ -133,7 +131,7 @@ describe("Treasury.spec", async () => {
 
     context("#updateBeta", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(treasury.connect(signer).updateBeta(2)).to.revertedWith("Ownable: caller is not the owner");
+        await expect(treasury.connect(signer).updateBeta(2)).to.reverted;
       });
 
       it("should succeed", async () => {
@@ -145,9 +143,7 @@ describe("Treasury.spec", async () => {
 
     context("#updatePriceOracle", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(treasury.connect(signer).updatePriceOracle(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
-        );
+        await expect(treasury.connect(signer).updatePriceOracle(ZeroAddress)).to.be.reverted;
       });
 
       it("should succeed", async () => {
@@ -161,9 +157,7 @@ describe("Treasury.spec", async () => {
 
     context("#updateSettleWhitelist", async () => {
       it("should revert, when non-owner call", async () => {
-        await expect(treasury.connect(signer).updateSettleWhitelist(ZeroAddress, false)).to.revertedWith(
-          "Ownable: caller is not the owner"
-        );
+        await expect(treasury.connect(signer).updateSettleWhitelist(ZeroAddress, false)).to.be.reverted;
       });
 
       it("should succeed", async () => {

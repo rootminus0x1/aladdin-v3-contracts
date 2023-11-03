@@ -26,7 +26,7 @@ contract ChainlinkPriceOracle is Ownable, IPriceOracle {
   /// @notice Mapping from token address to chainlink feed information.
   mapping(address => FeedInfo) public feeds;
 
-  constructor(address initialOwner) Ownable(initialOwner) {}
+  constructor() Ownable(_msgSender()) {}
 
   /*************************
    * Public View Functions *

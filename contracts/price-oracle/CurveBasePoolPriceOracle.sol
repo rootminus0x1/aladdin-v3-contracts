@@ -35,7 +35,7 @@ contract CurveBasePoolPriceOracle is Ownable, IPriceOracle {
    * Constructor *
    ***************/
 
-  constructor(address _baseOracle, address initialOwner) Ownable(initialOwner) {
+  constructor(address _baseOracle) Ownable(_msgSender()) {
     baseOracle = _baseOracle;
   }
 

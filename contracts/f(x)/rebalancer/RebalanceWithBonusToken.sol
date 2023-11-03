@@ -17,7 +17,7 @@ contract RebalanceWithBonusToken is Ownable {
 
   uint256 public bonus;
 
-  constructor(address _stabilityPool, address _bonusToken) Ownable(msg.sender){
+  constructor(address _stabilityPool, address _bonusToken) Ownable(_msgSender()){
     stabilityPool = _stabilityPool;
     bonusToken = _bonusToken;
   }
@@ -25,7 +25,7 @@ contract RebalanceWithBonusToken is Ownable {
   function liquidate(uint256 _minBaseOut) external {
     IRebalancePool(stabilityPool).liquidate(type(uint256).max, _minBaseOut);
 
-    IERC20(bonusToken).safeTransfer(msg.sender, bonus);
+    IERC20(bonusToken).safeTransfer(_msgSender(), bonus);
   }
 
   function updateBonus(uint256 _bonus) external onlyOwner {

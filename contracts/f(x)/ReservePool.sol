@@ -56,7 +56,7 @@ contract ReservePool is AccessControl, IReservePool {
    ************/
 
   modifier onlyAdmin() {
-    require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender), "only admin");
+    require(hasRole(DEFAULT_ADMIN_ROLE, _msgSender()), "only admin");
     _;
   }
 
@@ -68,7 +68,7 @@ contract ReservePool is AccessControl, IReservePool {
     market = _market;
     fToken = _fToken;
 
-    grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
   }
 
   /****************************
@@ -81,7 +81,7 @@ contract ReservePool is AccessControl, IReservePool {
     address _recipient,
     uint256 _originalAmount
   ) external override returns (uint256) {
-    require(msg.sender == market, "only market");
+    require(_msgSender() == market, "only market");
 
     uint256 _bonus = _originalAmount.mul(bonusRatio[_token]).div(PRECISION);
     uint256 _balance = _getBalance(_token);

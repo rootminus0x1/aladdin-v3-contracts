@@ -133,12 +133,12 @@ contract Treasury is OwnableUpgradeable, ITreasury {
    ************/
 
   modifier onlyMarket() {
-    require(msg.sender == market, "Only market");
+    require(_msgSender() == market, "Only market");
     _;
   }
 
   modifier onlyStrategy() {
-    require(msg.sender == strategy, "Only strategy");
+    require(_msgSender() == strategy, "Only strategy");
     _;
   }
 
@@ -159,10 +159,9 @@ contract Treasury is OwnableUpgradeable, ITreasury {
     address _priceOracle,
     uint256 _beta,
     uint256 _baseTokenCap,
-    address _rateProvider,
-    address _initialOwner
+    address _rateProvider
   ) external initializer {
-    OwnableUpgradeable.__Ownable_init(_initialOwner);
+    OwnableUpgradeable.__Ownable_init(_msgSender());
 
     market = _market;
     baseToken = _baseToken;
@@ -382,7 +381,7 @@ contract Treasury is OwnableUpgradeable, ITreasury {
 
     totalBaseToken = _state.baseSupply.sub(_baseOut);
 
-    _transferBaseToken(_baseOut, msg.sender);
+    _transferBaseToken(_baseOut, _msgSender());
   }
 
   /// @inheritdoc ITreasury
@@ -428,13 +427,13 @@ contract Treasury is OwnableUpgradeable, ITreasury {
     );
 
     if (_baseOut > 0) {
-      _transferBaseToken(_baseOut, msg.sender);
+      _transferBaseToken(_baseOut, _msgSender());
     }
   }
 
   /// @inheritdoc ITreasury
   function protocolSettle() external override {
-    require(settleWhitelist[msg.sender], "only settle whitelist");
+    require(settleWhitelist[_msgSender()], "only settle whitelist");
     if (totalBaseToken == 0) return;
 
     uint256 _newPrice = _fetchTwapPrice(SwapKind.None);
