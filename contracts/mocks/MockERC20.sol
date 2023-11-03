@@ -33,11 +33,12 @@ contract MockERC20 is ERC20 {
   }
 
   // log mint(0, x), burns(x, 0) & transfers(x, y)
-  function _beforeTokenTransfer(address from, address to, uint256 amount) internal view override {
+  function _update(address from, address to, uint256 amount) internal override {
     if (logging) {
       console.log("%s:", msg.sender);
       console.log("  MockERC20._beforeTokenTransfer(%s, %s, %s)", from, to, amount);
     }
+    super._update(from, to, amount);
   }
 
   // log approvals

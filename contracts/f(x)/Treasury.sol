@@ -159,9 +159,10 @@ contract Treasury is OwnableUpgradeable, ITreasury {
     address _priceOracle,
     uint256 _beta,
     uint256 _baseTokenCap,
-    address _rateProvider
+    address _rateProvider,
+    address _initialOwner
   ) external initializer {
-    OwnableUpgradeable.__Ownable_init();
+    OwnableUpgradeable.__Ownable_init(_initialOwner);
 
     market = _market;
     baseToken = _baseToken;

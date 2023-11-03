@@ -359,7 +359,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
 
     // bound the amount of base token
     FeeRatio memory _ratio = xTokenMintFeeRatio;
-    uint256 _feeRatio = uint256(int256(_ratio.defaultFeeRatio) + _ratio.extraFeeRatio);
+    uint256 _feeRatio = uint256(int256(uint256(_ratio.defaultFeeRatio)) + _ratio.extraFeeRatio);
     if (_baseIn * (PRECISION - _feeRatio) > _maxBaseInBeforeSystemStabilityMode * PRECISION) {
       _baseIn = (_maxBaseInBeforeSystemStabilityMode * PRECISION) / (PRECISION - _feeRatio);
     }
@@ -481,7 +481,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     uint256 _feeRatio;
     {
       FeeRatio memory _ratio = fTokenRedeemFeeRatio;
-      _feeRatio = uint256(int256(_ratio.defaultFeeRatio) + _ratio.extraFeeRatio);
+      _feeRatio = uint256(int256(uint256(_ratio.defaultFeeRatio)) + _ratio.extraFeeRatio);
     }
     uint256 _fee = (_baseOut * _feeRatio) / PRECISION;
     if (_fee > 0) {
@@ -508,6 +508,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     int128 _extraFeeRatio,
     bool _isFToken
   ) external onlyAdmin {
+    // TODO: rationalise these requires with following function's
     require(_defaultFeeRatio <= PRECISION, "default fee ratio too large");
     if (_extraFeeRatio < 0) {
       require(uint128(-_extraFeeRatio) <= _defaultFeeRatio, "delta fee too small");
@@ -670,7 +671,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     // [_maxBaseInBeforeSystemStabilityMode, infinity) => default + extra = fee_ratio_1
 
     uint256 _feeRatio0 = _ratio.defaultFeeRatio;
-    uint256 _feeRatio1 = uint256(int256(_ratio.defaultFeeRatio) + _ratio.extraFeeRatio);
+    uint256 _feeRatio1 = uint256(int256(uint256(_ratio.defaultFeeRatio)) + _ratio.extraFeeRatio);
 
     _baseInWithoutFee = _deductMintFee(_baseIn, _feeRatio0, _feeRatio1, _maxBaseInBeforeSystemStabilityMode);
   }
@@ -688,7 +689,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     // [0, _maxBaseInBeforeSystemStabilityMode) => default + extra = fee_ratio_0
     // [_maxBaseInBeforeSystemStabilityMode, infinity) => default = fee_ratio_1
 
-    uint256 _feeRatio0 = uint256(int256(_ratio.defaultFeeRatio) + _ratio.extraFeeRatio);
+    uint256 _feeRatio0 = uint256(int256(uint256(_ratio.defaultFeeRatio)) + _ratio.extraFeeRatio);
     uint256 _feeRatio1 = _ratio.defaultFeeRatio;
 
     _baseInWithoutFee = _deductMintFee(_baseIn, _feeRatio0, _feeRatio1, _maxBaseInBeforeSystemStabilityMode);
@@ -731,7 +732,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     // [0, _maxBaseInBeforeSystemStabilityMode) => default + extra = fee_ratio_0
     // [_maxBaseInBeforeSystemStabilityMode, infinity) => default = fee_ratio_1
 
-    uint256 _feeRatio0 = uint256(int256(_ratio.defaultFeeRatio) + _ratio.extraFeeRatio);
+    uint256 _feeRatio0 = uint256(int256(uint256(_ratio.defaultFeeRatio)) + _ratio.extraFeeRatio);
     uint256 _feeRatio1 = _ratio.defaultFeeRatio;
 
     _feeRatio = _computeRedeemFeeRatio(_amountIn, _feeRatio0, _feeRatio1, _maxInBeforeSystemStabilityMode);
@@ -751,7 +752,7 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
     // [_maxBaseInBeforeSystemStabilityMode, infinity) => default + extra = fee_ratio_1
 
     uint256 _feeRatio0 = _ratio.defaultFeeRatio;
-    uint256 _feeRatio1 = uint256(int256(_ratio.defaultFeeRatio) + _ratio.extraFeeRatio);
+    uint256 _feeRatio1 = uint256(int256(uint256(_ratio.defaultFeeRatio)) + _ratio.extraFeeRatio);
 
     _feeRatio = _computeRedeemFeeRatio(_amountIn, _feeRatio0, _feeRatio1, _maxInBeforeSystemStabilityMode);
   }

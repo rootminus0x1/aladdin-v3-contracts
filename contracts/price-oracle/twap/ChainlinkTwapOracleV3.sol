@@ -3,7 +3,7 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./compatibility8/SafeMath.sol";
+import "../../f(x)/compatibility8/SafeMath.sol";
 
 import "../interfaces/AggregatorV3Interface.sol";
 import "../interfaces/ITwapOracle.sol";
@@ -43,8 +43,8 @@ contract ChainlinkTwapOracleV3 is ITwapOracle, Ownable {
     address chainlinkAggregator_,
     uint256 chainlinkMinMessageCount_,
     uint256 chainlinkMessageExpiration_,
-    string memory symbol_
-  ) {
+    string memory symbol_,
+    address initialOwner) Ownable(initialOwner) {
     chainlinkAggregator = chainlinkAggregator_;
     require(chainlinkMinMessageCount_ > 0);
     chainlinkMinMessageCount = chainlinkMinMessageCount_;

@@ -239,8 +239,8 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
    * Constructor *
    ***************/
 
-  function initialize(address _treasury, address _market) external initializer {
-    OwnableUpgradeable.__Ownable_init();
+  function initialize(address _treasury, address _market, address _initialOwner) external initializer {
+    OwnableUpgradeable.__Ownable_init(_initialOwner);
 
     treasury = _treasury;
     market = _market;
