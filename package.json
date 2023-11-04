@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "yarn hardhat test",
+    "test": "forge test && yarn hardhat test",
     "testhh": "yarn hardhat test --no-compile",
     "build": "yarn hardhat compile",
     "votium:vote": "yarn ts-node scripts/votium/hermez_vote.ts",
