@@ -27,7 +27,7 @@ interface ICoinGeckoResponse {
 const MaxSupply = 10n ** (18n + 2n + 6n);
 
 function ratio(a: bigint, b: bigint): number {
-  return Number(a * HALFPRECISION / b / HALFPRECISION); // TODO: is this functiom needed with bigint?
+  return Number((a * HALFPRECISION) / b / HALFPRECISION); // TODO: is this functiom needed with bigint?
 }
 
 function as_float(x: BigInt): number {
@@ -74,7 +74,7 @@ async function computeCVX(amount: bigint, contract: IConvexToken, block: number)
   const cliff = supply / reductionPerCliff;
   if (cliff < totalCliffs) {
     const reduction = totalCliffs - cliff;
-    amount = amount * reduction /totalCliffs;
+    amount = (amount * reduction) / totalCliffs;
     const amtTillMax = MaxSupply - supply;
     if (amount > amtTillMax) {
       amount = amtTillMax;
@@ -86,11 +86,7 @@ async function computeCVX(amount: bigint, contract: IConvexToken, block: number)
   }
 }
 
-async function computeRewardsInDay(
-  contract: IConvexBasicRewards,
-  block: number,
-  timestamp: number
-): Promise<bigint> {
+async function computeRewardsInDay(contract: IConvexBasicRewards, block: number, timestamp: number): Promise<bigint> {
   const contractAddress = await contract.getAddress();
   const results = await doMulticall(
     [
@@ -116,7 +112,7 @@ async function computeRewardsInDay(
   let duration = periodFinish - timestamp;
   // if (duration > 86400) duration = 86400;
   duration = 86400;
-  return BigInt(rewardRate * duration * balanceOf / totalSupply);
+  return BigInt((rewardRate * duration * balanceOf) / totalSupply);
 }
 
 async function main(holder: string) {
@@ -243,7 +239,7 @@ async function main(holder: string) {
   if (w < 0) w = 0;
   if (w > 1) w = 1;
 
-  const adjusted_bal0_me = bal_me * BigInt(Math.floor((1 - w) * 10000)) / 10000n;
+  const adjusted_bal0_me = (bal_me * BigInt(Math.floor((1 - w) * 10000))) / 10000n;
   const adjusted_bal1_me = bal_me - adjusted_bal0_me;
   const adjusted_supply0 = supply0 - bal0_me + adjusted_bal0_me;
   const adjusted_supply1 = supply1 - bal1_me + adjusted_bal1_me;
@@ -274,8 +270,8 @@ async function main(holder: string) {
   );
 
   const getApy = (weight: number) => {
-    const adjusted_bal0_me = bal_me * BigInt(Math.floor((1 - weight) * 10000)) / 10000n;
-    const adjusted_bal1_me = bal_me -adjusted_bal0_me;
+    const adjusted_bal0_me = (bal_me * BigInt(Math.floor((1 - weight) * 10000))) / 10000n;
+    const adjusted_bal1_me = bal_me - adjusted_bal0_me;
     const adjusted_supply0 = supply0 - bal0_me + adjusted_bal0_me;
     const adjusted_supply1 = supply1 - bal1_me + adjusted_bal1_me;
     const adjustedCurrentDailyRewardUSD =

@@ -1024,17 +1024,11 @@ async function deployAbcCVX() {
       "AMORatio:",
       `[${ethers.formatUnits(amoConfig.minAMO, 10)}-${ethers.formatUnits(amoConfig.maxAMO, 10)}]`,
       "=>",
-      `[${ethers.formatUnits(cvxConfig.AMORatio.min, 10)}-${ethers.formatUnits(
-        cvxConfig.AMORatio.max,
-        10
-      )}],`,
+      `[${ethers.formatUnits(cvxConfig.AMORatio.min, 10)}-${ethers.formatUnits(cvxConfig.AMORatio.max, 10)}],`,
       "LPRatio:",
       `[${ethers.formatUnits(amoConfig.minLPRatio, 10)}-${ethers.formatUnits(amoConfig.maxLPRatio, 10)}]`,
       "=>",
-      `[${ethers.formatUnits(cvxConfig.LPRatio.min, 10)}-${ethers.formatUnits(
-        cvxConfig.LPRatio.max,
-        10
-      )}],`,
+      `[${ethers.formatUnits(cvxConfig.LPRatio.min, 10)}-${ethers.formatUnits(cvxConfig.LPRatio.max, 10)}],`,
       `hash: ${tx.hash}`
     );
     const receipt = await tx.wait();

@@ -576,10 +576,7 @@ async function deployFRAX() {
         console.log(
           `Setup reserve rate for CLever_${underlying}, hash:`,
           tx.hash,
-          `rate: ${ethers.formatUnits(currentReserveRate, 9)} => ${ethers.formatUnits(
-            expectedReserveRate,
-            9
-          )}`
+          `rate: ${ethers.formatUnits(currentReserveRate, 9)} => ${ethers.formatUnits(expectedReserveRate, 9)}`
         );
         const receipt = await tx.wait();
         console.log("✅ Done, gas used:", receipt.gasUsed.toString());
