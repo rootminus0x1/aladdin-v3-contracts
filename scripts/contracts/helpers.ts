@@ -14,7 +14,7 @@ export async function contractDeploy(
   desc: string,
   name: string,
   args: Array<any>,
-  overrides?: PayableOverrides
+  overrides?: PayableOverrides,
 ): Promise<string> {
   const contract = await ethers.getContractFactory(name, deployer);
 
@@ -33,7 +33,7 @@ export async function minimalProxyDeploy(
   deployer: HardhatEthersSigner,
   name: string,
   implementation: string,
-  overrides?: PayableOverrides
+  overrides?: PayableOverrides,
 ): Promise<string> {
   console.log(`\nDeploying Minimal Proxy for ${name} ...`);
   const tx = await deployer.sendTransaction({
@@ -55,7 +55,7 @@ export async function contractCall(
   desc: string,
   method: string,
   args: Array<any>,
-  overrides?: PayableOverrides
+  overrides?: PayableOverrides,
 ): Promise<TransactionReceipt> {
   console.log(`\n${desc}`);
   console.log("  target:", await contract.getAddress());
@@ -81,7 +81,7 @@ export async function ownerContractCall(
   desc: string,
   method: string,
   args: Array<any>,
-  overrides?: PayableOverrides
+  overrides?: PayableOverrides,
 ): Promise<TransactionReceipt | undefined> {
   const signer = contract.runner! as HardhatEthersSigner;
   let owner: string = ZeroAddress;
@@ -127,7 +127,7 @@ export async function ensureDeployer(network: string): Promise<HardhatEthersSign
   }
   console.log(
     `deployer[${deployer.address}]`,
-    `balance[${ethers.formatEther(await ethers.provider.getBalance(deployer.address))}]`
+    `balance[${ethers.formatEther(await ethers.provider.getBalance(deployer.address))}]`,
   );
   return deployer;
 }

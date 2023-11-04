@@ -55,7 +55,7 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
         ? [ethers.parseEther("0.80"), ethers.parseEther("0.20")]
         : [ethers.parseEther("0.20"), ethers.parseEther("0.80")],
       1e12,
-      deployer.address
+      deployer.address,
     );
     await factory.create(
       "X",
@@ -65,7 +65,7 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
         ? [ethers.parseEther("0.80"), ethers.parseEther("0.20")]
         : [ethers.parseEther("0.20"), ethers.parseEther("0.80")],
       1e12,
-      deployer.address
+      deployer.address,
     );
     dst = await ethers.getContractAt("MockERC20", poolAddress, deployer);
     dstAddress = poolAddress;
@@ -87,7 +87,7 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
           srcAddress.toLowerCase() < wethAddress.toLowerCase()
             ? [ethers.parseEther("80"), ethers.parseEther("20")]
             : [ethers.parseEther("20"), ethers.parseEther("80")],
-        ]
+        ],
       ),
       fromInternalBalance: false,
     });

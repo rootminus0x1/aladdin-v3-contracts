@@ -13,7 +13,22 @@
         "useTabs": false,
         "singleQuote": false,
         "bracketSpacing": true,
-        "explicitTypes": "preserve"
+        "explicitTypes": "preserve",
+        "semi": true,
+        "trailingComma": "all"
+      }
+    },
+    {
+      "files": "*.ts",
+      "options": {
+        "printWidth": 120,
+        "tabWidth": 2,
+        "useTabs": false,
+        "singleQuote": false,
+        "bracketSpacing": true,
+        "explicitTypes": "preserve",
+        "semi": true,
+        "trailingComma": "all"
       }
     }
   ]

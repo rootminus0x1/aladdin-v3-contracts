@@ -64,7 +64,7 @@ async function initialSetup() {
       PLATFORM,
       PLATFORM_FEE_PERCENTAGE,
       HARVEST_BOUNTY_PERCENTAGE,
-      REPAY_FEE_PERCENTAGE
+      REPAY_FEE_PERCENTAGE,
     );
     console.log("setup fees in CLever in tx:", tx.hash);
     const receipt = await tx.wait();

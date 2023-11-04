@@ -72,7 +72,7 @@ describe("Market.spec", async () => {
       oracleAddress,
       ethers.parseEther("0.1"),
       ethers.parseEther("1000"),
-      ZeroAddress
+      ZeroAddress,
     );
 
     await market.initialize(treasuryAddress, platform.address);
@@ -80,14 +80,14 @@ describe("Market.spec", async () => {
       ethers.parseEther("1.3"),
       ethers.parseEther("1.2"),
       ethers.parseEther("1.14"),
-      ethers.parseEther("1")
+      ethers.parseEther("1"),
     );
   });
 
   context("auth", async () => {
     it("should revert, when intialize again", async () => {
       await expect(market.initialize(treasuryAddress, platform.address)).to.revertedWith(
-        "Initializable: contract is already initialized"
+        "Initializable: contract is already initialized",
       );
     });
 
@@ -107,10 +107,10 @@ describe("Market.spec", async () => {
 
       it("should revert, when default fee too large", async () => {
         await expect(market.updateRedeemFeeRatio(PRECISION + BigInt(1), 0, false)).to.revertedWith(
-          "default fee ratio too large"
+          "default fee ratio too large",
         );
         await expect(market.updateRedeemFeeRatio(PRECISION + BigInt(1), 0, true)).to.revertedWith(
-          "default fee ratio too large"
+          "default fee ratio too large",
         );
       });
 
@@ -155,10 +155,10 @@ describe("Market.spec", async () => {
 
       it("should revert, when default fee too large", async () => {
         await expect(market.updateMintFeeRatio(PRECISION + BigInt(1), 0, false)).to.revertedWith(
-          "default fee ratio too large"
+          "default fee ratio too large",
         );
         await expect(market.updateMintFeeRatio(PRECISION + BigInt(1), 0, true)).to.revertedWith(
-          "default fee ratio too large"
+          "default fee ratio too large",
         );
       });
 
@@ -214,15 +214,15 @@ describe("Market.spec", async () => {
             ethers.parseEther("1.5"),
             ethers.parseEther("1.4"),
             ethers.parseEther("1.3"),
-            ethers.parseEther("1.2")
-          )
+            ethers.parseEther("1.2"),
+          ),
         )
           .to.emit(market, "UpdateMarketConfig")
           .withArgs(
             ethers.parseEther("1.5"),
             ethers.parseEther("1.4"),
             ethers.parseEther("1.3"),
-            ethers.parseEther("1.2")
+            ethers.parseEther("1.2"),
           );
         expect((await market.marketConfig()).stabilityRatio).to.eq(ethers.parseEther("1.5"));
         expect((await market.marketConfig()).liquidationRatio).to.eq(ethers.parseEther("1.4"));
@@ -250,7 +250,7 @@ describe("Market.spec", async () => {
         expect((await market.incentiveConfig()).liquidationIncentiveRatio).to.eq(ZeroHash);
         expect((await market.incentiveConfig()).selfLiquidationIncentiveRatio).to.eq(ZeroHash);
         await expect(
-          market.updateIncentiveConfig(ethers.parseEther("0.3"), ethers.parseEther("0.2"), ethers.parseEther("0.1"))
+          market.updateIncentiveConfig(ethers.parseEther("0.3"), ethers.parseEther("0.2"), ethers.parseEther("0.1")),
         )
           .to.emit(market, "UpdateIncentiveConfig")
           .withArgs(ethers.parseEther("0.3"), ethers.parseEther("0.2"), ethers.parseEther("0.1"));
@@ -277,7 +277,7 @@ describe("Market.spec", async () => {
     context("#updateLiquidationWhitelist", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(market.connect(signer).updateLiquidationWhitelist(ZeroAddress, false)).to.revertedWith(
-          "only Admin"
+          "only Admin",
         );
       });
 
@@ -331,10 +331,10 @@ describe("Market.spec", async () => {
     context("#pauseFTokenMintInSystemStabilityMode", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(market.connect(signer).pauseFTokenMintInSystemStabilityMode(false)).to.revertedWith(
-          "only Emergency DAO"
+          "only Emergency DAO",
         );
         await expect(market.connect(signer).pauseFTokenMintInSystemStabilityMode(true)).to.revertedWith(
-          "only Emergency DAO"
+          "only Emergency DAO",
         );
       });
 
@@ -356,10 +356,10 @@ describe("Market.spec", async () => {
     context("#pauseXTokenRedeemInSystemStabilityMode", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(market.connect(signer).pauseXTokenRedeemInSystemStabilityMode(false)).to.revertedWith(
-          "only Emergency DAO"
+          "only Emergency DAO",
         );
         await expect(market.connect(signer).pauseXTokenRedeemInSystemStabilityMode(true)).to.revertedWith(
-          "only Emergency DAO"
+          "only Emergency DAO",
         );
       });
 
@@ -407,7 +407,7 @@ describe("Market.spec", async () => {
           ethers.parseEther("1"),
           ethers.parseEther("500"),
           ethers.parseEther("500"),
-          0n
+          0n,
         );
       expect(await treasury.totalBaseToken()).to.eq(ethers.parseEther("1"));
       expect(await weth.balanceOf(treasuryAddress)).to.eq(ethers.parseEther("1"));
@@ -482,11 +482,11 @@ describe("Market.spec", async () => {
         .withArgs(deployer.address, signer.address, additionalCollateral, 0, expectedXCount, 0);
       expect(await treasury.totalBaseToken()).to.eq(
         initialCollateral + additionalCollateral,
-        "treasure should have added some eth"
+        "treasure should have added some eth",
       );
       expect(await weth.balanceOf(treasuryAddress)).to.eq(
         initialCollateral + additionalCollateral,
-        "erc20 treasury now has more eth"
+        "erc20 treasury now has more eth",
       );
       expect(await xToken.balanceOf(signer.address)).to.eq(expectedXCount, "signer got the collateral value of xToken");
       expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
@@ -543,7 +543,7 @@ describe("Market.spec", async () => {
       expect(await weth.balanceOf(treasuryAddress)).to.eq(initialCollateral + cap, "erc20 treasury now has more eth");
       expect(await xToken.balanceOf(signer.address)).to.eq(
         274706754931099701911n,
-        "signer got the collateral value of xToken"
+        "signer got the collateral value of xToken",
       );
       expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
 
@@ -559,15 +559,15 @@ describe("Market.spec", async () => {
         .withArgs(deployer.address, signer.address, attemptedCollateral, 230167792488516617652n);
       expect(await treasury.totalBaseToken()).to.eq(
         initialCollateral + attemptedCollateral,
-        "treasure should have added some eth"
+        "treasure should have added some eth",
       );
       expect(await weth.balanceOf(treasuryAddress)).to.eq(
         initialCollateral + attemptedCollateral,
-        "erc20 treasury now has more eth"
+        "erc20 treasury now has more eth",
       );
       expect(await xToken.balanceOf(signer.address)).to.eq(
         230167792488516617652n,
-        "signer got the collateral value of xToken"
+        "signer got the collateral value of xToken",
       );
       expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
 

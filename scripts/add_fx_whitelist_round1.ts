@@ -1684,7 +1684,7 @@ async function main() {
   const sale: TokenSale = (await ethers.getContractAt(
     "TokenSale",
     "0x3eB6Da2d3f39BA184AEA23876026E0747Fb0E17f",
-    deployer
+    deployer,
   )) as any as TokenSale;
 
   const caps: BigInt[] = lists.map((_) => ethers.parseEther("20000"));

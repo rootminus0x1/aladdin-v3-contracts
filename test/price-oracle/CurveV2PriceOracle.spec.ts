@@ -127,7 +127,7 @@ describe("CurveV2PriceOracle.spec", async () => {
     beforeEach(async () => {
       await oracleWETH.setPools(
         Object.keys(WETH_POOLS).map((symbol) => TOKENS[symbol].address),
-        Object.keys(WETH_POOLS).map((symbol) => WETH_POOLS[symbol])
+        Object.keys(WETH_POOLS).map((symbol) => WETH_POOLS[symbol]),
       );
     });
 
@@ -137,7 +137,7 @@ describe("CurveV2PriceOracle.spec", async () => {
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracleWETH.price(TOKENS[symbol].address))},`,
           "gas usage:",
-          gas.toString()
+          gas.toString(),
         );
       }
     });
@@ -147,7 +147,7 @@ describe("CurveV2PriceOracle.spec", async () => {
     beforeEach(async () => {
       await oracleUSDC.setPools(
         Object.keys(USDC_POOLS).map((symbol) => TOKENS[symbol].address),
-        Object.keys(USDC_POOLS).map((symbol) => USDC_POOLS[symbol])
+        Object.keys(USDC_POOLS).map((symbol) => USDC_POOLS[symbol]),
       );
     });
 
@@ -157,7 +157,7 @@ describe("CurveV2PriceOracle.spec", async () => {
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracleUSDC.price(TOKENS[symbol].address))},`,
           "gas usage:",
-          gas.toString()
+          gas.toString(),
         );
       }
     });
@@ -167,7 +167,7 @@ describe("CurveV2PriceOracle.spec", async () => {
     beforeEach(async () => {
       await oracleFraxBP.setPools(
         Object.keys(FRAXBP_POOLS).map((symbol) => TOKENS[symbol].address),
-        Object.keys(FRAXBP_POOLS).map((symbol) => FRAXBP_POOLS[symbol])
+        Object.keys(FRAXBP_POOLS).map((symbol) => FRAXBP_POOLS[symbol]),
       );
     });
 
@@ -177,7 +177,7 @@ describe("CurveV2PriceOracle.spec", async () => {
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracleFraxBP.price(TOKENS[symbol].address))},`,
           "gas usage:",
-          gas.toString()
+          gas.toString(),
         );
       }
     });
@@ -187,7 +187,7 @@ describe("CurveV2PriceOracle.spec", async () => {
     beforeEach(async () => {
       await oracle3CRV.setPools(
         Object.keys(TRICRV_POOLS).map((symbol) => TOKENS[symbol].address),
-        Object.keys(TRICRV_POOLS).map((symbol) => TRICRV_POOLS[symbol])
+        Object.keys(TRICRV_POOLS).map((symbol) => TRICRV_POOLS[symbol]),
       );
     });
 
@@ -197,7 +197,7 @@ describe("CurveV2PriceOracle.spec", async () => {
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracle3CRV.price(TOKENS[symbol].address))},`,
           "gas usage:",
-          gas.toString()
+          gas.toString(),
         );
       }
     });

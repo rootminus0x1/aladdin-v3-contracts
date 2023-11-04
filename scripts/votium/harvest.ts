@@ -49,7 +49,7 @@ async function main(round: number, manualStr: string) {
 
   // fetch price
   const response = await axios.get<ICoinGeckoResponse>(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${Object.values(symbol2ids).join("%2C")}&vs_currencies=usd`
+    `https://api.coingecko.com/api/v3/simple/price?ids=${Object.values(symbol2ids).join("%2C")}&vs_currencies=usd`,
   );
   const prices: { [symbol: string]: number } = {};
   for (const [symbol, id] of Object.entries(symbol2ids)) {
@@ -67,7 +67,7 @@ async function main(round: number, manualStr: string) {
   const claimParams = loadParams(round);
   for (const item of claimParams) {
     const symbol: string = Object.entries(TOKENS).filter(
-      ([, { address }]) => address.toLowerCase() === item.token.toLowerCase()
+      ([, { address }]) => address.toLowerCase() === item.token.toLowerCase(),
     )[0][0];
     const routeToETH = symbol === "WETH" ? [] : ZAP_ROUTES[symbol].WETH;
     const routeToCVX = ZAP_ROUTES.WETH.CVX;
@@ -76,7 +76,7 @@ async function main(round: number, manualStr: string) {
         from: KEEPER,
         to: deployment.CVXLocker,
         data: locker.interface.encodeFunctionData("harvestVotium", [[item], [routeToETH, routeToCVX], 0]),
-      })
+      }),
     );
     const tokenAmountStr = ethers.formatUnits(item.amount, TOKENS[symbol].decimals);
     const cvxAmountStr = ethers.formatEther(estimate.toString());
@@ -85,7 +85,7 @@ async function main(round: number, manualStr: string) {
         `  token[${symbol}]`,
         `address[${item.token}]`,
         `amount[${tokenAmountStr}]/USD[${(parseFloat(tokenAmountStr) * prices[symbol]).toFixed(2)}]`,
-        `CVX[${cvxAmountStr}]/USD[${(parseFloat(cvxAmountStr) * prices.CVX).toFixed(2)}]`
+        `CVX[${cvxAmountStr}]/USD[${(parseFloat(cvxAmountStr) * prices.CVX).toFixed(2)}]`,
       );
     } else {
       console.log(`  token[${symbol}]`, `address[${item.token}]`, `amount[${tokenAmountStr}]`, `CVX[${cvxAmountStr}]`);
@@ -99,7 +99,7 @@ async function main(round: number, manualStr: string) {
       from: KEEPER,
       to: await locker.getAddress(),
       data: locker.interface.encodeFunctionData("harvestVotium", [claimParams, routes, 0]),
-    })
+    }),
   );
   console.log("estimate harvested CVX:", ethers.formatEther(estimate.toString()));
   const gasEstimate = await ethers.provider.estimateGas({
@@ -136,7 +136,7 @@ async function main(round: number, manualStr: string) {
       "actual furnace CVX:",
       ethers.formatEther(furnaceCVX),
       "treasury CVX:",
-      ethers.formatEther(treasuryCVX)
+      ethers.formatEther(treasuryCVX),
     );
     for (const symbol of manualTokens) {
       const { address, decimals } = TOKENS[symbol];

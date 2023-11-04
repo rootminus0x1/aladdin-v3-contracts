@@ -57,7 +57,7 @@ describe("CurveBasePoolPriceOracle.spec", async () => {
       await expect(oracle.underlyings(TOKENS.crvFRAX.address, 0)).to.reverted;
       await oracle.setPools(
         [TOKENS.TRICRV.address, TOKENS.crvFRAX.address],
-        ["0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7", "0xDcEF968d416a41Cdac0ED8702fAC8128A64241A2"]
+        ["0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7", "0xDcEF968d416a41Cdac0ED8702fAC8128A64241A2"],
       );
       expect(await oracle.pools(TOKENS.TRICRV.address)).to.eq("0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7");
       expect(await oracle.pools(TOKENS.crvFRAX.address)).to.eq("0xDcEF968d416a41Cdac0ED8702fAC8128A64241A2");
@@ -75,7 +75,7 @@ describe("CurveBasePoolPriceOracle.spec", async () => {
     beforeEach(async () => {
       await oracle.setPools(
         [TOKENS.TRICRV.address, TOKENS.crvFRAX.address],
-        ["0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7", "0xDcEF968d416a41Cdac0ED8702fAC8128A64241A2"]
+        ["0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7", "0xDcEF968d416a41Cdac0ED8702fAC8128A64241A2"],
       );
     });
 

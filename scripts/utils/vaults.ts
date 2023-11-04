@@ -79,7 +79,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -89,7 +89,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -99,7 +99,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -110,7 +110,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -316,7 +316,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDC: [
@@ -326,7 +326,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDT: [
@@ -336,7 +336,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Add
+          Action.Add,
         ),
       ],
       // WETH ==(UniV3)==> USDC
@@ -348,7 +348,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       // UST_TERRA ==(UniV3)==> USDC
@@ -360,7 +360,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
     },
@@ -378,7 +378,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -388,7 +388,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -398,7 +398,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
     },
@@ -512,7 +512,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -522,7 +522,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -532,7 +532,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -543,7 +543,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -702,7 +702,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -712,7 +712,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -722,7 +722,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -733,7 +733,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -844,7 +844,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -854,7 +854,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -864,7 +864,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -875,7 +875,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -940,7 +940,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -950,7 +950,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -960,7 +960,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -971,7 +971,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1011,7 +1011,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1021,7 +1021,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -1031,7 +1031,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1042,7 +1042,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1146,7 +1146,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1156,7 +1156,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -1166,7 +1166,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1177,7 +1177,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1254,7 +1254,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1264,7 +1264,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -1274,7 +1274,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1285,7 +1285,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1307,7 +1307,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDC: [
@@ -1317,7 +1317,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       // WETH ==(UniV3)==> USDC
@@ -1329,7 +1329,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
     },
@@ -1343,7 +1343,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1353,7 +1353,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1364,7 +1364,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1386,7 +1386,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDC: [
@@ -1396,7 +1396,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       // WETH ==(UniV3)==> USDC
@@ -1408,7 +1408,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
     },
@@ -1422,7 +1422,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1432,7 +1432,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1443,7 +1443,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1465,7 +1465,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDC: [
@@ -1475,7 +1475,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       // WETH ==(UniV3)==> USDC
@@ -1487,7 +1487,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
     },
@@ -1503,7 +1503,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1513,7 +1513,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1524,7 +1524,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1546,7 +1546,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDC: [
@@ -1556,7 +1556,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       // WETH ==(UniV3)==> USDC
@@ -1568,7 +1568,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
     },
@@ -1582,7 +1582,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1592,7 +1592,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1603,7 +1603,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1625,7 +1625,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDC: [
@@ -1635,7 +1635,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       // WETH ==(UniV3)==> USDC
@@ -1647,7 +1647,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
     },
@@ -1661,7 +1661,7 @@ export const AVAILABLE_VAULTS: {
           3,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1671,7 +1671,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1682,7 +1682,7 @@ export const AVAILABLE_VAULTS: {
           3,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1825,7 +1825,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -1836,7 +1836,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -1847,7 +1847,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -1859,7 +1859,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],
@@ -1947,7 +1947,7 @@ export const AVAILABLE_VAULTS: {
           2,
           0,
           0,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       crvWSBTC: [
@@ -1957,7 +1957,7 @@ export const AVAILABLE_VAULTS: {
           2,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // crvWSBTC ==(Curve)==> WBTC
@@ -1968,7 +1968,7 @@ export const AVAILABLE_VAULTS: {
           2,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.CURVE_sBTC2_POOL, PoolType.CurveBasePool, 2, 0, 0, Action.Remove),
       ],
@@ -1980,7 +1980,7 @@ export const AVAILABLE_VAULTS: {
           2,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.CURVE_sBTC2_POOL, PoolType.CurveBasePool, 2, 1, 1, Action.Remove),
       ],
@@ -1992,7 +1992,7 @@ export const AVAILABLE_VAULTS: {
           2,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.CURVE_sBTC2_POOL, PoolType.CurveBasePool, 2, 0, 0, Action.Remove),
         encodePoolHintV2(ADDRESS.CURVE_TRICRYPTO_POOL, PoolType.CurveTriCryptoPool, 3, 1, 2, Action.Swap),
@@ -2005,7 +2005,7 @@ export const AVAILABLE_VAULTS: {
           2,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.CURVE_sBTC2_POOL, PoolType.CurveBasePool, 2, 0, 0, Action.Remove),
         encodePoolHintV2(ADDRESS.CURVE_TRICRYPTO_POOL, PoolType.CurveTriCryptoPool, 3, 1, 2, Action.Swap),
@@ -2414,7 +2414,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDC: [
@@ -2424,7 +2424,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
       USDT: [
@@ -2434,7 +2434,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Add
+          Action.Add,
         ),
       ],
       // WETH ==(UniV3)==> USDC
@@ -2446,7 +2446,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Add
+          Action.Add,
         ),
       ],
     },
@@ -2462,7 +2462,7 @@ export const AVAILABLE_VAULTS: {
           4,
           1,
           1,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDC: [
@@ -2472,7 +2472,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       USDT: [
@@ -2482,7 +2482,7 @@ export const AVAILABLE_VAULTS: {
           4,
           3,
           3,
-          Action.Remove
+          Action.Remove,
         ),
       ],
       // USDC ==(UniV3)==> WETH
@@ -2493,7 +2493,7 @@ export const AVAILABLE_VAULTS: {
           4,
           2,
           2,
-          Action.Remove
+          Action.Remove,
         ),
         encodePoolHintV2(ADDRESS.USDC_WETH_UNIV3, PoolType.UniswapV3, 2, 0, 1, Action.Swap),
       ],

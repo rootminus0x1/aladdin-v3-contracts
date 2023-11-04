@@ -40,7 +40,7 @@ async function main(round: string) {
 
   // fetch price
   const response = await axios.get<ICoinGeckoResponse>(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${Object.values(symbol2ids).join("%2C")}&vs_currencies=usd`
+    `https://api.coingecko.com/api/v3/simple/price?ids=${Object.values(symbol2ids).join("%2C")}&vs_currencies=usd`,
   );
   const prices: { [symbol: string]: number } = {};
   for (const [symbol, id] of Object.entries(symbol2ids)) {
@@ -62,11 +62,11 @@ async function main(round: string) {
   const claimParams = loadParams(round);
   for (const item of claimParams) {
     const symbol: string = Object.entries(TOKENS).filter(
-      ([, { address }]) => address.toLowerCase() === item.token.toLowerCase()
+      ([, { address }]) => address.toLowerCase() === item.token.toLowerCase(),
     )[0][0];
     const tokenAmountStr = ethers.formatUnits(item.amount, TOKENS[symbol].decimals);
     console.log(
-      `+ token[${symbol}]: amount[${tokenAmountStr}] USD[~${(parseFloat(tokenAmountStr) * prices[symbol]).toFixed(2)}]`
+      `+ token[${symbol}]: amount[${tokenAmountStr}] USD[~${(parseFloat(tokenAmountStr) * prices[symbol]).toFixed(2)}]`,
     );
 
     const amount = toBigInt(item.amount);
@@ -76,17 +76,17 @@ async function main(round: string) {
       console.log(
         `  + treasury[${ethers.formatEther(platformFee)} SDT]`,
         `delegation[${ethers.formatEther(boostFee)} SDT]`,
-        `staker[${ethers.formatEther(amount - platformFee - boostFee)} SDT]`
+        `staker[${ethers.formatEther(amount - platformFee - boostFee)} SDT]`,
       );
     } else {
       const amountSDT = ethers.parseEther(
-        ((parseFloat(ethers.formatUnits(boostFee, TOKENS[symbol].decimals)) * prices[symbol]) / priceSDT).toFixed(18)
+        ((parseFloat(ethers.formatUnits(boostFee, TOKENS[symbol].decimals)) * prices[symbol]) / priceSDT).toFixed(18),
       );
       if (symbol === "sdCRV") {
         console.log(
           `  + treasury[${ethers.formatEther(platformFee)} ${symbol}]`,
           `delegation[~${ethers.formatEther(amountSDT)} SDT]`,
-          `staker[${ethers.formatEther(amount - platformFee - boostFee)} sdCRV]`
+          `staker[${ethers.formatEther(amount - platformFee - boostFee)} sdCRV]`,
         );
       } else {
         const amountCRV = ethers.parseEther(
@@ -94,12 +94,12 @@ async function main(round: string) {
             (parseFloat(ethers.formatUnits(amount - platformFee - boostFee, TOKENS[symbol].decimals)) *
               prices[symbol]) /
             priceCRV
-          ).toFixed(18)
+          ).toFixed(18),
         );
         console.log(
           `  + treasury[${ethers.formatEther(platformFee)} ${symbol}]`,
           `delegation[~${ethers.formatEther(amountSDT)} SDT]`,
-          `staker[~${ethers.formatEther(amountCRV)} CRV]`
+          `staker[~${ethers.formatEther(amountCRV)} CRV]`,
         );
       }
     }
@@ -145,28 +145,28 @@ async function main(round: string) {
         "treasury SDT:",
         ethers.formatEther(treasurySDT),
         "delegation SDT:",
-        ethers.formatEther(delegateSDT)
+        ethers.formatEther(delegateSDT),
       );
     }
 
     for (const item of claimParams) {
       if (item.token.toLowerCase() !== TOKENS.SDT.address.toLowerCase()) {
         const symbol: string = Object.entries(TOKENS).filter(
-          ([, { address }]) => address.toLowerCase() === item.token.toLowerCase()
+          ([, { address }]) => address.toLowerCase() === item.token.toLowerCase(),
         )[0][0];
         const amount = toBigInt(item.amount);
         const platformFee = (amount * fee.platformPercentage) / toBigInt(1e7);
         const boostFee = (amount * fee.boostPercentage) / toBigInt(1e7);
 
         const amountSDT = ethers.parseEther(
-          ((parseFloat(ethers.formatUnits(boostFee, TOKENS[symbol].decimals)) * prices[symbol]) / priceSDT).toFixed(18)
+          ((parseFloat(ethers.formatUnits(boostFee, TOKENS[symbol].decimals)) * prices[symbol]) / priceSDT).toFixed(18),
         );
         const amountCRV = ethers.parseEther(
           (
             (parseFloat(ethers.formatUnits(amount - platformFee - boostFee, TOKENS[symbol].decimals)) *
               prices[symbol]) /
             priceCRV
-          ).toFixed(18)
+          ).toFixed(18),
         );
 
         console.log(`Burn token[${symbol}] address[${item.token}] to SDT`);
@@ -177,7 +177,7 @@ async function main(round: string) {
           ZAP_ROUTES[symbol].SDT,
           minSDT,
           ZAP_ROUTES[symbol].CRV,
-          minCRV
+          minCRV,
         );
         const tx = await burner.burn(item.token, ZAP_ROUTES[symbol].SDT, minSDT, ZAP_ROUTES[symbol].CRV, minCRV, {
           gasLimit: (gas * 12n) / 10n,
@@ -229,7 +229,7 @@ async function main(round: string) {
           `treasury ${symbol}:`,
           ethers.formatUnits(treasuryAmount, TOKENS[symbol].decimals),
           "delegation SDT:",
-          ethers.formatEther(delegationAmount)
+          ethers.formatEther(delegationAmount),
         );
       }
     }

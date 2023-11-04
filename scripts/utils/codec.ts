@@ -62,7 +62,7 @@ export function encodePoolHintV2(
   tokens: number,
   indexIn: number,
   indexOut: number,
-  action: number
+  action: number,
 ) {
   let encoding = toBigInt(poolAddress);
   encoding |= toBigInt(poolType as number) << 160n;
@@ -85,7 +85,7 @@ export function encodePoolHintV3(
     twamm?: boolean;
     use_eth?: boolean;
     use_underlying?: boolean;
-  }
+  },
 ) {
   let encoding = toBigInt(poolAddress);
   switch (poolType) {

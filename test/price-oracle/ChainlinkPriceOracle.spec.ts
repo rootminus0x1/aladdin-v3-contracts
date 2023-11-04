@@ -61,7 +61,7 @@ describe("ChainlinkPriceOracle.spec", async () => {
     beforeEach(async () => {
       await oracle.setFeeds(
         Object.keys(FEEDS).map((symbol) => TOKENS[symbol].address),
-        Object.keys(FEEDS).map((symbol) => FEEDS[symbol])
+        Object.keys(FEEDS).map((symbol) => FEEDS[symbol]),
       );
     });
 
@@ -71,7 +71,7 @@ describe("ChainlinkPriceOracle.spec", async () => {
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracle.price(TOKENS[symbol].address))},`,
           "gas usage:",
-          gas.toString()
+          gas.toString(),
         );
       }
     });

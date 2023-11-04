@@ -23,7 +23,7 @@ export interface ConcentratorFrxETHDeployment {
 
 export async function deploy(
   _deployer: HardhatEthersSigner,
-  _overrides?: Overrides
+  _overrides?: Overrides,
 ): Promise<ConcentratorFrxETHDeployment> {
   const deployment = selectDeployments(network.name, "Concentrator.frxETH");
 
@@ -33,7 +33,7 @@ export async function deploy(
 export async function initialize(
   deployer: HardhatEthersSigner,
   deployment: ConcentratorFrxETHDeployment,
-  overrides?: Overrides
+  overrides?: Overrides,
 ): Promise<void> {
   const vault = await ethers.getContractAt("ConcentratorAladdinETHVault", deployment.ConcentratorVault.proxy, deployer);
   const pools = DEPLOYED_VAULTS.afrxETH;
@@ -57,7 +57,7 @@ export async function initialize(
         `Initialize ${strategyName} for pool[${pool.name}]`,
         "initialize",
         [await vault.getAddress(), underlying, vaultConfig.rewarder!, vaultConfig.rewards],
-        overrides
+        overrides,
       );
     } else if (strategyName === "ManualCompoundingCurveGaugeStrategy") {
       await contractCall(
@@ -65,7 +65,7 @@ export async function initialize(
         `Initialize ${strategyName} for pool[${pool.name}]`,
         "initialize",
         [await vault.getAddress(), underlying, vaultConfig.gauge!, vaultConfig.rewards],
-        overrides
+        overrides,
       );
     } else {
       throw new Error(`strategy ${strategyName} not supported`);
@@ -76,7 +76,7 @@ export async function initialize(
       `Add pool[${pool.name}] with pid[${pid}]`,
       "addPool",
       [underlying, await strategy.getAddress(), pool.fees.withdraw, pool.fees.platform, pool.fees.harvest],
-      overrides
+      overrides,
     );
   }
 }

@@ -146,7 +146,7 @@ async function fetchVotes(proposalId: string, users: number): Promise<ISnapshotV
         headers: {
           "content-type": "application/json",
         },
-      }
+      },
     );
     votes.push(...response.data.data.votes);
   }
@@ -160,7 +160,7 @@ function compute(
   minProfitUSD: number,
   proposal: ISnapshotProposal,
   votium: IVotiumBribe,
-  votes: ISnapshotVotes[]
+  votes: ISnapshotVotes[],
 ): Array<number> {
   const scores: number[] = new Array(proposal.choices.length);
   const bribes: number[] = new Array(proposal.choices.length);
@@ -226,8 +226,8 @@ function compute(
         [
           ["Amount", ...symbols.map((s) => computeAmount(s))],
           ["Dollar", ...symbols.map((s) => tokenAmounts[s].dollar.toFixed(1))],
-        ]
-      ).render()
+        ],
+      ).render(),
     );
   };
 
@@ -247,7 +247,7 @@ function compute(
           `  + choice[${proposal.choices[index]}]`,
           `percentage[${((value * 100) / sum).toFixed(4)}%]`,
           `votes[${score.toFixed(4)}]`,
-          `profitUSD[${profit.toFixed(2)}]`
+          `profitUSD[${profit.toFixed(2)}]`,
         );
         currentProfit += (score * bribes[index]) / proposal.scores[index];
 
@@ -348,7 +348,7 @@ function compute(
           `  + choice[${proposal.choices[i]}]`,
           `percentage[${percentage.toFixed(4)}%]`,
           `votes[${voted.toFixed(4)}]`,
-          `profitUSD[${profit.toFixed(2)}]`
+          `profitUSD[${profit.toFixed(2)}]`,
         );
         if (x[i] > 0 && profit < minProfitUSD) {
           bribes[i] = 0;
@@ -376,7 +376,7 @@ function compute(
       `${accepted ? "✅ Accepted" : "❌ Abandoned"},`,
       `sumVotes[${sumVotes.toFixed(4)}]`,
       `actualVotes[${holderVotes.toFixed(4)}]`,
-      `sumPercentage[${sumPercentage.toFixed(4)}]`
+      `sumPercentage[${sumPercentage.toFixed(4)}]`,
     );
     if (accepted) {
       showTable();
@@ -396,7 +396,7 @@ async function main(
     private: string;
     mode: string;
     autoInterval: number;
-  }
+  },
 ) {
   const proposal_file = `${directory}/${round}.proposal.json`;
   const votes_file = `${directory}/${round}.votes.json`;
@@ -420,7 +420,7 @@ async function main(
           headers: {
             "content-type": "application/json; charset=utf-8",
           },
-        }
+        },
       );
       bribes = response.data.epoch;
       console.log("save bribes data to:", bribes_file);
@@ -448,7 +448,7 @@ async function main(
           headers: {
             "content-type": "application/json",
           },
-        }
+        },
       );
       proposal = response.data.data.proposal;
       console.log("save proposal data to:", proposal_file);
@@ -493,7 +493,7 @@ async function main(
         assert.strictEqual(scores[i], 0, `votes mismatch for choice[${proposal.choices[i]}]`);
       } else {
         console.log(
-          `  + choice[${proposal.choices[i]}] remote_votes[${proposal.scores[i]}] computed_votes[${scores[i]}]`
+          `  + choice[${proposal.choices[i]}] remote_votes[${proposal.scores[i]}] computed_votes[${scores[i]}]`,
         );
         const absError = Math.abs(proposal.scores[i] - scores[i]);
         if (absError > 1e-5) {
@@ -571,7 +571,7 @@ main(
         mode: options.mode || "manual",
         autoInterval: parseInt(options.autoInterval || "60"),
       }
-    : undefined
+    : undefined,
 ).catch((error) => {
   console.error(error);
   process.exitCode = 1;

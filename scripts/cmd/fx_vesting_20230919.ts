@@ -162,7 +162,7 @@ async function main() {
     recipients,
     amounts,
     startTimes,
-    endTimes
+    endTimes,
   );
   console.log("estimate gas:", estimateGas.toString());
   const tx = await helper.call(depolyment.get("Vesting"), recipients, amounts, startTimes, endTimes, {

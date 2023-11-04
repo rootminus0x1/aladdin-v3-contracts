@@ -110,7 +110,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       deployer,
       "GaugeController",
       implementationDeployment.GaugeController,
-      overrides
+      overrides,
     );
     deployment.set("GaugeController", address);
   } else {
@@ -124,7 +124,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
         deployer,
         `FeeDistributor ${token}`,
         implementationDeployment.FeeDistributor,
-        overrides
+        overrides,
       );
       deployment.set(selector, address);
     } else {
@@ -162,7 +162,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "PlatformFeeSpliter",
       "PlatformFeeSpliter",
       [multisig.Fx, multisig.Fx, multisig.Fx],
-      overrides
+      overrides,
     );
     deployment.set("PlatformFeeSpliter", address);
   } else {
@@ -175,7 +175,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "PlatformFeeBurner",
       "PlatformFeeBurner",
       [converter.GeneralTokenConverter, deployment.get("FeeDistributor.wstETH")],
-      overrides
+      overrides,
     );
     deployment.set("Burner.PlatformFeeBurner", address);
   } else {
@@ -188,7 +188,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
 export async function initialize(
   deployer: HardhatEthersSigner,
   deployment: FxGovernanceDeployment,
-  overrides?: Overrides
+  overrides?: Overrides,
 ) {
   const multisig = Multisig.deploy(network.name);
 
@@ -256,7 +256,7 @@ export async function initialize(
         "FXN Token",
         "FXN",
       ],
-      overrides
+      overrides,
     );
   }
   // set minter
@@ -266,7 +266,7 @@ export async function initialize(
       "initialize minter for FXN",
       "set_minter",
       [deployment.TokenMinter],
-      overrides
+      overrides,
     );
   }
 
@@ -277,7 +277,7 @@ export async function initialize(
       "initialize veFXN",
       "initialize",
       [deployer.address, deployment.FXN, "Voting Escrow FXN", "veFXN", "1.0.0"],
-      overrides
+      overrides,
     );
   }
   // commit smart_wallet_checker
@@ -290,7 +290,7 @@ export async function initialize(
       "commit smart_wallet_checker",
       "commit_smart_wallet_checker",
       [deployment.SmartWalletWhitelist],
-      overrides
+      overrides,
     );
   }
   // apply smart_wallet_checker
@@ -303,7 +303,7 @@ export async function initialize(
       "apply smart_wallet_checker",
       "apply_smart_wallet_checker",
       [],
-      overrides
+      overrides,
     );
   }
 
@@ -314,7 +314,7 @@ export async function initialize(
       "initialize TokenMinter",
       "initialize",
       [deployment.FXN, deployment.GaugeController],
-      overrides
+      overrides,
     );
   }
 
@@ -325,7 +325,7 @@ export async function initialize(
       "initialize GaugeController",
       "initialize",
       [multisig.Fx, deployment.FXN, deployment.veFXN],
-      overrides
+      overrides,
     );
   }
 
@@ -336,7 +336,7 @@ export async function initialize(
       "initialize FeeDistributor",
       "initialize",
       [deployment.veFXN, 1695859200n, TOKENS.wstETH.address, deployer.address, multisig.Fx],
-      overrides
+      overrides,
     );
   }
   if (!(await distributor.can_checkpoint_token())) {
@@ -345,7 +345,7 @@ export async function initialize(
       "FeeDistributor allow checkpoint ",
       "toggle_allow_checkpoint_token",
       [],
-      overrides
+      overrides,
     );
   }
 
@@ -357,7 +357,7 @@ export async function initialize(
         `SmartWalletWhitelist approve ${address}`,
         "approveWallet",
         [address],
-        overrides
+        overrides,
       );
     }
   }
@@ -376,7 +376,7 @@ export async function initialize(
         `Vesting add whitelist [${whitelists.join(",")}]`,
         "updateWhitelist",
         [whitelists, true],
-        overrides
+        overrides,
       );
     }
   }
@@ -388,7 +388,7 @@ export async function initialize(
       "PlatformFeeBurner add keeper",
       "updateKeeperStatus",
       ["0x11E91BB6d1334585AA37D8F4fde3932C7960B938", true],
-      overrides
+      overrides,
     );
   }
 }

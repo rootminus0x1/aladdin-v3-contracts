@@ -51,7 +51,7 @@ async function main() {
     const tx = await sale.updateSaleTime(
       config.time.WhitelistStartTime,
       config.time.PublicStartTime,
-      config.time.SaleDuration
+      config.time.SaleDuration,
     );
     console.log("Update Sale Time, hash:", tx.hash);
     const receipt = await tx.wait();

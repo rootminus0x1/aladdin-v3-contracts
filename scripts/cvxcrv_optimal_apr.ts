@@ -36,7 +36,7 @@ function as_float(x: BigInt): number {
 
 async function doMulticall(
   calls: { target: string; interface: Interface; method: string; param: any[] }[],
-  block: number
+  block: number,
 ): Promise<Result[]> {
   const multicall = (await ethers.getContractAt("IMulticall2", MULLTICALL2)) as IMulticall2;
   const [, results] = await multicall.aggregate.staticCall(
@@ -46,7 +46,7 @@ async function doMulticall(
         callData: x.interface.encodeFunctionData(x.method, x.param),
       };
     }),
-    { blockTag: block }
+    { blockTag: block },
   );
   return results.map((r: BytesLike, index: number) => {
     const call = calls[index];
@@ -62,7 +62,7 @@ async function computeCVX(amount: bigint, contract: IConvexToken, block: number)
       { target: contractAddress, interface: contract.interface, method: "reductionPerCliff", param: [] },
       { target: contractAddress, interface: contract.interface, method: "totalCliffs", param: [] },
     ],
-    block
+    block,
   );
 
   const supply: bigint = results[0][0];
@@ -100,7 +100,7 @@ async function computeRewardsInDay(contract: IConvexBasicRewards, block: number,
       },
       { target: contractAddress, interface: contract.interface, method: "totalSupply", param: [] },
     ],
-    block
+    block,
   );
 
   const periodFinish = results[0][0];
@@ -118,15 +118,15 @@ async function computeRewardsInDay(contract: IConvexBasicRewards, block: number,
 async function main(holder: string) {
   const crvRewards = (await ethers.getContractAt(
     "IConvexBasicRewards",
-    "0x3Fe65692bfCD0e6CF84cB1E7d24108E434A7587e"
+    "0x3Fe65692bfCD0e6CF84cB1E7d24108E434A7587e",
   )) as IConvexBasicRewards;
   const threeCRVRewards = (await ethers.getContractAt(
     "IConvexBasicRewards",
-    "0x7091dbb7fcbA54569eF1387Ac89Eb2a5C9F6d2EA"
+    "0x7091dbb7fcbA54569eF1387Ac89Eb2a5C9F6d2EA",
   )) as IConvexBasicRewards;
   const extraCVXRewards = (await ethers.getContractAt(
     "IConvexBasicRewards",
-    "0x449f2fd99174e1785CF2A1c79E665Fec3dD1DdC6"
+    "0x449f2fd99174e1785CF2A1c79E665Fec3dD1DdC6",
   )) as IConvexBasicRewards;
   const cvx = (await ethers.getContractAt("IConvexToken", TOKENS.CVX.address)) as IConvexToken;
   const stakedCvxCrv = (await ethers.getContractAt("ICvxCrvStakingWrapper", STAKED_CVXCRV)) as ICvxCrvStakingWrapper;
@@ -148,12 +148,12 @@ async function main(holder: string) {
     "CVX rewards:",
     ethers.formatEther(amountCVX),
     "extra CVX rewards:",
-    ethers.formatEther(amountExtraCVX)
+    ethers.formatEther(amountExtraCVX),
   );
 
   // fetch price
   const response = await axios.get<ICoinGeckoResponse>(
-    "https://api.coingecko.com/api/v3/simple/price?ids=convex-crv%2Ccurve-dao-token%2Cconvex-finance%2Clp-3pool-curve&vs_currencies=usd"
+    "https://api.coingecko.com/api/v3/simple/price?ids=convex-crv%2Ccurve-dao-token%2Cconvex-finance%2Clp-3pool-curve&vs_currencies=usd",
   );
   const priceCRV = response.data["curve-dao-token"].usd;
   const price3CRV = response.data["lp-3pool-curve"].usd;
@@ -201,7 +201,7 @@ async function main(holder: string) {
         param: [holder, 1],
       },
     ],
-    block.number
+    block.number,
   );
   const supply0: bigint = results[0][0];
   const supply1: bigint = results[1][0];
@@ -228,7 +228,7 @@ async function main(holder: string) {
     ` + dailyRewardUSD: ${currentDailyRewardUSD.toFixed(4)},`,
     `daily APR: ${((currentDailyRewardUSD / balanceUSD) * 100).toFixed(4)}%,`,
     `yearly APR: ${((currentDailyRewardUSD / balanceUSD) * 100 * 365).toFixed(4)}%,`,
-    `yearly APY: ${((Math.pow(currentDailyRewardUSD / balanceUSD + 1, 365) - 1) * 100).toFixed(4)}%`
+    `yearly APY: ${((Math.pow(currentDailyRewardUSD / balanceUSD + 1, 365) - 1) * 100).toFixed(4)}%`,
   );
 
   // do adjust computation
@@ -254,19 +254,19 @@ async function main(holder: string) {
     " + holderBalanceGroup0:",
     ethers.formatEther(adjusted_bal0_me),
     "ratio:",
-    ratio(adjusted_bal0_me, adjusted_supply0)
+    ratio(adjusted_bal0_me, adjusted_supply0),
   );
   console.log(
     " + holderBalanceGroup1:",
     ethers.formatEther(adjusted_bal1_me),
     "ratio:",
-    ratio(adjusted_bal1_me, adjusted_supply1)
+    ratio(adjusted_bal1_me, adjusted_supply1),
   );
   console.log(
     ` + dailyRewardUSD: ${adjustedCurrentDailyRewardUSD.toFixed(4)}`,
     `daily APR: ${((adjustedCurrentDailyRewardUSD / balanceUSD) * 100).toFixed(4)}%,`,
     `yearly APR: ${((adjustedCurrentDailyRewardUSD / balanceUSD) * 100 * 365).toFixed(4)}%,`,
-    `yearly APY: ${((Math.pow(adjustedCurrentDailyRewardUSD / balanceUSD + 1, 365) - 1) * 100).toFixed(4)}%`
+    `yearly APY: ${((Math.pow(adjustedCurrentDailyRewardUSD / balanceUSD + 1, 365) - 1) * 100).toFixed(4)}%`,
   );
 
   const getApy = (weight: number) => {
@@ -295,7 +295,7 @@ async function main(holder: string) {
   console.log(
     plot(aprList, {
       height: 50,
-    })
+    }),
   );
 }
 

@@ -96,11 +96,11 @@ async function addLiquidity() {
         maxAmountsIn: [constants.MaxUint256, constants.MaxUint256],
         userData: defaultAbiCoder().encode(
           ["uint8", "uint256[]"],
-          [0, [ethers.parseEther("37800"), ethers.parseEther("771.4285714")]]
+          [0, [ethers.parseEther("37800"), ethers.parseEther("771.4285714")]],
         ),
         fromInternalBalance: false,
       },
-    ])
+    ]),
   );
 }
 
@@ -124,7 +124,7 @@ async function main() {
     gaugeRewardDistributor = await ethers.getContractAt(
       "GaugeRewardDistributor",
       config.GaugeRewardDistributor,
-      deployer
+      deployer,
     );
     console.log("Found GaugeRewardDistributor at:", gaugeRewardDistributor.address);
   } else {
@@ -138,7 +138,7 @@ async function main() {
     platformFeeDistributor = await ethers.getContractAt(
       "PlatformFeeDistributor",
       config.PlatformFeeDistributor,
-      deployer
+      deployer,
     );
     console.log("Found PlatformFeeDistributor at:", platformFeeDistributor.address);
   } else {
@@ -147,7 +147,7 @@ async function main() {
       gaugeRewardDistributor.address,
       DEPLOYED_CONTRACTS.Concentrator.Treasury,
       DEPLOYED_CONTRACTS.Concentrator.Treasury, // should change after launch
-      []
+      [],
     );
     await platformFeeDistributor.deployed();
     console.log("Deploy PlatformFeeDistributor at:", platformFeeDistributor.address);
@@ -163,7 +163,7 @@ async function main() {
     const impl = await ethers.getContractAt(
       "ConcentratorIFOVault",
       "0x99373AE646ed89b9A466c4256b09b10dbCC07B40",
-      deployer
+      deployer,
     );
 
     const data = impl.interface.encodeFunctionData("initialize", [
@@ -308,7 +308,7 @@ async function main() {
       ctr.address,
       gauge.address,
       config.BalancerPoolId,
-      config.TokenZapLogic
+      config.TokenZapLogic,
     );
     await gateway.deployed();
     config.BalancerLPGaugeGateway = gateway.address;
@@ -357,7 +357,7 @@ async function main() {
     veCTRFeeDistributor = (await ethers.getContractAt(
       "veCTRFeeDistributor",
       config.veCTRFeeDistributor,
-      deployer
+      deployer,
     )) as VeCTRFeeDistributor;
     console.log("Found veFeeDistributor at:", veCTRFeeDistributor.address);
   } else {
@@ -368,7 +368,7 @@ async function main() {
       0,
       ctr.address,
       deployer.address,
-      DEPLOYED_CONTRACTS.Concentrator.Treasury
+      DEPLOYED_CONTRACTS.Concentrator.Treasury,
     )) as VeCTRFeeDistributor;
     await veCTRFeeDistributor.deployed();
     console.log("Deploy ConcentratorFeeDistributor at:", veCTRFeeDistributor.address);

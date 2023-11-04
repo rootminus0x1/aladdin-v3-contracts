@@ -29,7 +29,7 @@ describe("PlatformFeeSpliter.spec", async () => {
   context("#updateTreasury", async () => {
     it("should revert, when call updateTreasury and caller is not owner", async () => {
       await expect(spliter.connect(alice).updateTreasury(ZeroAddress)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
@@ -47,7 +47,7 @@ describe("PlatformFeeSpliter.spec", async () => {
   context("#updateEcosystem", async () => {
     it("should revert, when call updateEcosystem and caller is not owner", async () => {
       await expect(spliter.connect(alice).updateEcosystem(ZeroAddress)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
@@ -65,7 +65,7 @@ describe("PlatformFeeSpliter.spec", async () => {
   context("#updateStaker", async () => {
     it("should revert, when call updateStaker and caller is not owner", async () => {
       await expect(spliter.connect(alice).updateStaker(ZeroAddress)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
@@ -83,35 +83,35 @@ describe("PlatformFeeSpliter.spec", async () => {
   context("#addRewardToken", async () => {
     it("should revert, when call addRewardToken and caller is not owner", async () => {
       await expect(spliter.connect(alice).addRewardToken(ZeroAddress, ZeroAddress, 0, 0, 0)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
     it("should revert, when fee too large", async () => {
       await expect(spliter.addRewardToken(ZeroAddress, ZeroAddress, 1e9 + 1, 0, 0)).to.revertedWith(
-        "staker ratio too large"
+        "staker ratio too large",
       );
       await expect(spliter.addRewardToken(ZeroAddress, ZeroAddress, 0, 1e9 + 1, 0)).to.revertedWith(
-        "treasury ratio too large"
+        "treasury ratio too large",
       );
       await expect(spliter.addRewardToken(ZeroAddress, ZeroAddress, 0, 0, 1e9 + 1)).to.revertedWith(
-        "locker ratio too large"
+        "locker ratio too large",
       );
       await expect(spliter.addRewardToken(ZeroAddress, ZeroAddress, 5e8 + 1, 5e8, 0)).to.revertedWith(
-        "ecosystem ratio too small"
+        "ecosystem ratio too small",
       );
     });
 
     it("should revert, when zero burner", async () => {
       await expect(spliter.addRewardToken(ZeroAddress, ZeroAddress, 0, 0, 0)).to.revertedWith(
-        "burner address should not be zero"
+        "burner address should not be zero",
       );
     });
 
     it("should revert, when duplicated token", async () => {
       await spliter.addRewardToken(ZeroAddress, locker.address, 0, 0, 0);
       await expect(spliter.addRewardToken(ZeroAddress, locker.address, 0, 0, 0)).to.revertedWith(
-        "duplicated reward token"
+        "duplicated reward token",
       );
     });
 
@@ -183,7 +183,7 @@ describe("PlatformFeeSpliter.spec", async () => {
 
     it("should revert, when call updateRewardTokenRatio and caller is not owner", async () => {
       await expect(spliter.connect(alice).updateRewardTokenRatio(0, 0, 0, 0)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
@@ -226,19 +226,19 @@ describe("PlatformFeeSpliter.spec", async () => {
 
     it("should revert, when call updateRewardTokenBurner and caller is not owner", async () => {
       await expect(spliter.connect(alice).updateRewardTokenBurner(alice.address, ZeroAddress)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
     it("should revert, when new burner is zero", async () => {
       await expect(spliter.updateRewardTokenBurner(alice.address, ZeroAddress)).to.revertedWith(
-        "new burner address should not be zero"
+        "new burner address should not be zero",
       );
     });
 
     it("should revert, when old burner is zero", async () => {
       await expect(spliter.updateRewardTokenBurner(ZeroAddress, locker.address)).to.revertedWith(
-        "old burner address should not be zero"
+        "old burner address should not be zero",
       );
     });
 

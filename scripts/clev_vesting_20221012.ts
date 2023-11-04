@@ -217,7 +217,7 @@ async function main() {
   const helper: MultipleVestHelper = (await ethers.getContractAt(
     "MultipleVestHelper",
     "0x572DeCa882f4C9ABCBDc6f020601A1b789D11983",
-    deployer
+    deployer,
   )) as any as MultipleVestHelper;
 
   const recipients = [];
@@ -238,7 +238,7 @@ async function main() {
     recipients,
     amounts,
     startTimes,
-    endTimes
+    endTimes,
   );
   console.log("estimate gas:", estimateGas.toString());
   const tx = await helper.call(
@@ -247,7 +247,7 @@ async function main() {
     amounts,
     startTimes,
     endTimes,
-    { gasLimit: (estimateGas * 11n) / 10n }
+    { gasLimit: (estimateGas * 11n) / 10n },
   );
   console.log("run multiple vests, hash:", tx.hash);
   const receipt = await tx.wait();

@@ -41,8 +41,8 @@ describe("FxVault.spec", async () => {
             await src.getAddress(),
             await dst.getAddress(),
             await wrapper.getAddress(),
-            ethers.parseEther(fxRatio) / 100n
-          )
+            ethers.parseEther(fxRatio) / 100n,
+          ),
         )
           .to.emit(vault, "UpdateWrapper")
           .withArgs(ZeroAddress, await wrapper.getAddress())
@@ -61,7 +61,7 @@ describe("FxVault.spec", async () => {
 
           it("should revert, when non-owner call", async () => {
             await expect(vault.connect(signer).updateWrapper(await newWrapper.getAddress())).to.revertedWith(
-              "Ownable: caller is not the owner"
+              "Ownable: caller is not the owner",
             );
           });
 
@@ -293,7 +293,7 @@ describe("FxVault.spec", async () => {
               deployer.address,
               expectedFxAmount,
               expectedLpAmount,
-              expectedInitialShare
+              expectedInitialShare,
             );
           const fxBalanceAfter = await src.balanceOf(signer.address);
           const lpBalanceAfter = await dst.balanceOf(signer.address);
@@ -349,7 +349,7 @@ describe("FxVault.spec", async () => {
       await wrapper.setSrcAmount(ethers.parseEther("100"));
       await src.mint(await wrapper.getAddress(), ethers.parseEther("100"));
       await expect(
-        vault.rebalance(ethers.parseEther("1"), ethers.parseEther("100"), ethers.parseEther("100") + 1n)
+        vault.rebalance(ethers.parseEther("1"), ethers.parseEther("100"), ethers.parseEther("100") + 1n),
       ).to.revertedWith("insufficient output");
     });
 
@@ -422,7 +422,7 @@ describe("FxVault.spec", async () => {
         await src.getAddress(),
         await dst.getAddress(),
         await wrapper.getAddress(),
-        ethers.parseEther("1")
+        ethers.parseEther("1"),
       );
 
       await src.approve(await vault.getAddress(), ethers.parseEther("100"));
@@ -445,7 +445,7 @@ describe("FxVault.spec", async () => {
       await wrapper.setDstAmount(ethers.parseEther("100"));
       await dst.mint(await wrapper.getAddress(), ethers.parseEther("100"));
       await expect(vault.rebalance(0, ethers.parseEther("100"), ethers.parseEther("100") + 1n)).to.revertedWith(
-        "insufficient output"
+        "insufficient output",
       );
     });
 

@@ -88,7 +88,7 @@ describe("NavsGraphs", async () => {
       oracleAddress,
       beta,
       baseTokenCap,
-      ZeroAddress // rate provider - used to convert between wrapped and unwrapped, 0 address means 1:1 ratio
+      ZeroAddress, // rate provider - used to convert between wrapped and unwrapped, 0 address means 1:1 ratio
     );
 
     await market.initialize(treasuryAddress, platform.address);
@@ -96,7 +96,7 @@ describe("NavsGraphs", async () => {
       ethers.parseEther("1.3"),
       ethers.parseEther("1.2"),
       ethers.parseEther("1.14"),
-      ethers.parseEther("1")
+      ethers.parseEther("1"),
     );
 
     await weth.deposit({ value: initialCollateral * 1000n });
@@ -156,7 +156,7 @@ describe("NavsGraphs", async () => {
           formatEther(fTokens),
           formatEther(navs._fNav),
           formatEther(xTokens),
-          formatEther(navs._xNav)
+          formatEther(navs._xNav),
         );
       }
     });
@@ -182,7 +182,7 @@ describe("NavsGraphs", async () => {
           formatEther(fTokens),
           formatEther(navs._fNav),
           formatEther(xTokens),
-          formatEther(navs._xNav)
+          formatEther(navs._xNav),
         );
       }
     });
@@ -213,7 +213,7 @@ describe("NavsGraphs", async () => {
           formatEther(price),
           formatEther(navs._fNav),
           formatEther(navs._xNav),
-          formatEther(cr)
+          formatEther(cr),
         );
       }
     });

@@ -163,7 +163,7 @@ describe("GeneralTokenConverter.spec", async () => {
         7,
         2,
         1,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -205,7 +205,7 @@ describe("GeneralTokenConverter.spec", async () => {
         4,
         3,
         0,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -222,7 +222,7 @@ describe("GeneralTokenConverter.spec", async () => {
         4,
         3,
         1,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -239,7 +239,7 @@ describe("GeneralTokenConverter.spec", async () => {
         4,
         3,
         2,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -256,7 +256,7 @@ describe("GeneralTokenConverter.spec", async () => {
         2,
         1,
         0,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -490,7 +490,7 @@ describe("GeneralTokenConverter.spec", async () => {
         0,
         2,
         Action.Swap,
-        { use_underlying: true }
+        { use_underlying: true },
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -507,7 +507,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         0,
         2,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -525,7 +525,7 @@ describe("GeneralTokenConverter.spec", async () => {
         0,
         0,
         Action.Add,
-        { use_underlying: true }
+        { use_underlying: true },
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -543,7 +543,7 @@ describe("GeneralTokenConverter.spec", async () => {
         1,
         1,
         Action.Add,
-        { use_underlying: true }
+        { use_underlying: true },
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -561,7 +561,7 @@ describe("GeneralTokenConverter.spec", async () => {
         2,
         2,
         Action.Add,
-        { use_underlying: true }
+        { use_underlying: true },
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -578,7 +578,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         0,
         0,
-        Action.Add
+        Action.Add,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -596,7 +596,7 @@ describe("GeneralTokenConverter.spec", async () => {
         0,
         0,
         Action.Remove,
-        { use_underlying: true }
+        { use_underlying: true },
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -614,7 +614,7 @@ describe("GeneralTokenConverter.spec", async () => {
         1,
         1,
         Action.Remove,
-        { use_underlying: true }
+        { use_underlying: true },
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -632,7 +632,7 @@ describe("GeneralTokenConverter.spec", async () => {
         2,
         2,
         Action.Remove,
-        { use_underlying: true }
+        { use_underlying: true },
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -649,7 +649,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         0,
         0,
-        Action.Remove
+        Action.Remove,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -877,7 +877,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         1,
         2,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 17968230,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -895,7 +895,7 @@ describe("GeneralTokenConverter.spec", async () => {
         1,
         2,
         Action.Swap,
-        { use_eth: true }
+        { use_eth: true },
       ),
       fork: 17968230,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -912,7 +912,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         2,
         1,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -929,7 +929,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         0,
         1,
-        Action.Swap
+        Action.Swap,
       ),
       fork: 18217460,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -1033,7 +1033,7 @@ describe("GeneralTokenConverter.spec", async () => {
         Action.Swap,
         {
           use_eth: true,
-        }
+        },
       ),
       fork: 18119650,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -1053,7 +1053,7 @@ describe("GeneralTokenConverter.spec", async () => {
         Action.Swap,
         {
           use_eth: true,
-        }
+        },
       ),
       fork: 18119650,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -1135,7 +1135,7 @@ describe("GeneralTokenConverter.spec", async () => {
         Action.Add,
         {
           use_eth: true,
-        }
+        },
       ),
       fork: 18119650,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -1155,7 +1155,7 @@ describe("GeneralTokenConverter.spec", async () => {
         Action.Add,
         {
           use_eth: true,
-        }
+        },
       ),
       fork: 18119650,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -1182,7 +1182,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         0,
         0,
-        Action.Remove
+        Action.Remove,
       ),
       fork: 18119650,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -1199,7 +1199,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         1,
         1,
-        Action.Remove
+        Action.Remove,
       ),
       fork: 18119650,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
@@ -1216,7 +1216,7 @@ describe("GeneralTokenConverter.spec", async () => {
         3,
         2,
         2,
-        Action.Remove
+        Action.Remove,
       ),
       fork: 18119650,
       deployer: "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",

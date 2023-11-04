@@ -28,7 +28,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "GeneralTokenConverter",
       "GeneralTokenConverter",
       [deployment.get("ConverterRegistry")],
-      overrides
+      overrides,
     );
     deployment.set("GeneralTokenConverter", address);
   } else {
@@ -41,7 +41,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "LidoConverter",
       "LidoConverter",
       [deployment.get("ConverterRegistry")],
-      overrides
+      overrides,
     );
     deployment.set("LidoConverter", address);
   } else {
@@ -67,7 +67,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
 export async function initialize(
   deployer: HardhatEthersSigner,
   deployment: ConverterDeployment,
-  overrides?: Overrides
+  overrides?: Overrides,
 ) {
   const registry = await ethers.getContractAt("ConverterRegistry", deployment.ConverterRegistry, deployer);
 
@@ -78,7 +78,7 @@ export async function initialize(
         `ConverterRegistry register poolType[${i}]: GeneralTokenConverter`,
         "register",
         [i, deployment.GeneralTokenConverter],
-        overrides
+        overrides,
       );
     }
   }
@@ -89,7 +89,7 @@ export async function initialize(
       "ConverterRegistry register poolType[10]: LidoConverter",
       "register",
       [10n, deployment.LidoConverter],
-      overrides
+      overrides,
     );
   }
 }

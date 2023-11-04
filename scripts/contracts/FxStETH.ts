@@ -71,7 +71,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "stETHTreasury implementation",
       "stETHTreasury",
       [ethers.parseEther("0.5")],
-      overrides
+      overrides,
     );
     deployment.set("stETHTreasury.implementation", address);
   } else {
@@ -86,7 +86,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
         `${name} Proxy`,
         "TransparentUpgradeableProxy",
         [deployment.get(`${name}.implementation`), admin.Fx, "0x"],
-        overrides
+        overrides,
       );
       deployment.set(`${name}.proxy`, address);
     } else {
@@ -101,7 +101,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "stETHGateway",
       "stETHGateway",
       [deployment.get("Market.proxy"), deployment.get("FractionalToken.proxy"), deployment.get("LeveragedToken.proxy")],
-      overrides
+      overrides,
     );
     deployment.set("stETHGateway", address);
   } else {
@@ -124,7 +124,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
         "ChainlinkTwapOracleV3 for " + symbol,
         "ChainlinkTwapOracleV3",
         [ChainlinkPriceFeed[symbol], 1, 10800, symbol],
-        overrides
+        overrides,
       );
       deployment.set("ChainlinkTwapOracle." + symbol, address);
     } else {
@@ -143,7 +143,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
         deployment.get("ChainlinkTwapOracle.ETH"),
         "0x21e27a5e5513d6e65c4f830167390997aa84843a",
       ],
-      overrides
+      overrides,
     );
     deployment.set("FxETHTwapOracle", address);
   } else {
@@ -162,7 +162,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
         deployment.get("FractionalToken.proxy"),
         deployment.get("LeveragedToken.proxy"),
       ],
-      overrides
+      overrides,
     );
     deployment.set("FxGateway", address);
   } else {
@@ -176,7 +176,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "ReservePool",
       "ReservePool",
       [deployment.get("Market.proxy"), deployment.get("FractionalToken.proxy")],
-      overrides
+      overrides,
     );
     deployment.set("ReservePool", address);
   } else {
@@ -190,7 +190,7 @@ export async function deploy(deployer: HardhatEthersSigner, overrides?: Override
       "RebalanceWithBonusToken",
       "RebalanceWithBonusToken",
       [deployment.get("RebalancePool.proxy"), governance.FXN],
-      overrides
+      overrides,
     );
     deployment.set("RebalanceWithBonusToken", address);
   } else {
@@ -213,7 +213,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
   const rebalancer = await ethers.getContractAt(
     "RebalanceWithBonusToken",
     deployment.RebalanceWithBonusToken,
-    deployer
+    deployer,
   );
 
   // upgrade proxy
@@ -226,7 +226,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
         "ProxyAdmin upgrade " + name,
         "upgrade",
         [proxy, impl],
-        overrides
+        overrides,
       );
     }
   }
@@ -238,7 +238,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "ReservePool updateBonusRatio for stETH",
       "updateBonusRatio",
       [TOKENS.stETH.address, ReservePoolBonusRatio],
-      overrides
+      overrides,
     );
   }
 
@@ -249,7 +249,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "stETHTreasury update price oracle",
       "updatePriceOracle",
       [deployment.FxETHTwapOracle],
-      overrides
+      overrides,
     );
   }
 
@@ -259,7 +259,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "stETHTreasury update platform",
       "updatePlatform",
       [governance.PlatformFeeSpliter],
-      overrides
+      overrides,
     );
   }
 
@@ -273,7 +273,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "Market update reserve pool",
       "updateReservePool",
       [deployment.ReservePool],
-      overrides
+      overrides,
     );
   }
 
@@ -285,7 +285,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
         "FxGateway approve " + target,
         "updateTargetStatus",
         [target, true],
-        overrides
+        overrides,
       );
     }
   }
@@ -297,7 +297,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "PlatformFeeSpliter set ReservePool as Treasury",
       "updateTreasury",
       [deployment.ReservePool],
-      overrides
+      overrides,
     );
   }
   if ((await spliter.staker()) !== "0x11E91BB6d1334585AA37D8F4fde3932C7960B938") {
@@ -306,7 +306,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "PlatformFeeSpliter set keeper as staker",
       "updateStaker",
       ["0x11E91BB6d1334585AA37D8F4fde3932C7960B938"],
-      overrides
+      overrides,
     );
   }
 
@@ -329,7 +329,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
         ethers.parseUnits("0.25", 9),
         ethers.parseUnits("0.75", 9),
       ],
-      overrides
+      overrides,
     );
   }
   if ((await spliter.burners(TOKENS.stETH.address)) !== governance.Burner.PlatformFeeBurner) {
@@ -338,7 +338,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "PlatformFeeSpliter set burner for stETH",
       "updateRewardTokenBurner",
       [TOKENS.stETH.address, governance.Burner.PlatformFeeBurner],
-      overrides
+      overrides,
     );
   }
 
@@ -350,7 +350,7 @@ export async function initialize(deployer: HardhatEthersSigner, deployment: FxSt
       "RebalanceWithBonusToken set bonus to 2 FXN",
       "updateBonus",
       [ethers.parseEther("2")],
-      overrides
+      overrides,
     );
   }
 }

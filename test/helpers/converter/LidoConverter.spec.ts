@@ -35,57 +35,57 @@ describe("LidoConverter.spec", async () => {
 
     it("should revert, when action is invalid", async () => {
       await expect(
-        converter.getTokenPair(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}))
+        converter.getTokenPair(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {})),
       ).to.revertedWith("unsupported action");
       await expect(
-        converter.getTokenPair(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Remove, {}))
+        converter.getTokenPair(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Remove, {})),
       ).to.revertedWith("unsupported action");
       await expect(
-        converter.getTokenPair(encodePoolHintV3(TOKENS.wstETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}))
+        converter.getTokenPair(encodePoolHintV3(TOKENS.wstETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {})),
       ).to.revertedWith("unsupported action");
 
       await expect(
-        converter.queryConvert(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0)
+        converter.queryConvert(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0),
       ).to.revertedWith("unsupported action");
       await expect(
-        converter.queryConvert(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Remove, {}), 0)
+        converter.queryConvert(encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Remove, {}), 0),
       ).to.revertedWith("unsupported action");
       await expect(
-        converter.queryConvert(encodePoolHintV3(TOKENS.wstETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0)
+        converter.queryConvert(encodePoolHintV3(TOKENS.wstETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0),
       ).to.revertedWith("unsupported action");
 
       await expect(
         converter.convert(
           encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}),
           0,
-          ZeroAddress
-        )
+          ZeroAddress,
+        ),
       ).to.revertedWith("unsupported action");
       await expect(
         converter.convert(
           encodePoolHintV3(TOKENS.stETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Remove, {}),
           0,
-          ZeroAddress
-        )
+          ZeroAddress,
+        ),
       ).to.revertedWith("unsupported action");
       await expect(
         converter.convert(
           encodePoolHintV3(TOKENS.wstETH.address, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}),
           0,
-          ZeroAddress
-        )
+          ZeroAddress,
+        ),
       ).to.revertedWith("unsupported action");
     });
 
     it("should revert, when pool is invalid", async () => {
       await expect(
-        converter.getTokenPair(encodePoolHintV3(ZeroAddress, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}))
+        converter.getTokenPair(encodePoolHintV3(ZeroAddress, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {})),
       ).to.revertedWith("unsupported pool");
       await expect(
-        converter.queryConvert(encodePoolHintV3(ZeroAddress, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0)
+        converter.queryConvert(encodePoolHintV3(ZeroAddress, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0),
       ).to.revertedWith("unsupported pool");
       await expect(
-        converter.convert(encodePoolHintV3(ZeroAddress, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0, ZeroAddress)
+        converter.convert(encodePoolHintV3(ZeroAddress, PoolTypeV3.Lido, 2, 0, 0, Action.Swap, {}), 0, ZeroAddress),
       ).to.revertedWith("unsupported pool");
     });
   });
@@ -97,7 +97,7 @@ describe("LidoConverter.spec", async () => {
 
     it("should revert when withdraw ETH and receiver is bad", async () => {
       await expect(registry.withdrawFund(converter.getAddress(), ZeroAddress, registry.getAddress())).to.revertedWith(
-        "withdraw ETH failed"
+        "withdraw ETH failed",
       );
     });
 

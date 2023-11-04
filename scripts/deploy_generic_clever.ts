@@ -277,12 +277,12 @@ async function deployCRV() {
   const furnaceBeacon = await ethers.getContractAt(
     "UpgradeableBeacon",
     config.UpgradeableBeacon.MetaFurnace.beacon,
-    deployer
+    deployer,
   );
   const cleverBeacon = await ethers.getContractAt(
     "UpgradeableBeacon",
     config.UpgradeableBeacon.MetaCLever.beacon,
-    deployer
+    deployer,
   );
 
   if (config.CRV.clevCRV !== "") {
@@ -362,7 +362,7 @@ async function deployCRV() {
       PLATFORM,
       PLATFORM_FEE_PERCENTAGE,
       HARVEST_BOUNTY_PERCENTAGE,
-      REPAY_FEE_PERCENTAGE
+      REPAY_FEE_PERCENTAGE,
     );
     console.log("Setup fees in clever_aCRV, hash:", tx.hash);
     const receipt = await tx.wait();
@@ -404,43 +404,43 @@ async function deployFRAX() {
   const furnaceBeacon = await ethers.getContractAt(
     "UpgradeableBeacon",
     config.UpgradeableBeacon.MetaFurnace.beacon,
-    deployer
+    deployer,
   );
   const cleverBeacon = await ethers.getContractAt(
     "UpgradeableBeacon",
     config.UpgradeableBeacon.MetaCLever.beacon,
-    deployer
+    deployer,
   );
 
   console.log(
     "Zap from cvxCRV => FRAX:",
     `from[${ADDRESS.cvxCRV}]`,
     `to[${ADDRESS.FRAX}]`,
-    `routes[${ZAP_ROUTES.cvxCRV.FRAX.map((x) => x.toHexString())}]`
+    `routes[${ZAP_ROUTES.cvxCRV.FRAX.map((x) => x.toHexString())}]`,
   );
   console.log(
     "Zap from FRAXUSDC => FRAX:",
     `from[${ADDRESS.CURVE_FRAXUSDC_TOKEN}]`,
     `to[${ADDRESS.FRAX}]`,
-    `routes[${AVAILABLE_VAULTS.fraxusdc.withdraw.FRAX.map((x) => x.toHexString())}]`
+    `routes[${AVAILABLE_VAULTS.fraxusdc.withdraw.FRAX.map((x) => x.toHexString())}]`,
   );
   console.log(
     "Zap from TUSDFRAXBP => FRAX:",
     `from[${ADDRESS.CURVE_TUSDFRAXBP_TOKEN}]`,
     `to[${ADDRESS.FRAX}]`,
-    `routes[${AVAILABLE_VAULTS.tusdfraxbp.withdraw.FRAX.map((x) => x.toHexString())}]`
+    `routes[${AVAILABLE_VAULTS.tusdfraxbp.withdraw.FRAX.map((x) => x.toHexString())}]`,
   );
   console.log(
     "Zap from LUSDFRAXBP => FRAX:",
     `from[${ADDRESS.CURVE_LUSDFRAXBP_TOKEN}]`,
     `to[${ADDRESS.FRAX}]`,
-    `routes[${AVAILABLE_VAULTS.lusdfraxbp.withdraw.FRAX.map((x) => x.toHexString())}]`
+    `routes[${AVAILABLE_VAULTS.lusdfraxbp.withdraw.FRAX.map((x) => x.toHexString())}]`,
   );
   console.log(
     "Zap from clevUSDFRAXBP => FRAX:",
     `from[${ADDRESS["CURVE_clevUSD/FRAXBP_TOKEN"]}]`,
     `to[${ADDRESS.FRAX}]`,
-    `routes[${AVAILABLE_VAULTS.clevusd.withdraw.FRAX.map((x) => x.toHexString())}]`
+    `routes[${AVAILABLE_VAULTS.clevusd.withdraw.FRAX.map((x) => x.toHexString())}]`,
   );
 
   if (config.FRAX.clevUSD !== "") {
@@ -480,7 +480,7 @@ async function deployFRAX() {
       console.log(
         "Setup Period Length for FRAX_Furnace, hash:",
         tx.hash,
-        `length: ${rewardInfo.periodLength} => ${config.FRAX.rewardPeriod}`
+        `length: ${rewardInfo.periodLength} => ${config.FRAX.rewardPeriod}`,
       );
       const receipt = await tx.wait();
       console.log("✅ Done, gas used:", receipt.gasUsed.toString());
@@ -504,12 +504,12 @@ async function deployFRAX() {
           `platform: ${feeInfo.platform} => ${platform}`,
           `platformPercentage: ${ethers.formatUnits(feeInfo.platformPercentage, 9)} => ${ethers.formatUnits(
             platformPercentage,
-            9
+            9,
           )}`,
           `bountyPercentage: ${ethers.formatUnits(feeInfo.bountyPercentage, 9)} => ${ethers.formatUnits(
             bountyPercentage,
-            9
-          )}`
+            9,
+          )}`,
         );
         const receipt = await tx.wait();
         console.log("✅ Done, gas used:", receipt.gasUsed.toString());
@@ -545,7 +545,7 @@ async function deployFRAX() {
         strategy = await ethers.getContractAt(
           "ConcentratorStrategy",
           config.FRAX.CLever[underlying].strategies[name],
-          deployer
+          deployer,
         );
         console.log(`Found ConcentratorStrategy ${name} at:`, strategy.address);
       } else {
@@ -558,7 +558,7 @@ async function deployFRAX() {
           config.FRAX.CLever[underlying].pool,
           config.FRAX.CLever[underlying].token,
           ADDRESS.FRAX,
-          clever.address
+          clever.address,
         );
         console.log(`Deploying ConcentratorStrategy ${name}, hash:`, strategy.deployTransaction.hash);
         await strategy.deployed();
@@ -576,7 +576,7 @@ async function deployFRAX() {
         console.log(
           `Setup reserve rate for CLever_${underlying}, hash:`,
           tx.hash,
-          `rate: ${ethers.formatUnits(currentReserveRate, 9)} => ${ethers.formatUnits(expectedReserveRate, 9)}`
+          `rate: ${ethers.formatUnits(currentReserveRate, 9)} => ${ethers.formatUnits(expectedReserveRate, 9)}`,
         );
         const receipt = await tx.wait();
         console.log("✅ Done, gas used:", receipt.gasUsed.toString());
@@ -601,16 +601,16 @@ async function deployFRAX() {
           `platform: ${feeInfo.platform} => ${platform}`,
           `platformPercentage: ${ethers.formatUnits(feeInfo.platformPercentage, 9)} => ${ethers.formatUnits(
             platformPercentage,
-            9
+            9,
           )}`,
           `bountyPercentage: ${ethers.formatUnits(feeInfo.bountyPercentage, 9)} => ${ethers.formatUnits(
             bountyPercentage,
-            9
+            9,
           )}`,
           `repayPercentage: ${ethers.formatUnits(feeInfo.repayPercentage, 9)} => ${ethers.formatUnits(
             repayPercentage,
-            9
-          )}`
+            9,
+          )}`,
         );
         const receipt = await tx.wait();
         console.log("✅ Done, gas used:", receipt.gasUsed.toString());
@@ -628,7 +628,7 @@ async function deployFRAX() {
           `Add whitelist CLever_${underlying} to fraxFurnace:`,
           `target[${fraxFurnace.address}]`,
           "method[updateWhitelists]",
-          `param[[${clever.address}], true]`
+          `param[[${clever.address}], true]`,
         );
       }
     }
@@ -644,7 +644,7 @@ async function deployFRAX() {
           `Setup CLever_${underlying} as minter of clevUSD:`,
           `target[${clevUSD.address}]`,
           "method[updateMinters]",
-          `param[[${clever.address}], true]`
+          `param[[${clever.address}], true]`,
         );
       }
     }
@@ -660,7 +660,7 @@ async function deployFRAX() {
           `Setup minter ceiling for CLever_${underlying}:`,
           `target[${clevUSD.address}]`,
           "method[updateCeiling]",
-          `param[${clever.address}, "${config.FRAX.CLever[underlying].mintCeiling.toHexString()}"]`
+          `param[${clever.address}, "${config.FRAX.CLever[underlying].mintCeiling.toHexString()}"]`,
         );
       }
     }
@@ -671,7 +671,7 @@ async function deployFRAX() {
       const strategy = await ethers.getContractAt(
         "ConcentratorStrategy",
         config.FRAX.CLever[underlying].strategies[name],
-        deployer
+        deployer,
       );
       if (!strategies.includes(strategy.address)) {
         if ((await clever.owner()) === deployer.address) {
@@ -684,7 +684,7 @@ async function deployFRAX() {
             `Setup add ConcentratorStrategy ${name} to CLever_${underlying}:`,
             `target[${clever.address}]`,
             "method[addYieldStrategy]",
-            `param[${strategy.address}, []]`
+            `param[${strategy.address}, []]`,
           );
         }
       }
@@ -757,7 +757,7 @@ async function deployTokenAndVe() {
           timestamp,
           TOKENS[reward].address,
           DEPLOYED_CONTRACTS.Concentrator.Treasury,
-          DEPLOYED_CONTRACTS.Concentrator.Treasury
+          DEPLOYED_CONTRACTS.Concentrator.Treasury,
         );
       } else {
         distributor = await FeeDistributor.deploy(
@@ -765,7 +765,7 @@ async function deployTokenAndVe() {
           timestamp,
           TOKENS[reward].address,
           DEPLOYED_CONTRACTS.CLever.Treasury,
-          DEPLOYED_CONTRACTS.CLever.Treasury
+          DEPLOYED_CONTRACTS.CLever.Treasury,
         );
       }
       console.log(`Deploying FeeDistributor for ${reward}, hash:`, distributor.deployTransaction.hash);
@@ -797,7 +797,7 @@ async function deployGauge() {
     const factory = await ethers.getContractAt(
       "ICurveCryptoPoolFactory",
       "0xf18056bbd320e96a48e3fbf8bc061322531aac99",
-      deployer
+      deployer,
     );
     const pool = await factory.deploy_pool.staticCall(
       "CLEV/ETH",
@@ -812,7 +812,7 @@ async function deployGauge() {
       "146000000000000",
       "5000000000",
       "600",
-      "3461540000000000"
+      "3461540000000000",
     );
     const tx = await factory.deploy_pool(
       "CLEV/ETH",
@@ -827,7 +827,7 @@ async function deployGauge() {
       "146000000000000",
       "5000000000",
       "600",
-      "3461540000000000"
+      "3461540000000000",
     );
     console.log("Deploying Curve CLEV/ETH LP, hash:", tx.hash);
     const receipt = await tx.wait();
@@ -860,23 +860,23 @@ async function deployGauge() {
   console.log("Zap to Curve CLEV/ETH:");
   console.log(
     `  {"symbol": "WETH", "address": "${ADDRESS.WETH}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVETH_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "ETH", "address": "${ZeroAddress}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVETH_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "CLEV", "address": "${config.CLEV}", "routes": [${ZAP_ROUTES.CLEV.Curve_CLEVETH_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "USDC", "address": "${ADDRESS.USDC}", "routes": [${ZAP_ROUTES.USDC.Curve_CLEVETH_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
 
   // Deploy Curve clevCVX/CVX Gauge
@@ -892,28 +892,28 @@ async function deployGauge() {
   console.log("Zap to Curve clevCVX/CVX:");
   console.log(
     `  {"symbol": "clevCVX", "address": "${ADDRESS.clevCVX}", "routes": [${ZAP_ROUTES.clevCVX.Curve_CLEVCVX_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "CVX", "address": "${ADDRESS.CVX}", "routes": [${ZAP_ROUTES.CVX.Curve_CLEVCVX_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "WETH", "address": "${ADDRESS.WETH}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVCVX_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "ETH", "address": "${ZeroAddress}", "routes": [${ZAP_ROUTES.WETH.Curve_CLEVCVX_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "USDC", "address": "${ADDRESS.USDC}", "routes": [${ZAP_ROUTES.USDC.Curve_CLEVCVX_TOKEN.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
 
   // Deploy Balancer clevCVX/CVX Gauge
@@ -922,7 +922,7 @@ async function deployGauge() {
     const gauge = await LiquidityGaugeV3.deploy(
       config.Gauge.Balancer_clevCVX_CVX.token,
       config.Minter,
-      deployer.address
+      deployer.address,
     );
     console.log("Deploying Balancer clevCVX/CVX Gauge, hash:", gauge.deployTransaction.hash);
     await gauge.deployed();
@@ -935,18 +935,18 @@ async function deployGauge() {
   console.log(`  {"symbol": "CVX", "address": "${ADDRESS.CVX}", "routes": []}`);
   console.log(
     `  {"symbol": "WETH", "address": "${ADDRESS.WETH}", "routes": [${ZAP_ROUTES.WETH.CVX.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "ETH", "address": "${ZeroAddress}", "routes": [${ZAP_ROUTES.WETH.CVX.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
   console.log(
     `  {"symbol": "USDC", "address": "${ADDRESS.USDC}", "routes": [${ZAP_ROUTES.USDC.CVX.map(
-      (x) => `"${x.toHexString()}"`
-    )}]}`
+      (x) => `"${x.toHexString()}"`,
+    )}]}`,
   );
 
   console.log("gauge_type_names:", await controller.gauge_type_names(0));
@@ -955,7 +955,7 @@ async function deployGauge() {
       config.Gauge.Curve_CLEV_ETH.gauge,
       0,
       "1000000000000000000",
-      { gasLimit: 1000000 }
+      { gasLimit: 1000000 },
     );
     console.log("add Curve CLEV/ETH Gauge, hash:", tx.hash);
     const receipt = await tx.wait();
@@ -1005,7 +1005,7 @@ async function deployIDO() {
       ADDRESS.WETH,
       ADDRESS.CVX,
       DEPLOYED_CONTRACTS.AladdinZap,
-      ethers.parseEther("100000")
+      ethers.parseEther("100000"),
     );
     await sale.deployed();
     config.sale = sale.address;
@@ -1117,7 +1117,7 @@ async function main() {
       "0x11E91BB6d1334585AA37D8F4fde3932C7960B938",
       DEPLOYED_CONTRACTS.CLever.Treasury,
       config.FeeDistributor.CVX,
-      [{ token: TOKENS.CVX.address, gaugePercentage: 0, treasuryPercentage: 250000000 }]
+      [{ token: TOKENS.CVX.address, gaugePercentage: 0, treasuryPercentage: 250000000 }],
     );
     console.log("Deploying PlatformFeeDistributor, hash:", platform.deployTransaction.hash);
     await platform.deployed();

@@ -69,11 +69,11 @@ describe("AladdinPriceOracle.spec", async () => {
     beforeEach(async () => {
       await oracleChainlink.setFeeds(
         Object.keys(FEEDS).map((symbol) => TOKENS[symbol].address),
-        Object.keys(FEEDS).map((symbol) => FEEDS[symbol])
+        Object.keys(FEEDS).map((symbol) => FEEDS[symbol]),
       );
       await oracle.setSources(
         Object.keys(FEEDS).map((symbol) => TOKENS[symbol].address),
-        Object.keys(FEEDS).map((symbol) => oracleChainlinkAddress)
+        Object.keys(FEEDS).map((symbol) => oracleChainlinkAddress),
       );
     });
 
@@ -83,7 +83,7 @@ describe("AladdinPriceOracle.spec", async () => {
         console.log(
           `price of ${symbol}: ${ethers.formatEther(await oracle.price(TOKENS[symbol].address))},`,
           "gas usage:",
-          gas.toString()
+          gas.toString(),
         );
       }
     });

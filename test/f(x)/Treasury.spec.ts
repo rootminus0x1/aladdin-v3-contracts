@@ -62,7 +62,7 @@ describe("Treasury.spec", async () => {
       oracleAddress,
       ethers.parseEther("0.1"),
       ethers.parseEther("1000"),
-      ZeroAddress
+      ZeroAddress,
     );
 
     await weth.deposit({ value: ethers.parseEther("100") });
@@ -80,8 +80,8 @@ describe("Treasury.spec", async () => {
           oracleAddress,
           ethers.parseEther("0.1"),
           ethers.parseEther("1000"),
-          ZeroAddress
-        )
+          ZeroAddress,
+        ),
       ).to.revertedWith("Initializable: contract is already initialized");
     });
 
@@ -118,7 +118,7 @@ describe("Treasury.spec", async () => {
     context("#updateStrategy", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(treasury.connect(signer).updateStrategy(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
@@ -146,7 +146,7 @@ describe("Treasury.spec", async () => {
     context("#updatePriceOracle", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(treasury.connect(signer).updatePriceOracle(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
@@ -162,7 +162,7 @@ describe("Treasury.spec", async () => {
     context("#updateSettleWhitelist", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(treasury.connect(signer).updateSettleWhitelist(ZeroAddress, false)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
@@ -489,14 +489,14 @@ describe("Treasury.spec", async () => {
       // make collateral ratio to 150%, no incentive
       let [maxBaseIn, maxXTokenMintable] = await treasury.maxMintableXTokenWithIncentive(
         ethers.parseEther("1.5"),
-        ethers.parseEther("0.1")
+        ethers.parseEther("0.1"),
       );
       expect(maxBaseIn).to.eq(0n);
 
       // make collateral ratio to 300%, no incentive
       [maxBaseIn, maxXTokenMintable] = await treasury.maxMintableXTokenWithIncentive(
         ethers.parseEther("3.0"),
-        ethers.parseEther("0.1")
+        ethers.parseEther("0.1"),
       );
       expect(maxBaseIn).to.eq(ethers.parseEther(".290209790209790209"));
 
@@ -601,14 +601,14 @@ describe("Treasury.spec", async () => {
       // make collateral ratio to 150%
       let [maxBaseOut, maxFTokenLiquidatable] = await treasury.maxLiquidatable(
         ethers.parseEther("1.5"),
-        ethers.parseEther("0.1")
+        ethers.parseEther("0.1"),
       );
       expect(maxFTokenLiquidatable).to.eq(0n);
 
       // make collateral ratio to 300%
       [maxBaseOut, maxFTokenLiquidatable] = await treasury.maxLiquidatable(
         ethers.parseEther("3"),
-        ethers.parseEther("0.1")
+        ethers.parseEther("0.1"),
       );
       expect(maxFTokenLiquidatable).to.eq(ethers.parseEther("186.768676867686768676"));
 

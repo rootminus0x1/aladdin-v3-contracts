@@ -21,7 +21,7 @@ describe("ConverterRegistry.spec", async () => {
   context("#register", async () => {
     it("should revert, when non-owner call", async () => {
       await expect(registry.connect(signer).register(0, deployer.address)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
@@ -35,7 +35,7 @@ describe("ConverterRegistry.spec", async () => {
   context("withdrawFund", async () => {
     it("should revert, when non-owner call", async () => {
       await expect(registry.connect(signer).withdrawFund(ZeroAddress, ZeroAddress, ZeroAddress)).to.revertedWith(
-        "Ownable: caller is not the owner"
+        "Ownable: caller is not the owner",
       );
     });
 
@@ -45,7 +45,7 @@ describe("ConverterRegistry.spec", async () => {
         const converter = await factory.deploy(registry.getAddress());
 
         await expect(registry.withdrawFund(converter.getAddress(), ZeroAddress, registry.getAddress())).to.revertedWith(
-          "withdraw ETH failed"
+          "withdraw ETH failed",
         );
       });
 

@@ -25,7 +25,7 @@ describe("FractionalToken.spec", async () => {
   context("auth", async () => {
     it("should revert, when intialize again", async () => {
       await expect(token.initialize(ZeroAddress, "", "")).to.revertedWith(
-        "Initializable: contract is already initialized"
+        "Initializable: contract is already initialized",
       );
     });
 

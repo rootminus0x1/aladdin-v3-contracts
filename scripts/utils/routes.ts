@@ -583,6 +583,6 @@ export const CONVERTER_ROUTRS: { [from: string]: { [to: string]: bigint[] } } = 
 export function showConverterRoute(src: string, dst: string) {
   console.log(
     `convert ${src}[${TOKENS[src].address}] => ${dst}[${TOKENS[dst].address}]:`,
-    `[${CONVERTER_ROUTRS[src][dst].map((r) => `"0x${r.toString(16)}"`).join(",")}]`
+    `[${CONVERTER_ROUTRS[src][dst].map((r) => `"0x${r.toString(16)}"`).join(",")}]`,
   );
 }

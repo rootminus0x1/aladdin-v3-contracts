@@ -95,7 +95,7 @@ describe("RebalancePool.spec", async () => {
       oracleAddress,
       ethers.parseEther("0.1"),
       ethers.parseEther("1000"),
-      ZeroAddress
+      ZeroAddress,
     );
 
     await market.initialize(treasuryAddress, platform.address);
@@ -103,7 +103,7 @@ describe("RebalancePool.spec", async () => {
       ethers.parseEther("1.3"),
       ethers.parseEther("1.2"),
       ethers.parseEther("1.14"),
-      ethers.parseEther("1")
+      ethers.parseEther("1"),
     );
 
     await stabilityPool.initialize(treasuryAddress, marketAddress);
@@ -112,7 +112,7 @@ describe("RebalancePool.spec", async () => {
   context("auth", async () => {
     it("should revert, when intialize again", async () => {
       await expect(stabilityPool.initialize(treasuryAddress, marketAddress)).to.revertedWith(
-        "Initializable: contract is already initialized"
+        "Initializable: contract is already initialized",
       );
     });
 
@@ -127,7 +127,7 @@ describe("RebalancePool.spec", async () => {
     context("#updateLiquidator", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(stabilityPool.connect(signer).updateLiquidator(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
@@ -143,7 +143,7 @@ describe("RebalancePool.spec", async () => {
     context("#updateWrapper", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(stabilityPool.connect(signer).updateWrapper(ZeroAddress)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
@@ -177,7 +177,7 @@ describe("RebalancePool.spec", async () => {
     context("#updateLiquidatableCollateralRatio", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(stabilityPool.connect(signer).updateLiquidatableCollateralRatio(0)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
@@ -193,7 +193,7 @@ describe("RebalancePool.spec", async () => {
     context("#updateUnlockDuration", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(stabilityPool.connect(signer).updateUnlockDuration(0)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
@@ -213,14 +213,14 @@ describe("RebalancePool.spec", async () => {
     context("#addReward", async () => {
       it("should revert, when non-owner call", async () => {
         await expect(stabilityPool.connect(signer).addReward(ZeroAddress, ZeroAddress, 0)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
       it("should revert, when duplicated reward token", async () => {
         await stabilityPool.addReward(wethAddress, deployer.address, 10);
         await expect(stabilityPool.addReward(wethAddress, deployer.address, 10)).to.revertedWith(
-          "duplicated reward token"
+          "duplicated reward token",
         );
       });
 
@@ -252,13 +252,13 @@ describe("RebalancePool.spec", async () => {
 
       it("should revert, when non-owner call", async () => {
         await expect(stabilityPool.connect(signer).updateReward(ZeroAddress, ZeroAddress, 0)).to.revertedWith(
-          "Ownable: caller is not the owner"
+          "Ownable: caller is not the owner",
         );
       });
 
       it("should revert, when no such reward token", async () => {
         await expect(stabilityPool.updateReward(ZeroAddress, deployer.address, 10)).to.revertedWith(
-          "no such reward token"
+          "no such reward token",
         );
       });
 
@@ -268,7 +268,7 @@ describe("RebalancePool.spec", async () => {
 
       it("should revert, when zero period length", async () => {
         await expect(stabilityPool.updateReward(wethAddress, deployer.address, 0)).to.revertedWith(
-          "zero period length"
+          "zero period length",
         );
       });
 
@@ -336,25 +336,25 @@ describe("RebalancePool.spec", async () => {
 
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2"),
-        1000000
+        1000000,
       );
 
       // deposit again
       await expect(stabilityPool.deposit(ethers.parseEther("100"), signer.address)).to.emit(
         stabilityPool,
-        "UserDepositChange"
+        "UserDepositChange",
       );
       expect(await stabilityPool.totalSupply()).to.eq(amountIn - ethers.parseEther("100"));
       expect(await stabilityPool.balanceOf(signer.address)).to.be.closeTo(amountIn - ethers.parseEther("100"), 1e6);
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2"),
-        1000000
+        1000000,
       );
 
       // claim
       await expect(stabilityPool.connect(signer)["claim(address,bool)"](wethAddress, false)).to.emit(
         stabilityPool,
-        "Claim"
+        "Claim",
       );
       expect(await weth.balanceOf(signer.address)).to.be.closeTo(ethers.parseEther("0.2"), 100000);
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.eq(0n);
@@ -381,26 +381,26 @@ describe("RebalancePool.spec", async () => {
       expect(await stabilityPool.totalSupply()).to.eq(amountIn1 + amountIn2 - ethers.parseEther("200"));
       expect(await stabilityPool.balanceOf(signer.address)).to.be.closeTo(
         amountIn1 - (ethers.parseEther("200") * amountIn1) / (amountIn1 + amountIn2),
-        1e6
+        1e6,
       );
       expect(await stabilityPool.balanceOf(deployer.address)).to.be.closeTo(
         amountIn2 - (ethers.parseEther("200") * amountIn2) / (amountIn1 + amountIn2),
-        1e6
+        1e6,
       );
       expect((await stabilityPool.epochState()).prod).to.be.closeTo(
         ethers.parseEther("0.981818181818181818"), // 108/110
-        100
+        100,
       );
       expect((await stabilityPool.epochState()).epoch).to.eq(0);
       expect((await stabilityPool.epochState()).scale).to.eq(0);
 
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         (ethers.parseEther("0.2") * amountIn1) / (amountIn1 + amountIn2),
-        1000000
+        1000000,
       );
       expect(await stabilityPool.claimable(deployer.address, wethAddress)).to.be.closeTo(
         (ethers.parseEther("0.2") * amountIn2) / (amountIn1 + amountIn2),
-        1000000
+        1000000,
       );
     });
   });
@@ -451,7 +451,7 @@ describe("RebalancePool.spec", async () => {
       expect(await stabilityPool.totalUnlocking()).to.be.closeTo((unlockAmount * 98n) / 100n, 1e6);
       expect(await stabilityPool.balanceOf(signer.address)).to.be.closeTo(
         ((amountIn - unlockAmount) * 98n) / 100n,
-        1e6
+        1e6,
       );
       expect(await stabilityPool.unlockedBalanceOf(signer.address)).to.be.closeTo((unlockAmount * 98n) / 100n, 1e6);
       expect((await stabilityPool.epochState()).prod).to.be.closeTo(ethers.parseEther("0.98"), 100);
@@ -460,13 +460,13 @@ describe("RebalancePool.spec", async () => {
 
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.be.closeTo(
         ethers.parseEther("0.2"),
-        1000000
+        1000000,
       );
 
       // claim
       await expect(stabilityPool.connect(signer)["claim(address,bool)"](wethAddress, false)).to.emit(
         stabilityPool,
-        "Claim"
+        "Claim",
       );
       expect(await weth.balanceOf(signer.address)).to.be.closeTo(ethers.parseEther("0.2"), 100000);
       expect(await stabilityPool.claimable(signer.address, wethAddress)).to.eq(0n);
@@ -474,7 +474,7 @@ describe("RebalancePool.spec", async () => {
       // withdraw unlocked
       await expect(stabilityPool.connect(signer).withdrawUnlocked(false, false)).to.emit(
         stabilityPool,
-        "WithdrawUnlocked"
+        "WithdrawUnlocked",
       );
       expect(await fToken.balanceOf(signer.address)).to.be.closeTo((unlockAmount * 98n) / 100n, 1e6);
       expect(await stabilityPool.totalUnlocking()).to.be.closeTo(0n, 1e6);
@@ -530,16 +530,16 @@ describe("RebalancePool.spec", async () => {
         .withArgs(ethers.parseEther("200"), ethers.parseEther("0.2"));
       expect(await stabilityPool.totalSupply()).to.be.closeTo(
         ((amountInA + amountInB - unlockAmountA - unlockAmountB) * 99n) / 100n,
-        1e6
+        1e6,
       );
       expect(await stabilityPool.totalUnlocking()).to.be.closeTo(((unlockAmountA + unlockAmountB) * 99n) / 100n, 1e6);
       expect(await stabilityPool.balanceOf(userA.address)).to.be.closeTo(
         ((amountInA - unlockAmountA) * 99n) / 100n,
-        1e6
+        1e6,
       );
       expect(await stabilityPool.balanceOf(userB.address)).to.be.closeTo(
         ((amountInB - unlockAmountB) * 99n) / 100n,
-        1e6
+        1e6,
       );
       expect(await stabilityPool.unlockedBalanceOf(userA.address)).to.be.closeTo((unlockAmountA * 99n) / 100n, 1e6);
       expect(await stabilityPool.unlockedBalanceOf(userB.address)).to.be.closeTo((unlockAmountB * 99n) / 100n, 1e6);
@@ -549,11 +549,11 @@ describe("RebalancePool.spec", async () => {
 
       expect(await stabilityPool.claimable(userA.address, wethAddress)).to.be.closeTo(
         (ethers.parseEther("0.2") * 11n) / 20n,
-        1000000
+        1000000,
       );
       expect(await stabilityPool.claimable(userB.address, wethAddress)).to.be.closeTo(
         (ethers.parseEther("0.2") * 9n) / 20n,
-        1000000
+        1000000,
       );
     });
   });
