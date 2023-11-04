@@ -15,7 +15,7 @@
     "cvxcrv:weight": "env HARDHAT_NETWORK=mainnet yarn ts-node scripts/cvxcrv_optimal_apr.ts --holder",
     "solhint": "./node_modules/.bin/solhint -f table 'contracts/**/*.sol'",
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
-    "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' *.ts",
+    "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage"
   },
   "devDependencies": {

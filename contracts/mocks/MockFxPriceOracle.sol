@@ -20,10 +20,11 @@ contract MockFxPriceOracle is IFxPriceOracle {
       uint256 safePrice,
       uint256 minUnsafePrice,
       uint256 maxUnsafePrice
-    ) {
-      isValid = true;
-      safePrice = price;
-      minUnsafePrice = price;
-      maxUnsafePrice = price;
+    )
+  {
+    isValid = true;
+    safePrice = price;
+    minUnsafePrice = price;
+    maxUnsafePrice = price;
   }
 }
