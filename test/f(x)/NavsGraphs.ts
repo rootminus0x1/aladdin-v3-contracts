@@ -5,14 +5,14 @@ import { ethers } from "hardhat";
 import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle } from "@types";
 import { ZeroAddress, parseEther, formatEther, MaxUint256 } from "ethers";
 
-import * as fs from 'fs';
-import * as rd from 'readline';
+import * as fs from "fs";
+import * as rd from "readline";
 import { erc20 } from "typechain-types/@openzeppelin/contracts/token";
 
 enum MintOption {
   Both,
   FToken,
-  XToken
+  XToken,
 }
 
 const PRECISION = 10n ** 18n;
@@ -20,7 +20,7 @@ const PRECISION = 10n ** 18n;
 describe("NavsGraphs", async () => {
   let deployer: SignerWithAddress; // deploys all the contracts
   let platform: SignerWithAddress; // accepts fees from market
-  let signer: SignerWithAddress;   //
+  let signer: SignerWithAddress; //
 
   let weth: WETH9;
   let wethAddress: string;
@@ -102,25 +102,21 @@ describe("NavsGraphs", async () => {
     await weth.deposit({ value: initialCollateral * 1000n });
     //await weth.transfer(deployer.address, initialCollateral * 10n);
     await weth.approve(marketAddress, MaxUint256);
-
-});
-
+  });
 
   context("historic", async () => {
-
     it("run historic prices for each day and print the navs", async () => {
-
       console.log("Date, fToken NAV, xToken NAV");
-      var data: Array<{ day: string; price: bigint}> = [];
+      var data: Array<{ day: string; price: bigint }> = [];
 
-      var reader = rd.createInterface(fs.createReadStream("ethprices.txt"))
+      var reader = rd.createInterface(fs.createReadStream("ethprices.txt"));
       reader.on("line", (l: string) => {
-        var tokens = l.split('\t');
+        var tokens = l.split("\t");
         var date = tokens[0];
-        var price= parseEther(tokens[1]);
-        data.push({day: date, price: price});
-      })
-      reader.on("close", async ()=> {
+        var price = parseEther(tokens[1]);
+        data.push({ day: date, price: price });
+      });
+      reader.on("close", async () => {
         console.log("Data has been read %s", data.length);
         var first = true;
         for (let element of data) {
@@ -133,15 +129,12 @@ describe("NavsGraphs", async () => {
             var navs = await treasury.getCurrentNav();
             console.log("%s, %s, %s", element.day, formatEther(navs._fNav), formatEther(navs._xNav));
           }
-        }}
-      );
+        }
+      });
     });
   });
 
-
-
   context("navsby", async () => {
-
     it("xcollateral", async () => {
       // here we increase the collateral by minting equal amounts of f and x tokens
 
@@ -152,14 +145,19 @@ describe("NavsGraphs", async () => {
       await market.mint(initialCollateral, signer.address, 0, 0);
 
       console.log("Collateral, fTokens, fToken NAV, xTokens, xToken NAV");
-      for (let collateral = initialCollateral;
-        collateral < baseTokenCap;
-        collateral += additionalCollateral) {
+      for (let collateral = initialCollateral; collateral < baseTokenCap; collateral += additionalCollateral) {
         await market.mintXToken(additionalCollateral, signer.address, 0);
         let xTokens = await xToken.balanceOf(signer.address);
         let fTokens = await fToken.balanceOf(signer.address);
         var navs = await treasury.getCurrentNav();
-        console.log("%s, %s, %s, %s, %s", formatEther(collateral), formatEther(fTokens), formatEther(navs._fNav), formatEther(xTokens), formatEther(navs._xNav));
+        console.log(
+          "%s, %s, %s, %s, %s",
+          formatEther(collateral),
+          formatEther(fTokens),
+          formatEther(navs._fNav),
+          formatEther(xTokens),
+          formatEther(navs._xNav)
+        );
       }
     });
 
@@ -173,14 +171,19 @@ describe("NavsGraphs", async () => {
       await market.mint(initialCollateral, signer.address, 0, 0);
 
       console.log("Collateral, fTokens, fToken NAV, xTokens, xToken NAV");
-      for (let collateral = initialCollateral;
-        collateral < baseTokenCap;
-        collateral += additionalCollateral) {
+      for (let collateral = initialCollateral; collateral < baseTokenCap; collateral += additionalCollateral) {
         await market.mintFToken(additionalCollateral, signer.address, 0);
         let xTokens = await xToken.balanceOf(signer.address);
         let fTokens = await fToken.balanceOf(signer.address);
         var navs = await treasury.getCurrentNav();
-        console.log("%s, %s, %s, %s, %s", formatEther(collateral), formatEther(fTokens), formatEther(navs._fNav), formatEther(xTokens), formatEther(navs._xNav));
+        console.log(
+          "%s, %s, %s, %s, %s",
+          formatEther(collateral),
+          formatEther(fTokens),
+          formatEther(navs._fNav),
+          formatEther(xTokens),
+          formatEther(navs._xNav)
+        );
       }
     });
 
@@ -194,21 +197,25 @@ describe("NavsGraphs", async () => {
       await market.mint(initialCollateral, signer.address, 0, 0);
 
       console.log("price, fToken NAV, xToken NAV, CR");
-/*
+      /*
       for (let price = parseEther("100"); // 500 passes
         price < initialPrice * 2n;
         price += (initialPrice / 50n)) {
 */
-      for (let price = initialPrice; price > 0n; price -= (initialPrice / 500n)) {
+      for (let price = initialPrice; price > 0n; price -= initialPrice / 500n) {
         await oracle.setPrice(price);
         //let xTokens = await xToken.balanceOf(signer.address);
         //let fTokens = await fToken.balanceOf(signer.address);
         var cr = await treasury.collateralRatio();
         var navs = await treasury.getCurrentNav();
-        console.log("%s, %s, %s, %s", formatEther(price), formatEther(navs._fNav), formatEther(navs._xNav), formatEther(cr));
+        console.log(
+          "%s, %s, %s, %s",
+          formatEther(price),
+          formatEther(navs._fNav),
+          formatEther(navs._xNav),
+          formatEther(cr)
+        );
       }
     });
-
   });
-
 });

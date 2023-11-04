@@ -1,0 +1,28 @@
+{
+  // I think these go with the forge vscode extension
+  "solidity.packageDefaultDependenciesContractsDirectory": "contracts",
+  "solidity.packageDefaultDependenciesDirectory": "lib",
+  "solidity.remappings": [
+    "forge-std/=lib/forge-std/src/",
+    "contracts/=contracts"
+  ],
+
+  "editor.formatOnSave": true,
+  "solidity.formatter": "prettier", // this uses a .pretierrc , see https://github.com/prettier-solidity/prettier-plugin-solidity#configuration-file
+  //"solidity.formatter": "forge", // TODO: check against prettier
+  "[solidity]": {
+    //"editor.defaultFormatter": "JuanBlanco.solidity"
+    //"editor.defaultFormatter": "NomicFoundation.hardhat-solidity",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.documentSelectors": ["**/*.sol"],
+
+
+  "mochaExplorer.launcherScript": "node_modules/mocha-explorer-launcher-scripts/vscode-test",
+  "mochaExplorer.autoload": false,
+  "mochaExplorer.ipcRole": "server",
+  "mochaExplorer.env": {
+    "VSCODE_VERSION": "insiders",
+    "ELECTRON_RUN_AS_NODE": null
+  }
+}

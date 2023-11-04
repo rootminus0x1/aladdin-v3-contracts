@@ -43,9 +43,7 @@ describe("FractionalToken.spec", async () => {
     });
 
     it("should revert, when multiple too small", async () => {
-      await expect(token.connect(treasury).updateNav(BigInt(0) - PRECISION)).to.revertedWith(
-        "multiple too small"
-      );
+      await expect(token.connect(treasury).updateNav(BigInt(0) - PRECISION)).to.revertedWith("multiple too small");
     });
 
     it("should revert, when multiple too large", async () => {

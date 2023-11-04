@@ -26,11 +26,18 @@ describe("GeneralTokenConverter.spec", async () => {
   it("should revert when invalid action", async () => {
     for (let i = 0; i < 10; i++) {
       await expect(
-        converter.queryConvert(encodePoolHintV3(ZeroAddress, i as PoolTypeV3, 2, 0, 1, 3 as Action, { fee_num: 1 }), 0n)
+        converter.queryConvert(
+          encodePoolHintV3(ZeroAddress, i as PoolTypeV3, 2, 0, 1, 3 as Action, {
+            fee_num: 1,
+          }),
+          0n
+        )
       ).to.revertedWith("invalid action");
       await expect(
         converter.convert(
-          encodePoolHintV3(ZeroAddress, i as PoolTypeV3, 2, 0, 1, 3 as Action, { fee_num: 1 }),
+          encodePoolHintV3(ZeroAddress, i as PoolTypeV3, 2, 0, 1, 3 as Action, {
+            fee_num: 1,
+          }),
           0n,
           ZeroAddress
         )
@@ -44,15 +51,27 @@ describe("GeneralTokenConverter.spec", async () => {
       for (const action of [Action.Add, Action.Remove]) {
         expect(
           await converter.queryConvert.staticCall(
-            encodePoolHintV3(ZeroAddress, poolType, 2, 0, 1, action, { fee_num: 1 }),
+            encodePoolHintV3(ZeroAddress, poolType, 2, 0, 1, action, {
+              fee_num: 1,
+            }),
             0n
           )
         ).to.eq(0n);
         expect(
-          await converter.getTokenPair(encodePoolHintV3(ZeroAddress, poolType, 2, 0, 1, action, { fee_num: 1 }))
+          await converter.getTokenPair(
+            encodePoolHintV3(ZeroAddress, poolType, 2, 0, 1, action, {
+              fee_num: 1,
+            })
+          )
         ).to.deep.eq([ZeroAddress, ZeroAddress]);
         await expect(
-          converter.convert(encodePoolHintV3(ZeroAddress, poolType, 2, 0, 1, action, { fee_num: 1 }), 0n, ZeroAddress)
+          converter.convert(
+            encodePoolHintV3(ZeroAddress, poolType, 2, 0, 1, action, {
+              fee_num: 1,
+            }),
+            0n,
+            ZeroAddress
+          )
         ).to.reverted;
       }
     }
@@ -119,7 +138,10 @@ describe("GeneralTokenConverter.spec", async () => {
 
     it(`should succeed withdraw ETH`, async () => {
       const amount = ethers.parseEther("1");
-      await deployer.sendTransaction({ to: converter.getAddress(), value: amount });
+      await deployer.sendTransaction({
+        to: converter.getAddress(),
+        value: amount,
+      });
 
       expect(await ethers.provider.getBalance(converter.getAddress())).to.eq(amount);
       const before = await ethers.provider.getBalance(signer.address);

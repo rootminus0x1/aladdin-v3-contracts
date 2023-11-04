@@ -28,7 +28,7 @@ describe("CurveBasePoolPriceOracle.spec", async () => {
     const ChainlinkPriceOracle = await ethers.getContractFactory("ChainlinkPriceOracle", deployer);
     baseOracle = await ChainlinkPriceOracle.deploy();
     await baseOracle.waitForDeployment();
-    baseOracleAddress = await baseOracle.getAddress()
+    baseOracleAddress = await baseOracle.getAddress();
 
     const CurveBasePoolPriceOracle = await ethers.getContractFactory("CurveBasePoolPriceOracle", deployer);
     oracle = await CurveBasePoolPriceOracle.deploy(baseOracleAddress);

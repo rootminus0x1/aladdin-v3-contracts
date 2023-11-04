@@ -29,8 +29,14 @@ describe("wstETHWrapper.spec", async () => {
 
     deployer = await ethers.getSigner(DEPLOYER);
 
-    await deployer.sendTransaction({ to: stETH_HOLDER, value: ethers.parseEther("10") });
-    await deployer.sendTransaction({ to: wstETH_HOLDER, value: ethers.parseEther("10") });
+    await deployer.sendTransaction({
+      to: stETH_HOLDER,
+      value: ethers.parseEther("10"),
+    });
+    await deployer.sendTransaction({
+      to: wstETH_HOLDER,
+      value: ethers.parseEther("10"),
+    });
 
     const wstETHWrapper = await ethers.getContractFactory("wstETHWrapper", deployer);
     wrapper = (await wstETHWrapper.deploy()) as WstETHWrapper;

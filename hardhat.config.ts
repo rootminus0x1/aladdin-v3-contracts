@@ -39,7 +39,8 @@ const config: HardhatUserConfig = {
   preprocess: {
     eachLine: (hre) => ({
       transform: (line: string) => {
-        if (line.match(/^\s*import /i)) { // match all lines with `import `
+        if (line.match(/^\s*import /i)) {
+          // match all lines with `import `
           for (const [from, to] of getRemappings()) {
             if (line.includes(from)) {
               line = line.replace(from, to);
@@ -77,7 +78,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       accounts: {
         accountsBalance: "1000000000000000000000000", // 1,000,000 eth
-      }
+      },
     },
     mainnet: {
       url: process.env.MAINNET_URL || "https://rpc.ankr.com/eth",

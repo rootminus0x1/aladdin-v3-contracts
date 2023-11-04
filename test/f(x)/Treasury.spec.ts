@@ -305,9 +305,7 @@ describe("Treasury.spec", async () => {
 
   context("#redeem", async () => {
     it("should revert, when non-market call", async () => {
-      await expect(treasury.redeem(0n, 0n, ZeroAddress)).to.revertedWith(
-        "Only market"
-      );
+      await expect(treasury.redeem(0n, 0n, ZeroAddress)).to.revertedWith("Only market");
     });
 
     it("should succeed, mint both => price move up => redeem fToken", async () => {
@@ -411,9 +409,7 @@ describe("Treasury.spec", async () => {
 
   context("#addBaseToken", async () => {
     it("should revert, when non-market call", async () => {
-      await expect(treasury.addBaseToken(0n, 0n, ZeroAddress)).to.revertedWith(
-        "Only market"
-      );
+      await expect(treasury.addBaseToken(0n, 0n, ZeroAddress)).to.revertedWith("Only market");
     });
 
     it("should succeed, mint both => price move up => add base token, no incentive", async () => {
@@ -445,14 +441,9 @@ describe("Treasury.spec", async () => {
       expect((await treasury.getCurrentNav())._xNav).to.eq(ethers.parseEther("1.19"));
 
       // mint xToken
-      await treasury
-        .connect(market)
-        .addBaseToken(ethers.parseEther("1"), ethers.parseEther("0.1"), signer.address);
+      await treasury.connect(market).addBaseToken(ethers.parseEther("1"), ethers.parseEther("0.1"), signer.address);
       expect(await treasury.totalBaseToken()).to.eq(ethers.parseEther("2"));
-      expect(await xToken.balanceOf(signer.address)).to.be.closeTo(
-        ethers.parseEther("1016.806722689075630251"),
-        100
-      );
+      expect(await xToken.balanceOf(signer.address)).to.be.closeTo(ethers.parseEther("1016.806722689075630251"), 100);
       expect(await fToken.nav()).to.be.closeTo(ethers.parseEther(".782178217821782180"), 100);
     });
 
@@ -470,17 +461,11 @@ describe("Treasury.spec", async () => {
       expect(await treasury.collateralRatio()).to.eq(ethers.parseEther("2.178217821782178217"));
 
       // make collateral ratio to 150%, no incentive
-      let [maxBaseIn, maxXTokenMintable] = await treasury.maxMintableXTokenWithIncentive(
-        ethers.parseEther("1.5"),
-        0n
-      );
+      let [maxBaseIn, maxXTokenMintable] = await treasury.maxMintableXTokenWithIncentive(ethers.parseEther("1.5"), 0n);
       expect(maxBaseIn).to.eq(0n);
 
       // make collateral ratio to 300%, no incentive
-      [maxBaseIn, maxXTokenMintable] = await treasury.maxMintableXTokenWithIncentive(
-        ethers.parseEther("3.0"),
-        0n
-      );
+      [maxBaseIn, maxXTokenMintable] = await treasury.maxMintableXTokenWithIncentive(ethers.parseEther("3.0"), 0n);
       expect(maxBaseIn).to.eq(ethers.parseEther(".377272727272727272"));
 
       await treasury.connect(market).addBaseToken(maxBaseIn, 0n, signer.address);
@@ -524,9 +509,7 @@ describe("Treasury.spec", async () => {
 
   context("#liquidate", async () => {
     it("should revert, when non-market call", async () => {
-      await expect(treasury.liquidate(0n, 0n, ZeroAddress)).to.revertedWith(
-        "Only market"
-      );
+      await expect(treasury.liquidate(0n, 0n, ZeroAddress)).to.revertedWith("Only market");
     });
 
     it("should succeed, mint both => price move up => liquidate fToken, no incentive", async () => {
@@ -568,9 +551,7 @@ describe("Treasury.spec", async () => {
       expect(await xToken.balanceOf(deployer.address)).to.eq(ethers.parseEther("500"));
       expect(await treasury.totalBaseToken()).to.eq(ethers.parseEther("1"));
       expect(await weth.balanceOf(market.address)).to.eq(0n);
-      await treasury
-        .connect(market)
-        .liquidate(ethers.parseEther("100"), ethers.parseEther("0.1"), deployer.address);
+      await treasury.connect(market).liquidate(ethers.parseEther("100"), ethers.parseEther("0.1"), deployer.address);
       expect(await fToken.balanceOf(deployer.address)).to.eq(ethers.parseEther("400"));
       expect(await xToken.balanceOf(deployer.address)).to.eq(ethers.parseEther("500"));
       expect(await weth.balanceOf(market.address)).to.eq(ethers.parseEther(".101"));
@@ -592,17 +573,11 @@ describe("Treasury.spec", async () => {
       expect(await treasury.collateralRatio()).to.eq(ethers.parseEther("2.178217821782178217"));
 
       // make collateral ratio to 150%
-      let [maxBaseOut, maxFTokenLiquidatable] = await treasury.maxLiquidatable(
-        ethers.parseEther("1.5"),
-        0n
-      );
+      let [maxBaseOut, maxFTokenLiquidatable] = await treasury.maxLiquidatable(ethers.parseEther("1.5"), 0n);
       expect(maxFTokenLiquidatable).to.eq(0n);
 
       // make collateral ratio to 300%
-      [maxBaseOut, maxFTokenLiquidatable] = await treasury.maxLiquidatable(
-        ethers.parseEther("3"),
-        0n
-      );
+      [maxBaseOut, maxFTokenLiquidatable] = await treasury.maxLiquidatable(ethers.parseEther("3"), 0n);
       expect(maxFTokenLiquidatable).to.eq(ethers.parseEther("205.445544554455445544"));
 
       await treasury.connect(market).liquidate(maxFTokenLiquidatable, 0n, deployer.address);
@@ -649,9 +624,7 @@ describe("Treasury.spec", async () => {
 
   context("#selfLiquidate", async () => {
     it("should revert, when non-market call", async () => {
-      await expect(treasury.liquidate(0n, 0n, ZeroAddress)).to.revertedWith(
-        "Only market"
-      );
+      await expect(treasury.liquidate(0n, 0n, ZeroAddress)).to.revertedWith("Only market");
     });
   });
 

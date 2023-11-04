@@ -250,11 +250,7 @@ describe("Market.spec", async () => {
         expect((await market.incentiveConfig()).liquidationIncentiveRatio).to.eq(ZeroHash);
         expect((await market.incentiveConfig()).selfLiquidationIncentiveRatio).to.eq(ZeroHash);
         await expect(
-          market.updateIncentiveConfig(
-            ethers.parseEther("0.3"),
-            ethers.parseEther("0.2"),
-            ethers.parseEther("0.1")
-          )
+          market.updateIncentiveConfig(ethers.parseEther("0.3"), ethers.parseEther("0.2"), ethers.parseEther("0.1"))
         )
           .to.emit(market, "UpdateIncentiveConfig")
           .withArgs(ethers.parseEther("0.3"), ethers.parseEther("0.2"), ethers.parseEther("0.1"));
@@ -399,9 +395,7 @@ describe("Market.spec", async () => {
     it("should revert, when initialize multiple times", async () => {
       await market.mint(ethers.parseEther("1"), signer.address, 0, 0);
 
-      await expect(market.mint(ethers.parseEther("1"), signer.address, 0, 0)).to.revertedWith(
-        "only initialize once"
-      );
+      await expect(market.mint(ethers.parseEther("1"), signer.address, 0, 0)).to.revertedWith("only initialize once");
     });
 
     it("should succeed", async () => {
@@ -448,14 +442,7 @@ describe("Market.spec", async () => {
     it("should succeed", async () => {
       await expect(market.mintFToken(ethers.parseEther("1"), signer.address, 0))
         .to.emit(market, "Mint")
-        .withArgs(
-          deployer.address,
-          signer.address,
-          ethers.parseEther("1"),
-          ethers.parseEther("1000"),
-          0,
-          0
-        );
+        .withArgs(deployer.address, signer.address, ethers.parseEther("1"), ethers.parseEther("1000"), 0, 0);
       expect(await fToken.balanceOf(signer.address)).to.eq(ethers.parseEther("1000"));
       expect(await treasury.totalBaseToken()).to.eq(ethers.parseEther("1"), "treasure should have 1 eth");
       expect(await weth.balanceOf(treasuryAddress)).to.eq(ethers.parseEther("1"), "erc20 treasury now has 1 eth");
@@ -492,16 +479,15 @@ describe("Market.spec", async () => {
       let expectedXCount = ethers.parseEther("1871.1"); // get a bit more
       await expect(market.mintXToken(additionalCollateral, signer.address, 0), "event emitted")
         .to.emit(market, "Mint")
-        .withArgs(
-          deployer.address,
-          signer.address,
-          additionalCollateral,
-          0,
-          expectedXCount,
-          0
-        );
-      expect(await treasury.totalBaseToken()).to.eq(initialCollateral + additionalCollateral, "treasure should have added some eth");
-      expect(await weth.balanceOf(treasuryAddress)).to.eq(initialCollateral + additionalCollateral, "erc20 treasury now has more eth");
+        .withArgs(deployer.address, signer.address, additionalCollateral, 0, expectedXCount, 0);
+      expect(await treasury.totalBaseToken()).to.eq(
+        initialCollateral + additionalCollateral,
+        "treasure should have added some eth"
+      );
+      expect(await weth.balanceOf(treasuryAddress)).to.eq(
+        initialCollateral + additionalCollateral,
+        "erc20 treasury now has more eth"
+      );
       expect(await xToken.balanceOf(signer.address)).to.eq(expectedXCount, "signer got the collateral value of xToken");
       expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
       expect(await weth.balanceOf(platform.address)).to.eq(0n, "erc20 platform now has some fees");
@@ -509,8 +495,8 @@ describe("Market.spec", async () => {
   });
 
   context("add base token", async () => {
-    let ethusd1  = ethers.parseEther("1702");
-    let ethusd2  = ethers.parseEther("1001");
+    let ethusd1 = ethers.parseEther("1702");
+    let ethusd2 = ethers.parseEther("1001");
     let initialCollateral = ethers.parseEther("1");
     let cap = ethers.parseEther("0.059675324675324675"); // also includes fee
 
@@ -540,7 +526,8 @@ describe("Market.spec", async () => {
     });
 
     it("should revert, when mint paused, even in stability mode", async () => {
-      await oracle.setPrice(ethusd2); 1
+      await oracle.setPrice(ethusd2);
+      1;
       await market.grantRole(await market.EMERGENCY_DAO_ROLE(), deployer.address);
       await market.pauseMint(true);
       await expect(market.addBaseToken(1, signer.address, 0)).to.revertedWith("mint is paused");
@@ -551,16 +538,14 @@ describe("Market.spec", async () => {
       let attemptedCollateral = ethers.parseEther("1.5");
       await expect(market.addBaseToken(attemptedCollateral, signer.address, 0), "event emitted")
         .to.emit(market, "AddCollateral")
-        .withArgs(
-          deployer.address,
-          signer.address,
-          cap,
-          274706754931099701911n
-        );
-        expect(await treasury.totalBaseToken()).to.eq(initialCollateral + cap, "treasure should have added some eth");
-        expect(await weth.balanceOf(treasuryAddress)).to.eq(initialCollateral + cap, "erc20 treasury now has more eth");
-        expect(await xToken.balanceOf(signer.address)).to.eq(274706754931099701911n, "signer got the collateral value of xToken");
-        expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
+        .withArgs(deployer.address, signer.address, cap, 274706754931099701911n);
+      expect(await treasury.totalBaseToken()).to.eq(initialCollateral + cap, "treasure should have added some eth");
+      expect(await weth.balanceOf(treasuryAddress)).to.eq(initialCollateral + cap, "erc20 treasury now has more eth");
+      expect(await xToken.balanceOf(signer.address)).to.eq(
+        274706754931099701911n,
+        "signer got the collateral value of xToken"
+      );
+      expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
 
       // TODO: add bonus
       expect(await weth.balanceOf(platform.address)).to.eq(0n, "erc20 platform now has some fees");
@@ -571,22 +556,25 @@ describe("Market.spec", async () => {
       let attemptedCollateral = ethers.parseEther("0.05");
       await expect(market.addBaseToken(attemptedCollateral, signer.address, 0))
         .to.emit(market, "AddCollateral")
-        .withArgs(
-          deployer.address,
-          signer.address,
-          attemptedCollateral,
-          230167792488516617652n
-        );
-        expect(await treasury.totalBaseToken()).to.eq(initialCollateral + attemptedCollateral, "treasure should have added some eth");
-        expect(await weth.balanceOf(treasuryAddress)).to.eq(initialCollateral + attemptedCollateral, "erc20 treasury now has more eth");
-        expect(await xToken.balanceOf(signer.address)).to.eq(230167792488516617652n, "signer got the collateral value of xToken");
-        expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
+        .withArgs(deployer.address, signer.address, attemptedCollateral, 230167792488516617652n);
+      expect(await treasury.totalBaseToken()).to.eq(
+        initialCollateral + attemptedCollateral,
+        "treasure should have added some eth"
+      );
+      expect(await weth.balanceOf(treasuryAddress)).to.eq(
+        initialCollateral + attemptedCollateral,
+        "erc20 treasury now has more eth"
+      );
+      expect(await xToken.balanceOf(signer.address)).to.eq(
+        230167792488516617652n,
+        "signer got the collateral value of xToken"
+      );
+      expect(await fToken.balanceOf(signer.address)).to.eq(0n, "signer got no fToken");
 
       // TODO: add bonus
       expect(await weth.balanceOf(platform.address)).to.eq(0n, "erc20 platform now has some fees");
     });
 
     // TODO: check that the fee is paid to platform
-
   });
 });

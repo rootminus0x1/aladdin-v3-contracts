@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import dotenvExpand from 'dotenv-expand';
+import dotenvExpand from "dotenv-expand";
 // TODO: these must be a better way of importing NumberLike
 import type { NumberLike } from "@nomicfoundation/hardhat-network-helpers/src/types";
 

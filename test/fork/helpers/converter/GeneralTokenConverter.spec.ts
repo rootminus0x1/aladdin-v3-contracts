@@ -6,7 +6,7 @@ import { ethers } from "hardhat";
 import { ConverterRegistry, GeneralTokenConverter } from "@types";
 import { Action, ADDRESS, encodePoolHintV3, PoolTypeV3, TOKENS } from "@/utils/index";
 
-import { createFork, impersonateAccounts} from "test/network";
+import { createFork, impersonateAccounts } from "test/network";
 
 interface ISwapForkConfig {
   tokenIn: string;
@@ -1327,10 +1327,9 @@ describe("GeneralTokenConverter.spec", async () => {
 
     describe(swap_name, async () => {
       beforeEach(async () => {
-
         await createFork(swap.fork);
         deployer = await ethers.getSigner(swap.deployer);
-        impersonateAccounts([swap.deployer, swap.holder])
+        impersonateAccounts([swap.deployer, swap.holder]);
 
         const ConverterRegistry = await ethers.getContractFactory("ConverterRegistry", deployer);
         registry = await ConverterRegistry.deploy();
@@ -1351,7 +1350,10 @@ describe("GeneralTokenConverter.spec", async () => {
 
       it("should succeed", async () => {
         const signer = await ethers.getSigner(swap.holder);
-        await deployer.sendTransaction({ to: signer.address, value: ethers.parseEther("10") });
+        await deployer.sendTransaction({
+          to: signer.address,
+          value: ethers.parseEther("10"),
+        });
 
         const pair = await registry.getTokenPair(swap.encoding);
         expect(pair[0].toLowerCase()).to.eq(swap.tokenIn.toLowerCase());

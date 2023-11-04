@@ -103,7 +103,10 @@ describe("LidoConverter.spec", async () => {
 
     it(`should succeed withdraw ETH`, async () => {
       const amount = ethers.parseEther("1");
-      await deployer.sendTransaction({ to: converter.getAddress(), value: amount });
+      await deployer.sendTransaction({
+        to: converter.getAddress(),
+        value: amount,
+      });
 
       expect(await ethers.provider.getBalance(converter.getAddress())).to.eq(amount);
       const before = await ethers.provider.getBalance(signer.address);

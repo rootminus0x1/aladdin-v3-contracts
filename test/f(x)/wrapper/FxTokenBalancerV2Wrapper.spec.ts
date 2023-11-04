@@ -7,7 +7,7 @@ import { ethers } from "hardhat";
 import { TOKENS } from "@/utils/tokens";
 import { FxTokenBalancerV2Wrapper, MockERC20, WETH9 } from "@types";
 // eslint-disable-next-line camelcase
-import { createFork, impersonateAccounts} from "test/network";
+import { createFork, impersonateAccounts } from "test/network";
 import { AbiCoder, MaxUint256 } from "ethers";
 
 const FORK_HEIGHT = 17796350;
@@ -50,9 +50,7 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
     const poolAddress = await factory.create.staticCall(
       "X",
       "Y",
-      srcAddress.toLowerCase() < wethAddress.toLowerCase()
-        ? [srcAddress, wethAddress]
-        : [wethAddress, srcAddress],
+      srcAddress.toLowerCase() < wethAddress.toLowerCase() ? [srcAddress, wethAddress] : [wethAddress, srcAddress],
       srcAddress.toLowerCase() < wethAddress.toLowerCase()
         ? [ethers.parseEther("0.80"), ethers.parseEther("0.20")]
         : [ethers.parseEther("0.20"), ethers.parseEther("0.80")],
@@ -62,9 +60,7 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
     await factory.create(
       "X",
       "Y",
-      srcAddress.toLowerCase() < wethAddress.toLowerCase()
-        ? [srcAddress, wethAddress]
-        : [wethAddress, srcAddress],
+      srcAddress.toLowerCase() < wethAddress.toLowerCase() ? [srcAddress, wethAddress] : [wethAddress, srcAddress],
       srcAddress.toLowerCase() < wethAddress.toLowerCase()
         ? [ethers.parseEther("0.80"), ethers.parseEther("0.20")]
         : [ethers.parseEther("0.20"), ethers.parseEther("0.80")],
@@ -82,9 +78,7 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
     await weth.deposit({ value: ethers.parseEther("20") });
     await balancer.joinPool(poolId, deployer.address, deployer.address, {
       assets:
-        srcAddress.toLowerCase() < wethAddress.toLowerCase()
-          ? [srcAddress, wethAddress]
-          : [wethAddress, srcAddress],
+        srcAddress.toLowerCase() < wethAddress.toLowerCase() ? [srcAddress, wethAddress] : [wethAddress, srcAddress],
       maxAmountsIn: [MaxUint256, MaxUint256],
       userData: AbiCoder.defaultAbiCoder().encode(
         ["uint8", "uint256[]"],
@@ -123,5 +117,4 @@ describe("FxTokenBalancerV2Wrapper.spec", async () => {
   it("should fail when wrap with insufficient balance", async () => {
     await expect(wrapper.wrap(ethers.parseEther("100"))).to.be.revertedWith("ERC20: transfer amount exceeds balance");
   });
-
 });

@@ -53,7 +53,10 @@ describe("ConverterRegistry.spec", async () => {
         const factory = await ethers.getContractFactory(name, deployer);
         const converter = await factory.deploy(registry.getAddress());
         const amount = ethers.parseEther("1");
-        await deployer.sendTransaction({ to: converter.getAddress(), value: amount });
+        await deployer.sendTransaction({
+          to: converter.getAddress(),
+          value: amount,
+        });
 
         expect(await ethers.provider.getBalance(converter.getAddress())).to.eq(amount);
         const before = await ethers.provider.getBalance(signer.address);
