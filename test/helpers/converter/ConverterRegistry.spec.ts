@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ZeroAddress } from "ethers";
 import { ethers } from "hardhat";
 
-import { ConverterRegistry } from "@/types/index";
+import { ConverterRegistry } from "@types";
 
 describe("ConverterRegistry.spec", async () => {
   let deployer: HardhatEthersSigner;

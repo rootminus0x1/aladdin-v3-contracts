@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ZeroAddress, toBigInt } from "ethers";
 import { ethers } from "hardhat";
 
-import { MockERC20, PlatformFeeSpliter } from "@/types/index";
+import { MockERC20, PlatformFeeSpliter } from "@types";
 
 describe("PlatformFeeSpliter.spec", async () => {
   let deployer: HardhatEthersSigner;

@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ZeroAddress } from "ethers";
 import { ethers } from "hardhat";
 
-import { ConverterRegistry, LidoConverter } from "@/types/index";
+import { ConverterRegistry, LidoConverter } from "@types";
 import { Action, PoolTypeV3, encodePoolHintV3, TOKENS } from "@/utils/index";
 
 describe("LidoConverter.spec", async () => {

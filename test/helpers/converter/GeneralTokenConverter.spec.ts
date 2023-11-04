@@ -3,7 +3,7 @@ import { expect } from "chai";
 import { ZeroAddress } from "ethers";
 import { ethers } from "hardhat";
 
-import { ConverterRegistry, GeneralTokenConverter } from "@/types/index";
+import { ConverterRegistry, GeneralTokenConverter } from "@types";
 import { Action, PoolTypeV3, encodePoolHintV3 } from "@/utils/codec";
 
 describe("GeneralTokenConverter.spec", async () => {
