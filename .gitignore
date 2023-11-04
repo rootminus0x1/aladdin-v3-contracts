@@ -1,4 +1,5 @@
-node_modules
+node_modules/
+lib/
 .env
 coverage
 coverage*.json
@@ -12,9 +13,11 @@ archive-*/
 #yarn files
 yarn-error.log
 
-#Hardhat files
-cache
-artifacts
+#compiler files
+forge-cache/
+cache/
+artifacts/
+out/
 
 .store
 

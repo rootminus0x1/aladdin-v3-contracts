@@ -13,6 +13,8 @@ import "hardhat-preprocessor";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
+import "@nomicfoundation/hardhat-foundry";
+
 dotenv.config();
 
 if (process.env.PROXY) {
@@ -37,7 +39,7 @@ const config: HardhatUserConfig = {
   preprocess: {
     eachLine: (hre) => ({
       transform: (line: string) => {
-        if (line.match(/".*.sol";$/)) { // match all lines with `"<any-import-path>.sol";`
+        if (line.match(/^\s*import /i)) { // match all lines with `import `
           for (const [from, to] of getRemappings()) {
             if (line.includes(from)) {
               line = line.replace(from, to);
