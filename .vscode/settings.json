@@ -15,14 +15,20 @@
     //"editor.defaultFormatter": "NomicFoundation.hardhat-solidity",
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "prettier.documentSelectors": ["**/*.sol"],
+  "prettier.documentSelectors": ["**/*.sol", "**/*.ts", "**/*.json"],
 
-
-  "mochaExplorer.launcherScript": "node_modules/mocha-explorer-launcher-scripts/vscode-test",
-  "mochaExplorer.autoload": false,
-  "mochaExplorer.ipcRole": "server",
-  "mochaExplorer.env": {
-    "VSCODE_VERSION": "insiders",
-    "ELECTRON_RUN_AS_NODE": null
+  "workbench.colorCustomizations": {
+    //"markiscodecoverage.colorUncoveredLineText": "#FF7F2750",
+    "markiscodecoverage.colorUncoveredLineText": "#FFFFFF",
+    //"editor.tokenColorCustomizations": {
+    //  "textMateRules": [
+    //      {
+    //          "scope": ["markiscodecoverage.colorUncoveredLineText"],
+    //          "settings": {
+    //              "foreground": "#FFFFFF"
+    //          }
+    //      }
+    //  ]
+    //}
   }
 }
