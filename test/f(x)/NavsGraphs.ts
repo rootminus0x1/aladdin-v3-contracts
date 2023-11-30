@@ -17,19 +17,6 @@ enum MintOption {
 
 type ContractWithAddress<T extends BaseContract> = T & { address: string; };
 
- /*
-  return Object.assign(
-    contract,
-    { address: address }
-  ) as unknown as ContractWithAddress<Contract>;
-
-  return {
-    ...contract,
-    address: address,
-   } as unknown as ContractWithAddress<Contract>;
-
-    */
-
 async function deploy<T extends BaseContract> (factoryName: string,
   deployer: SignerWithAddress /*HardhatEthersSigner*/,
   ...deployArgs: any[]): Promise<ContractWithAddress<T>> {
@@ -40,7 +27,7 @@ async function deploy<T extends BaseContract> (factoryName: string,
   return Object.assign(
     contract as T,
     { address: await contract.getAddress() },
-    )as ContractWithAddress<T>;
+    ) as ContractWithAddress<T>;
 }
 
 const PRECISION = 10n ** 18n;
@@ -101,12 +88,9 @@ describe("NavsGraphs", async () => {
       ethers.parseEther("1.14"),
       ethers.parseEther("1"),
     );
-    console.log("weth.deposit");
     await weth.deposit({ value: initialCollateral * 1000n });
     //await weth.transfer(deployer.address, initialCollateral * 10n);
-    console.log("weth.approve");
     await weth.approve(market.address, MaxUint256);
-    console.log("done.");
   });
 
   context("navsby", async () => {
@@ -115,7 +99,6 @@ describe("NavsGraphs", async () => {
 
       let price = parseEther("1000"); // a grand per eth
       await oracle.setPrice(price);
-      console.log("treasury=%s (addr=%s)", treasury, treasury.address)
       await treasury.initializePrice();
 
       await market.mint(initialCollateral, signer.address, 0, 0);
