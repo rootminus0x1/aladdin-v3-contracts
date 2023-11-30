@@ -2,12 +2,15 @@
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 //import { expect } from "chai";
 import { ethers } from "hardhat";
+import { ContractWithAddress, deploy } from "test/useful";
 import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle } from "@types";
-import { ZeroAddress, parseEther, formatEther, MaxUint256, BaseContract } from "ethers";
+import { ZeroAddress, parseEther, formatEther, MaxUint256 } from "ethers";
 
 import * as fs from "fs";
 import * as rd from "readline";
 import { erc20 } from "typechain-types/@openzeppelin/contracts/token";
+
+import { Calculation, RegressionSystem, RegressionTest, Variable } from "test/f(x)/regression/RegressionTest";
 
 enum MintOption {
   Both,
@@ -15,27 +18,15 @@ enum MintOption {
   XToken,
 }
 
-type ContractWithAddress<T extends BaseContract> = T & { address: string; };
 
-async function deploy<T extends BaseContract> (factoryName: string,
-  deployer: SignerWithAddress /*HardhatEthersSigner*/,
-  ...deployArgs: any[]): Promise<ContractWithAddress<T>> {
-  const contractFactory = await ethers.getContractFactory(factoryName, deployer);
-  const contract = await contractFactory.deploy(...deployArgs);
-  await contract.waitForDeployment();
-
-  return Object.assign(
-    contract as T,
-    { address: await contract.getAddress() },
-    ) as ContractWithAddress<T>;
-}
 
 const PRECISION = 10n ** 18n;
 
 describe("NavsGraphs", async () => {
   let deployer: SignerWithAddress; // deploys all the contracts
   let platform: SignerWithAddress; // accepts fees from market
-  let signer: SignerWithAddress; //
+  let admin: SignerWithAddress; // bao admin
+  let fUser: SignerWithAddress; // user who mints/redeems fTokens
 
   let weth: ContractWithAddress<WETH9>;
   let oracle: ContractWithAddress<MockFxPriceOracle>;
@@ -49,12 +40,48 @@ describe("NavsGraphs", async () => {
   let initialCollateral = parseEther("100");
   let additionalCollateral = (baseTokenCap - initialCollateral) / 100n;
 
+  let rs = new RegressionSystem;
+  let index = new Variable(rs, "index", parseEther("0"));
+  let ethPrice = new Variable(rs, "ethPrice", parseEther("2000"));
+
+  let stabilityRatio = new Variable(rs, "stabilityRatio", parseEther("1.3"));
+  let liquidationRatio = new Variable(rs, "liquidationRatio", parseEther("1.2"));
+  let selfLiquidationRatio = new Variable(rs, "selfLiquidationRatio", parseEther("1.14"));
+  let recapRatio = new Variable(rs, "recapRatio", parseEther("1"));
+
+  let fTokenNav = new  Calculation(rs, "fTokenNav", () => {
+    return treasury.getCurrentNav().then((res) => res._fNav);
+  });
+  let xTokenNav = new  Calculation(rs, "xTokenNav", () => {
+    return treasury.getCurrentNav().then((res) => res._xNav);
+  });
+    let baseTokenNav = new  Calculation(rs, "baseTokenNav", () => {
+    return treasury.getCurrentNav().then((res) => res._baseNav);
+  });
+
+  let collateralRatio = new  Calculation(rs, "collateralRatio", () => {
+    return treasury.collateralRatio();
+  });
+
+  let fTokenSupply = new  Calculation(rs, "fTokenSupply", () => {
+    return fToken.totalSupply();
+  });
+  let fUserFTokens = new  Calculation(rs, "fUserFTokens", () => {
+    return fToken.balanceOf(fUser.address);
+  });
+
+  let xTokenSupply = new  Calculation(rs, "xTokenSupply", () => {
+    return xToken.totalSupply();
+  });
+  let xUserFTokens = new  Calculation(rs, "xUserFTokens", () => {
+    return xToken.balanceOf(fUser.address);
+  });
+
   beforeEach(async () => {
-    [deployer, platform, signer] = await ethers.getSigners();
+    [deployer, platform, admin, fUser] = await ethers.getSigners();
 
     weth = await deploy("WETH9", deployer);
     oracle = await deploy("MockFxPriceOracle", deployer);
-
     fToken = await deploy("FractionalToken", deployer);
     xToken = await deploy("LeveragedToken", deployer);
 
@@ -69,7 +96,6 @@ describe("NavsGraphs", async () => {
     await fToken.initialize(treasury.address, "Fractional ETH", "fETH");
     await xToken.initialize(treasury.address, fToken.address, "Leveraged ETH", "xETH");
 
-    console.log("treasury.initialize");
     await treasury.initialize(
       market.address,
       weth.address,
@@ -83,16 +109,40 @@ describe("NavsGraphs", async () => {
 
     await market.initialize(treasury.address, platform.address);
     await market.updateMarketConfig(
-      ethers.parseEther("1.3"),
-      ethers.parseEther("1.2"),
-      ethers.parseEther("1.14"),
-      ethers.parseEther("1"),
+      stabilityRatio.initialValue,
+      liquidationRatio.initialValue,
+      selfLiquidationRatio.initialValue,
+      recapRatio.initialValue
     );
     await weth.deposit({ value: initialCollateral * 1000n });
     //await weth.transfer(deployer.address, initialCollateral * 10n);
     await weth.approve(market.address, MaxUint256);
+
+    rs.initialise();
   });
 
+  context("navsby", async () => {
+    it("ethPrice", async () => {
+      let rt = new RegressionTest(rs, [index, ethPrice], []);
+
+      await oracle.setPrice(ethPrice.value);
+      await treasury.initializePrice();
+
+      await market.mint(initialCollateral, admin.address, 0, 0);
+
+      let maxIndex = parseEther("40");
+      for (; index.value <= maxIndex; index.value += parseEther("1")) {
+        ethPrice.value = ethPrice.initialValue * (maxIndex - index.value) / maxIndex;
+        await oracle.setPrice(ethPrice.value);
+
+        await rt.data();
+      }
+      await rt.done();
+    });
+  });
+
+
+/*
   context("navsby", async () => {
     it("xcollateral", async () => {
       // here we increase the collateral by minting equal amounts of f and x tokens
@@ -120,9 +170,6 @@ describe("NavsGraphs", async () => {
       }
     });
   });
-
-
-/*
 
   context("historic", async () => {
     it("run historic prices for each day and print the navs", async () => {
