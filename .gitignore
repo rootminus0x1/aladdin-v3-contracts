@@ -7,10 +7,10 @@ typechain-types/
 .eslintcache
 archive-*/
 
-*.csv
+test/data/run/
 
-#yarn files
-yarn-error.log
+# log files
+*.log
 
 #compiler files
 forge-cache/

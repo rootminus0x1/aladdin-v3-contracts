@@ -1,9 +1,9 @@
 /* eslint-disable node/no-missing-import */
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
-import { expect } from "chai";
+//import { expect } from "chai";
 import { ethers } from "hardhat";
 import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle } from "@types";
-import { ZeroAddress, parseEther, formatEther, MaxUint256 } from "ethers";
+import { ZeroAddress, parseEther, formatEther, MaxUint256, BaseContract } from "ethers";
 
 import * as fs from "fs";
 import * as rd from "readline";
@@ -15,6 +15,34 @@ enum MintOption {
   XToken,
 }
 
+type ContractWithAddress<T extends BaseContract> = T & { address: string; };
+
+ /*
+  return Object.assign(
+    contract,
+    { address: address }
+  ) as unknown as ContractWithAddress<Contract>;
+
+  return {
+    ...contract,
+    address: address,
+   } as unknown as ContractWithAddress<Contract>;
+
+    */
+
+async function deploy<T extends BaseContract> (factoryName: string,
+  deployer: SignerWithAddress /*HardhatEthersSigner*/,
+  ...deployArgs: any[]): Promise<ContractWithAddress<T>> {
+  const contractFactory = await ethers.getContractFactory(factoryName, deployer);
+  const contract = await contractFactory.deploy(...deployArgs);
+  await contract.waitForDeployment();
+
+  return Object.assign(
+    contract as T,
+    { address: await contract.getAddress() },
+    )as ContractWithAddress<T>;
+}
+
 const PRECISION = 10n ** 18n;
 
 describe("NavsGraphs", async () => {
@@ -22,18 +50,12 @@ describe("NavsGraphs", async () => {
   let platform: SignerWithAddress; // accepts fees from market
   let signer: SignerWithAddress; //
 
-  let weth: WETH9;
-  let wethAddress: string;
-  let oracle: MockFxPriceOracle;
-  let oracleAddress: string;
-  let fToken: FractionalToken;
-  let fTokenAddress: string;
-  let xToken: LeveragedToken;
-  let xTokenAddress: string;
-  let treasury: Treasury;
-  let treasuryAddress: string;
-  let market: Market;
-  let marketAddress: string;
+  let weth: ContractWithAddress<WETH9>;
+  let oracle: ContractWithAddress<MockFxPriceOracle>;
+  let fToken: ContractWithAddress<FractionalToken>;
+  let xToken: ContractWithAddress<LeveragedToken>;
+  let treasury: ContractWithAddress<Treasury>;
+  let market: ContractWithAddress<Market>;
 
   let beta = parseEther("0.1");
   let baseTokenCap = parseEther("1000");
@@ -43,66 +65,81 @@ describe("NavsGraphs", async () => {
   beforeEach(async () => {
     [deployer, platform, signer] = await ethers.getSigners();
 
-    const WETH9 = await ethers.getContractFactory("WETH9", deployer);
-    weth = await WETH9.deploy();
-    await weth.waitForDeployment();
-    wethAddress = await weth.getAddress();
+    weth = await deploy("WETH9", deployer);
+    oracle = await deploy("MockFxPriceOracle", deployer);
 
-    const MockFxPriceOracle = await ethers.getContractFactory("MockFxPriceOracle", deployer);
-    oracle = await MockFxPriceOracle.deploy();
-    await oracle.waitForDeployment();
-    oracleAddress = await oracle.getAddress();
+    fToken = await deploy("FractionalToken", deployer);
+    xToken = await deploy("LeveragedToken", deployer);
 
-    const FractionalToken = await ethers.getContractFactory("FractionalToken", deployer);
-    fToken = await FractionalToken.deploy();
-    await fToken.waitForDeployment();
-    fTokenAddress = await fToken.getAddress();
-
-    const LeveragedToken = await ethers.getContractFactory("LeveragedToken", deployer);
-    xToken = await LeveragedToken.deploy();
-    await xToken.waitForDeployment();
-    xTokenAddress = await xToken.getAddress();
-
-    const Treasury = await ethers.getContractFactory("Treasury", deployer);
     // TODO: upgradeable and constructors are incompatible (right?), so the constructor should be removed
     // and the ratio passed into the initialise function, or maybe the Market.mint() function?
     // both of these functions only get called once (check this), although the market can be changed so
     // could be called on each market... seems like an arbitrary thing that should maybe be designed out?
-    treasury = await Treasury.deploy(parseEther("0.5")); // 50/50 split between f & x tokens
-    await treasury.waitForDeployment();
-    treasuryAddress = await treasury.getAddress();
+    treasury = await deploy("Treasury", deployer, parseEther("0.5")); // 50/50 split between f & x tokens
 
-    const Market = await ethers.getContractFactory("Market", deployer);
-    market = await Market.deploy();
-    await market.waitForDeployment();
-    marketAddress = await market.getAddress();
+    market = await deploy("Market", deployer);
 
-    await fToken.initialize(treasuryAddress, "Fractional ETH", "fETH");
-    await xToken.initialize(treasuryAddress, fTokenAddress, "Leveraged ETH", "xETH");
+    await fToken.initialize(treasury.address, "Fractional ETH", "fETH");
+    await xToken.initialize(treasury.address, fToken.address, "Leveraged ETH", "xETH");
 
+    console.log("treasury.initialize");
     await treasury.initialize(
-      marketAddress,
-      wethAddress,
-      fTokenAddress,
-      xTokenAddress,
-      oracleAddress,
+      market.address,
+      weth.address,
+      fToken.address,
+      xToken.address,
+      oracle.address,
       beta,
       baseTokenCap,
       ZeroAddress, // rate provider - used to convert between wrapped and unwrapped, 0 address means 1:1 ratio
     );
 
-    await market.initialize(treasuryAddress, platform.address);
+    await market.initialize(treasury.address, platform.address);
     await market.updateMarketConfig(
       ethers.parseEther("1.3"),
       ethers.parseEther("1.2"),
       ethers.parseEther("1.14"),
       ethers.parseEther("1"),
     );
-
+    console.log("weth.deposit");
     await weth.deposit({ value: initialCollateral * 1000n });
     //await weth.transfer(deployer.address, initialCollateral * 10n);
-    await weth.approve(marketAddress, MaxUint256);
+    console.log("weth.approve");
+    await weth.approve(market.address, MaxUint256);
+    console.log("done.");
   });
+
+  context("navsby", async () => {
+    it("xcollateral", async () => {
+      // here we increase the collateral by minting equal amounts of f and x tokens
+
+      let price = parseEther("1000"); // a grand per eth
+      await oracle.setPrice(price);
+      console.log("treasury=%s (addr=%s)", treasury, treasury.address)
+      await treasury.initializePrice();
+
+      await market.mint(initialCollateral, signer.address, 0, 0);
+
+      console.log("Collateral, fTokens, fToken NAV, xTokens, xToken NAV");
+      for (let collateral = initialCollateral; collateral < baseTokenCap; collateral += additionalCollateral) {
+        await market.mintXToken(additionalCollateral, signer.address, 0);
+        let xTokens = await xToken.balanceOf(signer.address);
+        let fTokens = await fToken.balanceOf(signer.address);
+        var navs = await treasury.getCurrentNav();
+        console.log(
+          "%s, %s, %s, %s, %s",
+          formatEther(collateral),
+          formatEther(fTokens),
+          formatEther(navs._fNav),
+          formatEther(xTokens),
+          formatEther(navs._xNav),
+        );
+      }
+    });
+  });
+
+
+/*
 
   context("historic", async () => {
     it("run historic prices for each day and print the navs", async () => {
@@ -201,7 +238,7 @@ describe("NavsGraphs", async () => {
       for (let price = parseEther("100"); // 500 passes
         price < initialPrice * 2n;
         price += (initialPrice / 50n)) {
-*/
+
       for (let price = initialPrice; price > 0n; price -= initialPrice / 500n) {
         await oracle.setPrice(price);
         //let xTokens = await xToken.balanceOf(signer.address);
@@ -218,4 +255,5 @@ describe("NavsGraphs", async () => {
       }
     });
   });
+  */
 });

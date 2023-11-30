@@ -1,0 +1,4 @@
+code,message
+Not liquidation mode,VM Exception while processing transaction: reverted with reason string 'Not liquidation mode'
+SafeMath: subtraction overflow,VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'
+invalid twap price,VM Exception while processing transaction: reverted with reason string 'invalid twap price'
