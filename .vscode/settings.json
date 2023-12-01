@@ -16,13 +16,21 @@
   //"solidity.formatter": "prettier", // this uses a .pretierrc , see https://github.com/prettier-solidity/prettier-plugin-solidity#configuration-file
   //"solidity.formatter": "forge", // TODO: check against prettier
 
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.documentSelectors": ["**/*.sol", "**/*.ts", "**/*.json"],
 
   "[solidity]": {
     //"editor.defaultFormatter": "JuanBlanco.solidity"
     //"editor.defaultFormatter": "NomicFoundation.hardhat-solidity",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "markiscodecoverage.coverageThreshold": 90,
 
   "workbench.colorCustomizations": {
     //"markiscodecoverage.colorUncoveredLineText": "#FF7F2750",

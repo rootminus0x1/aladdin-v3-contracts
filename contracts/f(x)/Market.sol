@@ -12,6 +12,8 @@ import { IMarket } from "./interfaces/IMarket.sol";
 import { IReservePool } from "./interfaces/IReservePool.sol";
 import { ITreasury } from "./interfaces/ITreasury.sol";
 
+import "hardhat/console.sol";
+
 // solhint-disable max-states-count
 
 contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket {
@@ -459,6 +461,11 @@ contract Market is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IMarket
       _marketConfig.recapRatio <= _collateralRatio && _collateralRatio < _marketConfig.liquidationRatio,
       "Not liquidation mode"
     );
+
+    // TODO: liquidate all msg.sender's fTokens
+    // if (_fTokenIn == uint256(-1)) {
+    //   _fTokenIn = IERC20Upgradeable(fToken).balanceOf(msg.sender);
+    // }
 
     // bound the amount of fToken
     (, uint256 _maxFTokenLiquidatable) = _treasury.maxLiquidatable(
