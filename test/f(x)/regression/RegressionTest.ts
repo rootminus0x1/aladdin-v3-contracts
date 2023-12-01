@@ -243,7 +243,8 @@ export class RegressionTest {
     }
     */
 
-    // check for csvdiff
+    // just do a string compare
+    /*
     let run, good;
     let csvdiff = "csvdiff";
     if (commandExists.sync(csvdiff)) {
@@ -255,6 +256,9 @@ export class RegressionTest {
       run = runData;
       good = fs.readFileSync(this.goodDataFilePath, "utf-8");
     }
+    */
+    const run = runData;
+    const good = fs.readFileSync(this.goodDataFilePath, "utf-8");
     expect(run).to.equal(
       good,
       "This run is different to the good one.\n      Compare the run results to the good resuts, e.g.\n         bcompare "
