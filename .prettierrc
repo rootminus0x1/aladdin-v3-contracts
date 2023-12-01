@@ -19,7 +19,7 @@
       }
     },
     {
-      "files": "*.ts",
+      "files": ["*.ts", "*.json", "*.tsx"],
       "options": {
         "printWidth": 120,
         "tabWidth": 2,
