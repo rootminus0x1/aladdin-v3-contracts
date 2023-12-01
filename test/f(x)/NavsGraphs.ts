@@ -51,6 +51,8 @@ describe("NavsGraphs", async () => {
   let liquidationRatio = new Variable(rs, "liquidationRatio", parseEther("1.2"));
   let selfLiquidationRatio = new Variable(rs, "selfLiquidationRatio", parseEther("1.14"));
   let recapRatio = new Variable(rs, "recapRatio", parseEther("1"));
+  // TODO: why is this not just liquidationRatio: review the rebalance pool / market interactions
+  let rebalancePoolliquidatableRatio = new Variable(rs, "rebalancePoolliquidatableRatio", parseEther("1.4"));
 
   let liquidationBot = new Calculation(rs, "liquidationBot", async () => {
     const deposited = await fToken.balanceOf(rebalancePool); // TODO: add a -1 input to liquidate function
@@ -199,7 +201,7 @@ describe("NavsGraphs", async () => {
 
     await rebalancePool.initialize(treasury, market);
     await rebalancePool.updateLiquidator(liquidator.address);
-    await rebalancePool.updateLiquidatableCollateralRatio(ethers.parseEther("1.4"));
+    await rebalancePool.updateLiquidatableCollateralRatio(rebalancePoolliquidatableRatio.initialValue);
 
     rs.initialise();
   });

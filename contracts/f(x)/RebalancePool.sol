@@ -369,7 +369,7 @@ contract RebalancePool is OwnableUpgradeable, IRebalancePool {
     uint256 _compoundedDeposit = snapshots[_recipient].initialDeposit;
     uint256 _compoundedUnlock = snapshots[_recipient].initialUnlock.amount;
     uint256 _newDeposit = _compoundedDeposit.add(_amount);
-    emit UserDepositChange(_recipient, _newDeposit, 0);
+    emit UserDepositChange(_recipient, _newDeposit, 0); // TODO: check this is not a duplicate of below
 
     _takeAccountSnapshot(_recipient, _newDeposit, _compoundedUnlock);
 
