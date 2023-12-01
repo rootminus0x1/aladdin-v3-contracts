@@ -10,7 +10,7 @@ import { erc20 } from "typechain-types/@openzeppelin/contracts/token";
 
 import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle, RebalancePool } from "@types";
 import { ContractWithAddress, deploy } from "test/useful";
-import { Calculation, RegressionSystem, RegressionTest, Variable } from "test/f(x)/regression/RegressionTest";
+import { Actor, Calculation, RegressionSystem, RegressionTest, Variable } from "test/f(x)/regression/RegressionTest";
 
 enum MintOption {
   Both,
@@ -52,25 +52,24 @@ describe("NavsGraphs", async () => {
   let selfLiquidationRatio = new Variable(rs, "selfLiquidationRatio", parseEther("1.14"));
   let recapRatio = new Variable(rs, "recapRatio", parseEther("1"));
   // TODO: why is this not just liquidationRatio: review the rebalance pool / market interactions
-  let rebalancePoolliquidatableRatio = new Variable(rs, "rebalancePoolliquidatableRatio", parseEther("1.4"));
+  let rebalancePoolliquidatableRatio = new Variable(rs, "rebalancePoolliquidatableRatio", parseEther("1.3"));
 
-  let liquidationBot = new Calculation(rs, "liquidationBot", async () => {
+  let rebalancePoolLiquidation = new Actor(rs, "rebalancePoolLiquidation", async () => {
     const deposited = await fToken.balanceOf(rebalancePool); // TODO: add a -1 input to liquidate function
     await rebalancePool.connect(liquidator).liquidate(deposited, 0n);
-    return weth.balanceOf(liquidator.address);
+  });
+  let fUserLiquidation = new Actor(rs, "fUserLiquidation", async () => {
+    const balance = await fToken.balanceOf(fUser);
+    await market.connect(fUser).liquidate(balance, fUser.address, 0n);
   });
 
-  let fUserLiquidationBot = new Calculation(rs, "fUserLiquidationBot", async () => {
-    // const balance = await fToken.balanceOf(fUser);
-    await market.connect(fUser).liquidate(MaxUint256, fUser.address, 0n);
-    return weth.balanceOf(fUser.address);
-  });
-
+  /*
   let rebalanceUserLiquidationBot = new Calculation(rs, "rebalanceUserLiquidationBot", async () => {
     const deposited = await fToken.balanceOf(rebalanceUser);
     await market.connect(rebalanceUser).liquidate(deposited, rebalanceUser.address, 0n);
     return weth.balanceOf(rebalanceUser.address);
   });
+  */
 
   let fTokenNav = new Calculation(rs, "fTokenNav", async () => {
     return treasury.getCurrentNav().then((res) => res._fNav);
@@ -208,7 +207,7 @@ describe("NavsGraphs", async () => {
 
   context("navsby", async () => {
     it("ethPrice", async () => {
-      let rt = new RegressionTest(rs, [index, ethPrice], []);
+      let rt = new RegressionTest(rs, [index, ethPrice], [rebalancePoolLiquidation, fUserLiquidation]);
 
       await oracle.setPrice(ethPrice.value);
       await treasury.initializePrice();
@@ -224,7 +223,7 @@ describe("NavsGraphs", async () => {
       // TODO: actors are execised one at a time so data should take the actor as input
       // TODO: actors produce tw columns "Act", which has the name of the actor and
       // result - either "success" or an error message
-      await rt.data();
+      //await rt.data();
 
       // fUser and rebalanceUser mintFTokens
       const fTokensEth = initialCollateral.initialValue / 2n;
@@ -237,13 +236,13 @@ describe("NavsGraphs", async () => {
       await weth.connect(fUser).approve(market.address, MaxUint256);
       await market.connect(fUser).mintFToken(MaxUint256, fUser.address, 0n);
 
-      await rt.data();
+      //await rt.data();
 
       // set up rebalance Pool
       await fToken.connect(rebalanceUser).approve(rebalancePool.address, MaxUint256);
       await rebalancePool.connect(rebalanceUser).deposit(MaxUint256, rebalanceUser.address);
 
-      await rt.data();
+      //await rt.data();
 
       let maxIndex = parseEther("40");
       for (; index.value <= maxIndex; index.value += parseEther("1")) {

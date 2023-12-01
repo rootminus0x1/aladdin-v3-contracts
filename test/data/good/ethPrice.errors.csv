@@ -2,6 +2,5 @@ code,message
 cannot liquidate,VM Exception while processing transaction: reverted with reason string 'cannot liquidate'
 Not liquidation mode,VM Exception while processing transaction: reverted with reason string 'Not liquidation mode'
 redeem zero amount,VM Exception while processing transaction: reverted with reason string 'redeem zero amount'
-ERC20: burn amount exceeds balance,VM Exception while processing transaction: reverted with reason string 'ERC20: burn amount exceeds balance'
 SafeMath: subtraction overflow,VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'
 invalid twap price,VM Exception while processing transaction: reverted with reason string 'invalid twap price'

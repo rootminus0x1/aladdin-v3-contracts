@@ -6,6 +6,7 @@ import * as crypto from "crypto-js";
 //import 'command-exists';
 import commandExists from "command-exists";
 import { execSync } from "child_process";
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
 //////////////////////////////////
 // regression system
@@ -25,14 +26,16 @@ export class Variable {
   }
 }
 
+type ActorFunction = () => Promise<undefined>;
+
 export class Actor {
   // TODO: add a map to prevent duplicate variables
   // An actor is an independent variable that is updated by the act function
+
   constructor(
     system: RegressionSystem,
     public name: string,
-    public act: () => Promise<string>,
-    public calculations: Calculation[],
+    public act: ActorFunction, // TODO: add these? public calculations: Calculation[],
   ) {
     system.getAllActors().set(name, act);
   }
@@ -57,7 +60,7 @@ export class RegressionSystem {
     return this.allCalculations;
   }
 
-  private allActors = new Map<string, () => Promise<string>>(); // insertion order is retained in Map
+  private allActors = new Map<string, ActorFunction>(); // insertion order is retained in Map
   public getAllActors() {
     return this.allActors;
   }
@@ -91,13 +94,16 @@ export class RegressionTest {
     return this.independents.map((i) => i.name).includes(v.name);
   }
 
-  // TODO: get rid of the variables - they are all actors
+  // TODO: get rid of the variables - they are all actors, maybe?
   constructor(public system: RegressionSystem, public independents: Variable[], public actors: Actor[]) {
     // reset all the variables to their initial values
     system.initialise();
 
-    const keys = [...independents.map((v) => v.name), ...actors.map((a) => a.name)];
-    this.runData = new DataTable(keys, [...this.system.getAllCalculations().keys()]);
+    this.runData = new DataTable(
+      //[...independents.map((v) => v.name)].concat(actors.length ? ["actionName", "actionResult"] : []),
+      [...independents.map((v) => v.name)],
+      [...actors.map((a) => a.name)].concat([...this.system.getAllCalculations().keys()]),
+    );
 
     // TODO: use the DataTable for generating this parameter info
     // and print out all the header info
@@ -117,7 +123,7 @@ export class RegressionTest {
     this.runParameters.push(pdata.join());
 
     // set up the file names consistently
-    const runName = keys.slice(1).join("_x_"); // TODO: get this passed in
+    const runName = [...independents.map((v) => v.name)].slice(1).join("_x_"); // TODO: get this passed in
 
     const dataSuffix = ".data.csv";
     const errorsSuffix = ".errors.csv";
@@ -159,24 +165,39 @@ export class RegressionTest {
   }
 
   public async data() {
-    // one line for each of the actors plus one for no actors
-    for (let afn of [() => "", ...this.system.getAllActors().values()]) {
+    // one column for each actor
+    // one row, no actors
+    // then execute actors - if they pass it's a new line, else go on to the next actor
+
+    let currentActor = -1;
+    do {
       let line: string[] = [];
 
-      // first the independent variables, whose value is set outside the regression system
-      this.independents.forEach((v) => line.push(formatEther(v.value)));
+      this.independents.forEach((variable) => line.push(formatEther(variable.value)));
+      // one actor at a time
+      for (let a = 0; a < this.actors.length; a++) {
+        if (a == currentActor) {
+          try {
+            await this.actors[a].act();
+            line.push(":-)");
+          } catch (e: any) {
+            line.push(this.formatError(e));
+            currentActor++;
+          }
+        } else {
+          line.push("-");
+        }
+      }
 
       for (let cfn of this.system.getAllCalculations().values()) {
-        let value = "";
         try {
-          value = formatEther(await cfn());
+          line.push(formatEther(await cfn()));
         } catch (e: any) {
-          value = this.formatError(e);
+          line.push(this.formatError(e));
         }
-        line.push(value);
       }
       this.runData.addRow(line);
-    }
+    } while (++currentActor < this.actors.length);
   }
 
   public async done() {
