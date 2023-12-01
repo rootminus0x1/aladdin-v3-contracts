@@ -2,14 +2,14 @@
 import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 //import { expect } from "chai";
 import { ethers } from "hardhat";
-import { ContractWithAddress, deploy } from "test/useful";
-import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle } from "@types";
 import { ZeroAddress, parseEther, formatEther, MaxUint256 } from "ethers";
 
 import * as fs from "fs";
 import * as rd from "readline";
 import { erc20 } from "typechain-types/@openzeppelin/contracts/token";
 
+import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle, RebalancePool } from "@types";
+import { ContractWithAddress, deploy } from "test/useful";
 import { Calculation, RegressionSystem, RegressionTest, Variable } from "test/f(x)/regression/RegressionTest";
 
 enum MintOption {
@@ -18,8 +18,6 @@ enum MintOption {
   XToken,
 }
 
-
-
 const PRECISION = 10n ** 18n;
 
 describe("NavsGraphs", async () => {
@@ -27,6 +25,7 @@ describe("NavsGraphs", async () => {
   let platform: SignerWithAddress; // accepts fees from market
   let admin: SignerWithAddress; // bao admin
   let fUser: SignerWithAddress; // user who mints/redeems fTokens
+  let rebalanceUser: SignerWithAddress; // interacts with rebalancePool
 
   let weth: ContractWithAddress<WETH9>;
   let oracle: ContractWithAddress<MockFxPriceOracle>;
@@ -34,13 +33,15 @@ describe("NavsGraphs", async () => {
   let xToken: ContractWithAddress<LeveragedToken>;
   let treasury: ContractWithAddress<Treasury>;
   let market: ContractWithAddress<Market>;
+  let rebalancePool: ContractWithAddress<RebalancePool>;
 
-  let beta = parseEther("0.1");
-  let baseTokenCap = parseEther("1000");
-  let initialCollateral = parseEther("100");
-  let additionalCollateral = (baseTokenCap - initialCollateral) / 100n;
+  let rs = new RegressionSystem();
 
-  let rs = new RegressionSystem;
+  let beta = new Variable(rs, "beta", parseEther("0.1"));
+  let baseTokenCap = new Variable(rs, "baseTokenCap", parseEther("1000"));
+  let initialCollateral = new Variable(rs, "initialCollateral", parseEther("100"));
+  //let additionalCollateral = (baseTokenCap - initialCollateral) / 100n;
+
   let index = new Variable(rs, "index", parseEther("0"));
   let ethPrice = new Variable(rs, "ethPrice", parseEther("2000"));
 
@@ -49,36 +50,68 @@ describe("NavsGraphs", async () => {
   let selfLiquidationRatio = new Variable(rs, "selfLiquidationRatio", parseEther("1.14"));
   let recapRatio = new Variable(rs, "recapRatio", parseEther("1"));
 
-  let fTokenNav = new  Calculation(rs, "fTokenNav", () => {
+  let fTokenNav = new Calculation(rs, "fTokenNav", () => {
     return treasury.getCurrentNav().then((res) => res._fNav);
   });
-  let xTokenNav = new  Calculation(rs, "xTokenNav", () => {
+  let xTokenNav = new Calculation(rs, "xTokenNav", () => {
     return treasury.getCurrentNav().then((res) => res._xNav);
   });
-    let baseTokenNav = new  Calculation(rs, "baseTokenNav", () => {
+  let baseTokenNav = new Calculation(rs, "baseTokenNav", () => {
     return treasury.getCurrentNav().then((res) => res._baseNav);
   });
 
-  let collateralRatio = new  Calculation(rs, "collateralRatio", () => {
+  let collateralRatio = new Calculation(rs, "collateralRatio", () => {
     return treasury.collateralRatio();
   });
 
-  let fTokenSupply = new  Calculation(rs, "fTokenSupply", () => {
+  let fTokenSupply = new Calculation(rs, "fTokenSupply", () => {
     return fToken.totalSupply();
   });
-  let fUserFTokens = new  Calculation(rs, "fUserFTokens", () => {
+  let fUserFTokens = new Calculation(rs, "fUserFTokens", () => {
     return fToken.balanceOf(fUser.address);
   });
+  let rebalanceUserFTokens = new Calculation(rs, "rebalanceUserFTokens", () => {
+    return fToken.balanceOf(rebalanceUser.address);
+  });
 
-  let xTokenSupply = new  Calculation(rs, "xTokenSupply", () => {
+  let rebalancePoolFTokens = new Calculation(rs, "rebalancePoolFTokens", () => {
+    return rebalancePool.totalSupply();
+  });
+
+  let rebalancePoolLiquidatableCollateralRatio = new Calculation(rs, "rebalancePoolLiquidatableCollateralRatio", () => {
+    return rebalancePool.liquidatableCollateralRatio();
+  });
+
+  let xTokenSupply = new Calculation(rs, "xTokenSupply", () => {
     return xToken.totalSupply();
   });
-  let xUserFTokens = new  Calculation(rs, "xUserFTokens", () => {
+  let xUserXTokens = new Calculation(rs, "xUserXTokens", () => {
     return xToken.balanceOf(fUser.address);
   });
 
+  let deployerBaseTokens = new Calculation(rs, "deployerBaseTokens", () => {
+    return weth.balanceOf(rebalanceUser.address);
+  });
+  let platformBaseTokens = new Calculation(rs, "platformBaseTokens", () => {
+    return weth.balanceOf(platform.address);
+  });
+  let treasuryBaseTokens = new Calculation(rs, "treasuryBaseTokens", () => {
+    return weth.balanceOf(treasury.address);
+  });
+  let marketBaseTokens = new Calculation(rs, "marketBaseTokens", () => {
+    return weth.balanceOf(market.address);
+  });
+  let rebalanceUserBaseTokens = new Calculation(rs, "rebalanceUserBaseTokens", () => {
+    return weth.balanceOf(rebalanceUser.address);
+  });
+
   beforeEach(async () => {
-    [deployer, platform, admin, fUser] = await ethers.getSigners();
+    [deployer, platform, admin, fUser, rebalanceUser] = await ethers.getSigners();
+    console.log("%s = deployer", deployer.address);
+    console.log("%s = platform", platform.address);
+    console.log("%s = admin", admin.address);
+    console.log("%s = fUser", fUser.address);
+    console.log("%s = rebalanceUser", rebalanceUser.address);
 
     weth = await deploy("WETH9", deployer);
     oracle = await deploy("MockFxPriceOracle", deployer);
@@ -90,8 +123,16 @@ describe("NavsGraphs", async () => {
     // both of these functions only get called once (check this), although the market can be changed so
     // could be called on each market... seems like an arbitrary thing that should maybe be designed out?
     treasury = await deploy("Treasury", deployer, parseEther("0.5")); // 50/50 split between f & x tokens
-
     market = await deploy("Market", deployer);
+    rebalancePool = await deploy("RebalancePool", deployer);
+
+    console.log("%s = weth", weth.address);
+    console.log("%s = oracle", oracle.address);
+    console.log("%s = fToken", fToken.address);
+    console.log("%s = xToken", xToken.address);
+    console.log("%s = treasury", treasury.address);
+    console.log("%s = market", market.address);
+    console.log("%s = rebalancePool", rebalancePool.address);
 
     await fToken.initialize(treasury.address, "Fractional ETH", "fETH");
     await xToken.initialize(treasury.address, fToken.address, "Leveraged ETH", "xETH");
@@ -102,8 +143,8 @@ describe("NavsGraphs", async () => {
       fToken.address,
       xToken.address,
       oracle.address,
-      beta,
-      baseTokenCap,
+      beta.initialValue,
+      baseTokenCap.initialValue,
       ZeroAddress, // rate provider - used to convert between wrapped and unwrapped, 0 address means 1:1 ratio
     );
 
@@ -112,11 +153,10 @@ describe("NavsGraphs", async () => {
       stabilityRatio.initialValue,
       liquidationRatio.initialValue,
       selfLiquidationRatio.initialValue,
-      recapRatio.initialValue
+      recapRatio.initialValue,
     );
-    await weth.deposit({ value: initialCollateral * 1000n });
-    //await weth.transfer(deployer.address, initialCollateral * 10n);
-    await weth.approve(market.address, MaxUint256);
+
+    await rebalancePool.initialize(treasury, market);
 
     rs.initialise();
   });
@@ -128,11 +168,25 @@ describe("NavsGraphs", async () => {
       await oracle.setPrice(ethPrice.value);
       await treasury.initializePrice();
 
-      await market.mint(initialCollateral, admin.address, 0, 0);
+      // set up the market
+      // allow initial mint
+      await weth.deposit({ value: initialCollateral.initialValue });
+      await weth.approve(market.address, MaxUint256);
+      await market.mint(initialCollateral.value, deployer.address, 0, 0);
+
+      // set up rebalance Pool
+      // allow rebalanceUser to mintFTokens
+      const fTokensEth = initialCollateral.initialValue / 2n;
+      await weth.connect(rebalanceUser).deposit({ value: fTokensEth });
+      await weth.connect(rebalanceUser).approve(market.address, MaxUint256);
+      await market.connect(rebalanceUser).mintFToken(MaxUint256, rebalanceUser.address, 0n);
+
+      await fToken.connect(rebalanceUser).approve(rebalancePool.address, MaxUint256);
+      await rebalancePool.connect(rebalanceUser).deposit(MaxUint256, rebalanceUser.address);
 
       let maxIndex = parseEther("40");
       for (; index.value <= maxIndex; index.value += parseEther("1")) {
-        ethPrice.value = ethPrice.initialValue * (maxIndex - index.value) / maxIndex;
+        ethPrice.value = (ethPrice.initialValue * (maxIndex - index.value)) / maxIndex;
         await oracle.setPrice(ethPrice.value);
 
         await rt.data();
@@ -141,8 +195,7 @@ describe("NavsGraphs", async () => {
     });
   });
 
-
-/*
+  /*
   context("navsby", async () => {
     it("xcollateral", async () => {
       // here we increase the collateral by minting equal amounts of f and x tokens
