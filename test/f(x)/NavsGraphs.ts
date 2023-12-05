@@ -9,8 +9,8 @@ import * as rd from "readline";
 import { erc20 } from "typechain-types/@openzeppelin/contracts/token";
 
 import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle, RebalancePool } from "@types";
-import { ContractWithAddress, deploy } from "test/useful";
-import { Actor, Calculation, RegressionSystem, RegressionTest, Variable } from "test/f(x)/regression/RegressionTest";
+import { ContractWithAddress, UserWithAddress, deploy, getUser } from "test/useful";
+import { RegressionSystem, RegressionTest, Variable } from "test/f(x)/regression/RegressionTest";
 
 enum MintOption {
   Both,
@@ -21,13 +21,13 @@ enum MintOption {
 const PRECISION = 10n ** 18n;
 
 describe("NavsGraphs", async () => {
-  let deployer: SignerWithAddress; // deploys all the contracts
-  let platform: SignerWithAddress; // accepts fees from market
-  let admin: SignerWithAddress; // bao admin
-  let fUser: SignerWithAddress; // user who mints/liquidates fTokens
-  let rebalanceUser: SignerWithAddress; // mints fTokens and deposits in rebalancePool
-  let liquidator: SignerWithAddress; // bot that liquidates the rebalancePool (somehow)
-  let xUser: SignerWithAddress; // user who mints/redeems xTokens
+  let deployer: UserWithAddress; // deploys all the contracts
+  let platform: UserWithAddress; // accepts fees from market
+  let admin: UserWithAddress; // bao admin
+  let fUser: UserWithAddress; // user who mints/liquidates fTokens
+  let rebalanceUser: UserWithAddress; // mints fTokens and deposits in rebalancePool
+  let liquidator: UserWithAddress; // bot that liquidates the rebalancePool (somehow)
+  let xUser: UserWithAddress; // user who mints/redeems xTokens
 
   let weth: ContractWithAddress<WETH9>;
   let oracle: ContractWithAddress<MockFxPriceOracle>;
@@ -39,51 +39,53 @@ describe("NavsGraphs", async () => {
 
   let rs = new RegressionSystem();
 
-  let beta = new Variable(rs, "beta", parseEther("0.1"));
-  let baseTokenCap = new Variable(rs, "baseTokenCap", parseEther("200"));
-  let initialCollateral = new Variable(rs, "initialCollateral", parseEther("100"));
+  let beta = rs.defVariable("beta", parseEther("0.1"));
+  let baseTokenCap = rs.defVariable("baseTokenCap", parseEther("200"));
+  let initialCollateral = rs.defVariable("initialCollateral", parseEther("100"));
   //let additionalCollateral = (baseTokenCap - initialCollateral) / 100n;
 
-  let index = new Variable(rs, "index", parseEther("0"));
-  let ethPrice = new Variable(rs, "ethPrice", parseEther("2000"));
+  let index = rs.defVariable("index", parseEther("0"));
+  let ethPrice = rs.defVariable("ethPrice", parseEther("2000"));
 
-  let stabilityRatio = new Variable(rs, "stabilityRatio", parseEther("1.3"));
-  let liquidationRatio = new Variable(rs, "liquidationRatio", parseEther("1.2"));
-  let selfLiquidationRatio = new Variable(rs, "selfLiquidationRatio", parseEther("1.14"));
-  let recapRatio = new Variable(rs, "recapRatio", parseEther("1"));
+  let stabilityRatio = rs.defVariable("stabilityRatio", parseEther("1.3"));
+  let liquidationRatio = rs.defVariable("liquidationRatio", parseEther("1.2"));
+  let selfLiquidationRatio = rs.defVariable("selfLiquidationRatio", parseEther("1.14"));
+  let recapRatio = rs.defVariable("recapRatio", parseEther("1"));
   // TODO: why is this not just liquidationRatio: review the rebalance pool / market interactions
-  let rebalancePoolliquidatableRatio = new Variable(rs, "rebalancePoolliquidatableRatio", parseEther("1.3"));
+  let rebalancePoolliquidatableRatio = rs.defVariable("rebalancePoolliquidatableRatio", parseEther("1.3"));
 
-  let rebalancePoolLiquidation = new Actor(rs, "rebalancePoolLiquidation", async () => {
+  let rebalancePoolLiquidation = rs.defAction("rebalancePoolLiquidation", async () => {
     const deposited = await fToken.balanceOf(rebalancePool); // TODO: add a -1 input to liquidate function
     await rebalancePool.connect(liquidator).liquidate(deposited, 0n);
   });
-  let fUserLiquidation = new Actor(rs, "fUserLiquidation", async () => {
+  let fUserLiquidation = rs.defAction("fUserLiquidation", async () => {
     const balance = await fToken.balanceOf(fUser);
     await market.connect(fUser).liquidate(balance, fUser.address, 0n);
   });
 
-  /*
-  let rebalanceUserLiquidationBot = new Calculation(rs, "rebalanceUserLiquidationBot", async () => {
-    const deposited = await fToken.balanceOf(rebalanceUser);
-    await market.connect(rebalanceUser).liquidate(deposited, rebalanceUser.address, 0n);
-    return weth.balanceOf(rebalanceUser.address);
-  });
-  */
-
-  let fTokenNav = new Calculation(rs, "fTokenNav", async () => {
+  rs.defCalculation("fTokenNav", async () => {
     return treasury.getCurrentNav().then((res) => res._fNav);
   });
-  let xTokenNav = new Calculation(rs, "xTokenNav", async () => {
+  rs.defCalculation("xTokenNav", async () => {
     return treasury.getCurrentNav().then((res) => res._xNav);
   });
-  let baseTokenNav = new Calculation(rs, "baseTokenNav", async () => {
+  rs.defCalculation("baseTokenNav", async () => {
     return treasury.getCurrentNav().then((res) => res._baseNav);
   });
-
-  let collateralRatio = new Calculation(rs, "collateralRatio", async () => {
+  rs.defCalculation("collateralRatio", async () => {
     return treasury.collateralRatio();
   });
+
+  let token = rs.defType("token", [
+    {
+      name: "supply",
+      instanceCalculation: (token: any) => {
+        return token.totalSupply();
+      },
+    },
+  ]);
+
+  /*
 
   let fTokenSupply = new Calculation(rs, "fTokenSupply", async () => {
     return fToken.totalSupply();
@@ -142,8 +144,17 @@ describe("NavsGraphs", async () => {
     return weth.balanceOf(rebalancePool.address);
   });
 
+  */
+
   beforeEach(async () => {
-    [deployer, platform, admin, fUser, rebalanceUser, liquidator, xUser] = await ethers.getSigners();
+    deployer = await getUser("deployer");
+    platform = await getUser("playform");
+    admin = await getUser("admin");
+    fUser = await getUser("fUser");
+    rebalanceUser = await getUser("rebalanceUser");
+    liquidator = await getUser("liquidator");
+    xUser = await getUser("xUser");
+
     /*
     console.log("%s = deployer", deployer.address);
     console.log("%s = platform", platform.address);
@@ -154,17 +165,23 @@ describe("NavsGraphs", async () => {
     console.log("%s = xUser", xUser.address);
     */
     weth = await deploy("WETH9", deployer);
+    // rt.defToken(weth.name, weth.address);
     oracle = await deploy("MockFxPriceOracle", deployer);
     fToken = await deploy("FractionalToken", deployer);
+    //rs.defToken(fToken.name, fToken.address);
     xToken = await deploy("LeveragedToken", deployer);
+    //rs.defToken(xToken.name, xToken.address);
 
     // TODO: upgradeable and constructors are incompatible (right?), so the constructor should be removed
     // and the ratio passed into the initialise function, or maybe the Market.mint() function?
     // both of these functions only get called once (check this), although the market can be changed so
     // could be called on each market... seems like an arbitrary thing that should maybe be designed out?
     treasury = await deploy("Treasury", deployer, parseEther("0.5")); // 50/50 split between f & x tokens
+    //rs.defContract(treasury.name, treasury.address);
     market = await deploy("Market", deployer);
+    //rs.defContract(market.name, market.address);
     rebalancePool = await deploy("RebalancePool", deployer);
+    //rs.defContract(rebalancePool.name, rebalancePool.address);
 
     /*
     console.log("%s = weth", weth.address);
@@ -207,7 +224,13 @@ describe("NavsGraphs", async () => {
 
   context("navsby", async () => {
     it("ethPrice", async () => {
+      // TODO: move this into the before each and split out the constructor parameters
+      // TODO: consider merging some of Regression test and regression system, so we don't have this
+      // chronology coupling
+      // regression test for the definition of the actual test tro run, variables, actions and calcs
+      // regrression system for the definition of all thos actions and calcs, etc.
       let rt = new RegressionTest(rs, [index, ethPrice], [rebalancePoolLiquidation, fUserLiquidation]);
+      rt.defThing(fToken, token); // TODO: this could go in before each if regression test was visible there
 
       await oracle.setPrice(ethPrice.value);
       await treasury.initializePrice();

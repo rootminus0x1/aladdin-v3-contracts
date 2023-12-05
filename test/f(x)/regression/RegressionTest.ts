@@ -8,17 +8,17 @@ import commandExists from "command-exists";
 import { execSync } from "child_process";
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
+import { ContractWithAddress, UserWithAddress } from "test/useful";
+
 //////////////////////////////////
 // regression system
 
 // create variables by simply declaring variables of type Variable
 export class Variable {
-  // TODO: add a map to prevent duplicate variables
   public initialValue: bigint;
 
-  constructor(system: RegressionSystem, public name: string, public value: bigint) {
+  constructor(public name: string, public value: bigint) {
     this.initialValue = value;
-    system.getAllVariables().push(this);
   }
 
   public initialise() {
@@ -26,7 +26,8 @@ export class Variable {
   }
 }
 
-type ActorFunction = () => Promise<undefined>;
+/*
+type ActorFunction = () => {};
 
 export class Actor {
   // TODO: add a map to prevent duplicate variables
@@ -47,26 +48,91 @@ export class Calculation {
     system.getAllCalculations().set(name, calc);
   }
 }
+*/
+
+// export type NamedAddress = { name: string; address: string };
+type ActionFunction = () => {};
+type CalculationFunction = () => Promise<bigint>;
+type InstanceCalculationFunction = (instance: any) => Promise<bigint>;
+type TypeFunction = { name: string; instanceCalculation: InstanceCalculationFunction };
+
+function unInstance(fn: InstanceCalculationFunction, instance: any): CalculationFunction {
+  return () => {
+    return fn(instance);
+  };
+}
 
 // instantiate a RegressionSystem
 export class RegressionSystem {
-  private allVariables: Variable[] = [];
-  public getAllVariables() {
-    return this.allVariables;
+  // TODO: add a map to prevent duplicate variables
+  public variables: Variable[] = [];
+
+  public calculations = new Map<string, CalculationFunction>(); // insertion order is retained in Map
+  public actions = new Map<string, ActionFunction>(); // insertion order is retained in Map
+
+  // smart way of automatically defining new calculations
+  /*
+  private tokens = new Map<string, string>();
+  private contracts = new Map<string, string>();
+  private users = new Map<string, string>();
+  */
+
+  public defVariable(name: string, value: bigint): Variable {
+    let result = new Variable(name, value);
+    this.variables.push(result);
+    return result;
   }
 
-  private allCalculations = new Map<string, () => Promise<bigint>>(); // insertion order is retained in Map
-  public getAllCalculations() {
-    return this.allCalculations;
+  public defCalculation(name: string, calc: CalculationFunction): string {
+    this.calculations.set(name, calc);
+    return name;
   }
 
-  private allActors = new Map<string, ActorFunction>(); // insertion order is retained in Map
-  public getAllActors() {
-    return this.allActors;
+  public defAction(name: string, act: ActionFunction): string {
+    this.actions.set(name, act);
+    return name;
   }
 
+  // define a set of calculations to be applied to all things of a given type
+  public typeFunctions = new Map<string, TypeFunction[]>();
+  public defType(type: string, calcForAll?: TypeFunction[]): string {
+    if (calcForAll) this.typeFunctions.set(type, calcForAll);
+    return type;
+  }
+
+  /*
+  public defRelation<T1, T2>(
+    forEach: string,
+    name: string,
+    withEach: string,
+    value: (a: T1, b: T2) => Promise<bigint>,
+  ): string {
+    // TODO: return a structure
+    return forEach.concat("_x_").concat(withEach);
+  }
+  */
+
+  // this should be
+  // defType("token");
+  // defThing(MyToken, "token");
+  // defRelation("user", "has", "token", (a: UserType, b: TokenType) => { return calculation result } )
+  /*
+  public defToken(name: string, address: string) {
+    this.tokens.set(name, address);
+  }
+
+  public defContract(name: string, address: string) {
+    this.contracts.set(name, address);
+  }
+
+  public defUser(name: string, address: string) {
+    this.users.set(name, address);
+  }
+*/
   public initialise() {
-    this.allVariables.forEach((v) => v.initialise());
+    // create calculations for tokens, users & contracts
+
+    this.variables.forEach((v) => v.initialise());
   }
 }
 
@@ -94,34 +160,31 @@ export class RegressionTest {
     return this.independents.map((i) => i.name).includes(v.name);
   }
 
-  // TODO: get rid of the variables - they are all actors, maybe?
-  constructor(public system: RegressionSystem, public independents: Variable[], public actors: Actor[]) {
-    // reset all the variables to their initial values
-    system.initialise();
-
-    this.runData = new DataTable(
-      //[...independents.map((v) => v.name)].concat(actors.length ? ["actionName", "actionResult"] : []),
-      [...independents.map((v) => v.name)],
-      [...actors.map((a) => a.name)].concat([...this.system.getAllCalculations().keys()]),
-    );
-
-    // TODO: use the DataTable for generating this parameter info
-    // and print out all the header info
-    let phead: string[] = [];
-    let pdata: string[] = [];
-
-    // all variables that are not independent are static and listed as parameters
-    // if a new variable is added then do file names change?, no
-    // what about parameters that vary from the default, e.g. beta, should do really
-    for (let av of this.system.getAllVariables()) {
-      if (!this.hasIndependent(av)) {
-        phead.push(av.name);
-        pdata.push(formatEther(av.value)); // TODO: make this work with more types - e.g. should I assume its a 1e18 scaled number?
-      }
+  public defThing<T extends { name: string }>(that: T, type: string) {
+    let fns = this.system.typeFunctions.get(type);
+    if (fns) {
+      fns.forEach((value) => {
+        console.log(
+          "type %s calculation for %s x %s: ",
+          type,
+          that.name,
+          value.name,
+          that.name.concat(".").concat(value.name),
+        );
+        this.system.calculations.set(that.name.concat(".").concat(value.name), () => {
+          return value.instanceCalculation(that);
+        });
+      });
     }
-    this.runParameters.push(phead.join());
-    this.runParameters.push(pdata.join());
+  }
 
+  // TODO: get rid of the variables - they are all actors, maybe?
+  constructor(
+    public system: RegressionSystem,
+    public independents: Variable[],
+    public actions: string[],
+    public calculations?: string[],
+  ) {
     // set up the file names consistently
     const runName = [...independents.map((v) => v.name)].slice(1).join("_x_"); // TODO: get this passed in
 
@@ -165,6 +228,37 @@ export class RegressionTest {
   }
 
   public async data() {
+    if (!this.runData) {
+      // initialise the datatable
+      // reset all the variables to their initial values
+      this.system.initialise();
+
+      console.log(this.system.calculations.keys());
+
+      this.runData = new DataTable(
+        //[...independents.map((v) => v.name)].concat(actors.length ? ["actionName", "actionResult"] : []),
+        [...this.independents.map((v) => v.name)],
+        [...this.actions].concat([...this.system.calculations.keys()]),
+      );
+
+      // TODO: use the DataTable for generating this parameter info
+      // and print out all the header info
+      let phead: string[] = [];
+      let pdata: string[] = [];
+
+      // all variables that are not independent are static and listed as parameters
+      // if a new variable is added then do file names change?, no
+      // what about parameters that vary from the default, e.g. beta, should do really
+      for (let av of this.system.variables) {
+        if (!this.hasIndependent(av)) {
+          phead.push(av.name);
+          pdata.push(formatEther(av.value)); // TODO: make this work with more types - e.g. should I assume its a 1e18 scaled number?
+        }
+      }
+      this.runParameters.push(phead.join());
+      this.runParameters.push(pdata.join());
+    }
+    // now add one (or more) rows of data:
     // one column for each actor
     // one row, no actors
     // then execute actors - if they pass it's a new line, else go on to the next actor
@@ -175,10 +269,11 @@ export class RegressionTest {
 
       this.independents.forEach((variable) => line.push(formatEther(variable.value)));
       // one actor at a time
-      for (let a = 0; a < this.actors.length; a++) {
+      for (let a = 0; a < this.actions.length; a++) {
         if (a == currentActor) {
           try {
-            await this.actors[a].act();
+            let fn = this.system.actions.get(this.actions[a]);
+            if (fn) await fn(); // TODO: check if await is needed
             line.push(":-)");
           } catch (e: any) {
             line.push(this.formatError(e));
@@ -189,7 +284,7 @@ export class RegressionTest {
         }
       }
 
-      for (let cfn of this.system.getAllCalculations().values()) {
+      for (let cfn of this.system.calculations.values()) {
         try {
           line.push(formatEther(await cfn()));
         } catch (e: any) {
@@ -197,7 +292,7 @@ export class RegressionTest {
         }
       }
       this.runData.addRow(line);
-    } while (++currentActor < this.actors.length);
+    } while (++currentActor < this.actions.length);
   }
 
   public async done() {
