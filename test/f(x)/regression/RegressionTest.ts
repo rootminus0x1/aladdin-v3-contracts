@@ -53,14 +53,11 @@ export class Calculation {
 // export type NamedAddress = { name: string; address: string };
 type ActionFunction = () => {};
 type CalculationFunction = () => Promise<bigint>;
+// TODO: maybe change those any's into templated types
 type InstanceCalculationFunction = (instance: any) => Promise<bigint>;
-type TypeFunction = { name: string; instanceCalculation: InstanceCalculationFunction };
-
-function unInstance(fn: InstanceCalculationFunction, instance: any): CalculationFunction {
-  return () => {
-    return fn(instance);
-  };
-}
+type TypeNameFunction = { name: string; calc: InstanceCalculationFunction };
+type RelationCalculationFunction = (a: any, b: any) => Promise<bigint>;
+type RelationNameFunction = { name: string; calc: RelationCalculationFunction };
 
 // instantiate a RegressionSystem
 export class RegressionSystem {
@@ -94,23 +91,54 @@ export class RegressionSystem {
   }
 
   // define a set of calculations to be applied to all things of a given type
-  public typeFunctions = new Map<string, TypeFunction[]>();
-  public defType(type: string, calcForAll?: TypeFunction[]): string {
+  public typeFunctions = new Map<string, TypeNameFunction[]>();
+  public defType(type: string, calcForAll?: TypeNameFunction[]): string {
     if (calcForAll) this.typeFunctions.set(type, calcForAll);
     return type;
   }
 
-  /*
-  public defRelation<T1, T2>(
-    forEach: string,
-    name: string,
-    withEach: string,
-    value: (a: T1, b: T2) => Promise<bigint>,
-  ): string {
-    // TODO: return a structure
-    return forEach.concat("_x_").concat(withEach);
+  private thingTypes = new Map<string, any[]>();
+  public defThing<T extends { name: string }>(that: T, type: string) {
+    this.thingTypes.set(type, [...(this.thingTypes.get(type) || []), that]); // store it for the relations below
+    let fns = this.typeFunctions.get(type); // returning null is OK as there may just be no functions
+    if (fns) {
+      fns.forEach((value) => {
+        this.calculations.set(that.name + "." + value.name, () => {
+          return value.calc(that);
+        });
+      });
+    }
+    return that.name.concat(" is ").concat(type);
   }
-  */
+
+  // TODO: make defRelation delay its evaluation until the regression test is constructed
+  // defines the relationship between types of things
+  public relationFunctions = new Map<string, RelationNameFunction[]>();
+  public defRelation<T1 extends { name: string }, T2 extends { name: string }>(
+    forEachType: string,
+    withEachType: string,
+    calcs: RelationNameFunction[],
+  ) {
+    let forEachs = this.thingTypes.get(forEachType) || [];
+    let withEachs = this.thingTypes.get(withEachType) || [];
+    forEachs.forEach((forValue) => {
+      withEachs.forEach((withValue) => {
+        calcs.forEach((calc) => {
+          if (forValue != withValue) {
+            this.calculations.set(
+              /*forValue.name + "-" + calc.name + "-" + withValue.name*/
+              forValue.name + "'s " + withValue.name + "s",
+              () => {
+                return calc.calc(forValue, withValue);
+              },
+            );
+          }
+        });
+      });
+    });
+    // TODO: return a structure
+    // return forEach.concat("_x_").concat(withEach);
+  }
 
   // this should be
   // defType("token");
@@ -160,24 +188,6 @@ export class RegressionTest {
     return this.independents.map((i) => i.name).includes(v.name);
   }
 
-  public defThing<T extends { name: string }>(that: T, type: string) {
-    let fns = this.system.typeFunctions.get(type);
-    if (fns) {
-      fns.forEach((value) => {
-        console.log(
-          "type %s calculation for %s x %s: ",
-          type,
-          that.name,
-          value.name,
-          that.name.concat(".").concat(value.name),
-        );
-        this.system.calculations.set(that.name.concat(".").concat(value.name), () => {
-          return value.instanceCalculation(that);
-        });
-      });
-    }
-  }
-
   // TODO: get rid of the variables - they are all actors, maybe?
   constructor(
     public system: RegressionSystem,
@@ -205,6 +215,34 @@ export class RegressionTest {
     if (fs.existsSync(this.runParametersFilePath)) fs.unlinkSync(this.runParametersFilePath);
     if (fs.existsSync(this.runErrorsFilePath)) fs.unlinkSync(this.runErrorsFilePath);
     if (fs.existsSync(this.runDiffsFilePath)) fs.unlinkSync(this.runDiffsFilePath);
+
+    // initialise the datatable
+    // reset all the variables to their initial values
+    this.system.initialise();
+
+    this.runData = new DataTable(
+      //[...independents.map((v) => v.name)].concat(actors.length ? ["actionName", "actionResult"] : []),
+      [...this.independents.map((v) => v.name)],
+      [...this.actions].concat([...this.system.calculations.keys()]), // TODO: get rid of concat?
+    );
+
+    // TODO: use the DataTable for generating this parameter info
+    // TODO: or put the error and parameter info in as comments # in the data file
+    // and print out all the header info
+    let phead: string[] = [];
+    let pdata: string[] = [];
+
+    // all variables that are not independent are static and listed as parameters
+    // if a new variable is added then do file names change?, no
+    // what about parameters that vary from the default, e.g. beta, should do really
+    for (let av of this.system.variables) {
+      if (!this.hasIndependent(av)) {
+        phead.push(av.name);
+        pdata.push(formatEther(av.value)); // TODO: make this work with more types - e.g. should I assume its a 1e18 scaled number?
+      }
+    }
+    this.runParameters.push(phead.join());
+    this.runParameters.push(pdata.join());
   }
 
   private formatError(e: any): string {
@@ -228,36 +266,6 @@ export class RegressionTest {
   }
 
   public async data() {
-    if (!this.runData) {
-      // initialise the datatable
-      // reset all the variables to their initial values
-      this.system.initialise();
-
-      console.log(this.system.calculations.keys());
-
-      this.runData = new DataTable(
-        //[...independents.map((v) => v.name)].concat(actors.length ? ["actionName", "actionResult"] : []),
-        [...this.independents.map((v) => v.name)],
-        [...this.actions].concat([...this.system.calculations.keys()]),
-      );
-
-      // TODO: use the DataTable for generating this parameter info
-      // and print out all the header info
-      let phead: string[] = [];
-      let pdata: string[] = [];
-
-      // all variables that are not independent are static and listed as parameters
-      // if a new variable is added then do file names change?, no
-      // what about parameters that vary from the default, e.g. beta, should do really
-      for (let av of this.system.variables) {
-        if (!this.hasIndependent(av)) {
-          phead.push(av.name);
-          pdata.push(formatEther(av.value)); // TODO: make this work with more types - e.g. should I assume its a 1e18 scaled number?
-        }
-      }
-      this.runParameters.push(phead.join());
-      this.runParameters.push(pdata.join());
-    }
     // now add one (or more) rows of data:
     // one column for each actor
     // one row, no actors

@@ -79,119 +79,57 @@ describe("NavsGraphs", async () => {
   let token = rs.defType("token", [
     {
       name: "supply",
-      instanceCalculation: (token: any) => {
+      calc: (token: any) => {
         return token.totalSupply();
       },
     },
   ]);
 
-  /*
-
-  let fTokenSupply = new Calculation(rs, "fTokenSupply", async () => {
-    return fToken.totalSupply();
-  });
-  let fUserFTokens = new Calculation(rs, "fUserFTokens", async () => {
-    return fToken.balanceOf(fUser.address);
-  });
-  let rebalanceUserFTokens = new Calculation(rs, "rebalanceUserFTokens", async () => {
-    return fToken.balanceOf(rebalanceUser.address);
-  });
-  let rebalanceUserPoolTokens = new Calculation(rs, "rebalanceUserPoolTokens", async () => {
-    return rebalancePool.balanceOf(rebalanceUser.address);
-  });
-  let rebalanceUserPoolBalance = new Calculation(rs, "rebalanceUserPoolTokens", async () => {
-    return rebalancePool.balanceOf(rebalanceUser.address);
-  });
-
-  let rebalancePoolFTokens = new Calculation(rs, "rebalancePoolFTokens", async () => {
-    return rebalancePool.totalSupply();
-  });
-
-  let rebalancePoolLiquidatableCollateralRatio = new Calculation(
-    rs,
-    "rebalancePoolLiquidatableCollateralRatio",
-    async () => {
-      return rebalancePool.liquidatableCollateralRatio();
-    },
-  );
-
-  let xTokenSupply = new Calculation(rs, "xTokenSupply", async () => {
-    return xToken.totalSupply();
-  });
-  let xUserXTokens = new Calculation(rs, "xUserXTokens", async () => {
-    return xToken.balanceOf(xUser.address);
-  });
-
-  let deployerBaseTokens = new Calculation(rs, "deployerBaseTokens", async () => {
-    return weth.balanceOf(deployer.address);
-  });
-  let platformBaseTokens = new Calculation(rs, "platformBaseTokens", async () => {
-    return weth.balanceOf(platform.address);
-  });
-  let treasuryBaseTokens = new Calculation(rs, "treasuryBaseTokens", async () => {
-    return weth.balanceOf(treasury.address);
-  });
-  let marketBaseTokens = new Calculation(rs, "marketBaseTokens", async () => {
-    return weth.balanceOf(market.address);
-  });
-  let rebalanceUserBaseTokens = new Calculation(rs, "rebalanceUserBaseTokens", async () => {
-    return weth.balanceOf(rebalanceUser.address);
-  });
-  let liquidatorBaseTokens = new Calculation(rs, "liquidatorBaseTokens", async () => {
-    return weth.balanceOf(liquidator.address);
-  });
-  let rebalancePoolBaseTokens = new Calculation(rs, "rebalancePoolBaseTokens", async () => {
-    return weth.balanceOf(rebalancePool.address);
-  });
-
-  */
+  let owner = rs.defType("owner");
 
   beforeEach(async () => {
     deployer = await getUser("deployer");
+    rs.defThing(deployer, owner);
     platform = await getUser("playform");
+    rs.defThing(platform, owner);
     admin = await getUser("admin");
     fUser = await getUser("fUser");
+    rs.defThing(fUser, owner);
     rebalanceUser = await getUser("rebalanceUser");
+    rs.defThing(rebalanceUser, owner);
     liquidator = await getUser("liquidator");
+    rs.defThing(liquidator, owner);
     xUser = await getUser("xUser");
+    rs.defThing(xUser, owner);
 
-    /*
-    console.log("%s = deployer", deployer.address);
-    console.log("%s = platform", platform.address);
-    console.log("%s = admin", admin.address);
-    console.log("%s = fUser", fUser.address);
-    console.log("%s = rebalanceUser", rebalanceUser.address);
-    console.log("%s = liquidator", liquidator.address);
-    console.log("%s = xUser", xUser.address);
-    */
     weth = await deploy("WETH9", deployer);
-    // rt.defToken(weth.name, weth.address);
+    rs.defThing(weth, token);
     oracle = await deploy("MockFxPriceOracle", deployer);
     fToken = await deploy("FractionalToken", deployer);
-    //rs.defToken(fToken.name, fToken.address);
+    rs.defThing(fToken, token);
     xToken = await deploy("LeveragedToken", deployer);
-    //rs.defToken(xToken.name, xToken.address);
+    rs.defThing(xToken, token);
 
     // TODO: upgradeable and constructors are incompatible (right?), so the constructor should be removed
     // and the ratio passed into the initialise function, or maybe the Market.mint() function?
     // both of these functions only get called once (check this), although the market can be changed so
     // could be called on each market... seems like an arbitrary thing that should maybe be designed out?
     treasury = await deploy("Treasury", deployer, parseEther("0.5")); // 50/50 split between f & x tokens
-    //rs.defContract(treasury.name, treasury.address);
+    rs.defThing(treasury, owner);
     market = await deploy("Market", deployer);
-    //rs.defContract(market.name, market.address);
+    rs.defThing(market, owner);
     rebalancePool = await deploy("RebalancePool", deployer);
-    //rs.defContract(rebalancePool.name, rebalancePool.address);
+    rs.defThing(rebalancePool, owner);
+    rs.defThing(rebalancePool, token);
 
-    /*
-    console.log("%s = weth", weth.address);
-    console.log("%s = oracle", oracle.address);
-    console.log("%s = fToken", fToken.address);
-    console.log("%s = xToken", xToken.address);
-    console.log("%s = treasury", treasury.address);
-    console.log("%s = market", market.address);
-    console.log("%s = rebalancePool", rebalancePool.address);
-    */
+    rs.defRelation("owner", "token", [
+      {
+        name: "has",
+        calc: (a: any, b: any) => {
+          return b.balanceOf(a);
+        },
+      },
+    ]);
 
     await fToken.initialize(treasury.address, "Fractional ETH", "fETH");
     await xToken.initialize(treasury.address, fToken.address, "Leveraged ETH", "xETH");
@@ -224,13 +162,7 @@ describe("NavsGraphs", async () => {
 
   context("navsby", async () => {
     it("ethPrice", async () => {
-      // TODO: move this into the before each and split out the constructor parameters
-      // TODO: consider merging some of Regression test and regression system, so we don't have this
-      // chronology coupling
-      // regression test for the definition of the actual test tro run, variables, actions and calcs
-      // regrression system for the definition of all thos actions and calcs, etc.
       let rt = new RegressionTest(rs, [index, ethPrice], [rebalancePoolLiquidation, fUserLiquidation]);
-      rt.defThing(fToken, token); // TODO: this could go in before each if regression test was visible there
 
       await oracle.setPrice(ethPrice.value);
       await treasury.initializePrice();
@@ -241,12 +173,7 @@ describe("NavsGraphs", async () => {
       await weth.approve(market.address, MaxUint256);
       await market.mint(initialCollateral.value, deployer.address, 0, 0);
 
-      // TODO: all the initialisations should be part of the Actors, but only executed once
-      // some actors may need initialisation of another - like a dependency tree :-/
-      // TODO: actors are execised one at a time so data should take the actor as input
-      // TODO: actors produce tw columns "Act", which has the name of the actor and
-      // result - either "success" or an error message
-      //await rt.data();
+      await rt.data();
 
       // fUser and rebalanceUser mintFTokens
       const fTokensEth = initialCollateral.initialValue / 2n;
@@ -259,13 +186,13 @@ describe("NavsGraphs", async () => {
       await weth.connect(fUser).approve(market.address, MaxUint256);
       await market.connect(fUser).mintFToken(MaxUint256, fUser.address, 0n);
 
-      //await rt.data();
+      await rt.data();
 
       // set up rebalance Pool
       await fToken.connect(rebalanceUser).approve(rebalancePool.address, MaxUint256);
       await rebalancePool.connect(rebalanceUser).deposit(MaxUint256, rebalanceUser.address);
 
-      //await rt.data();
+      await rt.data();
 
       let maxIndex = parseEther("40");
       for (; index.value <= maxIndex; index.value += parseEther("1")) {

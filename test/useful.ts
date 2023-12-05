@@ -15,10 +15,13 @@ export async function deploy<T extends BaseContract>(
   const contractFactory = await ethers.getContractFactory(factoryName, deployer);
   const contract = await contractFactory.deploy(...deployArgs);
   await contract.waitForDeployment();
+  let address = await contract.getAddress();
+
+  //console.log("%s = %s", address, factoryName);
 
   return Object.assign(contract as T, {
     name: factoryName,
-    address: await contract.getAddress(),
+    address: address,
   }) as ContractWithAddress<T>;
 }
 
@@ -26,7 +29,9 @@ let allSigners = ethers.getSigners();
 let allocatedSigners = 0;
 
 export async function getUser(name: string): Promise<UserWithAddress> {
-  return Object.assign((await allSigners)[allocatedSigners++] as SignerWithAddress, { name: name }) as UserWithAddress;
+  let signer = (await allSigners)[allocatedSigners++] as SignerWithAddress;
+  //console.log("%s = %s", signer.address, name);
+  return Object.assign(signer, { name: name }) as UserWithAddress;
 }
 
 /*
