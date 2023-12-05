@@ -127,7 +127,7 @@ export class RegressionSystem {
           if (forValue != withValue) {
             this.calculations.set(
               /*forValue.name + "-" + calc.name + "-" + withValue.name*/
-              forValue.name + "'s " + withValue.name + "s",
+              forValue.name + "." + withValue.name,
               () => {
                 return calc.calc(forValue, withValue);
               },
