@@ -26,30 +26,6 @@ export class Variable {
   }
 }
 
-/*
-type ActorFunction = () => {};
-
-export class Actor {
-  // TODO: add a map to prevent duplicate variables
-  // An actor is an independent variable that is updated by the act function
-
-  constructor(
-    system: RegressionSystem,
-    public name: string,
-    public act: ActorFunction, // TODO: add these? public calculations: Calculation[],
-  ) {
-    system.getAllActors().set(name, act);
-  }
-}
-
-export class Calculation {
-  constructor(system: RegressionSystem, public name: string, public calc: () => Promise<bigint>) {
-    // TODO: should just be a push
-    system.getAllCalculations().set(name, calc);
-  }
-}
-*/
-
 // export type NamedAddress = { name: string; address: string };
 type ActionFunction = () => {};
 type CalculationFunction = () => Promise<bigint>;
@@ -67,27 +43,37 @@ export class RegressionSystem {
   public calculations = new Map<string, CalculationFunction>(); // insertion order is retained in Map
   public actions = new Map<string, ActionFunction>(); // insertion order is retained in Map
 
-  // smart way of automatically defining new calculations
-  /*
-  private tokens = new Map<string, string>();
-  private contracts = new Map<string, string>();
-  private users = new Map<string, string>();
-  */
+  constructor(
+    private aliases = new Map<string, string>(), // rename strings
+    public separator = ".",
+  ) {}
+
+  private alias(orig: string): string {
+    // replace all occurences of aliases keys in the orig string, with the alias value
+    // return this.aliases.get(orig) || orig; only replaces the
+    let result = orig;
+    this.aliases.forEach((_v, _k) => {
+      result = result.replace(new RegExp(`(\\b)${_k}(\\b)`, "g"), `$1${_v}$2`);
+    });
+    return result;
+  }
 
   public defVariable(name: string, value: bigint): Variable {
-    let result = new Variable(name, value);
+    let result = new Variable(this.alias(name), value);
     this.variables.push(result);
     return result;
   }
 
   public defCalculation(name: string, calc: CalculationFunction): string {
-    this.calculations.set(name, calc);
-    return name;
+    let rename = this.alias(name);
+    this.calculations.set(rename, calc);
+    return rename;
   }
 
   public defAction(name: string, act: ActionFunction): string {
-    this.actions.set(name, act);
-    return name;
+    let rename = this.alias(name);
+    this.actions.set(rename, act);
+    return rename;
   }
 
   // define a set of calculations to be applied to all things of a given type
@@ -103,7 +89,7 @@ export class RegressionSystem {
     let fns = this.typeFunctions.get(type); // returning null is OK as there may just be no functions
     if (fns) {
       fns.forEach((value) => {
-        this.calculations.set(that.name + "." + value.name, () => {
+        this.calculations.set(this.alias(that.name) + this.separator + this.alias(value.name), () => {
           return value.calc(that);
         });
       });
@@ -125,13 +111,9 @@ export class RegressionSystem {
       withEachs.forEach((withValue) => {
         calcs.forEach((calc) => {
           if (forValue != withValue) {
-            this.calculations.set(
-              /*forValue.name + "-" + calc.name + "-" + withValue.name*/
-              forValue.name + "." + withValue.name,
-              () => {
-                return calc.calc(forValue, withValue);
-              },
-            );
+            this.calculations.set(this.alias(forValue.name) + this.separator + this.alias(withValue.name), () => {
+              return calc.calc(forValue, withValue); // curried
+            });
           }
         });
       });
@@ -140,23 +122,6 @@ export class RegressionSystem {
     // return forEach.concat("_x_").concat(withEach);
   }
 
-  // this should be
-  // defType("token");
-  // defThing(MyToken, "token");
-  // defRelation("user", "has", "token", (a: UserType, b: TokenType) => { return calculation result } )
-  /*
-  public defToken(name: string, address: string) {
-    this.tokens.set(name, address);
-  }
-
-  public defContract(name: string, address: string) {
-    this.contracts.set(name, address);
-  }
-
-  public defUser(name: string, address: string) {
-    this.users.set(name, address);
-  }
-*/
   public initialise() {
     // create calculations for tokens, users & contracts
 
@@ -193,7 +158,7 @@ export class RegressionTest {
     public system: RegressionSystem,
     public independents: Variable[],
     public actions: string[],
-    public calculations?: string[],
+    public calculations: string[] = [],
   ) {
     // set up the file names consistently
     const runName = [...independents.map((v) => v.name)].slice(1).join("_x_"); // TODO: get this passed in
@@ -220,10 +185,15 @@ export class RegressionTest {
     // reset all the variables to their initial values
     this.system.initialise();
 
+    if (this.calculations.length == 0)
+      this.calculations = [...this.system.calculations.keys()].sort((a, b) =>
+        a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0,
+      );
+
     this.runData = new DataTable(
       //[...independents.map((v) => v.name)].concat(actors.length ? ["actionName", "actionResult"] : []),
       [...this.independents.map((v) => v.name)],
-      [...this.actions].concat([...this.system.calculations.keys()]), // TODO: get rid of concat?
+      [...this.actions, ...this.calculations], // TODO: get rid of concat?
     );
 
     // TODO: use the DataTable for generating this parameter info
@@ -271,36 +241,40 @@ export class RegressionTest {
     // one row, no actors
     // then execute actors - if they pass it's a new line, else go on to the next actor
 
-    let currentActor = -1;
+    let currentAction = -1; // do a line before any actions
     do {
       let line: string[] = [];
 
-      this.independents.forEach((variable) => line.push(formatEther(variable.value)));
+      this.independents.forEach((variable) =>
+        // add a 0.1 for each action
+        line.push(formatEther(variable.value + (variable.name == "index" ? BigInt((currentAction + 1) * 1e17) : 0n))),
+      );
       // one actor at a time
       for (let a = 0; a < this.actions.length; a++) {
-        if (a == currentActor) {
+        if (a == currentAction) {
           try {
             let fn = this.system.actions.get(this.actions[a]);
             if (fn) await fn(); // TODO: check if await is needed
-            line.push(":-)");
+            line.push(":-)"); // success
           } catch (e: any) {
-            line.push(this.formatError(e));
-            currentActor++;
+            line.push(this.formatError(e)); // failure
+            currentAction++;
           }
         } else {
-          line.push("-");
+          line.push("-"); // not executed
         }
       }
 
-      for (let cfn of this.system.calculations.values()) {
+      for (let cname of this.calculations) {
+        let cfn = this.system.calculations.get(cname);
         try {
-          line.push(formatEther(await cfn()));
+          line.push(formatEther(await cfn!()));
         } catch (e: any) {
           line.push(this.formatError(e));
         }
       }
       this.runData.addRow(line);
-    } while (++currentActor < this.actions.length);
+    } while (++currentAction < this.actions.length);
   }
 
   public async done() {

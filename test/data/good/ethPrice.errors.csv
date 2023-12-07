@@ -1,6 +1,7 @@
 code,message
 cannot liquidate,VM Exception while processing transaction: reverted with reason string 'cannot liquidate'
 Not liquidation mode,VM Exception while processing transaction: reverted with reason string 'Not liquidation mode'
+ERR: mg8u4w==,Transaction reverted: function call to a non-contract account
 redeem zero amount,VM Exception while processing transaction: reverted with reason string 'redeem zero amount'
 SafeMath: subtraction overflow,VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'
 invalid twap price,VM Exception while processing transaction: reverted with reason string 'invalid twap price'

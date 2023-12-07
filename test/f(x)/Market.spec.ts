@@ -3,7 +3,7 @@ import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { LeveragedToken, FractionalToken, Treasury, WETH9, MockFxPriceOracle, Market } from "@types";
-import { ZeroAddress, ZeroHash, MaxUint256, parseEther } from "ethers";
+import { ZeroAddress, MaxUint256 } from "ethers";
 
 // TODO: check the -1 for baseIn values below
 // TODO: test liquidate
@@ -131,8 +131,8 @@ describe("Market.spec", async () => {
 
         expect((await market.fTokenRedeemFeeRatio()).defaultFeeRatio).to.eq(1);
         expect((await market.fTokenRedeemFeeRatio()).extraFeeRatio).to.eq(2);
-        expect((await market.xTokenRedeemFeeRatio()).defaultFeeRatio).to.eq(ZeroHash);
-        expect((await market.xTokenRedeemFeeRatio()).extraFeeRatio).to.eq(ZeroHash);
+        expect((await market.xTokenRedeemFeeRatio()).defaultFeeRatio).to.eq(0);
+        expect((await market.xTokenRedeemFeeRatio()).extraFeeRatio).to.eq(0);
       });
 
       it("should succeed when update for xToken", async () => {
@@ -140,8 +140,8 @@ describe("Market.spec", async () => {
           .to.emit(market, "UpdateRedeemFeeRatioXToken")
           .withArgs(1, 2);
 
-        expect((await market.fTokenRedeemFeeRatio()).defaultFeeRatio).to.eq(ZeroHash);
-        expect((await market.fTokenRedeemFeeRatio()).extraFeeRatio).to.eq(ZeroHash);
+        expect((await market.fTokenRedeemFeeRatio()).defaultFeeRatio).to.eq(0);
+        expect((await market.fTokenRedeemFeeRatio()).extraFeeRatio).to.eq(0);
         expect((await market.xTokenRedeemFeeRatio()).defaultFeeRatio).to.eq(1);
         expect((await market.xTokenRedeemFeeRatio()).extraFeeRatio).to.eq(2);
       });
@@ -177,15 +177,15 @@ describe("Market.spec", async () => {
 
         expect((await market.fTokenMintFeeRatio()).defaultFeeRatio).to.eq(1);
         expect((await market.fTokenMintFeeRatio()).extraFeeRatio).to.eq(2);
-        expect((await market.xTokenMintFeeRatio()).defaultFeeRatio).to.eq(ZeroHash);
-        expect((await market.xTokenMintFeeRatio()).extraFeeRatio).to.eq(ZeroHash);
+        expect((await market.xTokenMintFeeRatio()).defaultFeeRatio).to.eq(0);
+        expect((await market.xTokenMintFeeRatio()).extraFeeRatio).to.eq(0);
       });
 
       it("should succeed when update for xToken", async () => {
         await expect(market.updateMintFeeRatio(1, 2, false)).to.emit(market, "UpdateMintFeeRatioXToken").withArgs(1, 2);
 
-        expect((await market.fTokenMintFeeRatio()).defaultFeeRatio).to.eq(ZeroHash);
-        expect((await market.fTokenMintFeeRatio()).extraFeeRatio).to.eq(ZeroHash);
+        expect((await market.fTokenMintFeeRatio()).defaultFeeRatio).to.eq(0);
+        expect((await market.fTokenMintFeeRatio()).extraFeeRatio).to.eq(0);
         expect((await market.xTokenMintFeeRatio()).defaultFeeRatio).to.eq(1);
         expect((await market.xTokenMintFeeRatio()).extraFeeRatio).to.eq(2);
       });
@@ -246,9 +246,9 @@ describe("Market.spec", async () => {
       });
 
       it("should succeed", async () => {
-        expect((await market.incentiveConfig()).stabilityIncentiveRatio).to.eq(ZeroHash);
-        expect((await market.incentiveConfig()).liquidationIncentiveRatio).to.eq(ZeroHash);
-        expect((await market.incentiveConfig()).selfLiquidationIncentiveRatio).to.eq(ZeroHash);
+        expect((await market.incentiveConfig()).stabilityIncentiveRatio).to.eq(0);
+        expect((await market.incentiveConfig()).liquidationIncentiveRatio).to.eq(0);
+        expect((await market.incentiveConfig()).selfLiquidationIncentiveRatio).to.eq(0);
         await expect(
           market.updateIncentiveConfig(ethers.parseEther("0.3"), ethers.parseEther("0.2"), ethers.parseEther("0.1")),
         )

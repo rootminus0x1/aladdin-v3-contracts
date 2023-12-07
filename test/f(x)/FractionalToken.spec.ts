@@ -3,7 +3,7 @@ import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { FractionalToken } from "@types";
-import { ZeroAddress, ZeroHash } from "ethers";
+import { ZeroAddress } from "ethers";
 
 const PRECISION = 10n ** 18n;
 
@@ -39,7 +39,7 @@ describe("FractionalToken.spec", async () => {
 
   context("#updateNav", async () => {
     it("should revert, when non-treasury call", async () => {
-      await expect(token.updateNav(ZeroHash)).to.revertedWith("Only treasury");
+      await expect(token.updateNav(0)).to.revertedWith("Only treasury");
     });
 
     it("should revert, when multiple too small", async () => {
