@@ -9,6 +9,7 @@ import { execSync } from "child_process";
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from "constants";
 
 import { ContractWithAddress, UserWithAddress } from "test/useful";
+import { string } from "hardhat/internal/core/params/argumentTypes";
 
 //////////////////////////////////
 // regression system
@@ -129,8 +130,20 @@ export class RegressionSystem {
   }
 }
 
+type CalculationState = {
+  name: string;
+  func: CalculationFunction;
+  // this is filled in during the calculations
+  allZeros: boolean; // can be removed for slim file
+  prevValue: bigint; // used to determine the above and also work out deltas
+  allSame: boolean; // can be removed in skinny file
+  prevText: string;
+};
+
 // each RegressionTest is part of a RegressionSystem
 export class RegressionTest {
+  // what to show
+  private calculations: CalculationState[] = [];
   // the data
   private runParameters: string[] = []; // stored in file .parameters.csv
   private runData: DataTable;
@@ -143,9 +156,9 @@ export class RegressionTest {
   // and what they are called
   private runFilePatternPath: string;
   private runDataFilePath: string;
+  private runDeltaFilePath: string;
   private runParametersFilePath: string;
   private runErrorsFilePath: string;
-  private runDiffsFilePath: string;
   private goodDataFilePath: string;
 
   public hasIndependent(v: Variable): boolean {
@@ -153,47 +166,65 @@ export class RegressionTest {
     return this.independents.map((i) => i.name).includes(v.name);
   }
 
-  // TODO: get rid of the variables - they are all actors, maybe?
+  // TODO: get rid of the variables - they are all actions, maybe?
   constructor(
     public system: RegressionSystem,
     public independents: Variable[],
     public actions: string[],
-    public calculations: string[] = [],
+    calculationFilter?: string[],
   ) {
     // set up the file names consistently
     const runName = [...independents.map((v) => v.name)].slice(1).join("_x_"); // TODO: get this passed in
 
-    const dataSuffix = ".data.csv";
-    const errorsSuffix = ".errors.csv";
-    const parametersSuffix = ".parameters.csv";
-    const diffsSuffix = ".diffs.txt";
+    const dataSuffix = ".data";
+    const deltaSuffix = ".data";
+    const errorsSuffix = ".errors";
+    const parametersSuffix = ".parameters";
+    const fileType = ".csv";
 
-    this.runFilePatternPath = this.runDir.concat(runName).concat(".*.csv");
-    this.runDataFilePath = this.runDir.concat(runName).concat(dataSuffix);
-    this.runParametersFilePath = this.runDir.concat(runName).concat(parametersSuffix);
-    this.runErrorsFilePath = this.runDir.concat(runName).concat(errorsSuffix);
-    this.runDiffsFilePath = this.runDir.concat(runName).concat(diffsSuffix);
-    this.goodDataFilePath = this.goodDir.concat(runName).concat(dataSuffix);
+    this.runFilePatternPath = this.runDir + runName + ".*" + fileType;
+    this.runDataFilePath = this.runDir + runName + dataSuffix + fileType;
+    this.runDeltaFilePath = this.runDir + runName + dataSuffix + fileType;
+    this.runParametersFilePath = this.runDir + runName + parametersSuffix + fileType;
+    this.runErrorsFilePath = this.runDir + runName + errorsSuffix + fileType;
+    this.goodDataFilePath = this.goodDir + runName + dataSuffix + fileType;
 
     // delete the run files (not the good one)
     if (fs.existsSync(this.runDataFilePath)) fs.unlinkSync(this.runDataFilePath);
+    if (fs.existsSync(this.runDeltaFilePath)) fs.unlinkSync(this.runDeltaFilePath);
     if (fs.existsSync(this.runParametersFilePath)) fs.unlinkSync(this.runParametersFilePath);
     if (fs.existsSync(this.runErrorsFilePath)) fs.unlinkSync(this.runErrorsFilePath);
-    if (fs.existsSync(this.runDiffsFilePath)) fs.unlinkSync(this.runDiffsFilePath);
 
     // initialise the datatable
     // reset all the variables to their initial values
     this.system.initialise();
 
-    if (this.calculations.length == 0)
-      this.calculations = [...this.system.calculations.keys()].sort((a, b) =>
+    // default calculations to sorted (case-insensitive) list
+    for (let calcName of calculationFilter ||
+      [...this.system.calculations.keys()].sort((a, b) =>
         a.toLowerCase() < b.toLowerCase() ? -1 : a.toLowerCase() > b.toLowerCase() ? 1 : 0,
-      );
+      )) {
+      // TODO: ensure the calculations ae properly aliased (the ones from system should already be)
+      // maybe we don't allow selection because we have slim, deltas, slim-deltas reports and
+      let calcFn = this.system.calculations.get(calcName);
+      if (calcFn) {
+        this.calculations.push({
+          name: calcName,
+          func: calcFn,
+          allZeros: false,
+          allSame: false,
+          prevValue: 0n,
+          prevText: "",
+        });
+      } else {
+        throw "unknown calculation: " + calcName;
+      }
+    }
 
     this.runData = new DataTable(
-      //[...independents.map((v) => v.name)].concat(actors.length ? ["actionName", "actionResult"] : []),
+      //[...independents.map((v) => v.name)].concat(actions.length ? ["actionName", "actionResult"] : []),
       [...this.independents.map((v) => v.name)],
-      [...this.actions, ...this.calculations], // TODO: get rid of concat?
+      [...this.actions, ...this.calculations.map((state) => state.name)],
     );
 
     // TODO: use the DataTable for generating this parameter info
@@ -237,9 +268,9 @@ export class RegressionTest {
 
   public async data() {
     // now add one (or more) rows of data:
-    // one column for each actor
-    // one row, no actors
-    // then execute actors - if they pass it's a new line, else go on to the next actor
+    // one column for each action
+    // one row, no actions
+    // then execute actions - if they pass it's a new line, else go on to the next action
 
     let currentAction = -1; // do a line before any actions
     do {
@@ -249,30 +280,45 @@ export class RegressionTest {
         // add a 0.1 for each action
         line.push(formatEther(variable.value + (variable.name == "index" ? BigInt((currentAction + 1) * 1e17) : 0n))),
       );
-      // one actor at a time
+      // one action at a time
       for (let a = 0; a < this.actions.length; a++) {
         if (a == currentAction) {
           try {
             let fn = this.system.actions.get(this.actions[a]);
-            if (fn) await fn(); // TODO: check if await is needed
-            line.push(":-)"); // success
+            if (fn) await fn(); // await is needed
+            line.push("\\o/"); // success
           } catch (e: any) {
             line.push(this.formatError(e)); // failure
             currentAction++;
           }
         } else {
-          line.push("-"); // not executed
+          line.push("---"); // not executed
         }
+      }
+      let deltaLine = line.slice(); // copy it
+
+      let first = true;
+      for (let calcState of this.calculations) {
+        let text: string;
+        let deltaText: string;
+        try {
+          let value = await calcState.func();
+          text = formatEther(value);
+          deltaText = formatEther(value - calcState.prevValue);
+
+          calcState.allZeros = calcState.allZeros && value == 0n;
+          calcState.prevValue = value;
+        } catch (e: any) {
+          text = this.formatError(e);
+          deltaText = text;
+        }
+        if (!first) calcState.allSame = calcState.allSame && text == calcState.prevText;
+        line.push(text);
+        deltaLine.push(deltaText);
+        calcState.prevText = text;
+        first = false;
       }
 
-      for (let cname of this.calculations) {
-        let cfn = this.system.calculations.get(cname);
-        try {
-          line.push(formatEther(await cfn!()));
-        } catch (e: any) {
-          line.push(this.formatError(e));
-        }
-      }
       this.runData.addRow(line);
     } while (++currentAction < this.actions.length);
   }
@@ -298,10 +344,8 @@ export class RegressionTest {
     // TODO: compare the parameters and errors too
     expect(
       fs.existsSync(this.goodDataFilePath),
-      "The good file doesn't exist. If this run is good,\n      cp "
-        .concat(this.runFilePatternPath)
-        .concat(" ")
-        .concat(this.goodDir),
+      `The good file (${this.goodDataFilePath}) doesn't exist. If this run is good,\n` +
+        `      cp ${this.runFilePatternPath} ${this.goodDir}`,
     ).to.be.true;
 
     /*

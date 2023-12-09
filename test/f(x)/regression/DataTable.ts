@@ -27,24 +27,14 @@ export function toCSV(dt: DataTable): string {
   // make one big string
   let result: string;
   // header row, assume no " or , characters there TODO: csv-safe the headers!
-  // add the key column
   // const headerRow = ["key:".concat(dt.keyFields.length.toString())].concat(dt.keyFields).concat(dt.fields).join(",");
   const headerRow = dt.keyFields.concat(dt.fields).join(",");
 
-  // create key-enriched, csv compatible, comma separated rows, separated by \n;
-  /*
-  const dataRows = dt.data.map((row) =>
-    [
-      row
-        .slice(0, dt.keyFields.length)
-        .map((cell) => formatForCSV(cell))
-        .join(" x "),
-    ]
-      .concat(row.map((cell) => formatForCSV(cell)))
-      .join(","),
-  );
-  */
-  const dataRows = dt.data.map((row) => row.map((cell) => formatForCSV(cell)).join(","));
+  // make csv compatible data fields - do this first so we don't do it again for the key
+  let dataRows = dt.data.map((row) => row.map((cell) => formatForCSV(cell)).join(","));
+  // add a key column
+  // dataRows = dataRows.map((row) => [row.slice(0, dt.keyFields.length).join(" x ") + ",",...row]);
+  // split lines by "\n"
   result = [headerRow].concat(dataRows).join("\n");
   return result;
 }
