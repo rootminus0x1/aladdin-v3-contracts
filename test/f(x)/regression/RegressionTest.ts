@@ -146,7 +146,12 @@ export class RegressionTest {
   private calculations: CalculationState[] = [];
   // the data
   private runParameters: string[] = []; // stored in file .parameters.csv
+
+  // TODO:
+  // make all output into datatables
+  // then attach a file name to the datatable
   private runData: DataTable;
+  private runDelta: DataTable;
   private runErrors = new Map<string, string>(); // map of error message to error hash string, stored in file .errors.csv
 
   // where files are stored
@@ -154,12 +159,11 @@ export class RegressionTest {
   private runDir = this.testDataDir.concat("run/"); // to do add date/time suffix
   private goodDir = this.testDataDir.concat("good/");
   // and what they are called
-  private runFilePatternPath: string;
-  private runDataFilePath: string;
-  private runDeltaFilePath: string;
-  private runParametersFilePath: string;
-  private runErrorsFilePath: string;
-  private goodDataFilePath: string;
+  // private runFilePatternPath: string;
+  private dataFileName: string;
+  private deltaFileName: string;
+  private parametersFileName: string;
+  private errorsFileName: string;
 
   public hasIndependent(v: Variable): boolean {
     //return this.runData.keyFields.includes(v.name);
@@ -177,23 +181,22 @@ export class RegressionTest {
     const runName = [...independents.map((v) => v.name)].slice(1).join("_x_"); // TODO: get this passed in
 
     const dataSuffix = ".data";
-    const deltaSuffix = ".data";
+    const deltaSuffix = ".delta";
     const errorsSuffix = ".errors";
     const parametersSuffix = ".parameters";
     const fileType = ".csv";
 
-    this.runFilePatternPath = this.runDir + runName + ".*" + fileType;
-    this.runDataFilePath = this.runDir + runName + dataSuffix + fileType;
-    this.runDeltaFilePath = this.runDir + runName + dataSuffix + fileType;
-    this.runParametersFilePath = this.runDir + runName + parametersSuffix + fileType;
-    this.runErrorsFilePath = this.runDir + runName + errorsSuffix + fileType;
-    this.goodDataFilePath = this.goodDir + runName + dataSuffix + fileType;
+    //this.runFileNamePatternPath = this.runDir + runName + ".*" + fileType;
+    this.dataFileName = runName + dataSuffix + fileType;
+    this.deltaFileName = runName + deltaSuffix + fileType;
+    this.parametersFileName = runName + parametersSuffix + fileType;
+    this.errorsFileName = runName + errorsSuffix + fileType;
 
     // delete the run files (not the good one)
-    if (fs.existsSync(this.runDataFilePath)) fs.unlinkSync(this.runDataFilePath);
-    if (fs.existsSync(this.runDeltaFilePath)) fs.unlinkSync(this.runDeltaFilePath);
-    if (fs.existsSync(this.runParametersFilePath)) fs.unlinkSync(this.runParametersFilePath);
-    if (fs.existsSync(this.runErrorsFilePath)) fs.unlinkSync(this.runErrorsFilePath);
+    this._remove(this.dataFileName);
+    this._remove(this.deltaFileName);
+    this._remove(this.parametersFileName);
+    this._remove(this.errorsFileName);
 
     // initialise the datatable
     // reset all the variables to their initial values
@@ -221,11 +224,13 @@ export class RegressionTest {
       }
     }
 
-    this.runData = new DataTable(
+    let keyFields =
       //[...independents.map((v) => v.name)].concat(actions.length ? ["actionName", "actionResult"] : []),
-      [...this.independents.map((v) => v.name)],
-      [...this.actions, ...this.calculations.map((state) => state.name)],
-    );
+      [...this.independents.map((v) => v.name)];
+    let dataFields = [...this.actions, ...this.calculations.map((state) => state.name)];
+
+    this.runData = new DataTable(keyFields, dataFields);
+    this.runDelta = new DataTable(keyFields, dataFields);
 
     // TODO: use the DataTable for generating this parameter info
     // TODO: or put the error and parameter info in as comments # in the data file
@@ -266,6 +271,11 @@ export class RegressionTest {
     return code;
   }
 
+  private formatDelta(before: bigint, after: bigint): string {
+    const result = after - before;
+    return (result > 0n ? "+" : "") + formatEther(result);
+  }
+
   public async data() {
     // now add one (or more) rows of data:
     // one column for each action
@@ -274,11 +284,13 @@ export class RegressionTest {
 
     let currentAction = -1; // do a line before any actions
     do {
-      let line: string[] = [];
+      let dataLine: string[] = [];
 
       this.independents.forEach((variable) =>
         // add a 0.1 for each action
-        line.push(formatEther(variable.value + (variable.name == "index" ? BigInt((currentAction + 1) * 1e17) : 0n))),
+        dataLine.push(
+          formatEther(variable.value + (variable.name == "index" ? BigInt((currentAction + 1) * 1e17) : 0n)),
+        ),
       );
       // one action at a time
       for (let a = 0; a < this.actions.length; a++) {
@@ -286,47 +298,48 @@ export class RegressionTest {
           try {
             let fn = this.system.actions.get(this.actions[a]);
             if (fn) await fn(); // await is needed
-            line.push("\\o/"); // success
+            dataLine.push("\\o/"); // success
           } catch (e: any) {
-            line.push(this.formatError(e)); // failure
+            dataLine.push(this.formatError(e)); // failure
             currentAction++;
           }
         } else {
-          line.push("---"); // not executed
+          dataLine.push("---"); // not executed
         }
       }
-      let deltaLine = line.slice(); // copy it
+      let deltaLine = dataLine.slice(); // copy it
 
       let first = true;
       for (let calcState of this.calculations) {
-        let text: string;
+        let dataText: string;
         let deltaText: string;
         try {
           let value = await calcState.func();
-          text = formatEther(value);
-          deltaText = formatEther(value - calcState.prevValue);
+          dataText = formatEther(value);
+          deltaText = this.formatDelta(calcState.prevValue, value);
 
           calcState.allZeros = calcState.allZeros && value == 0n;
           calcState.prevValue = value;
         } catch (e: any) {
-          text = this.formatError(e);
-          deltaText = text;
+          dataText = this.formatError(e);
+          deltaText = dataText;
         }
-        if (!first) calcState.allSame = calcState.allSame && text == calcState.prevText;
-        line.push(text);
+        if (!first) calcState.allSame = calcState.allSame && dataText == calcState.prevText;
+        dataLine.push(dataText);
         deltaLine.push(deltaText);
-        calcState.prevText = text;
+        calcState.prevText = dataText;
         first = false;
       }
 
-      this.runData.addRow(line);
+      this.runData.addRow(dataLine);
+      this.runDelta.addRow(deltaLine);
     } while (++currentAction < this.actions.length);
   }
 
   public async done() {
     // write the parameters file
     const runParameters = this.runParameters.join("\n");
-    fs.writeFileSync(this.runParametersFilePath, runParameters);
+    fs.writeFileSync(this.runDir + this.parametersFileName, runParameters);
 
     // write the errors file
     let runErrors: [string, string][] = [["no ", "errors"]];
@@ -334,64 +347,42 @@ export class RegressionTest {
       runErrors = Array.from(this.runErrors, ([k, v]) => [v.toString(), k]);
       runErrors.unshift(["code", "message"]);
     }
-    fs.writeFileSync(this.runErrorsFilePath, runErrors.join("\n"));
+    fs.writeFileSync(this.runDir + this.errorsFileName, runErrors.join("\n"));
 
     // write the data file
-    const runData = toCSV(this.runData);
-    fs.writeFileSync(this.runDataFilePath, runData);
+    fs.writeFileSync(this.runDir + this.dataFileName, toCSV(this.runData));
+    fs.writeFileSync(this.runDir + this.deltaFileName, toCSV(this.runDelta));
 
     // now compare them
-    // TODO: compare the parameters and errors too
+    this._compare(this.dataFileName);
+    this._compare(this.deltaFileName);
+  }
+
+  private _compare(fileName: string) {
+    const goodFilePath = this.goodDir + fileName;
+    const runFilePath = this.runDir + fileName;
     expect(
-      fs.existsSync(this.goodDataFilePath),
-      `The good file (${this.goodDataFilePath}) doesn't exist. If this run is good,\n` +
-        `      cp ${this.runFilePatternPath} ${this.goodDir}`,
+      fs.existsSync(goodFilePath),
+      `The good file (${goodFilePath}) doesn't exist. If this run is good,\n` +
+        `      cp ${runFilePath} ${this.goodDir}`,
     ).to.be.true;
 
-    /*
-    hand written comparison isn't so good so,
-    let diffsArray: string[] = [];
-    let diffsText: string = "";
-    try {
-      diffsArray = diff(this.runData, fromCSV(goodData));
-      diffsText = diffsArray.join("\n");
-    } catch (e: any) {
-      console.log("diff failed!!");
-    }
-    if (diffsArray.length > 0) {
-      console.log("DIFFS: %s", diffsText);
-      fs.writeFileSync(this.runDiffsFilePath, diffsText);
-    }
-    */
-
-    // just do a string compare
-    /*
-    let run, good;
-    let csvdiff = "csvdiff";
-    if (commandExists.sync(csvdiff)) {
-      csvdiff += ` ${this.runDataFilePath} ${this.goodDataFilePath}`;
-      run = execSync(csvdiff, { encoding: "utf-8" });
-      good = "";
-    } else {
-      // just do a text comparison
-      run = runData;
-      good = fs.readFileSync(this.goodDataFilePath, "utf-8");
-    }
-    */
-    const run = runData;
-    const good = fs.readFileSync(this.goodDataFilePath, "utf-8");
+    const run = fs.readFileSync(runFilePath, "utf-8");
+    const good = fs.readFileSync(goodFilePath, "utf-8");
     expect(run).to.equal(
       good,
-      "This run is different to the good one.\n      Compare the run results to the good resuts, e.g.\n         bcompare "
-        .concat(this.runDataFilePath)
-        .concat(" ")
-        .concat(this.goodDataFilePath)
-        .concat("\n      Then, if this run is good,\n         cp ")
-        .concat(this.runFilePatternPath)
-        .concat(" ")
-        .concat(this.goodDir),
+      "This run is different to the good one.\n" +
+        "      Compare the run results to the good resuts, e.g.\n" +
+        `         bcompare ${runFilePath} ${goodFilePath}\n` +
+        "      Then, if this run is good,\n" +
+        `         cp ${runFilePath} ${goodFilePath}`,
     );
   }
+
+  private _remove = (fileName: string) => {
+    const runFilePath = this.runDir + fileName;
+    if (fs.existsSync(runFilePath)) fs.unlinkSync(runFilePath);
+  };
 }
 
 ///////////////////////////////////////

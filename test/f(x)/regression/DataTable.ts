@@ -24,19 +24,17 @@ function unformatCSV(csv: string): string {
 }
 
 export function toCSV(dt: DataTable): string {
+  const specialKeyField = false;
   // make one big string
-  let result: string;
-  // header row, assume no " or , characters there TODO: csv-safe the headers!
-  // const headerRow = ["key:".concat(dt.keyFields.length.toString())].concat(dt.keyFields).concat(dt.fields).join(",");
-  const headerRow = dt.keyFields.concat(dt.fields).join(",");
+  let headerRowOfFields = [...dt.keyFields, ...dt.fields];
+  let dataRowOfFields = dt.data;
 
-  // make csv compatible data fields - do this first so we don't do it again for the key
-  let dataRows = dt.data.map((row) => row.map((cell) => formatForCSV(cell)).join(","));
-  // add a key column
-  // dataRows = dataRows.map((row) => [row.slice(0, dt.keyFields.length).join(" x ") + ",",...row]);
-  // split lines by "\n"
-  result = [headerRow].concat(dataRows).join("\n");
-  return result;
+  if (specialKeyField) {
+    headerRowOfFields = ["key:" + dt.keyFields.length.toString(), ...headerRowOfFields];
+    dataRowOfFields = dataRowOfFields.map((row) => [row.slice(0, dt.keyFields.length).join(" x "), ...row]);
+  }
+  let rows = [headerRowOfFields, ...dataRowOfFields].map((row) => row.map((cell) => formatForCSV(cell)));
+  return rows.map((row) => row.join(",")).join("\n");
 }
 
 export function fromCSV(csv: string): DataTable {
