@@ -146,8 +146,7 @@ export class RegressionTest {
   private calculations: CalculationState[] = [];
 
   // TODO:
-  // make all output into datatables
-  // then attach a file name to the datatable
+  // attach a file name to the datatable
   private runData: DataTable;
   private runDelta: DataTable;
   private runParameters: DataTable;
@@ -172,13 +171,14 @@ export class RegressionTest {
 
   // TODO: get rid of the variables - they are all actions, maybe?
   constructor(
+    runName: string,
     public system: RegressionSystem,
     public independents: Variable[],
     public actions: string[],
     calculationFilter?: string[],
   ) {
     // set up the file names consistently
-    const runName = [...independents.map((v) => v.name)].slice(1).join("_x_"); // TODO: get this passed in
+    runName = runName + "." + [...independents.map((v) => v.name)].slice(1).join("_x_"); // TODO: get this passed in
 
     const dataSuffix = ".data";
     const deltaSuffix = ".delta";

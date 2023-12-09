@@ -219,6 +219,7 @@ describe("NavsGraphs", async () => {
   context("navsby", async () => {
     it("ethPrice", async () => {
       let rt = new RegressionTest(
+        "Aladdin",
         rs,
         [index, ethPrice],
         [fMint, fRedeem, xMint, xRedeem, rebalancePoolLiquidation, fHolderLiquidation],
