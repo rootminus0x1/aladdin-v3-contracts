@@ -151,7 +151,8 @@ export class RegressionTest {
   private runData: DataTable;
   private runDelta: DataTable;
   private runParameters: DataTable;
-  private runErrors = new Map<string, string>(); // map of error message to error hash string, stored in file .errors.csv
+  private runErrors: DataTable;
+  private runErrorsMap = new Map<string, string>(); // map of error message to error hash string, stored in file .errors.csv
 
   // where files are stored
   private testDataDir = "test/data/";
@@ -237,11 +238,12 @@ export class RegressionTest {
       parameters.map((v) => v.name),
     );
     this.runParameters.addRow(parameters.map((v) => formatEther(v.value)));
+    this.runErrors = new DataTable(["code", "message"], []);
   }
 
   private formatError(e: any): string {
     let message = e.message || "undefined error";
-    let code = this.runErrors.get(message) || ""; // have we encountered this error text before?
+    let code = this.runErrorsMap.get(message) || ""; // have we encountered this error text before?
     if (code == "") {
       // first time this message has occurred - generate the code
       const match = message.match(/'([^']*)'$/);
@@ -254,7 +256,8 @@ export class RegressionTest {
         code = "ERR: ".concat(hash);
       }
       // TODO: ensure the code/message combination is unique - if not add a digit to the end representing the count
-      this.runErrors.set(message, code);
+      this.runErrorsMap.set(message, code);
+      this.runErrors.addRow([code, message]);
     }
     return code;
   }
@@ -325,15 +328,7 @@ export class RegressionTest {
   }
 
   public async done() {
-    // write the errors file
-    let runErrors: [string, string][] = [["no ", "errors"]];
-    if (this.runErrors.size > 0) {
-      runErrors = Array.from(this.runErrors, ([k, v]) => [v.toString(), k]);
-      runErrors.unshift(["code", "message"]);
-    }
-    fs.writeFileSync(this.runDir + this.errorsFileName, runErrors.join("\n"));
-
-    // write the data file
+    fs.writeFileSync(this.runDir + this.errorsFileName, toCSV(this.runErrors));
     fs.writeFileSync(this.runDir + this.parametersFileName, toCSV(this.runParameters));
     fs.writeFileSync(this.runDir + this.dataFileName, toCSV(this.runData));
     fs.writeFileSync(this.runDir + this.deltaFileName, toCSV(this.runDelta));
