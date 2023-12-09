@@ -144,14 +144,13 @@ type CalculationState = {
 export class RegressionTest {
   // what to show
   private calculations: CalculationState[] = [];
-  // the data
-  private runParameters: string[] = []; // stored in file .parameters.csv
 
   // TODO:
   // make all output into datatables
   // then attach a file name to the datatable
   private runData: DataTable;
   private runDelta: DataTable;
+  private runParameters: DataTable;
   private runErrors = new Map<string, string>(); // map of error message to error hash string, stored in file .errors.csv
 
   // where files are stored
@@ -232,23 +231,12 @@ export class RegressionTest {
     this.runData = new DataTable(keyFields, dataFields);
     this.runDelta = new DataTable(keyFields, dataFields);
 
-    // TODO: use the DataTable for generating this parameter info
-    // TODO: or put the error and parameter info in as comments # in the data file
-    // and print out all the header info
-    let phead: string[] = [];
-    let pdata: string[] = [];
-
-    // all variables that are not independent are static and listed as parameters
-    // if a new variable is added then do file names change?, no
-    // what about parameters that vary from the default, e.g. beta, should do really
-    for (let av of this.system.variables) {
-      if (!this.hasIndependent(av)) {
-        phead.push(av.name);
-        pdata.push(formatEther(av.value)); // TODO: make this work with more types - e.g. should I assume its a 1e18 scaled number?
-      }
-    }
-    this.runParameters.push(phead.join());
-    this.runParameters.push(pdata.join());
+    let parameters = this.system.variables.filter((v) => !this.hasIndependent(v));
+    this.runParameters = new DataTable(
+      [],
+      parameters.map((v) => v.name),
+    );
+    this.runParameters.addRow(parameters.map((v) => formatEther(v.value)));
   }
 
   private formatError(e: any): string {
@@ -337,10 +325,6 @@ export class RegressionTest {
   }
 
   public async done() {
-    // write the parameters file
-    const runParameters = this.runParameters.join("\n");
-    fs.writeFileSync(this.runDir + this.parametersFileName, runParameters);
-
     // write the errors file
     let runErrors: [string, string][] = [["no ", "errors"]];
     if (this.runErrors.size > 0) {
@@ -350,15 +334,18 @@ export class RegressionTest {
     fs.writeFileSync(this.runDir + this.errorsFileName, runErrors.join("\n"));
 
     // write the data file
+    fs.writeFileSync(this.runDir + this.parametersFileName, toCSV(this.runParameters));
     fs.writeFileSync(this.runDir + this.dataFileName, toCSV(this.runData));
     fs.writeFileSync(this.runDir + this.deltaFileName, toCSV(this.runDelta));
 
     // now compare them
-    this._compare(this.dataFileName);
-    this._compare(this.deltaFileName);
+    this.compare(this.dataFileName);
+    this.compare(this.deltaFileName);
+    this.compare(this.parametersFileName);
+    this.compare(this.errorsFileName);
   }
 
-  private _compare(fileName: string) {
+  private compare(fileName: string) {
     const goodFilePath = this.goodDir + fileName;
     const runFilePath = this.runDir + fileName;
     expect(
