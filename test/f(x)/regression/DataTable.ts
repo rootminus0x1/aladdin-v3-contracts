@@ -23,11 +23,14 @@ function unformatCSV(csv: string): string {
   return csv;
 }
 
-export function toCSV(dt: DataTable): string {
+export function toCSV(dt: DataTable, ignoreColumns: string[] = []): string {
   const specialKeyField = false;
-  // make one big string
+  // the superset headers
   let headerRowOfFields = [...dt.keyFields, ...dt.fields];
-  let dataRowOfFields = dt.data;
+  // find the indices of the ignoreColumns
+  let ignoreColumn = headerRowOfFields.map((name) => ignoreColumns.includes(name));
+  headerRowOfFields = headerRowOfFields.filter((value, index) => !ignoreColumn[index]);
+  let dataRowOfFields = dt.data.map((row) => row.filter((value, index) => !ignoreColumn[index]));
 
   if (specialKeyField) {
     headerRowOfFields = ["key:" + dt.keyFields.length.toString(), ...headerRowOfFields];

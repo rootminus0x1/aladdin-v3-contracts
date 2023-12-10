@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import * as fs from "fs";
-import { parseEther, formatEther } from "ethers";
+import { parseEther, formatEther, formatUnits, ContractTransactionResponse, MaxInt256 } from "ethers";
 import { DataTable, fromCSV, toCSV, diff } from "./DataTable";
 import * as crypto from "crypto-js";
 //import 'command-exists';
@@ -28,7 +28,7 @@ export class Variable {
 }
 
 // export type NamedAddress = { name: string; address: string };
-type ActionFunction = () => {};
+type ActionFunction = () => Promise<ContractTransactionResponse>;
 type CalculationFunction = () => Promise<bigint>;
 // TODO: maybe change those any's into templated types
 type InstanceCalculationFunction = (instance: any) => Promise<bigint>;
@@ -134,6 +134,7 @@ type CalculationState = {
   name: string;
   func: CalculationFunction;
   // this is filled in during the calculations
+  first: boolean; // the first row of this calculation
   allZeros: boolean; // can be removed for slim file
   prevValue: bigint; // used to determine the above and also work out deltas
   allSame: boolean; // can be removed in skinny file
@@ -160,7 +161,9 @@ export class RegressionTest {
   // and what they are called
   // private runFilePatternPath: string;
   private dataFileName: string;
+  private dataSlimFileName: string;
   private deltaFileName: string;
+  private deltaSlimFileName: string;
   private parametersFileName: string;
   private errorsFileName: string;
 
@@ -184,19 +187,24 @@ export class RegressionTest {
     const deltaSuffix = ".delta";
     const errorsSuffix = ".errors";
     const parametersSuffix = ".parameters";
+    const slimSuffix = ".slim";
     const fileType = ".csv";
 
     //this.runFileNamePatternPath = this.runDir + runName + ".*" + fileType;
     this.dataFileName = runName + dataSuffix + fileType;
+    this.dataSlimFileName = runName + dataSuffix + slimSuffix + fileType;
     this.deltaFileName = runName + deltaSuffix + fileType;
+    this.deltaSlimFileName = runName + deltaSuffix + slimSuffix + fileType;
     this.parametersFileName = runName + parametersSuffix + fileType;
     this.errorsFileName = runName + errorsSuffix + fileType;
 
     // delete the run files (not the good one)
-    this._remove(this.dataFileName);
-    this._remove(this.deltaFileName);
-    this._remove(this.parametersFileName);
-    this._remove(this.errorsFileName);
+    this.remove(this.dataFileName);
+    this.remove(this.dataSlimFileName);
+    this.remove(this.deltaFileName);
+    this.remove(this.deltaSlimFileName);
+    this.remove(this.parametersFileName);
+    this.remove(this.errorsFileName);
 
     // initialise the datatable
     // reset all the variables to their initial values
@@ -214,8 +222,9 @@ export class RegressionTest {
         this.calculations.push({
           name: calcName,
           func: calcFn,
-          allZeros: false,
-          allSame: false,
+          first: true,
+          allZeros: true,
+          allSame: true,
           prevValue: 0n,
           prevText: "",
         });
@@ -224,15 +233,17 @@ export class RegressionTest {
       }
     }
 
-    let keyFields =
-      //[...independents.map((v) => v.name)].concat(actions.length ? ["actionName", "actionResult"] : []),
-      [...this.independents.map((v) => v.name)];
-    let dataFields = [...this.actions, ...this.calculations.map((state) => state.name)];
+    const keyFields = [...this.independents.map((v) => v.name), ...(actions.length ? ["actionName"] : [])];
+    const dataFields = [
+      ...(actions.length ? ["actionResult", "gasUsed(wei)", "gasUsed(price=50gweix$2500)"] : []),
+      "whatChanged",
+      ...this.calculations.map((state) => state.name),
+    ];
 
     this.runData = new DataTable(keyFields, dataFields);
     this.runDelta = new DataTable(keyFields, dataFields);
 
-    let parameters = this.system.variables.filter((v) => !this.hasIndependent(v));
+    const parameters = this.system.variables.filter((v) => !this.hasIndependent(v));
     this.runParameters = new DataTable(
       [],
       parameters.map((v) => v.name),
@@ -244,22 +255,39 @@ export class RegressionTest {
   private formatError(e: any): string {
     let message = e.message || "undefined error";
     let code = this.runErrorsMap.get(message) || ""; // have we encountered this error text before?
-    if (code == "") {
+    if (code === "") {
       // first time this message has occurred - generate the code
-      const match = message.match(/'([^']*)'$/);
-      // TODO: ensure the code/message combination is unique
-      if (match && match.length === 2) {
-        code = match[1];
-      } else {
+      const patterns: [RegExp, (match: string) => string][] = [
+        [/'([^']+)'$/, (match) => match[1]], // message in quotes
+        [/:\s([^:]+)$/, (match) => match[1]], // message after ':'
+      ];
+      for (const [pattern, processor] of patterns) {
+        const matches = message.match(pattern);
+        if (matches) {
+          code = processor(matches);
+          break;
+        }
+      }
+      if (code === "") {
         //const hash = createHash("sha256").update(message).digest("base64");
         const hash = crypto.SHA3(message, { outputLength: 32 }).toString(crypto.enc.Base64);
         code = "ERR: ".concat(hash);
       }
-      // TODO: ensure the code/message combination is unique - if not add a digit to the end representing the count
-      this.runErrorsMap.set(message, code);
-      this.runErrors.addRow([code, message]);
     }
+    // TODO: ensure the code/message combination is unique
+    this.runErrorsMap.set(message, code);
+    this.runErrors.addRow([code, message]);
     return code;
+  }
+
+  private formatEther(value: bigint) {
+    const basic = formatEther(value);
+    return basic.endsWith(".0") ? basic.slice(0, -2) : basic;
+  }
+
+  private formatWei(value: bigint) {
+    const basic = formatUnits(value, "wei");
+    return basic.endsWith(".0") ? basic.slice(0, -2) : basic;
   }
 
   private formatDelta(before: bigint, after: bigint): string {
@@ -269,38 +297,35 @@ export class RegressionTest {
 
   public async data() {
     // now add one (or more) rows of data:
-    // one column for each action
-    // one row, no actions
-    // then execute actions - if they pass it's a new line, else go on to the next action
+    // one row, no actions, calculations
+    // one row for each action + calculations
 
-    let currentAction = -1; // do a line before any actions
-    do {
-      let dataLine: string[] = [];
+    for (let action of ["", ...this.actions]) {
+      let dataLine = this.independents.map((variable) => this.formatEther(variable.value));
 
-      this.independents.forEach((variable) =>
-        // add a 0.1 for each action
-        dataLine.push(
-          formatEther(variable.value + (variable.name == "index" ? BigInt((currentAction + 1) * 1e17) : 0n)),
-        ),
-      );
-      // one action at a time
-      for (let a = 0; a < this.actions.length; a++) {
-        if (a == currentAction) {
-          try {
-            let fn = this.system.actions.get(this.actions[a]);
-            if (fn) await fn(); // await is needed
-            dataLine.push("\\o/"); // success
-          } catch (e: any) {
-            dataLine.push(this.formatError(e)); // failure
-            currentAction++;
-          }
-        } else {
-          dataLine.push("---"); // not executed
+      let result = "-"; // no action
+      let actionGas = 0n;
+      const fn = this.system.actions.get(action);
+      if (fn) {
+        try {
+          let tx = await fn();
+          let receipt = await tx.wait();
+          actionGas = receipt ? receipt.gasUsed : MaxInt256;
+          result = "\\o/"; // success
+        } catch (e: any) {
+          result = this.formatError(e); // failure
         }
       }
+      dataLine.push(action);
+      dataLine.push(result);
+      dataLine.push(this.formatWei(actionGas));
+      dataLine.push("$" + formatEther(actionGas * 50n * 10n ** 9n * 2500n));
+
+      const whatChangedIndex = dataLine.push("?") - 1;
+      let whatChanged: string[] = []; // nothing changed yet
+
       let deltaLine = dataLine.slice(); // copy it
 
-      let first = true;
       for (let calcState of this.calculations) {
         let dataText: string;
         let deltaText: string;
@@ -308,34 +333,57 @@ export class RegressionTest {
           let value = await calcState.func();
           dataText = formatEther(value);
           deltaText = this.formatDelta(calcState.prevValue, value);
-
-          calcState.allZeros = calcState.allZeros && value == 0n;
+          calcState.allZeros = calcState.allZeros && value === 0n;
           calcState.prevValue = value;
         } catch (e: any) {
           dataText = this.formatError(e);
           deltaText = dataText;
         }
-        if (!first) calcState.allSame = calcState.allSame && dataText == calcState.prevText;
+        if (!calcState.first) {
+          calcState.allSame = calcState.allSame && dataText === calcState.prevText;
+          if (calcState.prevText !== dataText) whatChanged.push(calcState.name);
+        }
         dataLine.push(dataText);
         deltaLine.push(deltaText);
-        calcState.prevText = dataText;
-        first = false;
-      }
+        calcState.prevText = dataText.slice();
+        calcState.first = false;
+      } // calculations
+
+      const whatChangeText = whatChanged.join(" ");
+      dataLine[whatChangedIndex] = whatChangeText;
+      deltaLine[whatChangedIndex] = whatChangeText;
 
       this.runData.addRow(dataLine);
       this.runDelta.addRow(deltaLine);
-    } while (++currentAction < this.actions.length);
+    } // actions;
   }
 
   public async done() {
     fs.writeFileSync(this.runDir + this.errorsFileName, toCSV(this.runErrors));
     fs.writeFileSync(this.runDir + this.parametersFileName, toCSV(this.runParameters));
+
     fs.writeFileSync(this.runDir + this.dataFileName, toCSV(this.runData));
+    fs.writeFileSync(
+      this.runDir + this.dataSlimFileName,
+      toCSV(
+        this.runData,
+        this.calculations.filter((c) => c.allSame).map((c) => c.name),
+      ),
+    );
+
     fs.writeFileSync(this.runDir + this.deltaFileName, toCSV(this.runDelta));
+    fs.writeFileSync(
+      this.runDir + this.deltaSlimFileName,
+      toCSV(
+        this.runDelta,
+        this.calculations.filter((c) => c.allSame).map((c) => c.name),
+      ),
+    );
 
     // now compare them
     this.compare(this.dataFileName);
     this.compare(this.deltaFileName);
+    this.compare(this.deltaSlimFileName);
     this.compare(this.parametersFileName);
     this.compare(this.errorsFileName);
   }
@@ -361,7 +409,7 @@ export class RegressionTest {
     );
   }
 
-  private _remove = (fileName: string) => {
+  private remove = (fileName: string) => {
     const runFilePath = this.runDir + fileName;
     if (fs.existsSync(runFilePath)) fs.unlinkSync(runFilePath);
   };

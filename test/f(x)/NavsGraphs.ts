@@ -77,26 +77,26 @@ describe("NavsGraphs", async () => {
 
   let rebalancePoolLiquidation = rs.defAction("rebalancePool.liquidate(-1)", async () => {
     const deposited = await fToken.balanceOf(rebalancePool); // TODO: add a -1 input to liquidate function
-    await rebalancePool.connect(liquidator).liquidate(deposited, 0n);
+    return rebalancePool.connect(liquidator).liquidate(deposited, 0n);
   });
   let fHolderLiquidation = rs.defAction("fHolderLiquidate(-1)", async () => {
     const balance = await fToken.balanceOf(fHolderLiquidator);
-    await market.connect(fHolderLiquidator).liquidate(balance, fHolderLiquidator.address, 0n);
+    return market.connect(fHolderLiquidator).liquidate(balance, fHolderLiquidator.address, 0n);
   });
   let fMint = rs.defAction("fMinter.mint(100)", async () => {
     // TODO: access the Calculation for this
     let fNav = await treasury.getCurrentNav().then((res) => res._fNav);
-    await market.connect(fMinter).mintFToken((fNav * parseEther("100")) / ethPrice.value, fMinter.address, 0n);
+    return market.connect(fMinter).mintFToken((fNav * parseEther("100")) / ethPrice.value, fMinter.address, 0n);
   });
   let fRedeem = rs.defAction("fHolderRedeemer.Redeem(100)", async () => {
-    await market.connect(fHolderRedeemer).redeem(parseEther("100"), 0n, fHolderRedeemer.address, 0n);
+    return market.connect(fHolderRedeemer).redeem(parseEther("100"), 0n, fHolderRedeemer.address, 0n);
   });
   let xMint = rs.defAction("xMinter.mint(100)", async () => {
     let xNav = await treasury.getCurrentNav().then((res) => res._xNav);
-    await market.connect(xMinter).mintXToken((xNav * parseEther("100")) / ethPrice.value, xMinter.address, 0n);
+    return market.connect(xMinter).mintXToken((xNav * parseEther("100")) / ethPrice.value, xMinter.address, 0n);
   });
   let xRedeem = rs.defAction("xHolderRedeemer.Redeem(100)", async () => {
-    await market.connect(xHolderRedeemer).redeem(0n, parseEther("100"), xHolderRedeemer.address, 0n);
+    return market.connect(xHolderRedeemer).redeem(0n, parseEther("100"), xHolderRedeemer.address, 0n);
   });
 
   rs.defCalculation("FractionalToken.nav", async () => {
