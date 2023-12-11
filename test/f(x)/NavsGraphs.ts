@@ -8,7 +8,16 @@ import * as fs from "fs";
 import * as rd from "readline";
 import { erc20 } from "typechain-types/@openzeppelin/contracts/token";
 
-import { LeveragedToken, FractionalToken, Treasury, Market, WETH9, MockFxPriceOracle, RebalancePool } from "@types";
+import {
+  LeveragedToken,
+  FractionalToken,
+  Treasury,
+  Market,
+  WETH9,
+  MockFxPriceOracle,
+  RebalancePool,
+  ReservePool,
+} from "@types";
 import { ContractWithAddress, UserWithAddress, deploy, getUser } from "test/useful";
 import { RegressionSystem, RegressionTest, Variable } from "test/f(x)/regression/RegressionTest";
 import { features } from "process";
@@ -40,6 +49,7 @@ describe("NavsGraphs", async () => {
   let treasury: ContractWithAddress<Treasury>;
   let market: ContractWithAddress<Market>;
   let rebalancePool: ContractWithAddress<RebalancePool>;
+  let reservePool: ContractWithAddress<ReservePool>;
 
   let rs = new RegressionSystem(
     new Map([
@@ -105,11 +115,6 @@ describe("NavsGraphs", async () => {
   rs.defCalculation("LeveragedToken.nav", async () => {
     return treasury.getCurrentNav().then((res) => res._xNav);
   });
-  /*
-  rs.defCalculation("baseTokenNav", async () => {
-    return treasury.getCurrentNav().then((res) => res._baseNav);
-  });
-  */
   rs.defCalculation("treasury.collateralRatio", async () => {
     return treasury.collateralRatio();
   });
@@ -164,6 +169,8 @@ describe("NavsGraphs", async () => {
     rebalancePool = await deploy("RebalancePool", deployer);
     rs.defThing(rebalancePool, owner);
     rs.defThing(rebalancePool, token);
+    reservePool = await deploy("ReservePool", deployer, market.address, fToken.address);
+    rs.defThing(reservePool, owner);
 
     rs.defRelation("owner", "token", [
       {
@@ -196,7 +203,7 @@ describe("NavsGraphs", async () => {
       recapRatio.initialValue,
     );
 
-    if (fees.initialValue != 0n) {
+    if (fees.initialValue !== 0n) {
       // implement fees
       console.log("including fees");
       await market.updateMintFeeRatio(fTokenMintFeeDefault.initialValue, fTokenMintFeeExtra.initialValue, true);
@@ -211,7 +218,7 @@ describe("NavsGraphs", async () => {
     await rebalancePool.updateLiquidatableCollateralRatio(rebalancePoolliquidatableRatio.initialValue);
 
     // reserve pool
-    // market.updateReservePool
+    await market.updateReservePool(reservePool.address);
 
     rs.initialise();
   });
