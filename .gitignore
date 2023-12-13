@@ -1,4 +1,5 @@
 node_modules/
+contracts-deployed/
 .env
 coverage
 coverage*.json

@@ -32,6 +32,7 @@ const PRECISION = 10n ** 18n;
 
 describe("NavsGraphs", async () => {
   let deployer: UserWithAddress; // deploys all the contracts
+  // TODO: Aladdin's deployed platform is ) in market
   let platform: UserWithAddress; // accepts fees from market
   let admin: UserWithAddress; // bao admin
   let fHolderLiquidator: UserWithAddress; // user who mints/liquidates fTokens
@@ -44,12 +45,35 @@ describe("NavsGraphs", async () => {
 
   let weth: ContractWithAddress<WETH9>;
   let oracle: ContractWithAddress<MockFxPriceOracle>;
+
+  // FractionalToken.sol
   let fToken: ContractWithAddress<FractionalToken>;
+  // FxVault.sol
+  // HarvestableTreasury.sol
+  // LeveragedToken.sol
   let xToken: ContractWithAddress<LeveragedToken>;
-  let treasury: ContractWithAddress<Treasury>;
+  // Market.sol
+  // TODO: Aladdin uses FxMarket, not Market, with 0 as RebalancePoolRegistry
   let market: ContractWithAddress<Market>;
+  // RebalancePool.sol
   let rebalancePool: ContractWithAddress<RebalancePool>;
+  // ReservePool.sol
   let reservePool: ContractWithAddress<ReservePool>;
+  // StableCoinMath.sol
+  // Treasury.sol
+  let treasury: ContractWithAddress<Treasury>;
+  // WrappedTokenTreasury.sol
+
+  // oracle/FxETHTwapOracle.sol
+  // rate-provider/ChainlinkWstETHRateProvider.sol
+  // rate-provider/wBETHRateProvider.sol
+  // rebalancer/RebalanceWithBonusToken.sol
+
+  // steth/stETHGateway.sol
+  // steth/stETHTreasury.sol
+
+  // wrapper/FxTokenBalancerV2Wrapper.sol
+  // wrapper/wstETHWrapper.sol
 
   let rs = new RegressionSystem(
     new Map([
