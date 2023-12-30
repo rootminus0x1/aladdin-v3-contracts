@@ -1,19 +1,55 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Hardhat individual test",
-            "type": "node",
-            "request": "launch",
-            "console": "integratedTerminal",
-            "runtimeExecutable": "yarn",
-            "runtimeArgs": [
-                "testhh",
-                "${file}"
-            ]
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Hardhat individual test",
+      "type": "node",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["testhh", "${file}"]
+    },
+    {
+      "name": "debug TS",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/ts-node/dist/bin.js",
+      "args": ["${file}"],
+      "sourceMaps": true,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "debug dig fx",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/ts-node/dist/bin.js",
+      "args": ["${file}", "${input:dig.debug.args}"],
+      "sourceMaps": true,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "dig.debug.args",
+      "description": "What type of component do you want to create?",
+      "options": ["dig.yml", "debug.yml"],
+      "default": "debug.yml"
+    },
+    {
+      "type": "promptString",
+      "id": "componentName",
+      "description": "Name your component.",
+      "default": "my-new-component"
+    }
+  ]
 }
