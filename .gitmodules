@@ -4,3 +4,6 @@
 [submodule "lib/eat"]
 	path = lib/eat
 	url = https://github.com/rootminus0x1/eat
+[submodule "dotfiles"]
+	path = dotfiles
+	url = http://github.com/rootminus0x1/dotfiles
