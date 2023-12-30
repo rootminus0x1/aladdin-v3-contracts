@@ -16,7 +16,7 @@
   //"solidity.formatter": "prettier", // this uses a .pretierrc , see https://github.com/prettier-solidity/prettier-plugin-solidity#configuration-file
   //"solidity.formatter": "forge", // TODO: check against prettier
 
-  "prettier.documentSelectors": ["**/*.sol", "**/*.ts", "**/*.json"],
+  "prettier.documentSelectors": ["**/*.sol", "**/*.ts", "**/*.json", "**/*.yml"],
 
   "[solidity]": {
     //"editor.defaultFormatter": "JuanBlanco.solidity"
