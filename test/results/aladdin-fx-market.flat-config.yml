@@ -1,0 +1,73 @@
+block: 18888888
+diagram:
+  renderer: elk
+format:
+  - contract: BoostableRebalancePool
+    name: numTotalSupplyHistory
+  - name: chainlinkMinMessageCount
+  - name: chainlinkMessageExpiration
+  - name: start_epoch_time
+  - name: getChainId
+  - name: getThreshold
+  - name: nonce
+  - name: decimals
+  - name: epoch
+  - name: time_total
+  - name: numTotalSupplyHistory
+  - name: latestRoundData.startedAt
+  - name: latestRoundData.updatedAt
+  - name: latestTimestamp
+  - name: version
+  - name: getRewardCount
+  - name: latestAnswer
+    type: int256
+    unit: 8
+  - name: latestRoundData.answer
+    type: int256
+    unit: 8
+  - contract: Market
+    type: uint128
+    unit: 16
+  - contract: Market
+    type: int128
+    unit: 16
+  - contract: Market
+    type: uint64
+    unit: 18
+  - type: uint256
+    unit: ether
+stopafter:
+  - '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+  - '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
+  - '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
+  - '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
+  - '0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196'
+  - '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+  - '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
+  - '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
+  - '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
+  - '0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196'
+start:
+  - '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
+users:
+  - name: admin
+  - name: fMinter
+    wallet:
+      - contract: Lido
+        amount: 10000 ether
+  - name: fHolderLiquidator
+  - name: fHolderRedeemer
+  - name: xMinter
+  - name: xHolderRedeemer
+actions:
+  - user: fMinter
+    contract: Market
+    function: mintFToken
+    args:
+      - 1000 ether
+      - fMinter
+      - 0
+outputFileRoot: /home/tfras/github/rootminus0x1/aladdin-v3-contracts.main/test/results/
+configFilePath: >-
+  /home/tfras/github/rootminus0x1/aladdin-v3-contracts.main/test/aladdin-fx-market.config.yml
+configName: aladdin-fx-market

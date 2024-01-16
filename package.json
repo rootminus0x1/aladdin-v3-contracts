@@ -17,7 +17,7 @@
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
     "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage",
-    "dig": "ts-node lib/eat/src/dig.ts dig.yml"
+    "eat": "ts-node test/eat.ts test/*.yml"
   },
   "devDependencies": {
     "@nomicfoundation/ethereumjs-block": "^5.0.3",
@@ -33,8 +33,10 @@
     "@types/chai": "^4.2.21",
     "@types/edit-json-file": "^1.7.0",
     "@types/js-yaml": "^4.0.9",
+    "@types/lodash": "^4.14.202",
     "@types/mocha": "^9.0.0",
     "@types/node": "^12.0.0",
+    "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "asciichart": "^1.5.25",
@@ -61,6 +63,7 @@
     "husky": "^8.0.1",
     "js-yaml": "^4.1.0",
     "lint-staged": "^13.0.3",
+    "lodash": "^4.17.21",
     "prettier": "^2.3.2",
     "prettier-plugin-solidity": "^1.0.0-beta.13",
     "solhint": "^3.3.6",
@@ -70,7 +73,8 @@
     "tty-table": "^4.1.6",
     "typechain": "^8.3.1",
     "typescript": "^5.2.2",
-    "undici": "^5.22.1"
+    "undici": "^5.22.1",
+    "yargs": "^17.7.2"
   },
   "dependencies": {
     "@openzeppelin/contracts": "3.4.1-solc-0.7-2",

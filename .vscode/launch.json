@@ -25,11 +25,11 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "debug dig fx",
+      "name": "debug eat",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/ts-node/dist/bin.js",
-      "args": ["${file}", "${input:dig.debug.args}"],
+      "args": ["${workspaceFolder}/test/eat.ts", "${workspaceFolder}/test/aladdin-fx.config"],
       "sourceMaps": true,
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
