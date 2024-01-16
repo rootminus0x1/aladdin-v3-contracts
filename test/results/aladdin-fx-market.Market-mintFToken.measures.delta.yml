@@ -5,11 +5,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      delta: '0.000509131454847159'
+      delta: '+0.000010575430812849'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      delta: '-0.000509131454847159'
+      delta: '-0.000010575430812849'
 - address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
   name: BoostableRebalancePool_at_2
   contract: BoostableRebalancePool
@@ -17,29 +17,29 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      delta: '0.000509131454847159'
+      delta: '+0.000010575430812849'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      delta: '-0.000509131454847159'
+      delta: '-0.000010575430812849'
 - address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
   name: Curve_DAO_Token
   contract: Curve DAO Token
   measurements:
     - name: available_supply
       type: uint256
-      delta: '1.047247590055809073'
+      delta: '+0.021752917300862503'
 - address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
   name: FractionalToken
   contract: FractionalToken
   measurements:
     - name: totalSupply
       type: uint256
-      delta: '2284062.575333126121269027'
+      delta: '+2284062.575333126121269027'
     - name: balanceOf
       type: uint256
       target: fMinter
-      delta: '2284062.575333126121269027'
+      delta: '+2284062.575333126121269027'
 - address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
   name: LeveragedToken
   contract: LeveragedToken
@@ -53,7 +53,7 @@
   measurements:
     - name: price_oracle
       type: uint256
-      delta: '-0.000000001877679119'
+      delta: '-0.000000000042896817'
 - address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
   name: stETHTreasury
   contract: stETHTreasury
@@ -63,23 +63,23 @@
       delta: '-0.288227499768785675'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      delta: '31881'
+      delta: '31467'
     - name: emaLeverageRatio.lastValue
       type: uint96
       delta: '5986041380011295'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      delta: '-16944376846414711'
+      delta: '-16762009086727057'
     - name: leverageRatio
       type: uint256
-      delta: '-0.000148382936033526'
+      delta: '-0.000003091031541329'
     - name: totalBaseToken
       type: uint256
-      delta: '997.5'
+      delta: '+997.5'
 - address: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
   name: Voting_Escrow
   contract: Voting Escrow
   measurements:
     - name: totalSupply
       type: uint256
-      delta: '-0.307580380900433598'
+      delta: '-0.006388909989029778'
