@@ -17,9 +17,11 @@
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
     "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage",
-    "eat": "ts-node test/eat.ts test/*.yml"
+    "eat": "ts-node test/eat.ts test/*.yml",
+    "eat-view": "for file in ./test/results/*.md; do mmdc -i \"$file\" -o \"${file%.md}.svg\" && mv \"${file%.md}-1.svg\" \"${file%.md}.svg\" && firefox 2>/dev/null -new-tab \"${file%.md}.svg\" & done"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^10.6.1",
     "@nomicfoundation/ethereumjs-block": "^5.0.3",
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.2",
     "@nomicfoundation/hardhat-ethers": "^3.0.4",

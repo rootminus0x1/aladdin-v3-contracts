@@ -2,20 +2,32 @@ import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
-import { getConfig, write } from 'eat';
+import { ContractWithAddress, contracts, deploy, getConfig, getSigner, write } from 'eat';
 import { mermaid } from 'eat';
 import { asDateString } from 'eat';
 import { setupBlockchain } from 'eat';
 import { dig } from 'eat';
 import { delve } from 'eat';
 
+import { MockFxPriceOracle } from '@types';
+
 async function main() {
+    // TODO: replace with a simple initialise function and add timestamp to config, etc
     const timestamp = await setupBlockchain(getConfig().block, false);
 
-    // spider across the blockchain, following addresses contained in contracts, until we stop or are told to stop
-    // we build up the graph structure as we go for future processing
-
     await dig();
+
+    // mock the price oracle
+
+    // TODO: hide deployer (make a global like whale, or maybe use whale?)
+    const deployer = await getSigner('deployer');
+    let oracle: ContractWithAddress<MockFxPriceOracle>;
+    oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle', deployer);
+
+    // find the stETHTreasury owner
+
+    // need to find the owner of Treasury
+    await contracts.stETHTreasury.connect(contracts.stETHTreasury.owner).updatePriceOracle(oracle);
 
     // output a diagram
     write('diagram.md', await mermaid(getConfig().block, asDateString(timestamp), getConfig().diagram));

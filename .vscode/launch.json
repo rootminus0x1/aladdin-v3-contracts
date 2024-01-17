@@ -29,7 +29,7 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/ts-node/dist/bin.js",
-      "args": ["${workspaceFolder}/test/eat.ts", "${workspaceFolder}/test/aladdin-fx-market.config.yml"],
+      "args": ["${workspaceFolder}/test/eat.ts", "${workspaceFolder}/test/${input:debug-eat.args}"],
       "sourceMaps": true,
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
@@ -40,16 +40,9 @@
   "inputs": [
     {
       "type": "pickString",
-      "id": "dig.debug.args",
+      "id": "debug-eat.args",
       "description": "What type of component do you want to create?",
-      "options": ["dig.yml", "debug.yml"],
-      "default": "debug.yml"
-    },
-    {
-      "type": "promptString",
-      "id": "componentName",
-      "description": "Name your component.",
-      "default": "my-new-component"
+      "options": ["aladdin-fx-market.config.yml", "aladdin-fx-stETHTreasury.config.yml"]
     }
   ]
 }
