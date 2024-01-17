@@ -172,11 +172,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.003501978374883426'
+      value: '0.003503489150713833'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.173313181712630226'
+      value: '0.173311670936799819'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -216,11 +216,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.00089135773994013'
+      value: '0.000892868515770537'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.173313181712630226'
+      value: '0.173311670936799819'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -269,7 +269,7 @@
   measurements:
     - name: available_supply
       type: uint256
-      value: '1047280.215499746317472998'
+      value: '1047280.218607305931881927'
     - name: decimals
       type: uint256
       value: '18'
@@ -984,7 +984,7 @@
       value: '0.000000001703811923'
     - name: price_oracle
       type: uint256
-      value: '0.999585641928821516'
+      value: '0.999585641922700476'
     - name: totalSupply
       type: uint256
       value: '45363.931240034965729028'
@@ -1003,7 +1003,7 @@
       value: '1.839274612744141044'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824441'
+      value: '1703824442'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -1012,7 +1012,7 @@
       value: '1773235678532359425'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805400693956736369'
+      value: '1805400252396134243'
     - name: getCurrentNav._baseNav
       type: uint256
       value: '2354.30211112'
@@ -1030,7 +1030,7 @@
       value: '1836.7853'
     - name: leverageRatio
       type: uint256
-      value: '1.805400693956736369'
+      value: '1.805400252396134243'
     - name: rebalancePoolRatio
       type: uint128
       value: '500000000000000000'
@@ -1052,7 +1052,7 @@
       value: '115331.908808027700163144'
     - name: totalSupply
       type: uint256
-      value: '94540.331014548392093586'
+      value: '94540.330101846965089332'
 - address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
   name: WstETH
   contract: WstETH

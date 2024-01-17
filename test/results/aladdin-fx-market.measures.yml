@@ -1,3 +1,5 @@
+- name: ETH
+  value: '2500'
 - address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
   name: AccessControlledOffchainAggregator__0
   contract: AccessControlledOffchainAggregator
