@@ -1,6 +1,6 @@
 - address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
   name: AccessControlledOffchainAggregator__0
-  contract: AccessControlledOffchainAggregator
+  contractType: AccessControlledOffchainAggregator
   measurements:
     - name: decimals
       type: uint8
@@ -79,7 +79,7 @@
       value: '4'
 - address: '0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196'
   name: AccessControlledOffchainAggregator__1
-  contract: AccessControlledOffchainAggregator
+  contractType: AccessControlledOffchainAggregator
   measurements:
     - name: decimals
       type: uint8
@@ -155,7 +155,7 @@
       value: '4'
 - address: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
   name: BoostableRebalancePool_at_1
-  contract: BoostableRebalancePool
+  contractType: BoostableRebalancePool
   measurements:
     - name: liquidatableCollateralRatio
       type: uint256
@@ -195,7 +195,7 @@
       value: '1703939159'
 - address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
   name: BoostableRebalancePool_at_2
-  contract: BoostableRebalancePool
+  contractType: BoostableRebalancePool
   measurements:
     - name: liquidatableCollateralRatio
       type: uint256
@@ -239,7 +239,7 @@
       value: '1703939159'
 - address: '0x460B3CdE57DfbA90DBed02fd83d3990a92DA1230'
   name: ChainlinkTwapOracleV3__0
-  contract: ChainlinkTwapOracleV3
+  contractType: ChainlinkTwapOracleV3
   measurements:
     - name: chainlinkMessageExpiration
       type: uint256
@@ -252,7 +252,7 @@
       value: '2352.78183'
 - address: '0xD24AC180e6769Fd5F624e7605B93084171074A77'
   name: ChainlinkTwapOracleV3__1
-  contract: ChainlinkTwapOracleV3
+  contractType: ChainlinkTwapOracleV3
   measurements:
     - name: chainlinkMessageExpiration
       type: uint256
@@ -265,11 +265,11 @@
       value: '2354.30211112'
 - address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
   name: Curve_DAO_Token
-  contract: Curve DAO Token
+  contractType: Curve DAO Token
   measurements:
     - name: available_supply
       type: uint256
-      value: '1047280.215499746317472998'
+      value: '1047280.218607305931881927'
     - name: decimals
       type: uint256
       value: '18'
@@ -310,7 +310,7 @@
       value: '115331.908808027700163144'
 - address: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'
   name: EACAggregatorProxy__0
-  contract: EACAggregatorProxy
+  contractType: EACAggregatorProxy
   measurements:
     - name: decimals
       type: uint8
@@ -372,7 +372,7 @@
       value: '4'
 - address: '0xCfE54B5cD566aB89272946F602D76Ea879CAb4a8'
   name: EACAggregatorProxy__1
-  contract: EACAggregatorProxy
+  contractType: EACAggregatorProxy
   measurements:
     - name: decimals
       type: uint8
@@ -434,7 +434,7 @@
       value: '4'
 - address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
   name: FractionalToken
-  contract: FractionalToken
+  contractType: FractionalToken
   measurements:
     - name: decimals
       type: uint8
@@ -471,7 +471,7 @@
       value: '153679.491529277065741776'
 - address: '0xa84360896cE9152d1780c546305BB54125F962d9'
   name: FxETHTwapOracle
-  contract: FxETHTwapOracle
+  contractType: FxETHTwapOracle
   measurements:
     - name: getPrice._safePrice
       type: uint256
@@ -484,7 +484,7 @@
       value: '2354.30211112'
 - address: '0xe60eB8098B34eD775ac44B1ddE864e098C6d7f37'
   name: Gauge_Controller
-  contract: Gauge Controller
+  contractType: Gauge Controller
   measurements:
     - name: time_total
       type: uint256
@@ -639,7 +639,7 @@
       error: Transaction reverted without a reason string
 - address: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
   name: GnosisSafe__0
-  contract: GnosisSafe
+  contractType: GnosisSafe
   measurements:
     - name: getChainId
       type: uint256
@@ -652,7 +652,7 @@
       value: '45'
 - address: '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
   name: GnosisSafe__1
-  contract: GnosisSafe
+  contractType: GnosisSafe
   measurements:
     - name: getThreshold
       type: uint256
@@ -662,7 +662,7 @@
       value: '1277'
 - address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
   name: LeveragedToken
-  contract: LeveragedToken
+  contractType: LeveragedToken
   measurements:
     - name: decimals
       type: uint8
@@ -683,7 +683,7 @@
       value: '291952.174931281247450058'
 - address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
   name: Lido
-  contract: Lido
+  contractType: Lido
   measurements:
     - name: decimals
       type: uint8
@@ -830,51 +830,51 @@
       value: '3247614.817439930640437981'
 - address: '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
   name: Market
-  contract: Market
+  contractType: Market
   measurements:
     - name: fTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '0.25'
+      value: '2500000000000000'
     - name: fTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '0.25'
+      value: '2500000000000000'
     - name: fTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '-0.25'
+      value: '-2500000000000000'
     - name: marketConfig.stabilityRatio
       type: uint64
-      value: '1.3055'
+      value: '1305500000000000000'
     - name: marketConfig.liquidationRatio
       type: uint64
-      value: '1.2067'
+      value: '1206700000000000000'
     - name: marketConfig.selfLiquidationRatio
       type: uint64
-      value: '1.1439'
+      value: '1143900000000000000'
     - name: marketConfig.recapRatio
       type: uint64
-      value: '1.0'
+      value: '1000000000000000000'
     - name: xTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '1.0'
+      value: '10000000000000000'
     - name: xTokenMintFeeRatio.extraFeeRatio
       type: int128
-      value: '-1.0'
+      value: '-10000000000000000'
     - name: xTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '1.0'
+      value: '10000000000000000'
     - name: xTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '7.0'
+      value: '70000000000000000'
 - address: '0x0084C2e1B1823564e597Ff4848a88D61ac63D703'
   name: PlatformFeeSpliter
-  contract: PlatformFeeSpliter
+  contractType: PlatformFeeSpliter
   measurements:
     - name: getRewardCount
       type: uint256
       value: '1'
 - address: '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
   name: RebalancePool
-  contract: RebalancePool
+  contractType: RebalancePool
   measurements:
     - name: epochState.prod
       type: uint128
@@ -909,14 +909,14 @@
       value: '1703161475'
 - address: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
   name: RebalancePoolRegistry
-  contract: RebalancePoolRegistry
+  contractType: RebalancePoolRegistry
   measurements:
     - name: totalSupply
       type: uint256
       value: '5811959.010789095234500199'
 - address: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
   name: RebalancePoolSplitter
-  contract: RebalancePoolSplitter
+  contractType: RebalancePoolSplitter
   measurements:
     - name: getReceivers._ratios
       type: uint256[]
@@ -926,14 +926,14 @@
         - '500000000'
 - address: '0x17f21f468d77E6e35702a9Ae7a9da50Db7F6a4f4'
   name: RebalanceWithBonusToken
-  contract: RebalanceWithBonusToken
+  contractType: RebalanceWithBonusToken
   measurements:
     - name: bonus
       type: uint256
       value: '2.0'
 - address: '0x5d0Aacf75116d1645Db2B3d1Ca4b303ef0CA3752'
   name: ReservePool
-  contract: ReservePool
+  contractType: ReservePool
   measurements:
     - name: bonusRatio
       type: uint256
@@ -941,7 +941,7 @@
       value: '0.05'
 - address: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
   name: StableSwap
-  contract: StableSwap
+  contractType: StableSwap
   measurements:
     - name: A_precise
       type: uint256
@@ -984,13 +984,13 @@
       value: '0.000000001703811923'
     - name: price_oracle
       type: uint256
-      value: '0.999585641928821516'
+      value: '0.999585641922700476'
     - name: totalSupply
       type: uint256
       value: '45363.931240034965729028'
 - address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
   name: stETHTreasury
-  contract: stETHTreasury
+  contractType: stETHTreasury
   measurements:
     - name: baseTokenCap
       type: uint256
@@ -1003,7 +1003,7 @@
       value: '1.839274612744141044'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824441'
+      value: '1703824442'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -1012,7 +1012,7 @@
       value: '1773235678532359425'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805400693956736369'
+      value: '1805400252396134243'
     - name: getCurrentNav._baseNav
       type: uint256
       value: '2354.30211112'
@@ -1030,7 +1030,7 @@
       value: '1836.7853'
     - name: leverageRatio
       type: uint256
-      value: '1.805400693956736369'
+      value: '1.805400252396134243'
     - name: rebalancePoolRatio
       type: uint128
       value: '500000000000000000'
@@ -1039,7 +1039,7 @@
       value: '7176.974952048061425555'
 - address: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
   name: Voting_Escrow
-  contract: Voting Escrow
+  contractType: Voting Escrow
   measurements:
     - name: decimals
       type: uint256
@@ -1052,10 +1052,10 @@
       value: '115331.908808027700163144'
     - name: totalSupply
       type: uint256
-      value: '94540.331014548392093586'
+      value: '94540.330101846965089332'
 - address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
   name: WstETH
-  contract: WstETH
+  contractType: WstETH
   measurements:
     - name: decimals
       type: uint8
