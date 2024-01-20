@@ -4082,7 +4082,7 @@
   measurements:
     - name: available_supply
       type: uint256
-      value: '1047280.193746829016610495'
+      value: '1047280'
     - name: decimals
       type: uint256
       value: '18'

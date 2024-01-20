@@ -28,7 +28,7 @@
   measurements:
     - name: available_supply
       type: uint256
-      delta: '+0.024860476915271432'
+      delta: '+0'
 - address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
   name: FractionalToken
   contractType: FractionalToken

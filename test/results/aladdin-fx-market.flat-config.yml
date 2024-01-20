@@ -10,6 +10,9 @@ diagram:
 format:
   - contract: BoostableRebalancePool
     measurement: numTotalSupplyHistory
+  - contractType: Curve DAO Token
+    measurement: available_supply
+    decimals: 0
   - measurement: chainlinkMinMessageCount
   - measurement: chainlinkMessageExpiration
   - measurement: start_epoch_time

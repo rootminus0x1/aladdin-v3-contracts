@@ -30,6 +30,9 @@ format:
     decimals: 4
   - measurement: pendingRewards.1
     decimals: 4
+  - contractType: "Curve DAO Token"
+    measurement: available_supply
+    decimals: 0 # variable depending when run
   # no formatting
   - contract: BoostableRebalancePool
     measurement: numTotalSupplyHistory
