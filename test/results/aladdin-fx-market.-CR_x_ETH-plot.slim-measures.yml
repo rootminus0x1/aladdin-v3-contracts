@@ -444,7 +444,7 @@
       value: '1.0'
     - name: totalSupply
       type: uint256
-      value: '8934905.173398421742986698'
+      value: '6650842.598065295621717671'
     - name: balanceOf
       type: uint256
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
@@ -457,10 +457,6 @@
       type: uint256
       target: BoostableRebalancePool_at_2
       value: '2956321.364769018396295364'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '2284062.575333126121269027'
     - name: balanceOf
       type: uint256
       target: GnosisSafe__0
@@ -503,10 +499,6 @@
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
-      target: admin
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
       target: BoostableRebalancePool_at_1
       error: Transaction reverted without a reason string
     - name: gauge_types
@@ -532,18 +524,6 @@
     - name: gauge_types
       type: int128
       target: EACAggregatorProxy__1
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: fHolderLiquidator
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: fHolderRedeemer
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: fMinter
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
@@ -629,14 +609,6 @@
       type: int128
       target: wstETHWrapper
       error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: xHolderRedeemer
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: xMinter
-      error: Transaction reverted without a reason string
 - address: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
   name: GnosisSafe__0
   contractType: GnosisSafe
@@ -669,7 +641,7 @@
       value: '18'
     - name: nav
       type: uint256
-      value: '0.752272451457265793'
+      value: '0.832299813951458409'
     - name: totalSupply
       type: uint256
       value: '5646434.225742690599105577'
@@ -758,14 +730,6 @@
       value: '0.043439779588235981'
     - name: balanceOf
       type: uint256
-      target: fMinter
-      value: '9000.0'
-    - name: sharesOf
-      type: uint256
-      target: fMinter
-      value: '7814.089091377718906531'
-    - name: balanceOf
-      type: uint256
       target: GnosisSafe__0
       value: '0.119361387678593988'
     - name: sharesOf
@@ -783,11 +747,11 @@
     - name: balanceOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '7.125445077660994817'
+      value: '4.625445077660994817'
     - name: sharesOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '6.186540294729093636'
+      value: '4.015959991568616162'
     - name: balanceOf
       type: uint256
       target: RebalancePool
@@ -815,11 +779,11 @@
     - name: balanceOf
       type: uint256
       target: stETHTreasury
-      value: '7177.63244215750235306'
+      value: '6180.13244215750235306'
     - name: sharesOf
       type: uint256
       target: stETHTreasury
-      value: '6231.851040909083902043'
+      value: '5365.789499948053389903'
     - name: balanceOf
       type: uint256
       target: WstETH
@@ -1000,19 +964,19 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      value: '1.839274612744141044'
+      value: '2.127502112512926719'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824442'
+      value: '1703792975'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
     - name: emaLeverageRatio.lastValue
       type: uint96
-      value: '1773235678532359425'
+      value: '1767249637152348130'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805400252396134243'
+      value: '1822162261482861300'
     - name: getCurrentNav._baseNav
       type: uint256
       value: '2354.30211112'
@@ -1030,13 +994,13 @@
       value: '1836.7853'
     - name: leverageRatio
       type: uint256
-      value: '1.80540'
+      value: '1.805407'
     - name: rebalancePoolRatio
       type: uint128
       value: '500000000000000000'
     - name: totalBaseToken
       type: uint256
-      value: '7176.974952048061425555'
+      value: '6179.474952048061425555'
 - address: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
   name: Voting_Escrow
   contractType: Voting Escrow

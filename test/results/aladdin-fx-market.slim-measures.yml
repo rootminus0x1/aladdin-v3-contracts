@@ -1026,7 +1026,7 @@
       value: '1836.7853'
     - name: leverageRatio
       type: uint256
-      value: '1.805404'
+      value: '1.80540'
     - name: rebalancePoolRatio
       type: uint128
       value: '500000000000000000'

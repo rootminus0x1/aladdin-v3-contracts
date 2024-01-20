@@ -100,7 +100,7 @@
       delta: '-16762009086727057'
     - name: leverageRatio
       type: uint256
-      delta: '-0.000003'
+      delta: '-0.00000'
     - name: totalBaseToken
       type: uint256
       delta: '+997.5'

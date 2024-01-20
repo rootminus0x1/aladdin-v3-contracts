@@ -15,7 +15,7 @@ import { parseEther } from 'ethers';
 
 async function main() {
     // TODO: replace with a simple initialise function and add timestamp to config, etc
-    const timestamp = await setupBlockchain(getConfig().block, false);
+    await setupBlockchain();
 
     await dig();
     /*
@@ -49,7 +49,9 @@ async function main() {
         }
     };
 
-    await delve({ next: nextPrice, name: 'ETH' });
+    const ethPrice = getConfig().plot ? { next: nextPrice, name: 'ETH' } : undefined;
+
+    await delve(ethPrice);
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.

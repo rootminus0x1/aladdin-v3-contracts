@@ -40,7 +40,7 @@ format:
   - measurement: price_oracle
     decimals: 9
   - measurement: leverageRatio
-    decimals: 6 # because the price_oracle is not reliable, this isn't
+    decimals: 5 # because the price_oracle is not reliable, this isn't
   # no formatting
   - contract: BoostableRebalancePool
     measurement: numTotalSupplyHistory
