@@ -26,13 +26,21 @@ format:
   - contract: Market
     type: uint64
     unit: 18
+  # variable depending when run
   - measurement: pendingRewards.0
     decimals: 4
   - measurement: pendingRewards.1
     decimals: 4
   - contractType: "Curve DAO Token"
     measurement: available_supply
-    decimals: 0 # variable depending when run
+    decimals: 0
+  - contractType: "Voting Escrow"
+    measurement: totalSupply
+    decimals: 0
+  - measurement: price_oracle
+    decimals: 9
+  - measurement: leverageRatio
+    decimals: 6 # because the price_oracle is not reliable, this isn't
   # no formatting
   - contract: BoostableRebalancePool
     measurement: numTotalSupplyHistory
