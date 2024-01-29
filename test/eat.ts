@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
-import { ContractWithAddress, contracts, deploy, getConfig, getSigner, write } from 'eat';
+import { ContractWithAddress, contracts, delvePlot, deploy, getConfig, getSigner, writeEatFile } from 'eat';
 import { mermaid } from 'eat';
 import { asDateString } from 'eat';
 import { setupBlockchain } from 'eat';
@@ -11,14 +11,14 @@ import { delve } from 'eat';
 
 import { MockFxPriceOracle } from '@types';
 import { ethers } from 'hardhat';
-import { parseEther } from 'ethers';
+import { formatEther, parseEther } from 'ethers';
 
 async function main() {
     // TODO: replace with a simple initialise function and add timestamp to config, etc
     await setupBlockchain();
 
     await dig();
-    /*
+
     // mock the price oracle
     // TODO: hide deployer (make a global like whale, or maybe use whale?)
     const deployer = await getSigner('deployer');
@@ -34,24 +34,32 @@ async function main() {
     const setPrice = async (price: bigint) => {
         await oracle.setPrice(price);
     };
-*/
     // TODO: handle multiple variables?
 
-    //const prices = Array.from({ length: 40 }, (_, index) => 2000 - index * 50);
-    const prices = [2500];
-    let index = 0;
+    //const prices = Array.from({ length: 40 }, (_, index) => 4000 - index * 50);
+    let price = 7000;
+    const lowestPrice = 1010;
+    const step = 50;
     const nextPrice = async (): Promise<string | undefined> => {
-        if (index >= prices.length) {
+        if (price < lowestPrice) {
             return undefined;
         } else {
-            //            await setPrice(parseEther(prices[index].toString()));
-            return prices[index++].toString();
+            const thePrice = parseEther(price.toString());
+            await setPrice(thePrice);
+            price -= step;
+            return formatEther(thePrice);
         }
     };
 
-    const ethPrice = getConfig().plot ? { next: nextPrice, name: 'ETH' } : undefined;
-
-    await delve(ethPrice);
+    if (getConfig().plot) {
+        console.log(
+            await delvePlot({ next: nextPrice, name: 'ETH' }, [
+                { contract: 'stETHTreasury', functions: ['collateralRatio'] },
+            ]),
+        );
+    } else {
+        await delve({ name: 'ETH', value: 2500 });
+    }
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.
