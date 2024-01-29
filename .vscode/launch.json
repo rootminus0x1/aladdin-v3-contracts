@@ -42,7 +42,11 @@
       "type": "pickString",
       "id": "debug-eat.args",
       "description": "What type of component do you want to create?",
-      "options": ["aladdin-fx-market.config.yml", "aladdin-fx-stETHTreasury.config.yml"]
+      "options": [
+        "aladdin-fx-market.config.yml",
+        "aladdin-fx-stETHTreasury.config.yml",
+        "aladdin-fx-market.-CR_x_ETH-plot.config.yml"
+      ]
     }
   ]
 }
