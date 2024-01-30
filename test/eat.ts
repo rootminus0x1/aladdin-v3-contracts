@@ -18,6 +18,7 @@ async function main() {
     await setupBlockchain();
 
     await dig();
+    await delve(); // no price change
 
     // mock the price oracle
     // TODO: hide deployer (make a global like whale, or maybe use whale?)
@@ -31,34 +32,55 @@ async function main() {
     await deployer.sendTransaction({ to: owner.address, value: parseEther('1.0') });
     await contracts.stETHTreasury.connect(owner).updatePriceOracle(oracle.address);
 
-    const setPrice = async (price: bigint) => {
-        await oracle.setPrice(price);
-    };
     // TODO: handle multiple variables?
 
     //const prices = Array.from({ length: 40 }, (_, index) => 4000 - index * 50);
-    let price = 7000;
-    const lowestPrice = 1010;
-    const step = 50;
-    const nextPrice = async (): Promise<string | undefined> => {
-        if (price < lowestPrice) {
-            return undefined;
-        } else {
-            const thePrice = parseEther(price.toString());
-            await setPrice(thePrice);
-            price -= step;
-            return formatEther(thePrice);
+
+    // TODO: generalise this to take a function to set the new value
+    class PriceIterator {
+        private initial: number;
+        private done = false;
+        public value: string = '';
+
+        constructor(public name: string, private price: number, private finish?: number, private step: number = 1) {
+            this.initial = price;
         }
-    };
+
+        private setPrice = async () => {
+            this.value = this.price.toString();
+            await oracle.setPrice(parseEther(this.value));
+        };
+
+        public next = async () => {
+            if (this.finish) {
+                // sequence
+                if (this.price < this.finish) {
+                    return undefined;
+                } else {
+                    await this.setPrice();
+                    this.price -= this.step;
+                    return this.value;
+                }
+            } else {
+                // single value
+                if (!this.done) {
+                    this.setPrice();
+                }
+            }
+        };
+
+        public reset = () => {
+            this.price = this.initial;
+            this.done = false;
+        };
+    }
 
     if (getConfig().plot) {
-        console.log(
-            await delvePlot({ next: nextPrice, name: 'ETH' }, [
-                { contract: 'stETHTreasury', functions: ['collateralRatio'] },
-            ]),
-        );
+        await delvePlot(new PriceIterator('ETH', 4000, 1010, 50), [
+            { contract: 'stETHTreasury', functions: ['collateralRatio', 'leverageRatio'] },
+        ]);
     } else {
-        await delve({ name: 'ETH', value: 2500 });
+        await delve(new PriceIterator('ETH', 2500)); // price change
     }
 }
 

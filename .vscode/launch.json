@@ -45,7 +45,7 @@
       "options": [
         "aladdin-fx-market.config.yml",
         "aladdin-fx-stETHTreasury.config.yml",
-        "aladdin-fx-market.-CR_x_ETH-plot.config.yml"
+        "aladdin-fx-market.CR_x_ETH-plot.config.yml"
       ]
     }
   ]

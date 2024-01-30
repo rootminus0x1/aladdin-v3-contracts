@@ -35,18 +35,18 @@
   measurements:
     - name: totalSupply
       type: uint256
-      delta: '+2284062.575333126121269027'
+      delta: '+2406845.172367812029477371'
     - name: balanceOf
       type: uint256
       target: fMinter
-      delta: '+2284062.575333126121269027'
+      delta: '+2406845.172367812029477371'
 - address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
   name: LeveragedToken
   contractType: LeveragedToken
   measurements:
     - name: nav
       type: uint256
-      delta: '-0.080027362494192616'
+      delta: '-0.101772519194133805'
 - address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
   name: Lido
   contractType: Lido
@@ -88,16 +88,16 @@
   measurements:
     - name: collateralRatio
       type: uint256
-      delta: '-0.288227499768785675'
+      delta: '-0.329994314456349236'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      delta: '31466'
+      delta: '31470'
     - name: emaLeverageRatio.lastValue
       type: uint96
-      delta: '5986041380011295'
+      delta: '-71610313743936230'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      delta: '-16761567526124931'
+      delta: '-16763333737869917'
     - name: leverageRatio
       type: uint256
       delta: '-0.00000'
