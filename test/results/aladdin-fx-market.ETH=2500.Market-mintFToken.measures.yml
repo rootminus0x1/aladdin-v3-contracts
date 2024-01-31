@@ -8127,7 +8127,7 @@
       value: '1.911874294575622813'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824450'
+      value: '1703824460'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -8136,7 +8136,7 @@
       value: '1695639323408411900'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805398000000000000'
+      value: '1805390000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
       value: '2500.0'
@@ -8154,7 +8154,7 @@
       value: '1836.7853'
     - name: leverageRatio
       type: uint256
-      value: '1.80540'
+      value: '1.8054'
     - name: rebalancePoolRatio
       type: uint128
       value: '500000000000000000'

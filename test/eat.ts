@@ -26,11 +26,7 @@ async function main() {
     let oracle: ContractWithAddress<MockFxPriceOracle>;
     oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle', deployer);
 
-    // TODO: add owner as a propery of the contracts, which returns an impersonating signer
-    const owner = await ethers.getImpersonatedSigner('0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF');
-    // need to give the impersonated signer, owner some eth (aparently need 0.641520744180000000 eth to do this!)
-    await deployer.sendTransaction({ to: owner.address, value: parseEther('1.0') });
-    await contracts.stETHTreasury.connect(owner).updatePriceOracle(oracle.address);
+    await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
 
     // TODO: handle multiple variables?
 

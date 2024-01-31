@@ -12,7 +12,7 @@ format:
   - measurement: emaLeverageRatio.lastTime
     decimals: -1
   - measurement: emaLeverageRatio.lastEmaValue
-    decimals: -12
+    decimals: -13
   - type: uint256
     unit: ether
   - measurement: latestAnswer
@@ -44,7 +44,7 @@ format:
   - measurement: price_oracle
     decimals: 9
   - measurement: leverageRatio
-    decimals: 5 # because the price_oracle is not reliable, this isn't
+    decimals: 4 # because the price_oracle is not reliable, this isn't
   # no formatting
   - contract: BoostableRebalancePool
     measurement: numTotalSupplyHistory
