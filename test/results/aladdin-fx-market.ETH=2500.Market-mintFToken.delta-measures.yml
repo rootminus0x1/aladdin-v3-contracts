@@ -91,13 +91,13 @@
       delta: '-0.329994314456349236'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      delta: '31470'
+      delta: '+31470'
     - name: emaLeverageRatio.lastValue
       type: uint96
       delta: '-71610313743936230'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      delta: '-16763333737869917'
+      delta: '-16763000000000000'
     - name: leverageRatio
       type: uint256
       delta: '-0.00000'

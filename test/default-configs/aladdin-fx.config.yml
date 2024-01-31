@@ -9,6 +9,10 @@ leaf:
 diagram:
   renderer: default
 format:
+  - measurement: emaLeverageRatio.lastTime
+    decimals: -1
+  - measurement: emaLeverageRatio.lastEmaValue
+    decimals: -12
   - type: uint256
     unit: ether
   - measurement: latestAnswer

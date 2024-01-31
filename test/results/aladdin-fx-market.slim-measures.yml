@@ -999,7 +999,7 @@
       value: '2.127502112512926719'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703792975'
+      value: '1703792980'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -1008,7 +1008,7 @@
       value: '1767249637152348130'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1822162261482861300'
+      value: '1822162000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
       value: '2354.30211112'
