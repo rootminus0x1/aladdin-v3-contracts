@@ -23,8 +23,8 @@ async function main() {
     // handle price changes
     const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
     await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
-    const setPrice = async (value: string) => {
-        await oracle.setPrice(parseEther(value));
+    const setPrice = async (value: bigint) => {
+        await oracle.setPrice(value);
     };
 
     const getCR = async () => {
@@ -35,16 +35,31 @@ async function main() {
     // TODO: remove number - it's either a string for presentation or a bigint for calcs
 
     if (getConfig().plot) {
-        await delvePlot(await Values('ETH', valuesStepped(4000, 1010, -50), setPrice), [
-            { contract: 'stETHTreasury', functions: ['collateralRatio', 'leverageRatio'] },
-        ]);
+        await delvePlot(
+            await Values('ETH', 3, valuesStepped(parseEther('4000'), parseEther('1010'), parseEther('-50')), setPrice),
+            [{ contract: 'stETHTreasury', functions: ['collateralRatio', 'leverageRatio'] }],
+        );
     } else {
         // small price change
         //await delve(await Values('ETH', valuesSingle(2500), setPrice));
         // above and below the 130% CR
 
         await delve(
-            await Values('ETH', valuesSingle((await inverse(setPrice, getCR, parseEther('1.3'))) || 0), setPrice),
+            await Values(
+                'ETH',
+                3,
+                valuesSingle(
+                    (await inverse(
+                        parseEther('1.3'),
+                        getCR,
+                        setPrice,
+                        parseEther('1030'),
+                        parseEther('10000'),
+                        parseEther('0.0001'),
+                    )) || 0n,
+                ),
+                setPrice,
+            ),
         );
     }
 }

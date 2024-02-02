@@ -1012,7 +1012,7 @@
       value: '1773235678532359425'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805400000000000000'
+      value: '1805390000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
       value: '2354.30211112'

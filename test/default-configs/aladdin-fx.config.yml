@@ -10,9 +10,9 @@ diagram:
   renderer: default
 format:
   - measurement: emaLeverageRatio.lastTime
-    decimals: -1
+    precision: -1
   - measurement: emaLeverageRatio.lastEmaValue
-    decimals: -13
+    precision: -13
   - type: uint256
     unit: ether
   - measurement: latestAnswer
@@ -32,19 +32,19 @@ format:
     unit: 18
   # variable depending when run
   - measurement: pendingRewards.0
-    decimals: 4
+    precision: 4
   - measurement: pendingRewards.1
-    decimals: 4
+    precision: 4
   - contractType: "Curve DAO Token"
     measurement: available_supply
-    decimals: 0
+    precision: 0
   - contractType: "Voting Escrow"
     measurement: totalSupply
-    decimals: 0
+    precision: 0
   - measurement: price_oracle
-    decimals: 9
+    precision: 9
   - measurement: leverageRatio
-    decimals: 4 # because the price_oracle is not reliable, this isn't
+    precision: 4 # because the price_oracle is not reliable, this isn't
   # no formatting
   - contract: BoostableRebalancePool
     measurement: numTotalSupplyHistory

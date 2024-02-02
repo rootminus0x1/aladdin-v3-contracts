@@ -1,5 +1,5 @@
 - name: ETH
-  value: '1363.0790587794984'
+  value: '1363.079'
 - address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
   name: AccessControlledOffchainAggregator__0
   contractType: AccessControlledOffchainAggregator
@@ -2251,7 +2251,7 @@
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1732'
+      value: '0.1733'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -3897,11 +3897,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0010'
+      value: '0.0009'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1732'
+      value: '0.1733'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -7806,7 +7806,7 @@
       value: '0'
     - name: price_oracle
       type: uint256
-      value: '0.999585641'
+      value: '0.999585642'
     - name: totalSupply
       type: uint256
       value: '45363.931240034965729028'
@@ -8118,7 +8118,7 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      value: '1.299999999999999964'
+      value: '1.299999983990716931'
     - name: emaLeverageRatio.lastTime
       type: uint40
       value: '1703792980'
@@ -8133,13 +8133,13 @@
       value: '1822160000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
-      value: '1363.0790587794984'
+      value: '1363.079040609300136565'
     - name: getCurrentNav._fNav
       type: uint256
-      value: '0.974210037437663423'
+      value: '0.974210036448424328'
     - name: getCurrentNav._xNav
       type: uint256
-      value: '0.344251824642531219'
+      value: '0.344251805922219018'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'
