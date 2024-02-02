@@ -1,9 +1,5 @@
-- name: Market-mintFToken
-  user: fMinter
-  contract: Market
-  function: mintFToken
-  args: '["1000 ether","fMinter",0]'
-  gas: '335120'
+- name: ETH
+  value: '1363.0790587794984'
 - address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
   name: AccessControlledOffchainAggregator__0
   contractType: AccessControlledOffchainAggregator
@@ -2251,11 +2247,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0035'
+      value: '0.0036'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '0.1732'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -3901,11 +3897,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0009'
+      value: '0.0010'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '0.1732'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -4392,7 +4388,7 @@
       value: '1.0'
     - name: totalSupply
       type: uint256
-      value: '8934905.173398421742986698'
+      value: '6650842.598065295621717671'
     - name: balanceOf
       type: uint256
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
@@ -4448,7 +4444,7 @@
     - name: balanceOf
       type: uint256
       target: fMinter
-      value: '2284062.575333126121269027'
+      value: '0'
     - name: balanceOf
       type: uint256
       target: FxETHTwapOracle
@@ -5342,7 +5338,7 @@
       value: '18'
     - name: nav
       type: uint256
-      value: '0.752272451457265793'
+      value: '0.832299813951458409'
     - name: totalSupply
       type: uint256
       value: '5646434.225742690599105577'
@@ -5726,7 +5722,7 @@
     - name: balanceOf
       type: uint256
       target: fMinter
-      value: '9000.0'
+      value: '9999.999999999999999999'
     - name: nonces
       type: uint256
       target: fMinter
@@ -5734,7 +5730,7 @@
     - name: sharesOf
       type: uint256
       target: fMinter
-      value: '7814.089091377718906531'
+      value: '8682.321212641909896145'
     - name: balanceOf
       type: uint256
       target: FractionalToken
@@ -5822,7 +5818,7 @@
     - name: balanceOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '7.125445077660994817'
+      value: '4.625445077660994817'
     - name: nonces
       type: uint256
       target: PlatformFeeSpliter
@@ -5830,7 +5826,7 @@
     - name: sharesOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '6.186540294729093636'
+      value: '4.015959991568616162'
     - name: balanceOf
       type: uint256
       target: RebalancePool
@@ -5930,7 +5926,7 @@
     - name: balanceOf
       type: uint256
       target: stETHTreasury
-      value: '7177.63244215750235306'
+      value: '6180.13244215750235306'
     - name: nonces
       type: uint256
       target: stETHTreasury
@@ -5938,7 +5934,7 @@
     - name: sharesOf
       type: uint256
       target: stETHTreasury
-      value: '6231.851040909083902043'
+      value: '5365.789499948053389903'
     - name: balanceOf
       type: uint256
       target: Token_Minter
@@ -7810,7 +7806,7 @@
       value: '0'
     - name: price_oracle
       type: uint256
-      value: '0.999585642'
+      value: '0.999585641'
     - name: totalSupply
       type: uint256
       value: '45363.931240034965729028'
@@ -8122,28 +8118,28 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      value: '1.839274612744141044'
+      value: '1.299999999999999964'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824450'
+      value: '1703792980'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
     - name: emaLeverageRatio.lastValue
       type: uint96
-      value: '1773235678532359425'
+      value: '1767249637152348130'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805390000000000000'
+      value: '1822160000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
-      value: '2354.30211112'
+      value: '1363.0790587794984'
     - name: getCurrentNav._fNav
       type: uint256
-      value: '1.028175138984398448'
+      value: '0.974210037437663423'
     - name: getCurrentNav._xNav
       type: uint256
-      value: '1.365484765135404741'
+      value: '0.344251824642531219'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'
@@ -8161,7 +8157,7 @@
       value: '0'
     - name: totalBaseToken
       type: uint256
-      value: '7176.974952048061425555'
+      value: '6179.474952048061425555'
 - address: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
   name: Voting_Escrow
   contractType: Voting Escrow
