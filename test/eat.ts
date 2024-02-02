@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
-import { ContractWithAddress, contracts, deploy, getSigner, writeEatFile } from 'eat';
+import { ContractWithAddress, VariableSetter, contracts, deploy, getSigner, inverse, writeEatFile } from 'eat';
 import { getConfig, setupBlockchain } from 'eat';
 import { dig } from 'eat';
 import { Values, valuesStepped, valuesSingle, delve, delvePlot } from 'eat';
@@ -27,14 +27,25 @@ async function main() {
         await oracle.setPrice(parseEther(value));
     };
 
+    const getCR = async () => {
+        return contracts.stETHTreasury.collateralRatio();
+    };
+
     // TODO: handle multiple variables?
+    // TODO: remove number - it's either a string for presentation or a bigint for calcs
 
     if (getConfig().plot) {
         await delvePlot(await Values('ETH', valuesStepped(4000, 1010, -50), setPrice), [
             { contract: 'stETHTreasury', functions: ['collateralRatio', 'leverageRatio'] },
         ]);
     } else {
-        await delve(await Values('ETH', valuesSingle(2500), setPrice)); // price change
+        // small price change
+        //await delve(await Values('ETH', valuesSingle(2500), setPrice));
+        // above and below the 130% CR
+
+        await delve(
+            await Values('ETH', valuesSingle((await inverse(setPrice, getCR, parseEther('1.3'))) || 0), setPrice),
+        );
     }
 }
 
