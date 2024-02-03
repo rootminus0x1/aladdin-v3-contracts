@@ -16,6 +16,7 @@ test/data/run/
 #compiler files
 forge-cache/
 eat-cache/
+eat-source/
 cache/
 artifacts/
 out/

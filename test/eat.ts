@@ -2,7 +2,17 @@ import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
-import { ContractWithAddress, VariableSetter, contracts, deploy, getSigner, inverse, writeEatFile } from 'eat';
+import {
+    ContractWithAddress,
+    VariableSetter,
+    contracts,
+    delveSimulation,
+    deploy,
+    getSigner,
+    inverse,
+    writeEatFile,
+    getEthPrice,
+} from 'eat';
 import { getConfig, setupBlockchain } from 'eat';
 import { dig } from 'eat';
 import { Values, valuesStepped, valuesSingle, delve, delvePlot } from 'eat';
@@ -16,16 +26,13 @@ async function main() {
 
     await dig();
 
-    if (!getConfig().plot) {
-        await delve(); // no price change
-    }
-
     // handle price changes
     const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
     await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
     const setPrice = async (value: bigint) => {
         await oracle.setPrice(value);
     };
+    setPrice(await getEthPrice(getConfig().timestamp)); // set to the current eth price, like nothing had changed (approx)
 
     const getCR = async () => {
         return contracts.stETHTreasury.collateralRatio();
@@ -43,7 +50,7 @@ async function main() {
         // small price change
         //await delve(await Values('ETH', valuesSingle(2500), setPrice));
         // above and below the 130% CR
-
+        /*
         await delve(
             await Values(
                 'ETH',
@@ -61,6 +68,12 @@ async function main() {
                 setPrice,
             ),
         );
+    */
+        await delveSimulation([
+            getConfig().actions[0],
+            { name: 'ETH', value: parseEther('1300'), setTheMarket: setPrice },
+            getConfig().actions[0],
+        ]);
     }
 }
 
