@@ -16,7 +16,8 @@ users:
   - name: xHolderRedeemer # user who mint/redeems xTokens
 
 actions:
-  - user: fMinter
+  - name: mintFToken(1000eth)
+    user: fMinter
     contract: "Market"
     function: "mintFToken"
     args: [1000 ether, fMinter, 0]
