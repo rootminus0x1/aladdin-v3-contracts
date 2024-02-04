@@ -21,13 +21,13 @@ format:
   - measurement: latestRoundData.answer
     type: int256
     unit: 8
-  - contract: Market
+  - contractType: Market
     type: uint128
     unit: 16
-  - contract: Market
+  - contractType: Market
     type: int128
     unit: 16
-  - contract: Market
+  - contractType: Market
     type: uint64
     unit: 18
   # variable depending when run
@@ -46,7 +46,7 @@ format:
   - measurement: leverageRatio
     precision: 4 # because the price_oracle is not reliable, this isn't
   # no formatting
-  - contract: BoostableRebalancePool
+  - contractType: BoostableRebalancePool
     measurement: numTotalSupplyHistory
   - measurement: chainlinkMinMessageCount
   - measurement: chainlinkMessageExpiration

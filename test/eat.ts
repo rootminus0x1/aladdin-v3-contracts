@@ -2,20 +2,10 @@ import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
-import {
-    ContractWithAddress,
-    VariableSetter,
-    contracts,
-    delveSimulation,
-    deploy,
-    getSigner,
-    inverse,
-    writeEatFile,
-    getEthPrice,
-} from 'eat';
+import { ContractWithAddress, contracts, deploy, getSigner, inverse, writeEatFile, getEthPrice } from 'eat';
 import { getConfig, setupBlockchain } from 'eat';
 import { dig } from 'eat';
-import { Values, valuesStepped, valuesSingle, delve, delvePlot } from 'eat';
+import { marketEvents, delve, delvePlot } from 'eat';
 
 import { MockFxPriceOracle } from '@types';
 import { ethers } from 'hardhat';
@@ -25,6 +15,7 @@ async function main() {
     await setupBlockchain();
 
     await dig();
+    await delve('initial');
 
     // handle price changes
     const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
@@ -38,20 +29,39 @@ async function main() {
         return contracts.stETHTreasury.collateralRatio();
     };
 
-    // TODO: handle multiple variables?
-    // TODO: remove number - it's either a string for presentation or a bigint for calcs
-
     if (getConfig().plot) {
+        /*
         await delvePlot(
-            await Values('ETH', 3, valuesStepped(parseEther('4000'), parseEther('1010'), parseEther('-50')), setPrice),
+            marketEvents(
+                { name: 'ETH', precision: 3, setMarket: setPrice },
+                parseEther('4000'),
+                parseEther('1010'),
+                parseEther('-50'),
+            ),
             [{ contract: 'stETHTreasury', functions: ['collateralRatio', 'leverageRatio'] }],
+            'ratio',
+        );
+        */
+        await delvePlot(
+            marketEvents(
+                { name: 'ETH', precision: 3, setMarket: setPrice },
+                parseEther('4000'),
+                parseEther('1010'),
+                parseEther('-50'),
+            ),
+            [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }],
+            'collateral ratio',
+            [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }],
+            'leverage ratio',
         );
     } else {
         // small price change
-        //await delve(await Values('ETH', valuesSingle(2500), setPrice));
+        await delve('2500 price', [{ name: 'ETH', precision: 0, setMarket: setPrice, value: parseEther('2500') }]);
+
         // above and below the 130% CR
         /*
         await delve(
+            "simulate CR"
             await Values(
                 'ETH',
                 3,
@@ -68,12 +78,18 @@ async function main() {
                 setPrice,
             ),
         );
-    */
-        await delveSimulation([
-            getConfig().actions[0],
-            { name: 'ETH', value: parseEther('1300'), setTheMarket: setPrice },
-            getConfig().actions[0],
-        ]);
+        */
+
+        // run a simulation, on base state
+        await delve(
+            'simulation mint, drop, mint',
+            [],
+            [
+                getConfig().actions[0],
+                { name: 'ETH', value: parseEther('1300'), setMarket: setPrice },
+                getConfig().actions[0],
+            ],
+        );
     }
 }
 

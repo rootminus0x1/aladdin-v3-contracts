@@ -1,3 +1,6 @@
+- name: ETH=2500.0
+  precision: 0
+  value: '2500000000000000000000'
 - address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
   name: AccessControlledOffchainAggregator__0
   contractType: AccessControlledOffchainAggregator
@@ -95,6 +98,14 @@
       value: '0'
     - name: oracleObservationCount
       type: uint16
+      target: admin
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: admin
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: owedPayment
@@ -148,6 +159,30 @@
     - name: owedPayment
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: fHolderLiquidator
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: fHolderRedeemer
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: fMinter
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: fMinter
       value: '0'
     - name: oracleObservationCount
       type: uint16
@@ -324,6 +359,22 @@
     - name: owedPayment
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: xHolderRedeemer
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: xMinter
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196'
   name: AccessControlledOffchainAggregator__1
@@ -422,6 +473,14 @@
       value: '0'
     - name: oracleObservationCount
       type: uint16
+      target: admin
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: admin
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: owedPayment
@@ -475,6 +534,30 @@
     - name: owedPayment
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: fHolderLiquidator
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: fHolderRedeemer
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: fMinter
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: fMinter
       value: '0'
     - name: oracleObservationCount
       type: uint16
@@ -651,6 +734,22 @@
     - name: owedPayment
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: xHolderRedeemer
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: oracleObservationCount
+      type: uint16
+      target: xMinter
+      value: '0'
+    - name: owedPayment
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
   name: BoostableRebalancePool_at_1
@@ -808,6 +907,50 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: admin
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: admin
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: admin
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: admin
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: admin
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: admin
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: admin
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: admin
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: admin
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_2
       value: '0'
     - name: boostCheckpoint.veBalance
@@ -1069,6 +1212,138 @@
     - name: rewardData.finishAt
       type: uint40
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderLiquidator
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderRedeemer
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fMinter
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fMinter
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fMinter
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fMinter
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -2038,6 +2313,94 @@
       type: uint40
       target: wstETHWrapper
       value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xHolderRedeemer
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xMinter
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xMinter
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xMinter
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: xMinter
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: xMinter
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: xMinter
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: xMinter
+      value: '0'
 - address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
   name: BoostableRebalancePool_at_2
   contractType: BoostableRebalancePool
@@ -2194,6 +2557,50 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: admin
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: admin
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: admin
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: admin
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: admin
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: admin
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: admin
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: admin
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: admin
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: boostCheckpoint.veBalance
@@ -2455,6 +2862,138 @@
     - name: rewardData.finishAt
       type: uint40
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderLiquidator
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderRedeemer
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fMinter
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fMinter
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fMinter
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fMinter
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -3424,6 +3963,94 @@
       type: uint40
       target: wstETHWrapper
       value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xHolderRedeemer
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xMinter
+      value: '0'
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xMinter
+      value: '0'
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xMinter
+      value: '0'
+    - name: getBoostRatio
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: xMinter
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: xMinter
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: xMinter
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: xMinter
+      value: '0'
 - address: '0x460B3CdE57DfbA90DBed02fd83d3990a92DA1230'
   name: ChainlinkTwapOracleV3__0
   contractType: ChainlinkTwapOracleV3
@@ -3492,6 +4119,10 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '20.0'
     - name: balanceOf
@@ -3513,6 +4144,18 @@
     - name: balanceOf
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -3601,6 +4244,14 @@
     - name: balanceOf
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'
   name: EACAggregatorProxy__0
@@ -3753,6 +4404,10 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '2723055.141145695996658868'
     - name: balanceOf
@@ -3778,6 +4433,18 @@
     - name: balanceOf
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -3862,6 +4529,14 @@
     - name: balanceOf
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0xa84360896cE9152d1780c546305BB54125F962d9'
   name: FxETHTwapOracle
@@ -3954,6 +4629,26 @@
       value: '0'
     - name: gauge_relative_weight
       type: uint256
+      target: admin
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: admin
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: admin
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: admin
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: admin
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: gauge_types
@@ -4091,6 +4786,66 @@
     - name: vote_user_power
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: fHolderLiquidator
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: fHolderRedeemer
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: fMinter
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: fMinter
       value: '0'
     - name: gauge_relative_weight
       type: uint256
@@ -4511,6 +5266,46 @@
     - name: vote_user_power
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: xHolderRedeemer
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: xMinter
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
   name: GnosisSafe__0
@@ -4562,6 +5357,10 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: balanceOf
@@ -4587,6 +5386,18 @@
     - name: balanceOf
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -4671,6 +5482,14 @@
     - name: balanceOf
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
   name: Lido
@@ -4783,6 +5602,18 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: admin
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: nonces
@@ -4865,6 +5696,42 @@
       type: uint256
       target: EACAggregatorProxy__1
       value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '9999.999999999999999999'
+    - name: nonces
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: fMinter
+      value: '8682.321212641909896145'
     - name: balanceOf
       type: uint256
       target: FractionalToken
@@ -5117,6 +5984,30 @@
       type: uint256
       target: wstETHWrapper
       value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: xMinter
+      value: '0'
 - address: '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
   name: Market
   contractType: Market
@@ -5314,6 +6205,42 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: admin
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: admin
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: admin
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: admin
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: admin
+      value: '0'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: admin
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: admin
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: extraRewardState.rate
@@ -5563,6 +6490,114 @@
     - name: unlockingBalanceOf._unlockAt
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -6320,6 +7355,78 @@
       type: uint256
       target: wstETHWrapper
       value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: xMinter
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: xMinter
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: xMinter
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: xMinter
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: xMinter
+      value: '0'
 - address: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
   name: RebalancePoolRegistry
   contractType: RebalancePoolRegistry
@@ -6342,6 +7449,10 @@
     - name: getReceivers._ratios
       type: uint256[]
       target: AccessControlledOffchainAggregator__1
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: admin
       value: []
     - name: getReceivers._ratios
       type: uint256[]
@@ -6370,6 +7481,18 @@
     - name: getReceivers._ratios
       type: uint256[]
       target: EACAggregatorProxy__1
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: fHolderLiquidator
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: fHolderRedeemer
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: fMinter
       value: []
     - name: getReceivers._ratios
       type: uint256[]
@@ -6457,6 +7580,14 @@
       type: uint256[]
       target: wstETHWrapper
       value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: xHolderRedeemer
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: xMinter
+      value: []
 - address: '0x17f21f468d77E6e35702a9Ae7a9da50Db7F6a4f4'
   name: RebalanceWithBonusToken
   contractType: RebalanceWithBonusToken
@@ -6479,6 +7610,10 @@
     - name: bonusRatio
       type: uint256
       target: AccessControlledOffchainAggregator__1
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: admin
       value: '0'
     - name: bonusRatio
       type: uint256
@@ -6507,6 +7642,18 @@
     - name: bonusRatio
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: fMinter
       value: '0'
     - name: bonusRatio
       type: uint256
@@ -6591,6 +7738,14 @@
     - name: bonusRatio
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
   name: StableSwap
@@ -6682,6 +7837,14 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: nonces
@@ -6735,6 +7898,30 @@
     - name: nonces
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -6903,6 +8090,22 @@
     - name: nonces
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
   name: stETHTreasury
@@ -6916,7 +8119,7 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      value: '2.127502112512926719'
+      value: '2.241868609031972049'
     - name: emaLeverageRatio.lastTime
       type: uint40
       value: '1703792980'
@@ -6931,13 +8134,13 @@
       value: '1822160000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
-      value: '2354.30211112'
+      value: '2500.0'
     - name: getCurrentNav._fNav
       type: uint256
-      value: '1.028175138984398448'
+      value: '1.036107361050853357'
     - name: getCurrentNav._xNav
       type: uint256
-      value: '1.365484765135404741'
+      value: '1.515593747299606861'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'
@@ -7022,6 +8225,22 @@
       value: '0'
     - name: balanceOf
       type: uint256
+      target: admin
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: admin
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: admin
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
       target: BoostableRebalancePool_at_1
       value: '0'
     - name: get_last_user_slope
@@ -7131,6 +8350,54 @@
     - name: user_point_epoch
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: fHolderLiquidator
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: fHolderRedeemer
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: fMinter
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -7467,6 +8734,38 @@
     - name: user_point_epoch
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: xHolderRedeemer
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: xMinter
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: xMinter
       value: '0'
 - address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
   name: WstETH
@@ -7507,6 +8806,14 @@
     - name: nonces
       type: uint256
       target: AccessControlledOffchainAggregator__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: admin
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: admin
       value: '0'
     - name: balanceOf
       type: uint256
@@ -7563,6 +8870,30 @@
     - name: nonces
       type: uint256
       target: EACAggregatorProxy__1
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -7731,4 +9062,20 @@
     - name: nonces
       type: uint256
       target: wstETHWrapper
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xMinter
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xMinter
       value: '0'

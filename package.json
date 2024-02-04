@@ -18,7 +18,7 @@
     "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage",
     "eat-all": "for file in test/*.config.yml; do ts-node test/eat.ts $file; done",
-    "eat": "ts-node test/eat.ts test/aladdin-fx-market.config.yml",
+    "eat": "for file in test/aladdin-fx-market.config.yml test/aladdin-fx-market.CR_x_ETH-plot.config.yml; do ts-node test/eat.ts $file; done",
     "eat-plot": "for file in ./test/*-plot.config.yml; do ts-node test/eat.ts $file; done",
     "eat-view": "for file in ./test/results/*.md; do mmdc -i \"$file\" -o \"${file%.md}.svg\" && mv \"${file%.md}-1.svg\" \"${file%.md}.svg\" && firefox 2>/dev/null -new-tab \"${file%.md}.svg\" & done"
   },

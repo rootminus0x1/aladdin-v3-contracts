@@ -10,3 +10,6 @@ plot:
   dependent:
     - contract: stETHTreasury
       measurement: collateralRatio
+  dependent2:
+    - contract: stETHTreasury
+      measurement: leverageRatio

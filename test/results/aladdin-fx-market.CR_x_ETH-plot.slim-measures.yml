@@ -798,37 +798,37 @@
   measurements:
     - name: fTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '2500000000000000'
+      value: '0.25'
     - name: fTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '2500000000000000'
+      value: '0.25'
     - name: fTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '-2500000000000000'
+      value: '-0.25'
     - name: marketConfig.stabilityRatio
       type: uint64
-      value: '1305500000000000000'
+      value: '1.3055'
     - name: marketConfig.liquidationRatio
       type: uint64
-      value: '1206700000000000000'
+      value: '1.2067'
     - name: marketConfig.selfLiquidationRatio
       type: uint64
-      value: '1143900000000000000'
+      value: '1.1439'
     - name: marketConfig.recapRatio
       type: uint64
-      value: '1000000000000000000'
+      value: '1.0'
     - name: xTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '10000000000000000'
+      value: '1.0'
     - name: xTokenMintFeeRatio.extraFeeRatio
       type: int128
-      value: '-10000000000000000'
+      value: '-1.0'
     - name: xTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '10000000000000000'
+      value: '1.0'
     - name: xTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '70000000000000000'
+      value: '7.0'
 - address: '0x0084C2e1B1823564e597Ff4848a88D61ac63D703'
   name: PlatformFeeSpliter
   contractType: PlatformFeeSpliter
