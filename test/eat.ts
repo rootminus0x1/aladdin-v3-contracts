@@ -23,7 +23,7 @@ async function main() {
     const setPrice = async (value: bigint) => {
         await oracle.setPrice(value);
     };
-    setPrice(await getEthPrice(getConfig().timestamp)); // set to the current eth price, like nothing had changed (approx)
+    await setPrice(await getEthPrice(getConfig().timestamp)); // set to the current eth price, like nothing had changed (approx)
 
     const getCR = async () => {
         return contracts.stETHTreasury.collateralRatio();

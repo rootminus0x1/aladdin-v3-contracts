@@ -1,3 +1,15 @@
+- name: mintFToken(1000eth)
+  user: fMinter
+  contract: Market
+  function: mintFToken
+  args:
+    - 1000 ether
+    - fMinter
+    - 0
+  gas: '257986'
+  error: >-
+    VM Exception while processing transaction: reverted with reason string
+    'fToken mint paused'
 - address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
   name: AccessControlledOffchainAggregator__0
   contractType: AccessControlledOffchainAggregator
@@ -2245,11 +2257,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0035'
+      value: '0.0036'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '0.1732'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -3895,11 +3907,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0009'
+      value: '0.0010'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '0.1732'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -6011,16 +6023,16 @@
   measurements:
     - name: fTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '2500000000000000'
+      value: '0.25'
     - name: fTokenMintFeeRatio.extraFeeRatio
       type: int128
       value: '0'
     - name: fTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '2500000000000000'
+      value: '0.25'
     - name: fTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '-2500000000000000'
+      value: '-0.25'
     - name: incentiveConfig.stabilityIncentiveRatio
       type: uint64
       value: '0'
@@ -6032,28 +6044,28 @@
       value: '0'
     - name: marketConfig.stabilityRatio
       type: uint64
-      value: '1305500000000000000'
+      value: '1.3055'
     - name: marketConfig.liquidationRatio
       type: uint64
-      value: '1206700000000000000'
+      value: '1.2067'
     - name: marketConfig.selfLiquidationRatio
       type: uint64
-      value: '1143900000000000000'
+      value: '1.1439'
     - name: marketConfig.recapRatio
       type: uint64
-      value: '1000000000000000000'
+      value: '1.0'
     - name: xTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '10000000000000000'
+      value: '1.0'
     - name: xTokenMintFeeRatio.extraFeeRatio
       type: int128
-      value: '-10000000000000000'
+      value: '-1.0'
     - name: xTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '10000000000000000'
+      value: '1.0'
     - name: xTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '70000000000000000'
+      value: '7.0'
 - address: '0x0084C2e1B1823564e597Ff4848a88D61ac63D703'
   name: PlatformFeeSpliter
   contractType: PlatformFeeSpliter
@@ -8119,7 +8131,7 @@
       value: '1.075737230832926118'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824460'
+      value: '1703824480'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -8128,7 +8140,7 @@
       value: '1773669796613534616'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805390000000000000'
+      value: '1805380000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
       value: '1300.0'

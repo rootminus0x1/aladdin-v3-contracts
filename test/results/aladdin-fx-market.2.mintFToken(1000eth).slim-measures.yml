@@ -172,11 +172,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0035'
+      value: '0.0036'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '0.1732'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -216,11 +216,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0009'
+      value: '0.0010'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '0.1732'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -444,7 +444,7 @@
       value: '1.0'
     - name: totalSupply
       type: uint256
-      value: '6650842.598065295621717671'
+      value: '8934281.443739704541377936'
     - name: balanceOf
       type: uint256
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
@@ -457,6 +457,10 @@
       type: uint256
       target: BoostableRebalancePool_at_2
       value: '2956321.364769018396295364'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '2283438.845674408919660265'
     - name: balanceOf
       type: uint256
       target: GnosisSafe__0
@@ -665,7 +669,7 @@
       value: '18'
     - name: nav
       type: uint256
-      value: '0.832299813951458409'
+      value: '0.752382915802333969'
     - name: totalSupply
       type: uint256
       value: '5646434.225742690599105577'
@@ -755,11 +759,11 @@
     - name: balanceOf
       type: uint256
       target: fMinter
-      value: '9999.999999999999999999'
+      value: '9000.0'
     - name: sharesOf
       type: uint256
       target: fMinter
-      value: '8682.321212641909896145'
+      value: '7814.089091377718906531'
     - name: balanceOf
       type: uint256
       target: GnosisSafe__0
@@ -779,11 +783,11 @@
     - name: balanceOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '4.625445077660994817'
+      value: '7.125445077660994817'
     - name: sharesOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '4.015959991568616162'
+      value: '6.186540294729093636'
     - name: balanceOf
       type: uint256
       target: RebalancePool
@@ -811,11 +815,11 @@
     - name: balanceOf
       type: uint256
       target: stETHTreasury
-      value: '6180.13244215750235306'
+      value: '7177.63244215750235306'
     - name: sharesOf
       type: uint256
       target: stETHTreasury
-      value: '5365.789499948053389903'
+      value: '6231.851040909083902043'
     - name: balanceOf
       type: uint256
       target: WstETH
@@ -830,37 +834,37 @@
   measurements:
     - name: fTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '2500000000000000'
+      value: '0.25'
     - name: fTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '2500000000000000'
+      value: '0.25'
     - name: fTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '-2500000000000000'
+      value: '-0.25'
     - name: marketConfig.stabilityRatio
       type: uint64
-      value: '1305500000000000000'
+      value: '1.3055'
     - name: marketConfig.liquidationRatio
       type: uint64
-      value: '1206700000000000000'
+      value: '1.2067'
     - name: marketConfig.selfLiquidationRatio
       type: uint64
-      value: '1143900000000000000'
+      value: '1.1439'
     - name: marketConfig.recapRatio
       type: uint64
-      value: '1000000000000000000'
+      value: '1.0'
     - name: xTokenMintFeeRatio.defaultFeeRatio
       type: uint128
-      value: '10000000000000000'
+      value: '1.0'
     - name: xTokenMintFeeRatio.extraFeeRatio
       type: int128
-      value: '-10000000000000000'
+      value: '-1.0'
     - name: xTokenRedeemFeeRatio.defaultFeeRatio
       type: uint128
-      value: '10000000000000000'
+      value: '1.0'
     - name: xTokenRedeemFeeRatio.extraFeeRatio
       type: int128
-      value: '70000000000000000'
+      value: '7.0'
 - address: '0x0084C2e1B1823564e597Ff4848a88D61ac63D703'
   name: PlatformFeeSpliter
   contractType: PlatformFeeSpliter
@@ -996,28 +1000,28 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      value: '2.241868609031972049'
+      value: '1.075737230832926118'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703792980'
+      value: '1703824480'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
     - name: emaLeverageRatio.lastValue
       type: uint96
-      value: '1767249637152348130'
+      value: '1773669796613534616'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1822160000000000000'
+      value: '1805380000000000000'
     - name: getCurrentNav._baseNav
       type: uint256
-      value: '2500.0'
+      value: '1300.0'
     - name: getCurrentNav._fNav
       type: uint256
-      value: '1.036107361050853357'
+      value: '0.970775827746443747'
     - name: getCurrentNav._xNav
       type: uint256
-      value: '1.515593747299606861'
+      value: '0.116335894041159066'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'
@@ -1032,7 +1036,7 @@
       value: '500000000000000000'
     - name: totalBaseToken
       type: uint256
-      value: '6179.474952048061425555'
+      value: '7176.974952048061425555'
 - address: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
   name: Voting_Escrow
   contractType: Voting Escrow
