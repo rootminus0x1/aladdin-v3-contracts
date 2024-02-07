@@ -1,4 +1,4 @@
-- name: mintFToken(1000eth)
+- name: mintFToken_1000eth
   user: fMinter
   contract: Market
   function: mintFToken
@@ -7,9 +7,6 @@
     - fMinter
     - 0
   gas: '257986'
-  error: >-
-    VM Exception while processing transaction: reverted with reason string
-    'fToken mint paused'
 - address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
   name: AccessControlledOffchainAggregator__0
   contractType: AccessControlledOffchainAggregator
@@ -2657,11 +2654,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0036'
+      value: '0.0035'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1732'
+      value: '0.1733'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -4649,11 +4646,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0010'
+      value: '0.0009'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1732'
+      value: '0.1733'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -9794,10 +9791,10 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      value: '1.075737230832926118'
+      value: '1.838900715714979349'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824480'
+      value: '1703824460'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -9806,20 +9803,20 @@
       value: '1773669796613534616'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805380000000000000'
+      value: '1805390000000000000'
     - name: fToken
       type: address
       value: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
       valueName: FractionalToken
     - name: getCurrentNav._baseNav
       type: uint256
-      value: '1300.0'
+      value: '2353.567667793601232896'
     - name: getCurrentNav._fNav
       type: uint256
-      value: '0.970775827746443747'
+      value: '1.02813515372719943'
     - name: getCurrentNav._xNav
       type: uint256
-      value: '0.116335894041159066'
+      value: '1.364728086085141965'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'

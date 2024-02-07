@@ -88,16 +88,25 @@
   measurements:
     - name: collateralRatio
       type: uint256
-      delta: '-0.288020420523090156'
+      delta: '-1.051183905405143387'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      delta: '+31500'
+      delta: '+31490'
     - name: emaLeverageRatio.lastValue
       type: uint96
       delta: '6420159461186486'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
       delta: '-16770000000000000'
+    - name: getCurrentNav._baseNav
+      type: uint256
+      delta: '-1053.567667793601232896'
+    - name: getCurrentNav._fNav
+      type: uint256
+      delta: '-0.057359325980755683'
+    - name: getCurrentNav._xNav
+      type: uint256
+      delta: '-1.248392192043982899'
     - name: leverageRatio
       type: uint256
       delta: '-0.0000'
