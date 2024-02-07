@@ -322,4 +322,8 @@ click 0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA "https://etherscan.io/address/0
 0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196["<b>AccessControlledOffchainAggregator__1</b><br><hr>"]:::contract
 click 0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196 "https://etherscan.io/address/0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196#code"
 
+0x70997970C51812dc3A010C7d01b50e0d17dc79C8{{"admin"}}:::address
+
+0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC{{"fMinter"}}:::address
+
 ```

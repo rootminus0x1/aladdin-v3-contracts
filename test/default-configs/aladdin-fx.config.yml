@@ -6,8 +6,29 @@ leaf:
   - "0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA" # "           "
   - "0xE62B71cf983019BFf55bC83B48601ce8419650CC" # AccessControlledOffchainAggregator
   - "0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196" # "           ",
-diagram:
-  renderer: default
+
+users:
+  - name: admin # bao admin
+  - name: fMinter #user who mints fTokens
+    wallet:
+      - { contract: Lido, amount: 10000 ether }
+  - name: fHolderLiquidator # user who mints/liquidates fTokens
+  - name: fHolderRedeemer # user who mint/redeems fTokens
+  - name: xMinter # user who mint/redeems xTokens
+  - name: xHolderRedeemer # user who mint/redeems xTokens
+
+actions:
+  - name: mintFToken(1000eth)
+    user: fMinter
+    contract: "Market"
+    function: "mintFToken"
+    args: [1000 ether, fMinter, 0]
+  - name: mintFToken(finney)
+    user: fMinter
+    contract: "Market"
+    function: "mintFToken"
+    args: [1 finney, fMinter, 0]
+
 format:
   - measurement: emaLeverageRatio.lastTime
     precision: -1

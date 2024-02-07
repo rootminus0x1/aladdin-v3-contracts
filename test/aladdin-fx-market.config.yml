@@ -5,22 +5,5 @@ root:
   #- '0xc6dEe5913e010895F3702bc43a40d661B13a40BD' # BoostableRebalancePool (has array outputs with addresses)
   #- '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9' # BoostableRebalancePool proxy,
 
-users:
-  - name: admin # bao admin
-  - name: fMinter #user who mints fTokens
-    wallet:
-      - { contract: Lido, amount: 10000 ether }
-  - name: fHolderLiquidator # user who mints/liquidates fTokens
-  - name: fHolderRedeemer # user who mint/redeems fTokens
-  - name: xMinter # user who mint/redeems xTokens
-  - name: xHolderRedeemer # user who mint/redeems xTokens
-
-actions:
-  - name: mintFToken(1000eth)
-    user: fMinter
-    contract: "Market"
-    function: "mintFToken"
-    args: [1000 ether, fMinter, 0]
-
 diagram:
   renderer: "elk"

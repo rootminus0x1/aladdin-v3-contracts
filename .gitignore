@@ -24,3 +24,6 @@ out/
 .store
 
 deployments/fork*
+
+# debug filed
+test/results/debug*

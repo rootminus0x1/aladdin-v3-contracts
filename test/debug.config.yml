@@ -1,0 +1,7 @@
+# used to find the owner of a contract
+leaf:
+  - "0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb"
+  - "0x11E91BB6d1334585AA37D8F4fde3932C7960B938"
+
+diagram:
+  renderer: "default"
