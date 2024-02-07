@@ -17,13 +17,13 @@ users:
   - name: xMinter # user who mint/redeems xTokens
   - name: xHolderRedeemer # user who mint/redeems xTokens
 
-actions:
-  - name: mintFToken(1000eth)
+userEvents:
+  - name: mintFToken_1000eth
     user: fMinter
     contract: "Market"
     function: "mintFToken"
     args: [1000 ether, fMinter, 0]
-  - name: mintFToken(finney)
+  - name: mintFToken_finney
     user: fMinter
     contract: "Market"
     function: "mintFToken"

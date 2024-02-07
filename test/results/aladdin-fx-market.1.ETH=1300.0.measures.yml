@@ -2651,7 +2651,7 @@
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1732'
+      value: '0.1733'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -4639,11 +4639,11 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0010'
+      value: '0.0009'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1732'
+      value: '0.1733'
     - name: rewardData.queued
       type: uint96
       target: WstETH
@@ -9787,7 +9787,7 @@
       value: '1.075737230832926118'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824480'
+      value: '1703824460'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -9796,7 +9796,7 @@
       value: '1773669796613534616'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805380000000000000'
+      value: '1805390000000000000'
     - name: fToken
       type: address
       value: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'

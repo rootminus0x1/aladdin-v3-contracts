@@ -91,7 +91,7 @@
       delta: '-1.051183905405143387'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      delta: '+31500'
+      delta: '+31490'
     - name: emaLeverageRatio.lastValue
       type: uint96
       delta: '6420159461186486'
