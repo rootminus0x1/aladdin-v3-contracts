@@ -6,7 +6,7 @@ import { ethers } from 'hardhat';
 import { parseEther } from 'ethers';
 import { time } from '@nomicfoundation/hardhat-network-helpers';
 
-import { contracts, deploy, getEthPrice, doUserEvent, day, events, week, asDateString } from 'eat';
+import { contracts, deploy, getEthPrice, doEvent, day, events, week, marketEvent } from 'eat';
 import { getConfig, setupBlockchain } from 'eat';
 import { dig } from 'eat';
 import { marketEvents, delve, delvePlot } from 'eat';
@@ -22,34 +22,43 @@ async function main() {
     // to the diagram - I think this is just another measure - does etherscan have events?
     await dig();
 
-    if (!getConfig().plot) {
-        //await delve('initial');
-    }
     // TODO: some of this initialisation should be done on demand, rather than the existence of a contract
     if (contracts.stETHTreasury) {
         // handle price changes
         const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
         await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
 
-        const setPrice = async (value: bigint) => {
-            await oracle.setPrice(value);
-            return value;
+        events.ETH = {
+            name: 'ETH',
+            setMarket: async (value: bigint) => {
+                await oracle.setPrice(value);
+                return value;
+            },
         };
 
-        let prevDate = await time.latest(); // use this to make us immune to snapshot restores
-        let incrememt = 2 * week;
-        const setPriceAndRoll = async (value: bigint) => {
-            await oracle.setPrice(value);
-            await doUserEvent(events.harvest); // maybe a less intrusive way to do this
-            const target = prevDate + incrememt;
-            // console.log(`moving time to ${asDateString(target)}...`);
-            await time.increaseTo(target);
-            prevDate = await time.latest();
-            return value;
+        events.roll = {
+            name: 'time',
+            value: 2 * week,
+            setMarket: async (increment: number) => {
+                await doEvent(events.harvest); // maybe a less intrusive way to do this
+                const target = (await time.latest()) + increment;
+                // console.log(`moving time to ${asDateString(target)}...`);
+                await time.increaseTo(target);
+                return target - getConfig().timestamp; // delta time
+            },
+        };
+
+        events.liquidate = {
+            name: 'liquidate',
+            setMarket: async () => {
+                const deposited = await contracts.fToken.balanceOf(contracts.RebalancePool); // TODO: add a -1 input to liquidate function
+                console.log(`      liquidating ${deposited}...`);
+                return contracts.RebalancePool.connect(contracts.Market.liquidator).liquidate(deposited, 0n);
+            },
         };
 
         // TODO: set the price according to stETHTreasury.getCurrentNav._baseNav
-        await setPrice(startEthPrice); // set to the current eth price, like nothing had changed (approx)
+        await doEvent(events.ETH, startEthPrice); // set to the current eth price, like nothing had changed (approx)
 
         const getCR = async () => {
             return contracts.stETHTreasury.collateralRatio();
@@ -76,17 +85,15 @@ async function main() {
 
             await delvePlot(
                 'CRxETH',
-                marketEvents(
-                    { name: 'ETH', precision: 3, setMarket: setPriceAndRoll },
-                    parseEther('4000'),
-                    parseEther('10'),
-                    parseEther('-100'),
-                ),
-                [],
-                [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }],
+                'Ether Price (USD)',
+                marketEvents(events.ETH, parseEther('4000'), parseEther('10'), parseEther('-100')),
                 'collateral ratio',
-                [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }],
+                [
+                    { match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }] },
+                    //{ simulation: [events.liquidate], match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }] }
+                ],
                 'leverage ratio',
+                [{ simulation: [events.roll], match: [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }] }],
             );
         } else {
             // TODO: drive a collateral ratio < 130% with eth price. then run a liquidation bot to see what changes
@@ -123,11 +130,7 @@ async function main() {
             await delve(
                 'simulation mint, drop, mint',
                 [],
-                [
-                    events.mintFToken_1000eth,
-                    { name: 'ETH', value: parseEther('1300'), setMarket: setPrice },
-                    events.mintFToken_1000eth,
-                ],
+                [events.mintFToken_1000eth, marketEvent(events.ETH, parseEther('1300')), events.mintFToken_1000eth],
             );
         }
     }
