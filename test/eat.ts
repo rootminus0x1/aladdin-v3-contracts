@@ -2,16 +2,20 @@ import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
-import { contracts, deploy, getEthPrice, doUserEvent, rollForward, day, userEvents } from 'eat';
+import { ethers } from 'hardhat';
+import { parseEther } from 'ethers';
+import { time } from '@nomicfoundation/hardhat-network-helpers';
+
+import { contracts, deploy, getEthPrice, doUserEvent, day, events, week, asDateString } from 'eat';
 import { getConfig, setupBlockchain } from 'eat';
 import { dig } from 'eat';
 import { marketEvents, delve, delvePlot } from 'eat';
 
 import { MockFxPriceOracle } from '@types';
-import { parseEther } from 'ethers';
 
 async function main() {
     await setupBlockchain();
+    const startEthPrice = await getEthPrice(getConfig().timestamp);
 
     // TODO: scan event logs for events like UpdateSettleWhitelist(_account, _status)
     // the description of what parameters to gleem and how they are presented (array of addresses)
@@ -26,29 +30,26 @@ async function main() {
         // handle price changes
         const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
         await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
+
         const setPrice = async (value: bigint) => {
             await oracle.setPrice(value);
+            return value;
         };
 
-        /*
-        const userEvents: any = {};
-        if (getConfig().userEvents) {
-            getConfig().userEvents.forEach((ue) => {
-                // TODO: add a do function to call doUserEvent - look at removing doUserEvent, and also substituteArgs?
-                const copy = Object.assign({ ...ue });
-                userEvents[ue.name] = copy; // add do: doUserEvent(copy)
-                // userEvents.set(ue.name, copy);
-            });
-        }
-        */
-
-        const setPriceMinsFinneyRoll = async (value: bigint) => {
+        let prevDate = await time.latest(); // use this to make us immune to snapshot restores
+        let incrememt = 2 * week;
+        const setPriceAndRoll = async (value: bigint) => {
             await oracle.setPrice(value);
-            await doUserEvent(userEvents.mintFToken_finney);
-            await rollForward(2 * day);
+            await doUserEvent(events.harvest); // maybe a less intrusive way to do this
+            const target = prevDate + incrememt;
+            // console.log(`moving time to ${asDateString(target)}...`);
+            await time.increaseTo(target);
+            prevDate = await time.latest();
+            return value;
         };
+
         // TODO: set the price according to stETHTreasury.getCurrentNav._baseNav
-        await setPrice(await getEthPrice(getConfig().timestamp)); // set to the current eth price, like nothing had changed (approx)
+        await setPrice(startEthPrice); // set to the current eth price, like nothing had changed (approx)
 
         const getCR = async () => {
             return contracts.stETHTreasury.collateralRatio();
@@ -70,13 +71,18 @@ async function main() {
             'ratio',
         );
         */
+
+            //await ethers.provider.send('evm_setAutomine', [false]);
+
             await delvePlot(
+                'CRxETH',
                 marketEvents(
-                    { name: 'ETH', precision: 3, setMarket: setPriceMinsFinneyRoll },
+                    { name: 'ETH', precision: 3, setMarket: setPriceAndRoll },
                     parseEther('4000'),
-                    parseEther('1010'),
-                    parseEther('-50'),
+                    parseEther('10'),
+                    parseEther('-100'),
                 ),
+                [],
                 [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }],
                 'collateral ratio',
                 [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }],
@@ -118,9 +124,9 @@ async function main() {
                 'simulation mint, drop, mint',
                 [],
                 [
-                    userEvents.mintFToken_1000eth,
+                    events.mintFToken_1000eth,
                     { name: 'ETH', value: parseEther('1300'), setMarket: setPrice },
-                    userEvents.mintFToken_1000eth,
+                    events.mintFToken_1000eth,
                 ],
             );
         }

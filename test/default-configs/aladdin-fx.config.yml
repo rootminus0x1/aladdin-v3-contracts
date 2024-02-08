@@ -17,17 +17,22 @@ users:
   - name: xMinter # user who mint/redeems xTokens
   - name: xHolderRedeemer # user who mint/redeems xTokens
 
-userEvents:
+events:
   - name: mintFToken_1000eth
     user: fMinter
-    contract: "Market"
-    function: "mintFToken"
+    contract: Market
+    function: mintFToken
     args: [1000 ether, fMinter, 0]
   - name: mintFToken_finney
     user: fMinter
-    contract: "Market"
-    function: "mintFToken"
+    contract: Market
+    function: mintFToken
     args: [1 finney, fMinter, 0]
+  - name: harvest
+    user: fMinter
+    contract: stETHTreasury
+    function: harvest
+    args: []
 
 format:
   - measurement: emaLeverageRatio.lastTime
