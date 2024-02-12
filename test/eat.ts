@@ -3,11 +3,11 @@ import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
 import { ethers } from 'hardhat';
-import { parseEther } from 'ethers';
-import { time } from '@nomicfoundation/hardhat-network-helpers';
+import { formatEther, parseEther } from 'ethers';
+import { setBalance, time } from '@nomicfoundation/hardhat-network-helpers';
 
-import { contracts, deploy, getEthPrice, doEvent, day, events, week, marketEvent } from 'eat';
-import { getConfig, setupBlockchain } from 'eat';
+import { contracts, deploy, getEthPrice, doEvent, day, events, week, marketEvent, nodes, whale, Role } from 'eat';
+import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
 import { marketEvents, delve, delvePlot } from 'eat';
 
@@ -23,9 +23,10 @@ async function main() {
     await dig();
 
     // TODO: some of this initialisation should be done on demand, rather than the existence of a contract
-    if (contracts.stETHTreasury) {
+    if (contracts.stETHTreasury && events.harvest) {
         // handle price changes
         const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
+        console.log(`ownerSigner of stETHTreasury: ${contracts.stETHTreasury.ownerSigner}`);
         await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
 
         events.ETH = {
@@ -47,13 +48,44 @@ async function main() {
                 return target - getConfig().timestamp; // delta time
             },
         };
-
+    }
+    if (events.ETH && contracts.FractionalToken && contracts.RebalancePool) {
         events.liquidate = {
             name: 'liquidate',
             setMarket: async () => {
-                const deposited = await contracts.fToken.balanceOf(contracts.RebalancePool); // TODO: add a -1 input to liquidate function
-                console.log(`      liquidating ${deposited}...`);
-                return contracts.RebalancePool.connect(contracts.Market.liquidator).liquidate(deposited, 0n);
+                const pools = await contracts.RebalancePoolRegistry.getPools();
+                let result = false;
+                for (const poolAddress of pools) {
+                    // const liquidator = new ethers.Contract(poolAddress, [`function liquidate(uint256) view returns (address)`], whale);
+                    const pool = contracts[poolAddress];
+                    let liquidatorAddress = undefined;
+                    if (pool.roles) {
+                        const role = pool.roles.find((r: Role) => r.name === 'LIQUIDATOR_ROLE');
+                        if (role) liquidatorAddress = role.addresses[0];
+                    }
+                    if (!liquidatorAddress && pool.interface.hasFunction('liquidator')) {
+                        liquidatorAddress = await pool.liquidator();
+                    }
+                    if (!liquidatorAddress) throw Error(`couldnot find liquidator for ${pool.name}`);
+                    const liquidator = contracts[liquidatorAddress];
+                    try {
+                        const tx = await liquidator.liquidate(0n);
+                        const receipt = await tx.wait();
+                        /*
+                            const logs = receipt.logs;
+                            const abi = poolContract.interface;
+                            if (logs && logs.length && abi) {
+                                const args = abi.parseLog(logs[0])?.args;
+                                amount = args?.returnValue;
+                            }
+                            */
+                        console.log(`liquidated ${pool.name} via ${liquidator.name}`);
+                        result = true;
+                    } catch (e: any) {
+                        console.log(`error liquidating ${pool.name} via ${liquidator.name}: ${e.message}`);
+                    }
+                }
+                return result;
             },
         };
 
@@ -90,10 +122,15 @@ async function main() {
                 'collateral ratio',
                 [
                     { match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }] },
-                    //{ simulation: [events.liquidate], match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }] }
+                    {
+                        simulation: [events.liquidate],
+                        match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }],
+                    },
                 ],
+                /*
                 'leverage ratio',
                 [{ simulation: [events.roll], match: [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }] }],
+            */
             );
         } else {
             // TODO: drive a collateral ratio < 130% with eth price. then run a liquidation bot to see what changes

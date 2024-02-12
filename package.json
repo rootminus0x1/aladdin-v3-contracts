@@ -17,11 +17,10 @@
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
     "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage",
-    "eat-all": "for file in test/*.config.yml; do ts-node test/eat.ts $file; done",
-    "eat": "for file in test/aladdin-fx-market.config.yml test/aladdin-fx-market.CR_x_ETH-plot.config.yml; do ts-node test/eat.ts $file; done",
-    "eat1": "ts-node test/eat.ts ",
-    "eat-plot": "for file in ./test/*-plot.config.yml; do ts-node test/eat.ts $file; done",
-    "eat-view": "for file in ./test/results/*.md; do mmdc -i \"$file\" -o \"${file%.md}.svg\" && mv \"${file%.md}-1.svg\" \"${file%.md}.svg\" && firefox 2>/dev/null -new-tab \"${file%.md}.svg\" & done"
+    "eat:svg": "mmdc -i test/results/${0}.diagram.md -o test/results/${0}.diagram.svg && mv test/results/${0}.diagram-1.svg test/results/${0}.diagram.svg",
+    "eat:run": "ts-node test/eat.ts test/${0}.config.yml",
+    "eat1": "yarn eat:run ${0} && yarn eat:svg ${0}",
+    "eat": "for arg in aladdin-fx-market aladdin-fx-market.CR_x_ETH-plot; do yarn eat1 $arg; done"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^10.6.1",
@@ -92,5 +91,5 @@
   "engines": {
     "node": ">=10.4.0"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@4.1.0"
 }

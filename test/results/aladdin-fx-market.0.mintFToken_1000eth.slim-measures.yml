@@ -1,245 +1,5 @@
-- address: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
-  name: AccessControlledOffchainAggregator__0
-  contractType: AccessControlledOffchainAggregator
-  measurements:
-    - name: billingAccessController
-      type: address
-      value: '0x9db83CEf9f68b63989E4E82D65D549e7fF2aCda9'
-    - name: decimals
-      type: uint8
-      value: '8'
-    - name: getBilling.maximumGasPrice
-      type: uint32
-      value: '3000'
-    - name: getBilling.reasonableGasPrice
-      type: uint32
-      value: '75'
-    - name: getBilling.microLinkPerEth
-      type: uint32
-      value: '152732341'
-    - name: getBilling.linkGweiPerObservation
-      type: uint32
-      value: '63033173'
-    - name: getBilling.linkGweiPerTransmission
-      type: uint32
-      value: '378197037'
-    - name: getLinkToken
-      type: address
-      value: '0x514910771AF9Ca656af840dff83E8264EcF986CA'
-    - name: latestAnswer
-      type: int256
-      value: '2352.78183'
-    - name: latestConfigDetails.configCount
-      type: uint32
-      value: '3'
-    - name: latestConfigDetails.blockNumber
-      type: uint32
-      value: '17864177'
-    - name: latestRound
-      type: uint256
-      value: '0.000000000000009641'
-    - name: latestRoundData.roundId
-      type: uint80
-      value: '9641'
-    - name: latestRoundData.answer
-      type: int256
-      value: '2352.78183'
-    - name: latestRoundData.startedAt
-      type: uint256
-      value: '1703822135'
-    - name: latestRoundData.updatedAt
-      type: uint256
-      value: '1703822135'
-    - name: latestRoundData.answeredInRound
-      type: uint80
-      value: '9641'
-    - name: latestTimestamp
-      type: uint256
-      value: '1703822135'
-    - name: latestTransmissionDetails.epoch
-      type: uint32
-      value: '68880'
-    - name: latestTransmissionDetails.round
-      type: uint8
-      value: '1'
-    - name: latestTransmissionDetails.latestAnswer
-      type: int192
-      value: '235278183000'
-    - name: latestTransmissionDetails.latestTimestamp
-      type: uint64
-      value: '1703822135'
-    - name: linkAvailableForPayment
-      type: int256
-      value: '2929087254495212824000'
-    - name: maxAnswer
-      type: int192
-      value: '95780971304118053647396689196894323976171195136475135'
-    - name: minAnswer
-      type: int192
-      value: '1'
-    - name: owner
-      type: address
-      value: '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
-      valueName: GnosisSafe__1
-    - name: requesterAccessController
-      type: address
-      value: '0x641B698aD1C6E503470520B0EeCb472c0589dfE6'
-    - name: transmitters
-      type: address[]
-      value:
-        - '0x686beC83b59F8b23A6129f03550A3Aad245a543C'
-        - '0x982fa4d5F5C8C0063493AbE58967cA3B7639F10F'
-        - '0x8b1d49a93A84B5dA0917a1ed42D8a3E191C28524'
-        - '0x8F3Ab0e87B70a57bD4980111a99a1b2c4b8334F4'
-        - '0x7663C5790E1eBf04197245d541279D13f3c2f362'
-        - '0x61317C73d0225b2E37140fb9664d607B450613C6'
-        - '0x2a4a7afA40a9D03B425752fb4cFd5f0FF5b3964C'
-        - '0xb976d01275B809333E3EfD76D1d31fE9264466D0'
-        - '0xf34aC04a28F7CB5324A167C96B24ADE9c742B44f'
-        - '0x57CD4848b12469618b689163f507817940AccA02'
-        - '0xDbfea8D5822141c13f92CaA06EB94d0F3d67C243'
-        - '0x5a8216a9c47ee2E8Df1c874252fDEe467215C25b'
-        - '0xFa0E4F48a369BB3eCBCEe0B5119379EA8D1bcF29'
-        - '0xEdBED9F5dEA03dD0ec484577C41502af68B7c46a'
-        - '0x3C4ad65F5b4884397e1F09596c7ac7F8F95b3fF3'
-        - '0x632f869a26Ab4DA58e2Da476EE74800f2BAE060A'
-        - '0x218B5a7861dBf368D09A84E0dBfF6C6DDbf99DB8'
-        - '0x0312EA121df0a323fF535B753172736cc9d53d13'
-        - '0x5565b5362FF9f468bA2f144f38b87187C9a010A8'
-        - '0x7BFb89db2d7217c57C3Ad3d4B55826eFD17dC2e9'
-        - '0xc74cE67BfC623c803D48AFc74a09A6FF6b599003'
-        - '0xcC29be4Ca92D4Ecc43C8451fBA94C200B83991f6'
-        - '0xf16e77a989529AA4C58318acEe8A1548Df3fcCc1'
-        - '0x9cFAb1513FFA293E7023159B3C7A4C984B6a3480'
-        - '0xC4b732Fd121F2f3783A9Ac2a6C62fD535FD13FdA'
-        - '0x43793ee58E0a3D920e3e4a115A9FA07dc4B09715'
-        - '0xF07131F578a5F708AE2CCB9faF98458099E0FFB4'
-        - '0xddEB598fe902A13Cc523aaff5240e9988eDCE170'
-        - '0x5a6fCc02D8c50eA58a22115A7c4608b723030016'
-        - '0xDdE59ceeC7A2cC8B2bD78199877BA22018966813'
-        - '0x413e725094c7810669F91856cc58e73eA3fbc400'
-    - name: validatorConfig.validator
-      type: address
-      value: '0x264BDDFD9D93D48d759FBDB0670bE1C6fDd50236'
-    - name: validatorConfig.gasLimit
-      type: uint32
-      value: '450000'
-    - name: version
-      type: uint256
-      value: '4'
-- address: '0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196'
-  name: AccessControlledOffchainAggregator__1
-  contractType: AccessControlledOffchainAggregator
-  measurements:
-    - name: billingAccessController
-      type: address
-      value: '0x9db83CEf9f68b63989E4E82D65D549e7fF2aCda9'
-    - name: decimals
-      type: uint8
-      value: '8'
-    - name: getBilling.maximumGasPrice
-      type: uint32
-      value: '3000'
-    - name: getBilling.reasonableGasPrice
-      type: uint32
-      value: '75'
-    - name: getBilling.microLinkPerEth
-      type: uint32
-      value: '152732341'
-    - name: getBilling.linkGweiPerObservation
-      type: uint32
-      value: '63033173'
-    - name: getBilling.linkGweiPerTransmission
-      type: uint32
-      value: '378197037'
-    - name: getLinkToken
-      type: address
-      value: '0x514910771AF9Ca656af840dff83E8264EcF986CA'
-    - name: latestAnswer
-      type: int256
-      value: '2354.30211112'
-    - name: latestConfigDetails.configCount
-      type: uint32
-      value: '5'
-    - name: latestConfigDetails.blockNumber
-      type: uint32
-      value: '18219606'
-    - name: latestRound
-      type: uint256
-      value: '0.000000000000022861'
-    - name: latestRoundData.roundId
-      type: uint80
-      value: '22861'
-    - name: latestRoundData.answer
-      type: int256
-      value: '2354.30211112'
-    - name: latestRoundData.startedAt
-      type: uint256
-      value: '1703821343'
-    - name: latestRoundData.updatedAt
-      type: uint256
-      value: '1703821343'
-    - name: latestRoundData.answeredInRound
-      type: uint80
-      value: '22861'
-    - name: latestTimestamp
-      type: uint256
-      value: '1703821343'
-    - name: latestTransmissionDetails.epoch
-      type: uint32
-      value: '44979'
-    - name: latestTransmissionDetails.round
-      type: uint8
-      value: '1'
-    - name: latestTransmissionDetails.latestAnswer
-      type: int192
-      value: '235430211112'
-    - name: latestTransmissionDetails.latestTimestamp
-      type: uint64
-      value: '1703821343'
-    - name: linkAvailableForPayment
-      type: int256
-      value: '1085768059762880300000'
-    - name: maxAnswer
-      type: int192
-      value: '100000000000000'
-    - name: minAnswer
-      type: int192
-      value: '1000000000'
-    - name: owner
-      type: address
-      value: '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
-      valueName: GnosisSafe__1
-    - name: requesterAccessController
-      type: address
-      value: '0x641B698aD1C6E503470520B0EeCb472c0589dfE6'
-    - name: transmitters
-      type: address[]
-      value:
-        - '0x9741569DEDB1E0cB204f2dF7f43f7a52bB49ba3A'
-        - '0xEdBED9F5dEA03dD0ec484577C41502af68B7c46a'
-        - '0x8F3Ab0e87B70a57bD4980111a99a1b2c4b8334F4'
-        - '0x3C4ad65F5b4884397e1F09596c7ac7F8F95b3fF3'
-        - '0xe3E0596AC55Ae6044b757baB27426F7dC9e018d4'
-        - '0xddEB598fe902A13Cc523aaff5240e9988eDCE170'
-        - '0x2a4a7afA40a9D03B425752fb4cFd5f0FF5b3964C'
-        - '0xcC29be4Ca92D4Ecc43C8451fBA94C200B83991f6'
-        - '0x5a8216a9c47ee2E8Df1c874252fDEe467215C25b'
-        - '0xF07131F578a5F708AE2CCB9faF98458099E0FFB4'
-        - '0x8b1d49a93A84B5dA0917a1ed42D8a3E191C28524'
-        - '0x3aE9D0B74E3968CFCf89A4dE4f0D8B2A326a1Dfd'
-        - '0xf34aC04a28F7CB5324A167C96B24ADE9c742B44f'
-        - '0xD22c87Dc7a3F12dcBB75CEbDA2e96f6766AE114F'
-        - '0x5565b5362FF9f468bA2f144f38b87187C9a010A8'
-        - '0xDbfea8D5822141c13f92CaA06EB94d0F3d67C243'
-        - '0x632f869a26Ab4DA58e2Da476EE74800f2BAE060A'
-        - '0x265b3Aaeb858F32Fe18CFc28EEA21977Fc379F3C'
-        - '0x9e1735D07F77ABA85415fbE19fdb371a56Cabf07'
-    - name: version
-      type: uint256
-      value: '4'
 - address: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
-  name: BoostableRebalancePool_at_1
+  name: BoostableRebalancePool__0
   contractType: BoostableRebalancePool
   measurements:
     - name: asset
@@ -321,7 +81,7 @@
       target: WstETH
       value: '1703939159'
 - address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
-  name: BoostableRebalancePool_at_2
+  name: BoostableRebalancePool__1
   contractType: BoostableRebalancePool
   measurements:
     - name: asset
@@ -412,48 +172,6 @@
       type: uint40
       target: WstETH
       value: '1703939159'
-- address: '0x460B3CdE57DfbA90DBed02fd83d3990a92DA1230'
-  name: ChainlinkTwapOracleV3__0
-  contractType: ChainlinkTwapOracleV3
-  measurements:
-    - name: chainlinkAggregator
-      type: address
-      value: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'
-      valueName: EACAggregatorProxy__0
-    - name: chainlinkMessageExpiration
-      type: uint256
-      value: '10800'
-    - name: chainlinkMinMessageCount
-      type: uint256
-      value: '1'
-    - name: getLatest
-      type: uint256
-      value: '2352.78183'
-    - name: owner
-      type: address
-      value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
-      valueName: GnosisSafe__0
-- address: '0xD24AC180e6769Fd5F624e7605B93084171074A77'
-  name: ChainlinkTwapOracleV3__1
-  contractType: ChainlinkTwapOracleV3
-  measurements:
-    - name: chainlinkAggregator
-      type: address
-      value: '0xCfE54B5cD566aB89272946F602D76Ea879CAb4a8'
-      valueName: EACAggregatorProxy__1
-    - name: chainlinkMessageExpiration
-      type: uint256
-      value: '10800'
-    - name: chainlinkMinMessageCount
-      type: uint256
-      value: '1'
-    - name: getLatest
-      type: uint256
-      value: '2354.30211112'
-    - name: owner
-      type: address
-      value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
-      valueName: GnosisSafe__0
 - address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
   name: Curve_DAO_Token
   contractType: Curve DAO Token
@@ -489,11 +207,11 @@
       value: '1020000.0'
     - name: balanceOf
       type: uint256
-      target: BoostableRebalancePool_at_1
+      target: BoostableRebalancePool__0
       value: '20.0'
     - name: balanceOf
       type: uint256
-      target: BoostableRebalancePool_at_2
+      target: BoostableRebalancePool__1
       value: '20.0'
     - name: balanceOf
       type: uint256
@@ -501,152 +219,20 @@
       value: '11724.557898160134110992'
     - name: balanceOf
       type: uint256
-      target: RebalanceWithBonusToken
+      target: RebalanceWithBonusToken__0
       value: '100.0'
+    - name: balanceOf
+      type: uint256
+      target: RebalanceWithBonusToken__1
+      value: '20.0'
+    - name: balanceOf
+      type: uint256
+      target: RebalanceWithBonusToken__2
+      value: '20.0'
     - name: balanceOf
       type: uint256
       target: Voting_Escrow
       value: '115331.908808027700163144'
-- address: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'
-  name: EACAggregatorProxy__0
-  contractType: EACAggregatorProxy
-  measurements:
-    - name: aggregator
-      type: address
-      value: '0xE62B71cf983019BFf55bC83B48601ce8419650CC'
-      valueName: AccessControlledOffchainAggregator__0
-    - name: decimals
-      type: uint8
-      value: '8'
-    - name: latestAnswer
-      type: int256
-      value: '2352.78183'
-    - name: latestRound
-      type: uint256
-      value: '110.680464442257319337'
-    - name: latestRoundData.roundId
-      type: uint80
-      value: '110680464442257319337'
-    - name: latestRoundData.answer
-      type: int256
-      value: '2352.78183'
-    - name: latestRoundData.startedAt
-      type: uint256
-      value: '1703822135'
-    - name: latestRoundData.updatedAt
-      type: uint256
-      value: '1703822135'
-    - name: latestRoundData.answeredInRound
-      type: uint80
-      value: '110680464442257319337'
-    - name: latestTimestamp
-      type: uint256
-      value: '1703822135'
-    - name: owner
-      type: address
-      value: '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
-      valueName: GnosisSafe__1
-    - name: phaseId
-      type: uint16
-      value: '6'
-    - name: proposedLatestRoundData.roundId
-      type: uint80
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.answer
-      type: int256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.startedAt
-      type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.updatedAt
-      type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.answeredInRound
-      type: uint80
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: version
-      type: uint256
-      value: '4'
-- address: '0xCfE54B5cD566aB89272946F602D76Ea879CAb4a8'
-  name: EACAggregatorProxy__1
-  contractType: EACAggregatorProxy
-  measurements:
-    - name: aggregator
-      type: address
-      value: '0xdA31bc2B08F22AE24aeD5F6EB1E71E96867BA196'
-      valueName: AccessControlledOffchainAggregator__1
-    - name: decimals
-      type: uint8
-      value: '8'
-    - name: latestAnswer
-      type: int256
-      value: '2354.30211112'
-    - name: latestRound
-      type: uint256
-      value: '18.446744073709574477'
-    - name: latestRoundData.roundId
-      type: uint80
-      value: '18446744073709574477'
-    - name: latestRoundData.answer
-      type: int256
-      value: '2354.30211112'
-    - name: latestRoundData.startedAt
-      type: uint256
-      value: '1703821343'
-    - name: latestRoundData.updatedAt
-      type: uint256
-      value: '1703821343'
-    - name: latestRoundData.answeredInRound
-      type: uint80
-      value: '18446744073709574477'
-    - name: latestTimestamp
-      type: uint256
-      value: '1703821343'
-    - name: owner
-      type: address
-      value: '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
-      valueName: GnosisSafe__1
-    - name: phaseId
-      type: uint16
-      value: '1'
-    - name: proposedLatestRoundData.roundId
-      type: uint80
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.answer
-      type: int256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.startedAt
-      type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.updatedAt
-      type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: proposedLatestRoundData.answeredInRound
-      type: uint80
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'No proposed aggregator present'
-    - name: version
-      type: uint256
-      value: '4'
 - address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
   name: FractionalToken
   contractType: FractionalToken
@@ -670,11 +256,11 @@
       value: '16.490482704733555399'
     - name: balanceOf
       type: uint256
-      target: BoostableRebalancePool_at_1
+      target: BoostableRebalancePool__0
       value: '2723055.141145695996658868'
     - name: balanceOf
       type: uint256
-      target: BoostableRebalancePool_at_2
+      target: BoostableRebalancePool__1
       value: '2956321.364769018396295364'
     - name: balanceOf
       type: uint256
@@ -695,15 +281,12 @@
     - name: chainlinkETHTwapOracle
       type: address
       value: '0x460B3CdE57DfbA90DBed02fd83d3990a92DA1230'
-      valueName: ChainlinkTwapOracleV3__0
     - name: chainlinkStETHTwapOracle
       type: address
       value: '0xD24AC180e6769Fd5F624e7605B93084171074A77'
-      valueName: ChainlinkTwapOracleV3__1
     - name: curvePool
       type: address
       value: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
-      valueName: StableSwap
     - name: getPrice._safePrice
       type: uint256
       value: '2354.30211112'
@@ -738,43 +321,19 @@
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
-      target: AccessControlledOffchainAggregator__0
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: AccessControlledOffchainAggregator__1
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
       target: admin
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
-      target: BoostableRebalancePool_at_1
+      target: BoostableRebalancePool__0
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
-      target: BoostableRebalancePool_at_2
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: ChainlinkTwapOracleV3__0
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: ChainlinkTwapOracleV3__1
+      target: BoostableRebalancePool__1
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
       target: Curve_DAO_Token
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: EACAggregatorProxy__0
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: EACAggregatorProxy__1
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
@@ -834,7 +393,15 @@
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
-      target: RebalanceWithBonusToken
+      target: RebalanceWithBonusToken__0
+      error: Transaction reverted without a reason string
+    - name: gauge_types
+      type: int128
+      target: RebalanceWithBonusToken__1
+      error: Transaction reverted without a reason string
+    - name: gauge_types
+      type: int128
+      target: RebalanceWithBonusToken__2
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
@@ -843,10 +410,6 @@
     - name: gauge_types
       type: int128
       target: SmartWalletWhitelist
-      error: Transaction reverted without a reason string
-    - name: gauge_types
-      type: int128
-      target: StableSwap
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
@@ -1110,14 +673,6 @@
       value: '18.834569927009498437'
     - name: balanceOf
       type: uint256
-      target: StableSwap
-      value: '29271.981171892666890469'
-    - name: sharesOf
-      type: uint256
-      target: StableSwap
-      value: '25414.87430647782943244'
-    - name: balanceOf
-      type: uint256
       target: stETHTreasury
       value: '7177.63244215750235306'
     - name: sharesOf
@@ -1252,7 +807,7 @@
     - name: liquidator
       type: address
       value: '0x17f21f468d77E6e35702a9Ae7a9da50Db7F6a4f4'
-      valueName: RebalanceWithBonusToken
+      valueName: RebalanceWithBonusToken__0
     - name: market
       type: address
       value: '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
@@ -1307,8 +862,8 @@
         - '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
       valueName:
         - RebalancePool
-        - BoostableRebalancePool_at_1
-        - BoostableRebalancePool_at_2
+        - BoostableRebalancePool__0
+        - BoostableRebalancePool__1
     - name: owner
       type: address
       value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
@@ -1341,7 +896,7 @@
       target: WstETH
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
 - address: '0x17f21f468d77E6e35702a9Ae7a9da50Db7F6a4f4'
-  name: RebalanceWithBonusToken
+  name: RebalanceWithBonusToken__0
   contractType: RebalanceWithBonusToken
   measurements:
     - name: bonus
@@ -1359,6 +914,44 @@
       type: address
       value: '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
       valueName: RebalancePool
+- address: '0x74E9234A6e03c382A01Bb942B1aF05B639371309'
+  name: RebalanceWithBonusToken__1
+  contractType: RebalanceWithBonusToken
+  measurements:
+    - name: bonus
+      type: uint256
+      value: '1.0'
+    - name: bonusToken
+      type: address
+      value: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+      valueName: Curve_DAO_Token
+    - name: owner
+      type: address
+      value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
+      valueName: GnosisSafe__0
+    - name: stabilityPool
+      type: address
+      value: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+      valueName: BoostableRebalancePool__0
+- address: '0x5a161B94c737326cA115eC46f4Eaf4eEC5037dBE'
+  name: RebalanceWithBonusToken__2
+  contractType: RebalanceWithBonusToken
+  measurements:
+    - name: bonus
+      type: uint256
+      value: '1.0'
+    - name: bonusToken
+      type: address
+      value: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+      valueName: Curve_DAO_Token
+    - name: owner
+      type: address
+      value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
+      valueName: GnosisSafe__0
+    - name: stabilityPool
+      type: address
+      value: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
+      valueName: BoostableRebalancePool__1
 - address: '0x5d0Aacf75116d1645Db2B3d1Ca4b303ef0CA3752'
   name: ReservePool
   contractType: ReservePool
@@ -1383,55 +976,6 @@
       type: address
       value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
       valueName: GnosisSafe__0
-- address: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
-  name: StableSwap
-  contractType: StableSwap
-  measurements:
-    - name: A_precise
-      type: uint256
-      value: '0.00000000000015'
-    - name: A
-      type: uint256
-      value: '0.0000000000000015'
-    - name: admin_fee
-      type: uint256
-      value: '0.000000005'
-    - name: decimals
-      type: uint256
-      value: '18'
-    - name: ema_price
-      type: uint256
-      value: '0.999587597349320961'
-    - name: fee
-      type: uint256
-      value: '0.000000000004'
-    - name: future_A
-      type: uint256
-      value: '0.00000000000015'
-    - name: get_p
-      type: uint256
-      value: '0.999585626171170308'
-    - name: get_virtual_price
-      type: uint256
-      value: '1.017734101479506865'
-    - name: initial_A
-      type: uint256
-      value: '0.00000000000015'
-    - name: last_price
-      type: uint256
-      value: '0.999585626029419962'
-    - name: ma_exp_time
-      type: uint256
-      value: '0.000000000000002597'
-    - name: ma_last_time
-      type: uint256
-      value: '0.000000001703811923'
-    - name: price_oracle
-      type: uint256
-      value: '0.999585642'
-    - name: totalSupply
-      type: uint256
-      value: '45363.931240034965729028'
 - address: '0xC2BdBF323304eaBd9260b42E4d0d429Ca3481d6E'
   name: StETHAndxETHWrapper
   contractType: StETHAndxETHWrapper
@@ -1471,7 +1015,7 @@
       value: '1.838900715714979349'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824460'
+      value: '1703824450'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
@@ -1480,7 +1024,7 @@
       value: '1773669796613534616'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805390000000000000'
+      value: '1805400000000000000'
     - name: fToken
       type: address
       value: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
@@ -1517,7 +1061,7 @@
       valueName: PlatformFeeSpliter
     - name: priceOracle
       type: address
-      value: '0x76a999d5F7EFDE0a300e710e6f52Fb0A4b61aD58'
+      value: '0x889D9A5AF83525a2275e41464FAECcCb3337fF60'
     - name: rebalancePool
       type: address
       value: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
@@ -1606,11 +1150,11 @@
       value: '3247614.816540003642107369'
     - name: balanceOf
       type: uint256
-      target: BoostableRebalancePool_at_1
+      target: BoostableRebalancePool__0
       value: '1.893157730172243796'
     - name: balanceOf
       type: uint256
-      target: BoostableRebalancePool_at_2
+      target: BoostableRebalancePool__1
       value: '1.930332134442365476'
     - name: balanceOf
       type: uint256

@@ -20,6 +20,7 @@ eat-source/
 cache/
 artifacts/
 out/
+*.svg
 
 .store
 

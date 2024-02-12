@@ -1,7 +1,9 @@
 # used to find the owner of a contract
-leaf:
-  - "0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb"
-  - "0x11E91BB6d1334585AA37D8F4fde3932C7960B938"
+twig:
+  - "0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB" # Market
+  - "0xa677d95B91530d56791FbA72C01a862f1B01A49e" # rebalance pools
+  - "0xc6dEe5913e010895F3702bc43a40d661B13a40BD"
+  - "0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9"
 
 diagram:
-  renderer: "default"
+  renderer: "elk"

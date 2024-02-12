@@ -13,3 +13,6 @@ plot:
   dependent2:
     - contract: stETHTreasury
       measurement: leverageRatio
+
+diagram:
+  renderer: "elk"
