@@ -45,6 +45,15 @@ events:
     args: []
 
 format:
+  - measurement: getPrice._safePrice
+    precision: 1
+  - measurement: getPrice._minUnsafePrice
+    precision: 1
+  - measurement: getPrice._maxUnsafePrice
+    precision: 1
+  - contractType: Voting Escrow
+    measurement: balanceOf
+    precision: 2
   - measurement: emaLeverageRatio.lastTime
     precision: -1
   - measurement: emaLeverageRatio.lastEmaValue

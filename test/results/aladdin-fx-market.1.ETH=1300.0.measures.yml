@@ -5008,13 +5008,13 @@
       value: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
     - name: getPrice._safePrice
       type: uint256
-      value: '2500.860837139266666666'
+      value: '2500.9'
     - name: getPrice._minUnsafePrice
       type: uint256
-      value: '2495.114568069366142264'
+      value: '2495.1'
     - name: getPrice._maxUnsafePrice
       type: uint256
-      value: '2500.860837139266666666'
+      value: '2500.9'
 - address: '0x56B3c8eF8A095f8637B6A84942aA898326B82b91'
   name: FxnDepositor
   contractType: FxnDepositor
@@ -9280,7 +9280,7 @@
     - name: balanceOf
       type: uint256
       target: FxnVoterProxy
-      value: '46358.33508143142056112'
+      value: '46358.34'
     - name: get_last_user_slope
       type: int128
       target: FxnVoterProxy
