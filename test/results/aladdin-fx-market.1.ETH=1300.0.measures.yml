@@ -134,70 +134,6 @@
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
-      target: admin
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: admin
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: admin
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: admin
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: admin
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: admin
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: admin
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: admin
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: admin
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: admin
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: admin
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: admin
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: admin
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
       target: BoostableRebalancePool__1
       value: '0'
     - name: boostCheckpoint.veBalance
@@ -387,198 +323,6 @@
     - name: rewardReceiver
       type: address
       target: Curve_DAO_Token
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: fHolderLiquidator
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: fHolderLiquidator
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: fHolderLiquidator
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: fHolderLiquidator
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: fHolderLiquidator
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: fHolderRedeemer
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: fHolderRedeemer
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: fHolderRedeemer
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: fHolderRedeemer
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: fHolderRedeemer
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: fMinter
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: fMinter
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: fMinter
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: fMinter
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: fMinter
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: fMinter
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: fMinter
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: fMinter
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: fMinter
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
@@ -2182,11 +1926,11 @@
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: boostCheckpoint.veBalance
       type: uint112
-      target: xHolderRedeemer
+      target: admin
       error: >-
         could not decode result data
         (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -2194,7 +1938,7 @@
         "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: boostCheckpoint.veSupply
       type: uint112
-      target: xHolderRedeemer
+      target: admin
       error: >-
         could not decode result data
         (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -2202,7 +1946,7 @@
         "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: boostCheckpoint.historyIndex
       type: uint32
-      target: xHolderRedeemer
+      target: admin
       error: >-
         could not decode result data
         (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -2210,39 +1954,231 @@
         "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: distributors
       type: address
-      target: xHolderRedeemer
+      target: admin
       value: '0x0000000000000000000000000000000000000000'
     - name: getBoostRatio
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: pendingRewards.0
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: pendingRewards.1
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.queued
       type: uint96
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.rate
       type: uint80
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.lastUpdate
       type: uint40
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.finishAt
       type: uint40
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardReceiver
       type: address
-      target: xHolderRedeemer
+      target: admin
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: fMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fMinter
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fMinter
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fMinter
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fMinter
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: fMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: fHolderLiquidator
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: fHolderLiquidator
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: fHolderRedeemer
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: fHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
@@ -2307,6 +2243,70 @@
     - name: rewardReceiver
       type: address
       target: xMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: xHolderRedeemer
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: xHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
 - address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
   name: BoostableRebalancePool__1
@@ -2441,70 +2441,6 @@
     - name: rewardReceiver
       type: address
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
-      target: admin
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: admin
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: admin
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: admin
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: admin
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: admin
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: admin
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: admin
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: admin
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: admin
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: admin
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: admin
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: admin
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
@@ -2697,198 +2633,6 @@
     - name: rewardReceiver
       type: address
       target: Curve_DAO_Token
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: fHolderLiquidator
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: fHolderLiquidator
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: fHolderLiquidator
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: fHolderLiquidator
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: fHolderLiquidator
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: fHolderRedeemer
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: fHolderRedeemer
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: fHolderRedeemer
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: fHolderRedeemer
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: fHolderRedeemer
-      value: '0x0000000000000000000000000000000000000000'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: boostCheckpoint.veBalance
-      type: uint112
-      target: fMinter
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.veSupply
-      type: uint112
-      target: fMinter
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: boostCheckpoint.historyIndex
-      type: uint32
-      target: fMinter
-      error: >-
-        could not decode result data
-        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        info={ "method": "boostCheckpoint", "signature":
-        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
-    - name: distributors
-      type: address
-      target: fMinter
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getBoostRatio
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: pendingRewards.0
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: pendingRewards.1
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: rewardData.queued
-      type: uint96
-      target: fMinter
-      value: '0'
-    - name: rewardData.rate
-      type: uint80
-      target: fMinter
-      value: '0'
-    - name: rewardData.lastUpdate
-      type: uint40
-      target: fMinter
-      value: '0'
-    - name: rewardData.finishAt
-      type: uint40
-      target: fMinter
-      value: '0'
-    - name: rewardReceiver
-      type: address
-      target: fMinter
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
@@ -4492,11 +4236,11 @@
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: boostCheckpoint.veBalance
       type: uint112
-      target: xHolderRedeemer
+      target: admin
       error: >-
         could not decode result data
         (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -4504,7 +4248,7 @@
         "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: boostCheckpoint.veSupply
       type: uint112
-      target: xHolderRedeemer
+      target: admin
       error: >-
         could not decode result data
         (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -4512,7 +4256,7 @@
         "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: boostCheckpoint.historyIndex
       type: uint32
-      target: xHolderRedeemer
+      target: admin
       error: >-
         could not decode result data
         (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -4520,39 +4264,231 @@
         "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: distributors
       type: address
-      target: xHolderRedeemer
+      target: admin
       value: '0x0000000000000000000000000000000000000000'
     - name: getBoostRatio
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: pendingRewards.0
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: pendingRewards.1
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.queued
       type: uint96
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.rate
       type: uint80
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.lastUpdate
       type: uint40
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardData.finishAt
       type: uint40
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardReceiver
       type: address
-      target: xHolderRedeemer
+      target: admin
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: fMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fMinter
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fMinter
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fMinter
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fMinter
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: fMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: fHolderLiquidator
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: fHolderLiquidator
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: fHolderRedeemer
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: fHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
     - name: balanceOf
       type: uint256
@@ -4617,6 +4553,70 @@
     - name: rewardReceiver
       type: address
       target: xMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: xHolderRedeemer
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getBoostRatio
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.0
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: pendingRewards.1
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.queued
+      type: uint96
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.rate
+      type: uint80
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardData.finishAt
+      type: uint40
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardReceiver
+      type: address
+      target: xHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
 - address: '0x91e575C0CC6E8BC530d897d3d425B57B49A821C6'
   name: Booster
@@ -4702,10 +4702,6 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: admin
-      value: '0'
-    - name: balanceOf
-      type: uint256
       target: BoostableRebalancePool__0
       value: '20.0'
     - name: balanceOf
@@ -4715,18 +4711,6 @@
     - name: balanceOf
       type: uint256
       target: Booster
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -4830,11 +4814,27 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: balanceOf
       type: uint256
       target: xMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
   name: FractionalToken
@@ -4859,10 +4859,6 @@
       value: '16.490482704733555399'
     - name: balanceOf
       type: uint256
-      target: admin
-      value: '0'
-    - name: balanceOf
-      type: uint256
       target: BoostableRebalancePool__0
       value: '5688690.988856864319720448'
     - name: balanceOf
@@ -4876,18 +4872,6 @@
     - name: balanceOf
       type: uint256
       target: Curve_DAO_Token
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -4987,11 +4971,27 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: balanceOf
       type: uint256
       target: xMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0xa84360896cE9152d1780c546305BB54125F962d9'
   name: FxETHTwapOracle
@@ -5132,26 +5132,6 @@
       value: '0'
     - name: gauge_relative_weight
       type: uint256
-      target: admin
-      value: '0'
-    - name: gauge_types
-      type: int128
-      target: admin
-      error: Transaction reverted without a reason string
-    - name: get_gauge_weight
-      type: uint256
-      target: admin
-      value: '0'
-    - name: time_weight
-      type: uint256
-      target: admin
-      value: '0'
-    - name: vote_user_power
-      type: uint256
-      target: admin
-      value: '0'
-    - name: gauge_relative_weight
-      type: uint256
       target: BoostableRebalancePool__0
       value: '0'
     - name: gauge_types
@@ -5229,66 +5209,6 @@
     - name: vote_user_power
       type: uint256
       target: Curve_DAO_Token
-      value: '0'
-    - name: gauge_relative_weight
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: gauge_types
-      type: int128
-      target: fHolderLiquidator
-      error: Transaction reverted without a reason string
-    - name: get_gauge_weight
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: time_weight
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: vote_user_power
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: gauge_relative_weight
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: gauge_types
-      type: int128
-      target: fHolderRedeemer
-      error: Transaction reverted without a reason string
-    - name: get_gauge_weight
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: time_weight
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: vote_user_power
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: gauge_relative_weight
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: gauge_types
-      type: int128
-      target: fMinter
-      error: Transaction reverted without a reason string
-    - name: get_gauge_weight
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: time_weight
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: vote_user_power
-      type: uint256
-      target: fMinter
       value: '0'
     - name: gauge_relative_weight
       type: uint256
@@ -5772,23 +5692,83 @@
       value: '0'
     - name: gauge_relative_weight
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: gauge_types
       type: int128
-      target: xHolderRedeemer
+      target: admin
       error: Transaction reverted without a reason string
     - name: get_gauge_weight
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: time_weight
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: vote_user_power
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: fMinter
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: fHolderLiquidator
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: fHolderRedeemer
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: gauge_relative_weight
       type: uint256
@@ -5809,6 +5789,26 @@
     - name: vote_user_power
       type: uint256
       target: xMinter
+      value: '0'
+    - name: gauge_relative_weight
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: gauge_types
+      type: int128
+      target: xHolderRedeemer
+      error: Transaction reverted without a reason string
+    - name: get_gauge_weight
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: time_weight
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: vote_user_power
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
   name: GnosisSafe__0
@@ -5883,10 +5883,6 @@
       value: '21.987150410873681687'
     - name: balanceOf
       type: uint256
-      target: admin
-      value: '0'
-    - name: balanceOf
-      type: uint256
       target: BoostableRebalancePool__0
       value: '0'
     - name: balanceOf
@@ -5900,18 +5896,6 @@
     - name: balanceOf
       type: uint256
       target: Curve_DAO_Token
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -6011,11 +5995,27 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: balanceOf
       type: uint256
       target: xMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
   name: Lido
@@ -6129,18 +6129,6 @@
       value: '0.067576111815704987'
     - name: balanceOf
       type: uint256
-      target: admin
-      value: '0'
-    - name: nonces
-      type: uint256
-      target: admin
-      value: '0'
-    - name: sharesOf
-      type: uint256
-      target: admin
-      value: '0'
-    - name: balanceOf
-      type: uint256
       target: BoostableRebalancePool__0
       value: '0'
     - name: nonces
@@ -6187,42 +6175,6 @@
       type: uint256
       target: Curve_DAO_Token
       value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: nonces
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: sharesOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: nonces
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: sharesOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '9999.999999999999999999'
-    - name: nonces
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: sharesOf
-      type: uint256
-      target: fMinter
-      value: '8644.89884283735810299'
     - name: balanceOf
       type: uint256
       target: FractionalToken
@@ -6513,15 +6465,51 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: nonces
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: sharesOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '9999.999999999999999999'
+    - name: nonces
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: fMinter
+      value: '8644.89884283735810299'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: balanceOf
       type: uint256
@@ -6534,6 +6522,18 @@
     - name: sharesOf
       type: uint256
       target: xMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: sharesOf
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
   name: Market
@@ -6641,10 +6641,6 @@
       value: '0x0000000000000000000000000000000000000000'
     - name: burners
       type: address
-      target: admin
-      value: '0x0000000000000000000000000000000000000000'
-    - name: burners
-      type: address
       target: BoostableRebalancePool__0
       value: '0x0000000000000000000000000000000000000000'
     - name: burners
@@ -6658,18 +6654,6 @@
     - name: burners
       type: address
       target: Curve_DAO_Token
-      value: '0x0000000000000000000000000000000000000000'
-    - name: burners
-      type: address
-      target: fHolderLiquidator
-      value: '0x0000000000000000000000000000000000000000'
-    - name: burners
-      type: address
-      target: fHolderRedeemer
-      value: '0x0000000000000000000000000000000000000000'
-    - name: burners
-      type: address
-      target: fMinter
       value: '0x0000000000000000000000000000000000000000'
     - name: burners
       type: address
@@ -6769,11 +6753,27 @@
       value: '0x0000000000000000000000000000000000000000'
     - name: burners
       type: address
-      target: xHolderRedeemer
+      target: admin
+      value: '0x0000000000000000000000000000000000000000'
+    - name: burners
+      type: address
+      target: fMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: burners
+      type: address
+      target: fHolderLiquidator
+      value: '0x0000000000000000000000000000000000000000'
+    - name: burners
+      type: address
+      target: fHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
     - name: burners
       type: address
       target: xMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: burners
+      type: address
+      target: xHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
 - address: '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
   name: RebalancePool
@@ -6880,46 +6880,6 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: admin
-      value: '0'
-    - name: extraRewardState.rate
-      type: uint128
-      target: admin
-      value: '0'
-    - name: extraRewardState.periodLength
-      type: uint32
-      target: admin
-      value: '0'
-    - name: extraRewardState.lastUpdate
-      type: uint48
-      target: admin
-      value: '0'
-    - name: extraRewardState.finishAt
-      type: uint48
-      target: admin
-      value: '0'
-    - name: extraRewardState.queued
-      type: uint256
-      target: admin
-      value: '0'
-    - name: rewardManager
-      type: address
-      target: admin
-      value: '0x0000000000000000000000000000000000000000'
-    - name: unlockedBalanceOf
-      type: uint256
-      target: admin
-      value: '0'
-    - name: unlockingBalanceOf._balance
-      type: uint256
-      target: admin
-      value: '0'
-    - name: unlockingBalanceOf._unlockAt
-      type: uint256
-      target: admin
-      value: '0'
-    - name: balanceOf
-      type: uint256
       target: BoostableRebalancePool__0
       value: '0'
     - name: extraRewardState.rate
@@ -7077,126 +7037,6 @@
     - name: unlockingBalanceOf._unlockAt
       type: uint256
       target: Curve_DAO_Token
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: extraRewardState.rate
-      type: uint128
-      target: fHolderLiquidator
-      value: '0'
-    - name: extraRewardState.periodLength
-      type: uint32
-      target: fHolderLiquidator
-      value: '0'
-    - name: extraRewardState.lastUpdate
-      type: uint48
-      target: fHolderLiquidator
-      value: '0'
-    - name: extraRewardState.finishAt
-      type: uint48
-      target: fHolderLiquidator
-      value: '0'
-    - name: extraRewardState.queued
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: rewardManager
-      type: address
-      target: fHolderLiquidator
-      value: '0x0000000000000000000000000000000000000000'
-    - name: unlockedBalanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: unlockingBalanceOf._balance
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: unlockingBalanceOf._unlockAt
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: extraRewardState.rate
-      type: uint128
-      target: fHolderRedeemer
-      value: '0'
-    - name: extraRewardState.periodLength
-      type: uint32
-      target: fHolderRedeemer
-      value: '0'
-    - name: extraRewardState.lastUpdate
-      type: uint48
-      target: fHolderRedeemer
-      value: '0'
-    - name: extraRewardState.finishAt
-      type: uint48
-      target: fHolderRedeemer
-      value: '0'
-    - name: extraRewardState.queued
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: rewardManager
-      type: address
-      target: fHolderRedeemer
-      value: '0x0000000000000000000000000000000000000000'
-    - name: unlockedBalanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: unlockingBalanceOf._balance
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: unlockingBalanceOf._unlockAt
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: extraRewardState.rate
-      type: uint128
-      target: fMinter
-      value: '0'
-    - name: extraRewardState.periodLength
-      type: uint32
-      target: fMinter
-      value: '0'
-    - name: extraRewardState.lastUpdate
-      type: uint48
-      target: fMinter
-      value: '0'
-    - name: extraRewardState.finishAt
-      type: uint48
-      target: fMinter
-      value: '0'
-    - name: extraRewardState.queued
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: rewardManager
-      type: address
-      target: fMinter
-      value: '0x0000000000000000000000000000000000000000'
-    - name: unlockedBalanceOf
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: unlockingBalanceOf._balance
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: unlockingBalanceOf._unlockAt
-      type: uint256
-      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -8160,43 +8000,163 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: extraRewardState.rate
       type: uint128
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: extraRewardState.periodLength
       type: uint32
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: extraRewardState.lastUpdate
       type: uint48
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: extraRewardState.finishAt
       type: uint48
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: extraRewardState.queued
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: rewardManager
       type: address
-      target: xHolderRedeemer
+      target: admin
       value: '0x0000000000000000000000000000000000000000'
     - name: unlockedBalanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: unlockingBalanceOf._balance
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: unlockingBalanceOf._unlockAt
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: fMinter
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: rewardManager
+      type: address
+      target: fMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: fHolderLiquidator
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: rewardManager
+      type: address
+      target: fHolderLiquidator
+      value: '0x0000000000000000000000000000000000000000'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: fHolderRedeemer
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: rewardManager
+      type: address
+      target: fHolderRedeemer
+      value: '0x0000000000000000000000000000000000000000'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: balanceOf
       type: uint256
@@ -8237,6 +8197,46 @@
     - name: unlockingBalanceOf._unlockAt
       type: uint256
       target: xMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.rate
+      type: uint128
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.periodLength
+      type: uint32
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.lastUpdate
+      type: uint48
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.finishAt
+      type: uint48
+      target: xHolderRedeemer
+      value: '0'
+    - name: extraRewardState.queued
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: rewardManager
+      type: address
+      target: xHolderRedeemer
+      value: '0x0000000000000000000000000000000000000000'
+    - name: unlockedBalanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._balance
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: unlockingBalanceOf._unlockAt
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
   name: RebalancePoolRegistry
@@ -8284,18 +8284,6 @@
     - name: splitter
       type: address
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getReceivers._receivers
-      type: address[]
-      target: admin
-      value: []
-    - name: getReceivers._ratios
-      type: uint256[]
-      target: admin
-      value: []
-    - name: splitter
-      type: address
-      target: admin
       value: '0x0000000000000000000000000000000000000000'
     - name: getReceivers._receivers
       type: address[]
@@ -8349,42 +8337,6 @@
       type: address
       target: Curve_DAO_Token
       value: '0x81243a88Dd9Fb963c643bD3f2194c2cA9CCFc428'
-    - name: getReceivers._receivers
-      type: address[]
-      target: fHolderLiquidator
-      value: []
-    - name: getReceivers._ratios
-      type: uint256[]
-      target: fHolderLiquidator
-      value: []
-    - name: splitter
-      type: address
-      target: fHolderLiquidator
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getReceivers._receivers
-      type: address[]
-      target: fHolderRedeemer
-      value: []
-    - name: getReceivers._ratios
-      type: uint256[]
-      target: fHolderRedeemer
-      value: []
-    - name: splitter
-      type: address
-      target: fHolderRedeemer
-      value: '0x0000000000000000000000000000000000000000'
-    - name: getReceivers._receivers
-      type: address[]
-      target: fMinter
-      value: []
-    - name: getReceivers._ratios
-      type: uint256[]
-      target: fMinter
-      value: []
-    - name: splitter
-      type: address
-      target: fMinter
-      value: '0x0000000000000000000000000000000000000000'
     - name: getReceivers._receivers
       type: address[]
       target: FractionalToken
@@ -8679,15 +8631,51 @@
       value: '0x0000000000000000000000000000000000000000'
     - name: getReceivers._receivers
       type: address[]
-      target: xHolderRedeemer
+      target: admin
       value: []
     - name: getReceivers._ratios
       type: uint256[]
-      target: xHolderRedeemer
+      target: admin
       value: []
     - name: splitter
       type: address
-      target: xHolderRedeemer
+      target: admin
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getReceivers._receivers
+      type: address[]
+      target: fMinter
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: fMinter
+      value: []
+    - name: splitter
+      type: address
+      target: fMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getReceivers._receivers
+      type: address[]
+      target: fHolderLiquidator
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: fHolderLiquidator
+      value: []
+    - name: splitter
+      type: address
+      target: fHolderLiquidator
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getReceivers._receivers
+      type: address[]
+      target: fHolderRedeemer
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: fHolderRedeemer
+      value: []
+    - name: splitter
+      type: address
+      target: fHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
     - name: getReceivers._receivers
       type: address[]
@@ -8700,6 +8688,18 @@
     - name: splitter
       type: address
       target: xMinter
+      value: '0x0000000000000000000000000000000000000000'
+    - name: getReceivers._receivers
+      type: address[]
+      target: xHolderRedeemer
+      value: []
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: xHolderRedeemer
+      value: []
+    - name: splitter
+      type: address
+      target: xHolderRedeemer
       value: '0x0000000000000000000000000000000000000000'
 - address: '0x17f21f468d77E6e35702a9Ae7a9da50Db7F6a4f4'
   name: RebalanceWithBonusToken__0
@@ -8776,10 +8776,6 @@
       value: '0'
     - name: bonusRatio
       type: uint256
-      target: admin
-      value: '0'
-    - name: bonusRatio
-      type: uint256
       target: BoostableRebalancePool__0
       value: '0'
     - name: bonusRatio
@@ -8793,18 +8789,6 @@
     - name: bonusRatio
       type: uint256
       target: Curve_DAO_Token
-      value: '0'
-    - name: bonusRatio
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: bonusRatio
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: bonusRatio
-      type: uint256
-      target: fMinter
       value: '0'
     - name: bonusRatio
       type: uint256
@@ -8904,11 +8888,27 @@
       value: '0'
     - name: bonusRatio
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: bonusRatio
       type: uint256
       target: xMinter
+      value: '0'
+    - name: bonusRatio
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0xD71B8B76015F296E53D41e8288a8a13eAfFff2ea'
   name: SmartWalletWhitelist
@@ -9103,22 +9103,6 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: admin
-      value: '0'
-    - name: get_last_user_slope
-      type: int128
-      target: admin
-      value: '0'
-    - name: locked__end
-      type: uint256
-      target: admin
-      value: '0'
-    - name: user_point_epoch
-      type: uint256
-      target: admin
-      value: '0'
-    - name: balanceOf
-      type: uint256
       target: BoostableRebalancePool__0
       value: '0'
     - name: get_last_user_slope
@@ -9180,54 +9164,6 @@
     - name: user_point_epoch
       type: uint256
       target: Curve_DAO_Token
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: get_last_user_slope
-      type: int128
-      target: fHolderLiquidator
-      value: '0'
-    - name: locked__end
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: user_point_epoch
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: get_last_user_slope
-      type: int128
-      target: fHolderRedeemer
-      value: '0'
-    - name: locked__end
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: user_point_epoch
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: get_last_user_slope
-      type: int128
-      target: fMinter
-      value: '0'
-    - name: locked__end
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: user_point_epoch
-      type: uint256
-      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -9615,19 +9551,67 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: get_last_user_slope
       type: int128
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: locked__end
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: user_point_epoch
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: fMinter
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: fHolderLiquidator
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: fHolderRedeemer
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: balanceOf
       type: uint256
@@ -9644,6 +9628,22 @@
     - name: user_point_epoch
       type: uint256
       target: xMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: get_last_user_slope
+      type: int128
+      target: xHolderRedeemer
+      value: '0'
+    - name: locked__end
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: user_point_epoch
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
   name: WstETH
@@ -9672,14 +9672,6 @@
     - name: nonces
       type: uint256
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: admin
-      value: '0'
-    - name: nonces
-      type: uint256
-      target: admin
       value: '0'
     - name: balanceOf
       type: uint256
@@ -9712,30 +9704,6 @@
     - name: nonces
       type: uint256
       target: Curve_DAO_Token
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: nonces
-      type: uint256
-      target: fHolderLiquidator
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: nonces
-      type: uint256
-      target: fHolderRedeemer
-      value: '0'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '0'
-    - name: nonces
-      type: uint256
-      target: fMinter
       value: '0'
     - name: balanceOf
       type: uint256
@@ -9931,11 +9899,35 @@
       value: '0'
     - name: balanceOf
       type: uint256
-      target: xHolderRedeemer
+      target: admin
       value: '0'
     - name: nonces
       type: uint256
-      target: xHolderRedeemer
+      target: admin
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderLiquidator
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: fHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: fHolderRedeemer
       value: '0'
     - name: balanceOf
       type: uint256
@@ -9944,6 +9936,14 @@
     - name: nonces
       type: uint256
       target: xMinter
+      value: '0'
+    - name: balanceOf
+      type: uint256
+      target: xHolderRedeemer
+      value: '0'
+    - name: nonces
+      type: uint256
+      target: xHolderRedeemer
       value: '0'
 - address: '0xb09e34dD25d5E88a1E9Ff6F6418109927675B658'
   name: wstETHWrapper

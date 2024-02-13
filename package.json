@@ -20,7 +20,7 @@
     "eat:svg": "mmdc -i test/results/${0}.diagram.md -o test/results/${0}.diagram.svg && mv test/results/${0}.diagram-1.svg test/results/${0}.diagram.svg",
     "eat:run": "ts-node test/eat.ts test/${0}.config.yml",
     "eat1": "yarn eat:run ${0} && yarn eat:svg ${0}",
-    "eat": "for arg in aladdin-fx-market aladdin-fx-market.CR_x_ETH-plot; do yarn eat1 $arg; done"
+    "eat": "for arg in aladdin-fx-market aladdin-fx-market-plot; do yarn eat1 $arg; done"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^10.6.1",
