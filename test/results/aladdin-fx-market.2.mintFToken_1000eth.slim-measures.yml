@@ -18,8 +18,10 @@
       type: address[]
       value:
         - '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
+        - '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
       valueName:
         - WstETH
+        - Curve_DAO_Token
     - name: liquidatableCollateralRatio
       type: uint256
       value: '1.3055'
@@ -33,13 +35,13 @@
       valueName: Token_Minter
     - name: numTotalSupplyHistory
       type: uint256
-      value: '68'
+      value: '136'
     - name: periodLength
       type: uint40
       value: '604800'
     - name: totalSupply
       type: uint256
-      value: '2723055.141145695996658868'
+      value: '5688690.988856864319720448'
     - name: treasury
       type: address
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
@@ -52,6 +54,782 @@
       type: address
       value: '0xb09e34dD25d5E88a1E9Ff6F6418109927675B658'
       valueName: wstETHWrapper
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: admin
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: admin
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: admin
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: BoostableRebalancePool__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: BoostableRebalancePool__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: BoostableRebalancePool__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Booster
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Booster
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Booster
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Curve_DAO_Token
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Curve_DAO_Token
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Curve_DAO_Token
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: Curve_DAO_Token
+      value: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: Curve_DAO_Token
+      value: '1707654215'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FractionalToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FractionalToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FractionalToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FxETHTwapOracle
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FxETHTwapOracle
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FxETHTwapOracle
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FxnDepositor
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FxnDepositor
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FxnDepositor
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FxnVoterProxy
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FxnVoterProxy
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FxnVoterProxy
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Gauge_Controller
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Gauge_Controller
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Gauge_Controller
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: GnosisSafe__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: GnosisSafe__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: GnosisSafe__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: GnosisSafe__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: GnosisSafe__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: GnosisSafe__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: LeveragedToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: LeveragedToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: LeveragedToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Lido
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Lido
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Lido
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Market
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Market
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Market
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: PlatformFeeSpliter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: PlatformFeeSpliter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: PlatformFeeSpliter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalancePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalancePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalancePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalancePoolRegistry
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalancePoolRegistry
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalancePoolRegistry
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalancePoolSplitter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalancePoolSplitter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalancePoolSplitter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalanceWithBonusToken__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalanceWithBonusToken__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalanceWithBonusToken__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalanceWithBonusToken__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalanceWithBonusToken__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalanceWithBonusToken__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalanceWithBonusToken__2
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalanceWithBonusToken__2
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalanceWithBonusToken__2
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: ReservePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: ReservePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: ReservePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: SmartWalletWhitelist
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: SmartWalletWhitelist
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: SmartWalletWhitelist
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: StETHAndxETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: StETHAndxETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: StETHAndxETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: stETHTreasury
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: stETHTreasury
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: stETHTreasury
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Token_Minter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Token_Minter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Token_Minter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Voting_Escrow
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Voting_Escrow
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Voting_Escrow
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: WstETH
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: WstETH
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: WstETH
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: distributors
       type: address
       target: WstETH
@@ -59,27 +837,99 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0035'
+      value: '0.1401'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '1.2008'
     - name: rewardData.queued
       type: uint96
       target: WstETH
-      value: '492945732942624529'
+      value: '492028'
     - name: rewardData.rate
       type: uint80
       target: WstETH
-      value: '1510775830407'
+      value: '2217091562984'
     - name: rewardData.lastUpdate
       type: uint40
       target: WstETH
-      value: '1703822123'
+      value: '1707654215'
     - name: rewardData.finishAt
       type: uint40
       target: WstETH
-      value: '1703939159'
+      value: '1708259015'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: wstETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: wstETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: wstETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
 - address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
   name: BoostableRebalancePool__1
   contractType: BoostableRebalancePool
@@ -101,9 +951,11 @@
       value:
         - '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
         - '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+        - '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
       valueName:
         - WstETH
         - LeveragedToken
+        - Curve_DAO_Token
     - name: liquidatableCollateralRatio
       type: uint256
       value: '1.3055'
@@ -117,13 +969,13 @@
       valueName: Token_Minter
     - name: numTotalSupplyHistory
       type: uint256
-      value: '69'
+      value: '149'
     - name: periodLength
       type: uint40
       value: '604800'
     - name: totalSupply
       type: uint256
-      value: '2956321.364769018396295364'
+      value: '5769148.339830873300346477'
     - name: treasury
       type: address
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
@@ -136,6 +988,398 @@
       type: address
       value: '0xC2BdBF323304eaBd9260b42E4d0d429Ca3481d6E'
       valueName: StETHAndxETHWrapper
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: admin
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: admin
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: admin
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: BoostableRebalancePool__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: BoostableRebalancePool__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: BoostableRebalancePool__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Booster
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Booster
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Booster
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Curve_DAO_Token
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Curve_DAO_Token
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Curve_DAO_Token
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: distributors
+      type: address
+      target: Curve_DAO_Token
+      value: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
+    - name: rewardData.lastUpdate
+      type: uint40
+      target: Curve_DAO_Token
+      value: '1707654215'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderLiquidator
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: fMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FractionalToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FractionalToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FractionalToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FxETHTwapOracle
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FxETHTwapOracle
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FxETHTwapOracle
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FxnDepositor
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FxnDepositor
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FxnDepositor
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: FxnVoterProxy
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: FxnVoterProxy
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: FxnVoterProxy
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Gauge_Controller
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Gauge_Controller
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Gauge_Controller
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: GnosisSafe__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: GnosisSafe__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: GnosisSafe__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: GnosisSafe__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: GnosisSafe__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: GnosisSafe__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: LeveragedToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: LeveragedToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: LeveragedToken
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: distributors
       type: address
       target: LeveragedToken
@@ -143,7 +1387,391 @@
     - name: rewardData.lastUpdate
       type: uint40
       target: LeveragedToken
-      value: '1703823851'
+      value: '1707654215'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Lido
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Lido
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Lido
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Market
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Market
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Market
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: PlatformFeeSpliter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: PlatformFeeSpliter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: PlatformFeeSpliter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalancePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalancePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalancePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalancePoolRegistry
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalancePoolRegistry
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalancePoolRegistry
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalancePoolSplitter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalancePoolSplitter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalancePoolSplitter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalanceWithBonusToken__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalanceWithBonusToken__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalanceWithBonusToken__0
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalanceWithBonusToken__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalanceWithBonusToken__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalanceWithBonusToken__1
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: RebalanceWithBonusToken__2
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: RebalanceWithBonusToken__2
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: RebalanceWithBonusToken__2
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: ReservePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: ReservePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: ReservePool
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: SmartWalletWhitelist
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: SmartWalletWhitelist
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: SmartWalletWhitelist
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: StETHAndxETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: StETHAndxETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: StETHAndxETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: stETHTreasury
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: stETHTreasury
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: stETHTreasury
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Token_Minter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Token_Minter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Token_Minter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: Voting_Escrow
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: Voting_Escrow
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: Voting_Escrow
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: WstETH
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: WstETH
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: WstETH
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
     - name: distributors
       type: address
       target: WstETH
@@ -151,27 +1779,135 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.0009'
+      value: '0.1401'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '0.1733'
+      value: '1.2008'
     - name: rewardData.queued
       type: uint96
       target: WstETH
-      value: '492945732942624529'
+      value: '492028'
     - name: rewardData.rate
       type: uint80
       target: WstETH
-      value: '1510775830407'
+      value: '2217091562984'
     - name: rewardData.lastUpdate
       type: uint40
       target: WstETH
-      value: '1703823851'
+      value: '1707654215'
     - name: rewardData.finishAt
       type: uint40
       target: WstETH
-      value: '1703939159'
+      value: '1708259015'
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: wstETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: wstETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: wstETHWrapper
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xHolderRedeemer
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veBalance
+      type: uint112
+      target: xMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.veSupply
+      type: uint112
+      target: xMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+    - name: boostCheckpoint.historyIndex
+      type: uint32
+      target: xMinter
+      error: >-
+        could not decode result data
+        (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        info={ "method": "boostCheckpoint", "signature":
+        "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+- address: '0x91e575C0CC6E8BC530d897d3d425B57B49A821C6'
+  name: Booster
+  contractType: Booster
+  measurements:
+    - name: cvxfxn
+      type: address
+      value: '0x183395DbD0B5e93323a7286D1973150697FFFCB3'
+    - name: feeDistro
+      type: address
+      value: '0xd116513EEa4Efe3908212AfBAeFC76cb29245681'
+    - name: feeQueue
+      type: address
+      value: '0x30575fDCFb2b76096047F0a8651b52159aB835f7'
+    - name: feeToken
+      type: address
+      value: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
+      valueName: WstETH
+    - name: fxn
+      type: address
+      value: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+      valueName: Curve_DAO_Token
+    - name: fxnDepositor
+      type: address
+      value: '0x56B3c8eF8A095f8637B6A84942aA898326B82b91'
+      valueName: FxnDepositor
+    - name: owner
+      type: address
+      value: '0xa3C5A1e09150B75ff251c1a7815A07182c3de2FB'
+      valueName: GnosisSafe__1
+    - name: proxy
+      type: address
+      value: '0xd11a4Ee017cA0BECA8FA45fF2abFe9C6267b7881'
+      valueName: FxnVoterProxy
+    - name: rewardManager
+      type: address
+      value: '0xe7Ac460137CCD6173DB6992529013D672d4F0087'
 - address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
   name: Curve_DAO_Token
   contractType: Curve DAO Token
@@ -182,7 +1918,7 @@
       valueName: GnosisSafe__0
     - name: available_supply
       type: uint256
-      value: '1047280'
+      value: '1059378'
     - name: decimals
       type: uint256
       value: '18'
@@ -215,8 +1951,12 @@
       value: '20.0'
     - name: balanceOf
       type: uint256
+      target: FxnDepositor
+      value: '1397.713230953075188082'
+    - name: balanceOf
+      type: uint256
       target: GnosisSafe__0
-      value: '11724.557898160134110992'
+      value: '7119.915946328541726892'
     - name: balanceOf
       type: uint256
       target: RebalanceWithBonusToken__0
@@ -232,7 +1972,7 @@
     - name: balanceOf
       type: uint256
       target: Voting_Escrow
-      value: '115331.908808027700163144'
+      value: '119837.435444639915103636'
 - address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
   name: FractionalToken
   contractType: FractionalToken
@@ -245,7 +1985,7 @@
       value: '1.0'
     - name: totalSupply
       type: uint256
-      value: '8934281.443739704541377936'
+      value: '12136954.927001896064148827'
     - name: treasury
       type: address
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
@@ -257,15 +1997,11 @@
     - name: balanceOf
       type: uint256
       target: BoostableRebalancePool__0
-      value: '2723055.141145695996658868'
+      value: '5688690.988856864319720448'
     - name: balanceOf
       type: uint256
       target: BoostableRebalancePool__1
-      value: '2956321.364769018396295364'
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      value: '2283438.845674408919660265'
+      value: '5769148.339830873300346477'
     - name: balanceOf
       type: uint256
       target: GnosisSafe__0
@@ -273,7 +2009,7 @@
     - name: balanceOf
       type: uint256
       target: RebalancePool
-      value: '153679.491529277065741776'
+      value: '33956.49258989810449867'
 - address: '0xa84360896cE9152d1780c546305BB54125F962d9'
   name: FxETHTwapOracle
   contractType: FxETHTwapOracle
@@ -289,13 +2025,71 @@
       value: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
     - name: getPrice._safePrice
       type: uint256
-      value: '2354.30211112'
+      value: '2500.857906073844444444'
     - name: getPrice._minUnsafePrice
       type: uint256
-      value: '2351.811536536838519878'
+      value: '2495.113454962366484069'
     - name: getPrice._maxUnsafePrice
       type: uint256
-      value: '2354.30211112'
+      value: '2500.857906073844444444'
+- address: '0x56B3c8eF8A095f8637B6A84942aA898326B82b91'
+  name: FxnDepositor
+  contractType: FxnDepositor
+  measurements:
+    - name: DENOMINATOR
+      type: uint256
+      value: '0.00000000000001'
+    - name: escrow
+      type: address
+      value: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
+      valueName: Voting_Escrow
+    - name: fxn
+      type: address
+      value: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+      valueName: Curve_DAO_Token
+    - name: minter
+      type: address
+      value: '0x183395DbD0B5e93323a7286D1973150697FFFCB3'
+    - name: owner
+      type: address
+      value: '0xe7Ac460137CCD6173DB6992529013D672d4F0087'
+    - name: platformDeposit
+      type: address
+      value: '0x1389388d01708118b497f59521f6943Be2541bb7'
+    - name: platformHolding
+      type: uint256
+      value: '0.000000000000002'
+    - name: staker
+      type: address
+      value: '0xd11a4Ee017cA0BECA8FA45fF2abFe9C6267b7881'
+      valueName: FxnVoterProxy
+    - name: unlockTime
+      type: uint256
+      value: '0.0000000018319392'
+- address: '0xd11a4Ee017cA0BECA8FA45fF2abFe9C6267b7881'
+  name: FxnVoterProxy
+  contractType: FxnVoterProxy
+  measurements:
+    - name: depositor
+      type: address
+      value: '0x56B3c8eF8A095f8637B6A84942aA898326B82b91'
+      valueName: FxnDepositor
+    - name: escrow
+      type: address
+      value: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
+      valueName: Voting_Escrow
+    - name: fxn
+      type: address
+      value: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+      valueName: Curve_DAO_Token
+    - name: operator
+      type: address
+      value: '0x91e575C0CC6E8BC530d897d3d425B57B49A821C6'
+      valueName: Booster
+    - name: owner
+      type: address
+      value: '0xa3C5A1e09150B75ff251c1a7815A07182c3de2FB'
+      valueName: GnosisSafe__1
 - address: '0xe60eB8098B34eD775ac44B1ddE864e098C6d7f37'
   name: Gauge_Controller
   contractType: Gauge Controller
@@ -333,6 +2127,10 @@
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
+      target: Booster
+      error: Transaction reverted without a reason string
+    - name: gauge_types
+      type: int128
       target: Curve_DAO_Token
       error: Transaction reverted without a reason string
     - name: gauge_types
@@ -354,6 +2152,14 @@
     - name: gauge_types
       type: int128
       target: FxETHTwapOracle
+      error: Transaction reverted without a reason string
+    - name: gauge_types
+      type: int128
+      target: FxnDepositor
+      error: Transaction reverted without a reason string
+    - name: gauge_types
+      type: int128
+      target: FxnVoterProxy
       error: Transaction reverted without a reason string
     - name: gauge_types
       type: int128
@@ -467,33 +2273,25 @@
       value: '6'
     - name: nonce
       type: uint256
-      value: '45'
-- address: '0x21f73D42Eb58Ba49dDB685dc29D3bF5c0f0373CA'
+      value: '58'
+- address: '0xa3C5A1e09150B75ff251c1a7815A07182c3de2FB'
   name: GnosisSafe__1
   contractType: GnosisSafe
   measurements:
-    - name: getModules
-      type: address[]
-      value:
-        - '0x2e1B5a40Edc922bCE489668b11749B8eAbd67f6b'
     - name: getOwners
       type: address[]
       value:
-        - '0x2ED16eFE2d89d0928f674E7DC201c4719f7b70e1'
-        - '0x66E0Af79DeD1d71f31F8c82513cC24B4285E8eA7'
-        - '0x459FAd0766aBD782ae0196bBF2c414d5D9319B85'
-        - '0xfae79Bf52DBeC760D24f9116A2ED7C2AACA51530'
-        - '0x6e4ca20721F98498BF5FCE793c40aB21BAd440e0'
-        - '0x41eAdbc688797a02bfaBE48472995833489ce69D'
-        - '0x7052cB84079905400ea52B635cAb6a275fDA8823'
-        - '0xE062e7D123AC8dF480C56147f911144F55C10f88'
-        - '0x326377a6B92eC69AcbbFe2De1eB1d7c9008E4C89'
+        - '0x49e5097f627e400F2a377D5FD7E712d1E0e16FC2'
+        - '0x17e06ce6914E3969f7BD37D8b2a563890cA1c96e'
+        - '0xAdE9e51C9E23d64E538A7A38656B78aB6Bcc349e'
+        - '0xAAc0aa431c237C2C0B5f041c8e59B3f1a43aC78F'
+        - '0x7904Ad7c992CDAb500dAa0f3366301b1f5365B62'
     - name: getThreshold
       type: uint256
-      value: '4'
+      value: '3'
     - name: nonce
       type: uint256
-      value: '1277'
+      value: '1007'
 - address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
   name: LeveragedToken
   contractType: LeveragedToken
@@ -507,10 +2305,10 @@
       valueName: FractionalToken
     - name: nav
       type: uint256
-      value: '0.752382915802333969'
+      value: '0.723751949545094451'
     - name: totalSupply
       type: uint256
-      value: '5646434.225742690599105577'
+      value: '7200159.012861980016343739'
     - name: treasury
       type: address
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
@@ -522,7 +2320,7 @@
     - name: balanceOf
       type: uint256
       target: GnosisSafe__0
-      value: '291952.174931281247450058'
+      value: '217352.174931281247450058'
 - address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
   name: Lido
   contractType: Lido
@@ -539,16 +2337,16 @@
       valueName: Lido
     - name: getBeaconStat.depositedValidators
       type: uint256
-      value: '0.00000000000031188'
+      value: '0.000000000000329449'
     - name: getBeaconStat.beaconValidators
       type: uint256
-      value: '0.000000000000311337'
+      value: '0.00000000000032914'
     - name: getBeaconStat.beaconBalance
       type: uint256
-      value: '9130689.172355421'
+      value: '9609517.707248935'
     - name: getBufferedEther
       type: uint256
-      value: '6792.032076129984000457'
+      value: '5317.034030923591218678'
     - name: getContractVersion
       type: uint256
       value: '0.000000000000000002'
@@ -593,19 +2391,19 @@
       value: '0.0000000000000064'
     - name: getStakeLimitFullInfo.prevStakeLimit
       type: uint256
-      value: '149998.99156165'
+      value: '149999.691'
     - name: getStakeLimitFullInfo.prevStakeBlockNumber
       type: uint256
-      value: '0.000000000018888855'
+      value: '0.000000000019209999'
     - name: getTotalELRewardsCollected
       type: uint256
-      value: '128949.944192216119088595'
+      value: '139179.302573740159056574'
     - name: getTotalPooledEther
       type: uint256
-      value: '9154857.204431550984000457'
+      value: '9624722.741279858591218678'
     - name: getTotalShares
       type: uint256
-      value: '7948541.09047436689477704'
+      value: '8320475.448872065470959815'
     - name: getTreasury
       type: address
       value: '0x3e40D73EB977Dc6a537aF587D48316feE66E9C8c'
@@ -614,27 +2412,27 @@
       value: '0xb8FFC3Cd6e7Cf5a098A1c92F48009765B24088Dc'
     - name: totalSupply
       type: uint256
-      value: '9154857.204431550984000457'
+      value: '9624722.741279858591218678'
     - name: balanceOf
       type: uint256
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
-      value: '0.050032449300522778'
+      value: '0.078168771022340508'
     - name: sharesOf
       type: uint256
       target: $0x11E91BB6d1334585AA37D8F4fde3932C7960B938
-      value: '0.043439779588235981'
+      value: '0.067576111815704987'
     - name: balanceOf
       type: uint256
       target: fMinter
-      value: '9000.0'
+      value: '9999.999999999999999999'
     - name: sharesOf
       type: uint256
       target: fMinter
-      value: '7814.089091377718906531'
+      value: '8644.89884283735810299'
     - name: balanceOf
       type: uint256
       target: GnosisSafe__0
-      value: '0.119361387678593988'
+      value: '0.119878083833320394'
     - name: sharesOf
       type: uint256
       target: GnosisSafe__0
@@ -642,23 +2440,23 @@
     - name: balanceOf
       type: uint256
       target: Market
-      value: '0.000000000000000168'
+      value: '0.000000000000000257'
     - name: sharesOf
       type: uint256
       target: Market
-      value: '0.000000000000000146'
+      value: '0.000000000000000223'
     - name: balanceOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '7.125445077660994817'
+      value: '5.197900559808995813'
     - name: sharesOf
       type: uint256
       target: PlatformFeeSpliter
-      value: '6.186540294729093636'
+      value: '4.49353245346764438'
     - name: balanceOf
       type: uint256
       target: RebalancePool
-      value: '2.82343246243252071'
+      value: '2.835654645207379804'
     - name: sharesOf
       type: uint256
       target: RebalancePool
@@ -666,27 +2464,27 @@
     - name: balanceOf
       type: uint256
       target: ReservePool
-      value: '21.693012117065408707'
+      value: '33.534419777694696864'
     - name: sharesOf
       type: uint256
       target: ReservePool
-      value: '18.834569927009498437'
+      value: '28.990166673141510048'
     - name: balanceOf
       type: uint256
       target: stETHTreasury
-      value: '7177.63244215750235306'
+      value: '9444.807757115345432466'
     - name: sharesOf
       type: uint256
       target: stETHTreasury
-      value: '6231.851040909083902043'
+      value: '8164.940765030775329617'
     - name: balanceOf
       type: uint256
       target: WstETH
-      value: '3740491.439905765137298479'
+      value: '3548193.498864804637627201'
     - name: sharesOf
       type: uint256
       target: WstETH
-      value: '3247614.817439930640437981'
+      value: '3067377.387249938650363244'
 - address: '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
   name: Market
   contractType: Market
@@ -818,10 +2616,10 @@
       valueName: GnosisSafe__0
     - name: totalSupply
       type: uint256
-      value: '132582.504874380841545967'
+      value: '14241.540200078689350421'
     - name: totalUnlocking
       type: uint256
-      value: '21096.986654896224195809'
+      value: '19714.952389819415148249'
     - name: treasury
       type: address
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
@@ -870,7 +2668,7 @@
       valueName: GnosisSafe__0
     - name: totalSupply
       type: uint256
-      value: '5811959.010789095234500199'
+      value: '11472080.868887816309417346'
 - address: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
   name: RebalancePoolSplitter
   contractType: RebalancePoolSplitter
@@ -879,6 +2677,22 @@
       type: address
       value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
       valueName: GnosisSafe__0
+    - name: getReceivers._receivers
+      type: address[]
+      target: Curve_DAO_Token
+      value:
+        - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+        - '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
+    - name: getReceivers._ratios
+      type: uint256[]
+      target: Curve_DAO_Token
+      value:
+        - '500000000'
+        - '500000000'
+    - name: splitter
+      type: address
+      target: Curve_DAO_Token
+      value: '0x81243a88Dd9Fb963c643bD3f2194c2cA9CCFc428'
     - name: getReceivers._receivers
       type: address[]
       target: WstETH
@@ -1012,19 +2826,19 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      value: '1.075737230832926118'
+      value: '1.042096127133246976'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1703824450'
+      value: '1707713590'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
     - name: emaLeverageRatio.lastValue
       type: uint96
-      value: '1773669796613534616'
+      value: '1983800545126983346'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1805400000000000000'
+      value: '1985630000000000000'
     - name: fToken
       type: address
       value: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
@@ -1037,7 +2851,7 @@
       value: '0.970775827746443747'
     - name: getCurrentNav._xNav
       type: uint256
-      value: '0.116335894041159066'
+      value: '0.068885647911719566'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'
@@ -1046,7 +2860,7 @@
       value: '1836.7853'
     - name: leverageRatio
       type: uint256
-      value: '1.8054'
+      value: '1.9855'
     - name: market
       type: address
       value: '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
@@ -1061,7 +2875,7 @@
       valueName: PlatformFeeSpliter
     - name: priceOracle
       type: address
-      value: '0x889D9A5AF83525a2275e41464FAECcCb3337fF60'
+      value: '0xF357118EBd576f3C812c7875B1A1651a7f140E9C'
     - name: rebalancePool
       type: address
       value: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
@@ -1071,7 +2885,7 @@
       value: '500000000000000000'
     - name: totalBaseToken
       type: uint256
-      value: '7176.974952048061425555'
+      value: '9444.807757115345432463'
     - name: xToken
       type: address
       value: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
@@ -1105,7 +2919,7 @@
       value: '18'
     - name: epoch
       type: uint256
-      value: '194'
+      value: '310'
     - name: future_admin
       type: address
       value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
@@ -1120,14 +2934,30 @@
       valueName: SmartWalletWhitelist
     - name: supply
       type: uint256
-      value: '115331.908808027700163144'
+      value: '119837.435444639915103636'
     - name: token
       type: address
       value: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
       valueName: Curve_DAO_Token
     - name: totalSupply
       type: uint256
-      value: '94540'
+      value: '97569'
+    - name: balanceOf
+      type: uint256
+      target: FxnVoterProxy
+      value: '46358.33209591093687968'
+    - name: get_last_user_slope
+      type: int128
+      target: FxnVoterProxy
+      value: '373190060460180'
+    - name: locked__end
+      type: uint256
+      target: FxnVoterProxy
+      value: '0.0000000018319392'
+    - name: user_point_epoch
+      type: uint256
+      target: FxnVoterProxy
+      value: '0.000000000000000039'
 - address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
   name: WstETH
   contractType: WstETH
@@ -1141,21 +2971,21 @@
       valueName: Lido
     - name: stEthPerToken
       type: uint256
-      value: '1.15176572659388384'
+      value: '1.156751534262936691'
     - name: tokensPerStEth
       type: uint256
-      value: '0.868232121264190989'
+      value: '0.86448988428373581'
     - name: totalSupply
       type: uint256
-      value: '3247614.816540003642107369'
+      value: '3067377.386350011652026778'
     - name: balanceOf
       type: uint256
       target: BoostableRebalancePool__0
-      value: '1.893157730172243796'
+      value: '8.360821562508724569'
     - name: balanceOf
       type: uint256
       target: BoostableRebalancePool__1
-      value: '1.930332134442365476'
+      value: '8.278632756944126637'
     - name: balanceOf
       type: uint256
       target: GnosisSafe__0
@@ -1167,7 +2997,11 @@
     - name: balanceOf
       type: uint256
       target: RebalancePool
-      value: '1.75974579997211619'
+      value: '1.157354421777380292'
+    - name: balanceOf
+      type: uint256
+      target: RebalancePoolSplitter
+      value: '0.000000000000000001'
 - address: '0xb09e34dD25d5E88a1E9Ff6F6418109927675B658'
   name: wstETHWrapper
   contractType: wstETHWrapper

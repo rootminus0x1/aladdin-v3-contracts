@@ -29,74 +29,26 @@
     - name: available_supply
       type: uint256
       delta: '+0'
-- address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
-  name: FractionalToken
-  contractType: FractionalToken
+- address: '0xa84360896cE9152d1780c546305BB54125F962d9'
+  name: FxETHTwapOracle
+  contractType: FxETHTwapOracle
   measurements:
-    - name: totalSupply
+    - name: getPrice._safePrice
       type: uint256
-      delta: '+2283438.845674408919660265'
-    - name: balanceOf
+      delta: '-0.004030214955555556'
+    - name: getPrice._minUnsafePrice
       type: uint256
-      target: fMinter
-      delta: '+2283438.845674408919660265'
-- address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
-  name: LeveragedToken
-  contractType: LeveragedToken
-  measurements:
-    - name: nav
+      delta: '-0.001530522124530018'
+    - name: getPrice._maxUnsafePrice
       type: uint256
-      delta: '-0.07991689814912444'
-- address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
-  name: Lido
-  contractType: Lido
-  measurements:
-    - name: balanceOf
-      type: uint256
-      target: fMinter
-      delta: '-999.999999999999999999'
-    - name: sharesOf
-      type: uint256
-      target: fMinter
-      delta: '-868.232121264190989614'
-    - name: balanceOf
-      type: uint256
-      target: PlatformFeeSpliter
-      delta: '+2.5'
-    - name: sharesOf
-      type: uint256
-      target: PlatformFeeSpliter
-      delta: '+2.170580303160477474'
-    - name: balanceOf
-      type: uint256
-      target: stETHTreasury
-      delta: '+997.5'
-    - name: sharesOf
-      type: uint256
-      target: stETHTreasury
-      delta: '+866.06154096103051214'
+      delta: '-0.004030214955555556'
 - address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
   name: stETHTreasury
   contractType: stETHTreasury
   measurements:
-    - name: collateralRatio
-      type: uint256
-      delta: '-0.288020420523090156'
-    - name: emaLeverageRatio.lastTime
-      type: uint40
-      delta: '+31470'
-    - name: emaLeverageRatio.lastValue
-      type: uint96
-      delta: '6420159461186486'
-    - name: emaLeverageRatio.lastEmaValue
-      type: uint96
-      delta: '-16760000000000000'
     - name: leverageRatio
       type: uint256
       delta: '-0.0000'
-    - name: totalBaseToken
-      type: uint256
-      delta: '+997.5'
 - address: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
   name: Voting_Escrow
   contractType: Voting Escrow
@@ -104,3 +56,7 @@
     - name: totalSupply
       type: uint256
       delta: '-0'
+    - name: balanceOf
+      type: uint256
+      target: FxnVoterProxy
+      delta: '-0.00410509066506198'

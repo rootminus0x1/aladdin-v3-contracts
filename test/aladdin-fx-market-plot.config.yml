@@ -1,0 +1,8 @@
+plot:
+  independent: ETH
+  dependent:
+    - contract: stETHTreasury
+      measurement: collateralRatio
+  dependent2:
+    - contract: stETHTreasury
+      measurement: leverageRatio

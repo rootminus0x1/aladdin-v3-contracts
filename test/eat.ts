@@ -4,9 +4,9 @@ dotenvExpand.expand(dotenv.config());
 
 import { ethers } from 'hardhat';
 import { formatEther, parseEther } from 'ethers';
-import { setBalance, time } from '@nomicfoundation/hardhat-network-helpers';
+import { mine, setBalance, time } from '@nomicfoundation/hardhat-network-helpers';
 
-import { contracts, deploy, getEthPrice, doEvent, day, events, week, marketEvent, nodes, whale, Role } from 'eat';
+import { contracts, deploy, getEthPrice, doEvent, events, marketEvent, Role, parseTime, asDateString } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
 import { marketEvents, delve, delvePlot } from 'eat';
@@ -26,7 +26,6 @@ async function main() {
     if (contracts.stETHTreasury && events.harvest) {
         // handle price changes
         const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
-        console.log(`ownerSigner of stETHTreasury: ${contracts.stETHTreasury.ownerSigner}`);
         await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
 
         events.ETH = {
@@ -37,15 +36,22 @@ async function main() {
             },
         };
 
-        events.roll = {
-            name: 'time',
-            value: 2 * week,
-            setMarket: async (increment: number) => {
+        const makeRollEvent = (by: number, units: string) => {
+            return {
+                name: by.toString + units,
+                value: parseTime(by, units),
+                setMarket: async (increment: number) => {
+                    const target = (await time.latest()) + increment;
+                    console.log(`moving time to ${asDateString(target)}...`);
+                    await time.increaseTo(target);
+                    return target - getConfig().timestamp; // delta time
+                },
+            };
+        };
+
+        events.doLeverageRatio = {
+            setMarket: async () => {
                 await doEvent(events.harvest); // maybe a less intrusive way to do this
-                const target = (await time.latest()) + increment;
-                // console.log(`moving time to ${asDateString(target)}...`);
-                await time.increaseTo(target);
-                return target - getConfig().timestamp; // delta time
             },
         };
     }
@@ -79,7 +85,12 @@ async function main() {
                                 amount = args?.returnValue;
                             }
                             */
-                        console.log(`liquidated ${pool.name} via ${liquidator.name}`);
+                        await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
+                        console.log(
+                            `liquidated ${pool.name} via ${
+                                liquidator.name
+                            }, block: ${await time.latestBlock()}, CR: ${await contracts.stETHTreasury.collateralRatio()}`,
+                        );
                         result = true;
                     } catch (e: any) {
                         console.log(`error liquidating ${pool.name} via ${liquidator.name}: ${e.message}`);
@@ -91,10 +102,6 @@ async function main() {
 
         // TODO: set the price according to stETHTreasury.getCurrentNav._baseNav
         await doEvent(events.ETH, startEthPrice); // set to the current eth price, like nothing had changed (approx)
-
-        const getCR = async () => {
-            return contracts.stETHTreasury.collateralRatio();
-        };
 
         if (getConfig().plot) {
             // TODO: plot the below against a beta = 0 set up
@@ -118,7 +125,7 @@ async function main() {
             await delvePlot(
                 'CRxETH',
                 'Ether Price (USD)',
-                marketEvents(events.ETH, parseEther('4000'), parseEther('10'), parseEther('-100')),
+                marketEvents(events.ETH, parseEther('3000'), parseEther('10'), parseEther('-50')),
                 'collateral ratio',
                 [
                     { match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }] },
@@ -129,7 +136,7 @@ async function main() {
                 ],
                 /*
                 'leverage ratio',
-                [{ simulation: [events.roll], match: [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }] }],
+                [{ simulation: [events.doLeverageRatio, makeRollEvent(2, "week")], match: [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }] }],
             */
             );
         } else {
@@ -151,7 +158,7 @@ async function main() {
                 valuesSingle(
                     (await inverse(
                         parseEther('1.3'),
-                        getCR,
+                        async () => await contracts.stETHTreasury.collateralRatio(),
                         setPrice,
                         parseEther('1030'),
                         parseEther('10000'),
