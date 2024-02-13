@@ -56,14 +56,16 @@ async function main() {
         };
     }
     if (events.ETH && contracts.FractionalToken && contracts.RebalancePool) {
-        events.liquidate = {
-            name: 'liquidate',
-            setMarket: async () => {
-                const pools = await contracts.RebalancePoolRegistry.getPools();
-                let result = false;
-                for (const poolAddress of pools) {
-                    // const liquidator = new ethers.Contract(poolAddress, [`function liquidate(uint256) view returns (address)`], whale);
-                    const pool = contracts[poolAddress];
+        const makeLiquidateEvent = async (poolIndex: number) => {
+            const pools = await contracts.RebalancePoolRegistry.getPools();
+            const poolAddress = pools[poolIndex];
+            const pool = contracts[poolAddress];
+            const wrapperAddress = await pool.wrapper();
+            const wrapper = contracts[wrapperAddress];
+            const poolName = `${pool.name}(${wrapper.name})`;
+            return {
+                name: `${poolName}.liquidate`,
+                setMarket: async () => {
                     let liquidatorAddress = undefined;
                     if (pool.roles) {
                         const role = pool.roles.find((r: Role) => r.name === 'LIQUIDATOR_ROLE');
@@ -77,27 +79,15 @@ async function main() {
                     try {
                         const tx = await liquidator.liquidate(0n);
                         const receipt = await tx.wait();
-                        /*
-                            const logs = receipt.logs;
-                            const abi = poolContract.interface;
-                            if (logs && logs.length && abi) {
-                                const args = abi.parseLog(logs[0])?.args;
-                                amount = args?.returnValue;
-                            }
-                            */
                         await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
-                        console.log(
-                            `liquidated ${pool.name} via ${
-                                liquidator.name
-                            }, block: ${await time.latestBlock()}, CR: ${await contracts.stETHTreasury.collateralRatio()}`,
-                        );
-                        result = true;
+                        console.log(`liquidate on ${pool.name} ${pool.address} via ${liquidator.name}`);
+                        return true;
                     } catch (e: any) {
-                        console.log(`error liquidating ${pool.name} via ${liquidator.name}: ${e.message}`);
+                        //console.log(`error liquidating ${pool.name} via ${liquidator.name}: ${e.message}`);
+                        return false;
                     }
-                }
-                return result;
-            },
+                },
+            };
         };
 
         // TODO: set the price according to stETHTreasury.getCurrentNav._baseNav
@@ -125,13 +115,28 @@ async function main() {
             await delvePlot(
                 'CRxETH',
                 'Ether Price (USD)',
-                marketEvents(events.ETH, parseEther('3000'), parseEther('10'), parseEther('-50')),
+                marketEvents(events.ETH, parseEther('2200'), parseEther('10'), parseEther('-20')),
                 'collateral ratio',
                 [
-                    { match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }] },
                     {
-                        simulation: [events.liquidate],
-                        match: [{ contract: 'stETHTreasury', functions: ['collateralRatio'] }],
+                        calculations: [
+                            {
+                                match: { contract: 'stETHTreasury', function: 'collateralRatio' },
+                                lineStyle: 'linewidth 2 dashtype 2',
+                            },
+                        ],
+                    },
+                    {
+                        simulation: [await makeLiquidateEvent(0)],
+                        calculations: [{ match: { contract: 'stETHTreasury', function: 'collateralRatio' } }],
+                    },
+                    {
+                        simulation: [await makeLiquidateEvent(1)],
+                        calculations: [{ match: { contract: 'stETHTreasury', function: 'collateralRatio' } }],
+                    },
+                    {
+                        simulation: [await makeLiquidateEvent(2)],
+                        calculations: [{ match: { contract: 'stETHTreasury', function: 'collateralRatio' } }],
                     },
                 ],
                 /*

@@ -1,4 +1,4 @@
-# ETH stETHTreasury.collateralRatio stETHTreasury.collateralRatio.liquidate:RebalancePool(wstETHWrapper) stETHTreasury.collateralRatio.liquidate:BoostableRebalancePool__0(wstETHWrapper) stETHTreasury.collateralRatio.liquidate:BoostableRebalancePool__1(StETHAndxETHWrapper)
+# ETH stETHTreasury.collateralRatio stETHTreasury.collateralRatio>RebalancePool(wstETHWrapper).liquidate stETHTreasury.collateralRatio>BoostableRebalancePool__0(wstETHWrapper).liquidate stETHTreasury.collateralRatio>BoostableRebalancePool__1(StETHAndxETHWrapper).liquidate
 2200.0 1.678811462364275251 1.678811462364275251 1.678811462364275251 1.678811462364275251
 2180.0 1.66532768494302602 1.66532768494302602 1.66532768494302602 1.66532768494302602
 2160.0 1.651815051433643846 1.651815051433643846 1.651815051433643846 1.651815051433643846
