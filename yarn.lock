@@ -2116,6 +2116,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/crypto-js@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "@types/crypto-js@npm:4.2.2"
+  checksum: 10c0/760a2078f36f2a3a1089ef367b0d13229876adcf4bcd6e8824d00d9e9bfad8118dc7e6a3cc66322b083535e12be3a29044ccdc9603bfb12519ff61551a3322c6
+  languageName: node
+  linkType: hard
+
 "@types/edit-json-file@npm:^1.7.0":
   version: 1.7.3
   resolution: "@types/edit-json-file@npm:1.7.3"
@@ -2623,6 +2630,7 @@ __metadata:
     "@typechain/hardhat": "npm:^9.0.0"
     "@types/asciichart": "npm:^1.5.6"
     "@types/chai": "npm:^4.2.21"
+    "@types/crypto-js": "npm:^4.2.2"
     "@types/edit-json-file": "npm:^1.7.0"
     "@types/js-yaml": "npm:^4.0.9"
     "@types/lodash": "npm:^4.14.202"

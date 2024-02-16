@@ -1,0 +1,3 @@
+"cannot liquidate,VM Exception while processing transaction: reverted with reason string 'cannot liquidate'"
+"reverted with an unrecognized custom error ,VM Exception while processing transaction: reverted with an unrecognized custom error (return data: 0xbf87c7d5)"
+"SafeMath: subtraction overflow,VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'"
