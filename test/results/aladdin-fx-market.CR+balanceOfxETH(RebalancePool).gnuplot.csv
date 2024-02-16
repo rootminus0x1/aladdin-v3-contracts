@@ -1,0 +1,72 @@
+ETH(simulation),ETH,stETHTreasury.collateralRatio,RebalancePool(wstETHWrapper).liquidate,stETHTreasury.collateralRatio>RebalancePool(wstETHWrapper).liquidate,FractionalToken.balanceOf(RebalancePool)>RebalancePool(wstETHWrapper).liquidate
+ETH=2400.0,2400.0,1.812082272114073875,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.812082272114073875,33956.49258989810449867
+ETH=2380.0,2380.0,1.79888204143721316,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.79888204143721316,33956.49258989810449867
+ETH=2360.0,2360.0,1.785653860554707138,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.785653860554707138,33956.49258989810449867
+ETH=2340.0,2340.0,1.772397640599706015,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.772397640599706015,33956.49258989810449867
+ETH=2320.0,2320.0,1.75911329232822762,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.75911329232822762,33956.49258989810449867
+ETH=2300.0,2300.0,1.745800726117154696,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.745800726117154696,33956.49258989810449867
+ETH=2280.0,2280.0,1.732459851962219397,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.732459851962219397,33956.49258989810449867
+ETH=2260.0,2260.0,1.719090579475974941,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.719090579475974941,33956.49258989810449867
+ETH=2240.0,2240.0,1.705692817885754274,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.705692817885754274,33956.49258989810449867
+ETH=2220.0,2220.0,1.692266476031615686,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.692266476031615686,33956.49258989810449867
+ETH=2200.0,2200.0,1.678811462364275251,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.678811462364275251,33956.49258989810449867
+ETH=2180.0,2180.0,1.66532768494302602,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.66532768494302602,33956.49258989810449867
+ETH=2160.0,2160.0,1.651815051433643846,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.651815051433643846,33956.49258989810449867
+ETH=2140.0,2140.0,1.63827346910627976,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.63827346910627976,33956.49258989810449867
+ETH=2120.0,2120.0,1.62470284483333877,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.62470284483333877,33956.49258989810449867
+ETH=2100.0,2100.0,1.611103085087345012,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.611103085087345012,33956.49258989810449867
+ETH=2080.0,2080.0,1.597474095938793132,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.597474095938793132,33956.49258989810449867
+ETH=2060.0,2060.0,1.5838157830539858,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.5838157830539858,33956.49258989810449867
+ETH=2040.0,2040.0,1.570128051692857243,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.570128051692857243,33956.49258989810449867
+ETH=2020.0,2020.0,1.556410806706782713,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.556410806706782713,33956.49258989810449867
+ETH=2000.0,2000.0,1.542663952536373761,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.542663952536373761,33956.49258989810449867
+ETH=1980.0,1980.0,1.528887393209259215,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.528887393209259215,33956.49258989810449867
+ETH=1960.0,1960.0,1.515081032337851767,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.515081032337851767,33956.49258989810449867
+ETH=1940.0,1940.0,1.501244773117100048,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.501244773117100048,33956.49258989810449867
+ETH=1920.0,1920.0,1.487378518322226076,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.487378518322226076,33956.49258989810449867
+ETH=1900.0,1900.0,1.473482170306447979,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.473482170306447979,33956.49258989810449867
+ETH=1880.0,1880.0,1.459555630998687878,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.459555630998687878,33956.49258989810449867
+ETH=1860.0,1860.0,1.445598801901264811,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.445598801901264811,33956.49258989810449867
+ETH=1840.0,1840.0,1.431611584087572578,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.431611584087572578,33956.49258989810449867
+ETH=1820.0,1820.0,1.417593878199742419,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.417593878199742419,33956.49258989810449867
+ETH=1800.0,1800.0,1.40354558444629038,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.40354558444629038,33956.49258989810449867
+ETH=1780.0,1780.0,1.389466602599749259,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.389466602599749259,33956.49258989810449867
+ETH=1760.0,1760.0,1.375356831994285025,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.375356831994285025,33956.49258989810449867
+ETH=1740.0,1740.0,1.361216171523297573,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.361216171523297573,33956.49258989810449867
+ETH=1720.0,1720.0,1.347044519637005719,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.347044519637005719,33956.49258989810449867
+ETH=1700.0,1700.0,1.332841774340016274,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.332841774340016274,33956.49258989810449867
+ETH=1680.0,1680.0,1.318607833188877126,RebalancePool(wstETHWrapper).liquidate!!cannot liquidate,1.318607833188877126,33956.49258989810449867
+ETH=1660.0,1660.0,1.304342593289614163,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""20.258838023666069667""}",1.305196464920667649,0
+ETH=1640.0,1640.0,1.290045951295251939,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""20.483352006408563744""}",1.290859711889311345,0
+ETH=1620.0,1620.0,1.275717803403317942,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""20.713409544280502118""}",1.27649136456660356,0
+ETH=1600.0,1600.0,1.261358045353330355,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""20.949218520599238952""}",1.262091318399546508,0
+ETH=1580.0,1580.0,1.246966572424269155,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""21.19099734441971598""}",1.247659468373312104,0
+ETH=1560.0,1560.0,1.232543279432030454,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""21.43897562526123086""}",1.233195709008689156,0
+ETH=1540.0,1540.0,1.218088060726863926,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""21.693394900410317554""}",1.218699934359513601,0
+ETH=1520.0,1520.0,1.203600810190793198,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""21.95450941964227495""}",1.204172038010081667,0
+ETH=1500.0,1500.0,1.18908142123501908,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""22.222586992720417878""}",1.189611913072545808,0
+ETH=1480.0,1480.0,1.17452978679730549,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""22.497909905611483587""}",1.175019452184293299,0
+ETH=1460.0,1460.0,1.15994579933934794,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""22.78077591200641411""}",1.160394547505307342,0
+ETH=1440.0,1440.0,1.145329350844124457,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""23.071499307467870504""}",1.145737090715510548,0
+ETH=1420.0,1420.0,1.130680332813228791,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""23.370412094350776351""}",1.131046973012090669,0
+ETH=1400.0,1400.0,1.115998636264185774,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""23.677865246573193793""}",1.116324085106808422,0
+ETH=1380.0,1380.0,1.101284151727748698,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""23.994230084367275509""}",1.101568317223287284,0
+ETH=1360.0,1360.0,1.086536769245178566,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""24.319899770331771393""}",1.08677955909428511,0
+ETH=1340.0,1340.0,1.071756378365505063,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""24.655290939459386557""}",1.071957699958947422,0
+ETH=1320.0,1320.0,1.056942868142769132,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""25.000845477348444604""}",1.057102628560042245,0
+ETH=1300.0,1300.0,1.042096127133246976,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""25.357032462557166003""}",1.04221423314117632,0
+ETH=1280.0,1280.0,1.027216043392655369,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""25.724350291053659918""}",1.027292401443992582,0
+ETH=1260.0,1260.0,1.012302504473338111,"RebalancePool(wstETHWrapper).liquidate={""liquidated"":""33956.49258989810449867"",""baseGained"":""26.103329002994486974""}",1.012337020705348711,0
+ETH=1240.0,1240.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1220.0,1220.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1200.0,1200.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1180.0,1180.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1160.0,1160.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1140.0,1140.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1120.0,1120.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1100.0,1100.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1080.0,1080.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1060.0,1060.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1040.0,1040.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1020.0,1020.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867
+ETH=1000.0,1000.0,SafeMath: subtraction overflow,RebalancePool(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,33956.49258989810449867

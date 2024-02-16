@@ -1,0 +1,72 @@
+ETH(simulation),ETH,stETHTreasury.collateralRatio,BoostableRebalancePool__0(wstETHWrapper).liquidate,stETHTreasury.collateralRatio>BoostableRebalancePool__0(wstETHWrapper).liquidate,FractionalToken.balanceOf(BoostableRebalancePool__0)>BoostableRebalancePool__0(wstETHWrapper).liquidate
+ETH=2400.0,2400.0,1.812082272114073875,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.812082272114073875,5688690.988856864319720448
+ETH=2380.0,2380.0,1.79888204143721316,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.79888204143721316,5688690.988856864319720448
+ETH=2360.0,2360.0,1.785653860554707138,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.785653860554707138,5688690.988856864319720448
+ETH=2340.0,2340.0,1.772397640599706015,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.772397640599706015,5688690.988856864319720448
+ETH=2320.0,2320.0,1.75911329232822762,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.75911329232822762,5688690.988856864319720448
+ETH=2300.0,2300.0,1.745800726117154696,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.745800726117154696,5688690.988856864319720448
+ETH=2280.0,2280.0,1.732459851962219397,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.732459851962219397,5688690.988856864319720448
+ETH=2260.0,2260.0,1.719090579475974941,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.719090579475974941,5688690.988856864319720448
+ETH=2240.0,2240.0,1.705692817885754274,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.705692817885754274,5688690.988856864319720448
+ETH=2220.0,2220.0,1.692266476031615686,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.692266476031615686,5688690.988856864319720448
+ETH=2200.0,2200.0,1.678811462364275251,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.678811462364275251,5688690.988856864319720448
+ETH=2180.0,2180.0,1.66532768494302602,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.66532768494302602,5688690.988856864319720448
+ETH=2160.0,2160.0,1.651815051433643846,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.651815051433643846,5688690.988856864319720448
+ETH=2140.0,2140.0,1.63827346910627976,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.63827346910627976,5688690.988856864319720448
+ETH=2120.0,2120.0,1.62470284483333877,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.62470284483333877,5688690.988856864319720448
+ETH=2100.0,2100.0,1.611103085087345012,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.611103085087345012,5688690.988856864319720448
+ETH=2080.0,2080.0,1.597474095938793132,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.597474095938793132,5688690.988856864319720448
+ETH=2060.0,2060.0,1.5838157830539858,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.5838157830539858,5688690.988856864319720448
+ETH=2040.0,2040.0,1.570128051692857243,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.570128051692857243,5688690.988856864319720448
+ETH=2020.0,2020.0,1.556410806706782713,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.556410806706782713,5688690.988856864319720448
+ETH=2000.0,2000.0,1.542663952536373761,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.542663952536373761,5688690.988856864319720448
+ETH=1980.0,1980.0,1.528887393209259215,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.528887393209259215,5688690.988856864319720448
+ETH=1960.0,1960.0,1.515081032337851767,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.515081032337851767,5688690.988856864319720448
+ETH=1940.0,1940.0,1.501244773117100048,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.501244773117100048,5688690.988856864319720448
+ETH=1920.0,1920.0,1.487378518322226076,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.487378518322226076,5688690.988856864319720448
+ETH=1900.0,1900.0,1.473482170306447979,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.473482170306447979,5688690.988856864319720448
+ETH=1880.0,1880.0,1.459555630998687878,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.459555630998687878,5688690.988856864319720448
+ETH=1860.0,1860.0,1.445598801901264811,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.445598801901264811,5688690.988856864319720448
+ETH=1840.0,1840.0,1.431611584087572578,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.431611584087572578,5688690.988856864319720448
+ETH=1820.0,1820.0,1.417593878199742419,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.417593878199742419,5688690.988856864319720448
+ETH=1800.0,1800.0,1.40354558444629038,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.40354558444629038,5688690.988856864319720448
+ETH=1780.0,1780.0,1.389466602599749259,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.389466602599749259,5688690.988856864319720448
+ETH=1760.0,1760.0,1.375356831994285025,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.375356831994285025,5688690.988856864319720448
+ETH=1740.0,1740.0,1.361216171523297573,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.361216171523297573,5688690.988856864319720448
+ETH=1720.0,1720.0,1.347044519637005719,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.347044519637005719,5688690.988856864319720448
+ETH=1700.0,1700.0,1.332841774340016274,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.332841774340016274,5688690.988856864319720448
+ETH=1680.0,1680.0,1.318607833188877126,BoostableRebalancePool__0(wstETHWrapper).liquidate!!reverted with an unrecognized custom error ,1.318607833188877126,5688690.988856864319720448
+ETH=1660.0,1660.0,1.304342593289614163,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""45981.64673048259626081"",""baseGained"":""27.43318470563737197""}",1.3055,5642709.342126381723459638
+ETH=1640.0,1640.0,1.290045951295251939,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""613961.023139833875559844"",""baseGained"":""370.355675630917934713""}",1.3055,5074729.965717030444160604
+ETH=1620.0,1620.0,1.275717803403317942,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""1183192.071099965280815041"",""baseGained"":""721.745388554353573079""}",1.3055,4505498.917756899038905407
+ETH=1600.0,1600.0,1.261358045353330355,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""1753678.932688678816348897"",""baseGained"":""1081.919844300875102405""}",1.3055,3935012.056168185503371551
+ETH=1580.0,1580.0,1.246966572424269155,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""2325425.768280114977355086"",""baseGained"":""1451.212640699207336185""}",1.3055,3363265.220576749342365362
+ETH=1560.0,1560.0,1.232543279432030454,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""2898436.756645887200841375"",""baseGained"":""1829.97448315903523502""}",1.3055,2790254.232210977118879073
+ETH=1540.0,1540.0,1.218088060726863926,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""3472716.095056888400578322"",""baseGained"":""2218.574295552884637721""}",1.3055,2215974.893799975919142126
+ETH=1520.0,1520.0,1.203600810190793198,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""4048267.999385773784578062"",""baseGained"":""2617.400418799203761546""}",1.3055,1640422.989471090535142386
+ETH=1500.0,1500.0,1.18908142123501908,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""4625096.704210125968819869"",""baseGained"":""3026.861905332091395339""}",1.3055,1063594.284646738350900579
+ETH=1480.0,1480.0,1.17452978679730549,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5203206.462916307384667221"",""baseGained"":""3447.389918528030046262""}",1.3055,485484.525940556935053227
+ETH=1460.0,1460.0,1.15994579933934794,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""3816.436409228897945602""}",1.301050790719245165,0
+ETH=1440.0,1440.0,1.145329350844124457,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""3865.140955366371102434""}",1.273539637596315705,0
+ETH=1420.0,1420.0,1.130680332813228791,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""3915.217460549970259677""}",1.24596718192897452,0
+ETH=1400.0,1400.0,1.115998636264185774,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""3966.724723024529392841""}",1.218333218589856843,0
+ETH=1380.0,1380.0,1.101284151727748698,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""4019.724949628785892184""}",1.190637541535394061,0
+ETH=1360.0,1360.0,1.086536769245178566,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""4074.284006427285229744""}",1.162879943800692698,0
+ETH=1340.0,1340.0,1.071756378365505063,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""4130.47169178693380126""}",1.135060217494379016,0
+ETH=1320.0,1320.0,1.056942868142769132,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""4188.362034278692935549""}",1.10717815379340896,0
+ETH=1300.0,1300.0,1.042096127133246976,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""4248.033618077890816808""}",1.079233542937843173,0
+ETH=1280.0,1280.0,1.027216043392655369,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""4309.569938870813627412""}",1.051226174225586819,0
+ETH=1260.0,1260.0,1.012302504473338111,"BoostableRebalancePool__0(wstETHWrapper).liquidate={""liquidated"":""5688690.988856864319720448"",""baseGained"":""4373.059793657162558987""}",1.023155836007093902,0
+ETH=1240.0,1240.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1220.0,1220.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1200.0,1200.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1180.0,1180.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1160.0,1160.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1140.0,1140.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1120.0,1120.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1100.0,1100.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1080.0,1080.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1060.0,1060.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1040.0,1040.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1020.0,1020.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448
+ETH=1000.0,1000.0,SafeMath: subtraction overflow,BoostableRebalancePool__0(wstETHWrapper).liquidate!!SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.988856864319720448

@@ -905,7 +905,7 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.1405'
+      value: '0.1406'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
@@ -1843,7 +1843,7 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.1405'
+      value: '0.1406'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
@@ -2826,9 +2826,7 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '1.261358045353330355'
     - name: emaLeverageRatio.lastTime
       type: uint40
       value: '1707713590'
@@ -2847,19 +2845,13 @@
       valueName: FractionalToken
     - name: getCurrentNav._baseNav
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '1600.0'
     - name: getCurrentNav._fNav
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '0.987108711072546149'
     - name: getCurrentNav._xNav
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '0.434879073011126099'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'

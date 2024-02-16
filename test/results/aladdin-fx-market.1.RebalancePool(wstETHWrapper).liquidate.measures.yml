@@ -1,3 +1,7 @@
+- name: RebalancePool(wstETHWrapper).liquidate
+  error: >-
+    VM Exception while processing transaction: reverted with reason string
+    'SafeMath: subtraction overflow'
 - address: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
   name: BoostableRebalancePool__0
   contractType: BoostableRebalancePool
@@ -1437,7 +1441,7 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.1405'
+      value: '0.1401'
     - name: pendingRewards.0
       type: uint256
       target: wstETHWrapper
@@ -1577,7 +1581,7 @@
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '1.2003'
+      value: '1.2008'
     - name: pendingRewards.1
       type: uint256
       target: wstETHWrapper
@@ -3747,7 +3751,7 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.1405'
+      value: '0.1401'
     - name: pendingRewards.0
       type: uint256
       target: wstETHWrapper
@@ -3887,7 +3891,7 @@
     - name: pendingRewards.1
       type: uint256
       target: WstETH
-      value: '1.2003'
+      value: '1.2008'
     - name: pendingRewards.1
       type: uint256
       target: wstETHWrapper
@@ -5006,13 +5010,13 @@
       value: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
     - name: getPrice._safePrice
       type: uint256
-      value: '2500.8'
+      value: '2500.9'
     - name: getPrice._minUnsafePrice
       type: uint256
       value: '2495.1'
     - name: getPrice._maxUnsafePrice
       type: uint256
-      value: '2500.8'
+      value: '2500.9'
 - address: '0x56B3c8eF8A095f8637B6A84942aA898326B82b91'
   name: FxnDepositor
   contractType: FxnDepositor
@@ -9126,7 +9130,7 @@
     - name: balanceOf
       type: uint256
       target: FxnVoterProxy
-      value: '46358.26'
+      value: '46358.34'
     - name: balanceOf
       type: uint256
       target: Gauge_Controller

@@ -905,7 +905,7 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.1405'
+      value: '0.1406'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
@@ -1843,7 +1843,7 @@
     - name: pendingRewards.0
       type: uint256
       target: WstETH
-      value: '0.1405'
+      value: '0.1406'
     - name: pendingRewards.1
       type: uint256
       target: WstETH
@@ -1918,7 +1918,7 @@
       valueName: GnosisSafe__0
     - name: available_supply
       type: uint256
-      value: '1059378'
+      value: '1059379'
     - name: decimals
       type: uint256
       value: '18'
@@ -1960,7 +1960,7 @@
     - name: balanceOf
       type: uint256
       target: RebalanceWithBonusToken__0
-      value: '100.0'
+      value: '98.0'
     - name: balanceOf
       type: uint256
       target: RebalanceWithBonusToken__1
@@ -1985,7 +1985,7 @@
       value: '1.0'
     - name: totalSupply
       type: uint256
-      value: '12136954.927001896064148827'
+      value: '12102998.434411997959650157'
     - name: treasury
       type: address
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
@@ -2006,10 +2006,6 @@
       type: uint256
       target: GnosisSafe__0
       value: '9802.392603376365221993'
-    - name: balanceOf
-      type: uint256
-      target: RebalancePool
-      value: '33956.49258989810449867'
 - address: '0xa84360896cE9152d1780c546305BB54125F962d9'
   name: FxETHTwapOracle
   contractType: FxETHTwapOracle
@@ -2305,7 +2301,7 @@
       valueName: FractionalToken
     - name: nav
       type: uint256
-      value: '0.723751949545094451'
+      value: '0.723123807301687441'
     - name: totalSupply
       type: uint256
       value: '7200159.012861980016343739'
@@ -2440,11 +2436,11 @@
     - name: balanceOf
       type: uint256
       target: stETHTreasury
-      value: '9444.807757115345432466'
+      value: '9423.858538594746193514'
     - name: balanceOf
       type: uint256
       target: WstETH
-      value: '3548193.498864804637627201'
+      value: '3548214.448083325236866153'
     - name: balanceOf
       type: uint256
       target: fMinter
@@ -2476,11 +2472,11 @@
     - name: sharesOf
       type: uint256
       target: stETHTreasury
-      value: '8164.940765030775329617'
+      value: '8146.830377536067798433'
     - name: sharesOf
       type: uint256
       target: WstETH
-      value: '3067377.387249938650363244'
+      value: '3067395.497637433357894428'
     - name: sharesOf
       type: uint256
       target: fMinter
@@ -2593,6 +2589,9 @@
       type: address
       value: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
       valueName: Lido
+    - name: epochState.epoch
+      type: uint64
+      value: '1'
     - name: epochState.prod
       type: uint128
       value: '1000000000000000000'
@@ -2614,12 +2613,6 @@
       type: address
       value: '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
       valueName: GnosisSafe__0
-    - name: totalSupply
-      type: uint256
-      value: '14241.540200078689350421'
-    - name: totalUnlocking
-      type: uint256
-      value: '19714.952389819415148249'
     - name: treasury
       type: address
       value: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
@@ -2668,7 +2661,7 @@
       valueName: GnosisSafe__0
     - name: totalSupply
       type: uint256
-      value: '11472080.868887816309417346'
+      value: '11457839.328687737620066925'
 - address: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
   name: RebalancePoolSplitter
   contractType: RebalancePoolSplitter
@@ -2826,40 +2819,32 @@
       value: '0.1'
     - name: collateralRatio
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '1.262091318399546508'
     - name: emaLeverageRatio.lastTime
       type: uint40
-      value: '1707713590'
+      value: '1707717630'
     - name: emaLeverageRatio.sampleInterval
       type: uint24
       value: '86400'
     - name: emaLeverageRatio.lastValue
       type: uint96
-      value: '1983800545126983346'
+      value: '4492876171817533558'
     - name: emaLeverageRatio.lastEmaValue
       type: uint96
-      value: '1985630000000000000'
+      value: '1985540000000000000'
     - name: fToken
       type: address
       value: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
       valueName: FractionalToken
     - name: getCurrentNav._baseNav
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '1600.0'
     - name: getCurrentNav._fNav
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '0.987108711072546149'
     - name: getCurrentNav._xNav
       type: uint256
-      error: >-
-        VM Exception while processing transaction: reverted with reason string
-        'SafeMath: subtraction overflow'
+      value: '0.434879073011126099'
     - name: harvestBountyRatio
       type: uint128
       value: '10000000000000000'
@@ -2868,7 +2853,7 @@
       value: '1836.7853'
     - name: leverageRatio
       type: uint256
-      value: '1.9855'
+      value: '1.9856'
     - name: market
       type: address
       value: '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
@@ -2893,7 +2878,7 @@
       value: '500000000000000000'
     - name: totalBaseToken
       type: uint256
-      value: '9444.807757115345432463'
+      value: '9423.858538594746193511'
     - name: xToken
       type: address
       value: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
@@ -2985,7 +2970,7 @@
       value: '0.86448988428373581'
     - name: totalSupply
       type: uint256
-      value: '3067377.386350011652026778'
+      value: '3067395.496737506359557962'
     - name: balanceOf
       type: uint256
       target: BoostableRebalancePool__0
@@ -3005,7 +2990,7 @@
     - name: balanceOf
       type: uint256
       target: RebalancePool
-      value: '1.157354421777380292'
+      value: '19.267741916484911476'
     - name: balanceOf
       type: uint256
       target: RebalancePoolSplitter
