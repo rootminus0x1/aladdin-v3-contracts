@@ -17,10 +17,10 @@
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
     "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage",
-    "eat:svg": "mmdc -i test/results/${0}.diagram.md -o test/results/${0}.diagram.svg && mv test/results/${0}.diagram-1.svg test/results/${0}.diagram.svg",
-    "eat:run": "ts-node test/eat.ts test/${0}.config.yml",
-    "eat1": "yarn eat:run ${0} && yarn eat:svg ${0}",
-    "eat": "for arg in aladdin-fx-market aladdin-fx-market-plot; do yarn eat1 $arg; done"
+    "eat:svg1": "mmdc -i test/results/${0}.diagram.md -o test/results/${0}.diagram.svg && mv test/results/${0}.diagram-1.svg test/results/${0}.diagram.svg",
+    "eat:run1": "ts-node test/eat.ts test/${0}.config.yml",
+    "eat1": "yarn eat:run1 ${0} && yarn eat:svg1 ${0}.base",
+    "eat": "yarn eat1 aladdin-fx"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^10.6.1",
