@@ -45,25 +45,25 @@ events:
     args: []
 
 format:
-  - measurement: getPrice._safePrice
+  - reading: getPrice._safePrice
     precision: 1
-  - measurement: getPrice._minUnsafePrice
+  - reading: getPrice._minUnsafePrice
     precision: 1
-  - measurement: getPrice._maxUnsafePrice
+  - reading: getPrice._maxUnsafePrice
     precision: 1
   - contractType: Voting Escrow
-    measurement: balanceOf
+    reading: balanceOf
     precision: 2
-  - measurement: emaLeverageRatio.lastTime
+  - reading: emaLeverageRatio.lastTime
     precision: -1
-  - measurement: emaLeverageRatio.lastEmaValue
+  - reading: emaLeverageRatio.lastEmaValue
     precision: -13
   - type: uint256
     unit: ether
-  - measurement: latestAnswer
+  - reading: latestAnswer
     type: int256
     unit: 8
-  - measurement: latestRoundData.answer
+  - reading: latestRoundData.answer
     type: int256
     unit: 8
   - contractType: Market
@@ -76,35 +76,35 @@ format:
     type: uint64
     unit: 18
   # variable depending when run
-  - measurement: pendingRewards.0
+  - reading: pendingRewards.0
     precision: 4
-  - measurement: pendingRewards.1
+  - reading: pendingRewards.1
     precision: 4
   - contractType: "Curve DAO Token"
-    measurement: available_supply
+    reading: available_supply
     precision: 0
   - contractType: "Voting Escrow"
-    measurement: totalSupply
+    reading: totalSupply
     precision: 0
-  - measurement: price_oracle
+  - reading: price_oracle
     precision: 9
-  - measurement: leverageRatio
+  - reading: leverageRatio
     precision: 4 # because the price_oracle is not reliable, this isn't
   # no formatting
   - contractType: BoostableRebalancePool
-    measurement: numTotalSupplyHistory
-  - measurement: chainlinkMinMessageCount
-  - measurement: chainlinkMessageExpiration
-  - measurement: start_epoch_time
-  - measurement: getChainId
-  - measurement: getThreshold
-  - measurement: nonce
-  - measurement: decimals
-  - measurement: epoch
-  - measurement: time_total
-  - measurement: numTotalSupplyHistory
-  - measurement: latestRoundData.startedAt
-  - measurement: latestRoundData.updatedAt
-  - measurement: latestTimestamp
-  - measurement: version
-  - measurement: getRewardCount
+    reading: numTotalSupplyHistory
+  - reading: chainlinkMinMessageCount
+  - reading: chainlinkMessageExpiration
+  - reading: start_epoch_time
+  - reading: getChainId
+  - reading: getThreshold
+  - reading: nonce
+  - reading: decimals
+  - reading: epoch
+  - reading: time_total
+  - reading: numTotalSupplyHistory
+  - reading: latestRoundData.startedAt
+  - reading: latestRoundData.updatedAt
+  - reading: latestTimestamp
+  - reading: version
+  - reading: getRewardCount

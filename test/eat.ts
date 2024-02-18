@@ -6,10 +6,25 @@ import { ethers } from 'hardhat';
 import { formatEther, parseEther } from 'ethers';
 import { mine, setBalance, time } from '@nomicfoundation/hardhat-network-helpers';
 
-import { contracts, deploy, getEthPrice, doEvent, events, marketEvent, Role, parseTime, asDateString } from 'eat';
+import {
+    contracts,
+    deploy,
+    getEthPrice,
+    doTrigger,
+    triggers,
+    Role,
+    parseTime,
+    asDateString,
+    writeYaml,
+    writeReadings,
+    makeTrigger,
+    Trigger,
+    writeEatFile,
+    mermaid,
+} from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
-import { marketEvents, delve, delvePlot } from 'eat';
+import { delve } from 'eat';
 
 import { MockFxPriceOracle } from '@types';
 
@@ -19,28 +34,37 @@ async function main() {
 
     // TODO: scan event logs for events like UpdateSettleWhitelist(_account, _status)
     // the description of what parameters to gleem and how they are presented (array of addresses)
-    // to the diagram - I think this is just another measure - does etherscan have events?
-    await dig();
+    // to the diagram - I think this is just another reading - does etherscan have events?
 
-    // TODO: some of this initialisation should be done on demand, rather than the existence of a contract
-    //if (contracts.stETHTreasury && events.harvest) {
     // handle price changes
-    const oracle = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
-    await contracts.stETHTreasury.connect(contracts.stETHTreasury.ownerSigner).updatePriceOracle(oracle.address);
 
-    events.ETH = {
+    //await dig();
+    // first add the new contracts
+    // await deploy<MockFxPriceOracle>('MockFxPriceOracle');
+    // await contracts.stETHTreasury
+    //     .connect(contracts.stETHTreasury.ownerSigner)
+    //     .updatePriceOracle(contracts.MockFxPriceOracle.address);
+
+    await dig('base');
+    if (getConfig().diagram) writeEatFile('base.diagram.md', await mermaid());
+
+    const [base] = await delve('base'); // get the base readings for comparisons
+    writeReadings('base', base);
+    return 0;
+
+    triggers.ETH = {
         name: 'ETH',
-        setMarket: async (value: bigint) => {
-            await oracle.setPrice(value);
+        pull: async (value: bigint) => {
+            await contracts.MockFxPriceOracle.setPrice(value);
             return value;
         },
     };
 
-    const makeRollEvent = (by: number, units: string) => {
+    const makeRollTrigger = (by: number, units: string): Trigger => {
         return {
             name: by.toString + units,
-            value: BigInt(parseTime(by, units)),
-            setMarket: async (increment: number) => {
+            args: [BigInt(parseTime(by, units))],
+            pull: async (increment: number) => {
                 const target = (await time.latest()) + increment;
                 console.log(`moving time to ${asDateString(target)}...`);
                 await time.increaseTo(target);
@@ -49,14 +73,14 @@ async function main() {
         };
     };
 
-    events.doLeverageRatio = {
+    triggers.doLeverageRatio = {
         setMarket: async () => {
-            await doEvent(events.harvest); // maybe a less intrusive way to do this
+            await doTrigger(triggers.harvest); // maybe a less intrusive way to do this
         },
     };
     //}
     //if (events.ETH && contracts.FractionalToken && contracts.RebalancePool) {
-    const makeLiquidateEvent = async (poolIndex: number) => {
+    const makeLiquidateEvent = async (poolIndex: number): Promise<Trigger> => {
         const pools = await contracts.RebalancePoolRegistry.getPools();
         const poolAddress = pools[poolIndex];
         const pool = contracts[poolAddress];
@@ -65,7 +89,7 @@ async function main() {
         const poolName = `${pool.name}(${wrapper.name})`;
         return {
             name: `${poolName}.liquidate`,
-            setMarket: async () => {
+            pull: async () => {
                 let liquidatorAddress = undefined;
                 if (pool.roles) {
                     const role = pool.roles.find((r: Role) => r.name === 'LIQUIDATOR_ROLE');
@@ -92,7 +116,7 @@ async function main() {
     };
 
     // TODO: set the price according to stETHTreasury.getCurrentNav._baseNav
-    await doEvent(events.ETH, startEthPrice); // set to the current eth price, like nothing had changed (approx)
+    await doTrigger(triggers.ETH, startEthPrice); // set to the current eth price, like nothing had changed (approx)
 
     // TODO: plot the below against a beta = 0 set up
     // TODO: could do a plot of beta against collateral ratio, would like beta=0 to have the highest, I suspect it doesn't
@@ -111,6 +135,7 @@ async function main() {
         */
 
     //await ethers.provider.send('evm_setAutomine', [false]);
+    /*
     for (const [index, pool] of ['RebalancePool', 'BoostableRebalancePool__0', 'BoostableRebalancePool__1'].entries()) {
         await delvePlot(
             `CR+balanceOfxETH(${pool})`,
@@ -121,7 +146,7 @@ async function main() {
                 {
                     calculations: [
                         {
-                            match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                            match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
                             lineStyle: 'linetype 8 linewidth 3 dashtype 3',
                         },
                     ],
@@ -130,13 +155,13 @@ async function main() {
                     simulation: [await makeLiquidateEvent(index)],
                     calculations: [
                         {
-                            match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                            match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
                             lineStyle: 'linetype 1',
                         },
                         {
                             match: {
                                 contract: 'FractionalToken',
-                                measurement: 'balanceOf',
+                                reading: 'balanceOf',
                                 target: contracts[pool].address,
                             },
                             lineStyle: 'linetype 2',
@@ -144,18 +169,18 @@ async function main() {
                         },
                     ],
                 },
-                /*
+
                     {
                         simulation: [await makeLiquidateEvent(1)],
                         calculations: [
                             {
-                                match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                                match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
                                 lineStyle: 'linetype 2',
                             },
                             {
                                 match: {
                                     contract: 'FractionalToken',
-                                    measurement: 'balanceOf',
+                                    reading: 'balanceOf',
                                     target: contracts['BoostableRebalancePool__0'].address,
                                 },
                                 lineStyle: 'linetype 2 linewidth 2 dashtype 2',
@@ -167,13 +192,13 @@ async function main() {
                         simulation: [await makeLiquidateEvent(2)],
                         calculations: [
                             {
-                                match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                                match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
                                 lineStyle: 'linetype 4',
                             },
                             {
                                 match: {
                                     contract: 'FractionalToken',
-                                    measurement: 'balanceOf',
+                                    reading: 'balanceOf',
                                     target: contracts['BoostableRebalancePool__1'].address,
                                 },
                                 lineStyle: 'linetype 4 linewidth 2 dashtype 2',
@@ -181,14 +206,15 @@ async function main() {
                             },
                         ],
                     },
-                    */
+
             ],
-            /*
+
                 'leverage ratio',
                 [{ simulation: [events.doLeverageRatio, makeRollEvent(2, "week")], match: [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }] }],
-                */
+
         );
     }
+    */
 
     // TODO: drive a collateral ratio < 130% with eth price. then run a liquidation bot to see what changes
     // beforehand either get a depositor's address, or deposit some from one of my users
@@ -226,11 +252,12 @@ async function main() {
                 [events.mintFToken_1000eth, marketEvent(events.ETH, parseEther('1300')), events.mintFToken_1000eth],
             );
             */
-    await delve(
-        'drop,liquidate',
-        [],
-        [marketEvent(events.ETH, parseEther('1600')), makeRollEvent(1, 'day'), await makeLiquidateEvent(0)],
-    );
+    const [r, s] = await delve('drop,liquidate', [
+        makeTrigger(triggers.ETH, parseEther('1600')),
+        makeRollTrigger(1, 'day'),
+        await makeLiquidateEvent(0),
+    ]);
+    writeReadings('drop,liquidate', r, s);
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.
