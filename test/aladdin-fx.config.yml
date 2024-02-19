@@ -88,8 +88,7 @@ format:
     precision: 1
   - reading: getPrice._maxUnsafePrice
     precision: 1
-  - contract: Voting Escrow
-    reading: balanceOf
+  - reading: balanceOf
     precision: 2
   - reading: emaLeverageRatio.lastTime
     precision: -1
