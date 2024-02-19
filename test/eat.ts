@@ -3,7 +3,7 @@ import * as dotenvExpand from 'dotenv-expand';
 dotenvExpand.expand(dotenv.config());
 
 import { ethers } from 'hardhat';
-import { formatEther, parseEther } from 'ethers';
+import { MaxUint256, formatEther, parseEther } from 'ethers';
 import { mine, setBalance, time } from '@nomicfoundation/hardhat-network-helpers';
 
 import {
@@ -15,12 +15,18 @@ import {
     Role,
     parseTime,
     asDateString,
-    writeYaml,
     writeReadings,
     makeTrigger,
     Trigger,
     writeEatFile,
     mermaid,
+    users,
+    getSigner,
+    nodes,
+    digOne,
+    parseArg,
+    addTokenToWhale,
+    whale,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -36,29 +42,36 @@ async function main() {
     // the description of what parameters to gleem and how they are presented (array of addresses)
     // to the diagram - I think this is just another reading - does etherscan have events?
 
-    // handle price changes
-
-    //await dig();
-    // first add the new contracts
-    // await deploy<MockFxPriceOracle>('MockFxPriceOracle');
-    // await contracts.stETHTreasury
-    //     .connect(contracts.stETHTreasury.ownerSigner)
-    //     .updatePriceOracle(contracts.MockFxPriceOracle.address);
-
     await dig('base');
     if (getConfig().diagram) writeEatFile('base.diagram.md', await mermaid());
-
     const [base] = await delve('base'); // get the base readings for comparisons
     writeReadings('base', base);
-    return 0;
 
-    triggers.ETH = {
-        name: 'ETH',
-        pull: async (value: bigint) => {
-            await contracts.MockFxPriceOracle.setPrice(value);
-            return value;
-        },
-    };
+    // add the mock price contract
+    const mock = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
+    await contracts.stETHTreasury
+        .connect(contracts.stETHTreasury.ownerSigner)
+        .updatePriceOracle(contracts.MockFxPriceOracle.address);
+    // TODO: create a difference between a trigger (no parameters needed) and a trigger template (need to supply parameters)
+    // triggers.ETH = {
+    //     // this is a trigger template
+    //     name: 'ETH',
+    //     pull: async (value: bigint) => {
+    //         return await contracts.MockFxPriceOracle.setPrice(value);
+    //     },
+    // };
+    // const setPrice = await doTrigger(triggers.ETH, startEthPrice); // set to the current eth price, like nothing had changed (approx)
+
+    const tx0 = await mock.setPrice(startEthPrice);
+    const tx = await contracts.MockFxPriceOracle.setPrice(startEthPrice);
+
+    // redig
+    await dig('mockETH');
+    if (getConfig().diagram) writeEatFile('mockETH.diagram.md', await mermaid());
+
+    const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
+    writeReadings('mockETH', mockETH);
+    return 0;
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {
@@ -114,9 +127,6 @@ async function main() {
             },
         };
     };
-
-    // TODO: set the price according to stETHTreasury.getCurrentNav._baseNav
-    await doTrigger(triggers.ETH, startEthPrice); // set to the current eth price, like nothing had changed (approx)
 
     // TODO: plot the below against a beta = 0 set up
     // TODO: could do a plot of beta against collateral ratio, would like beta=0 to have the highest, I suspect it doesn't

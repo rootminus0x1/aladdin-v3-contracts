@@ -9,6 +9,7 @@ addresses:
   RebalancePool: RebalancePool@0xa677d95B91530d56791FbA72C01a862f1B01A49e
   BoostableRebalancePool__0: BoostableRebalancePool@0xc6dEe5913e010895F3702bc43a40d661B13a40BD
   BoostableRebalancePool__1: BoostableRebalancePool@0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9
+  MockFxPriceOracle: MockFxPriceOracle@0xF357118EBd576f3C812c7875B1A1651a7f140E9C
   RebalancePoolSplitter: RebalancePoolSplitter@0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb
   WstETH: WstETH@0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0
   RebalanceWithBonusToken__0: RebalanceWithBonusToken@0x17f21f468d77E6e35702a9Ae7a9da50Db7F6a4f4
@@ -167,6 +168,11 @@ contracts:
     rewardData.lastUpdate: uint40
     rewardData.finishAt: uint40
     rewardReceiver: address
+  MockFxPriceOracle:
+    getPrice.safePrice: uint256
+    getPrice.minUnsafePrice: uint256
+    getPrice.maxUnsafePrice: uint256
+    price: uint256
   RebalancePoolSplitter:
     owner: address
     pendingOwner: address
@@ -361,6 +367,7 @@ readings:
   FractionalToken.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   FractionalToken.balanceOf(Lido): '0.0 # {unit:ether}'
   FractionalToken.balanceOf(Market): '0.0 # {unit:ether}'
+  FractionalToken.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   FractionalToken.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   FractionalToken.balanceOf(RebalancePool): '33956.49258989810449867 # {unit:ether}'
   FractionalToken.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -402,6 +409,7 @@ readings:
   PlatformFeeSpliter.burners(LeveragedToken): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(Lido): '0x6440e21A3634C319c69CEf8d17601DBC4E97C3dB'
   PlatformFeeSpliter.burners(Market): '0x0000000000000000000000000000000000000000'
+  PlatformFeeSpliter.burners(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(RebalancePool): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(RebalancePoolRegistry): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(RebalancePoolSplitter): '0x0000000000000000000000000000000000000000'
@@ -446,6 +454,7 @@ readings:
   ReservePool.bonusRatio(LeveragedToken): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(Lido): '0.05 # {unit:ether}'
   ReservePool.bonusRatio(Market): '0.0 # {unit:ether}'
+  ReservePool.bonusRatio(MockFxPriceOracle): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(PlatformFeeSpliter): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(RebalancePool): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -469,22 +478,22 @@ readings:
   stETHTreasury.baseToken: Lido
   stETHTreasury.baseTokenCap: '10000.0 # {unit:ether}'
   stETHTreasury.beta: '0.1 # {unit:ether}'
-  stETHTreasury.collateralRatio: '1.878 # {unit:ether,precision:3}'
+  stETHTreasury.collateralRatio: '1.876 # {unit:ether,precision:3}'
   stETHTreasury.emaLeverageRatio.lastTime: '1707713590 # {precision:-1}'
   stETHTreasury.emaLeverageRatio.sampleInterval: '86400'
   stETHTreasury.emaLeverageRatio.lastValue: '1983800545126983346'
   stETHTreasury.emaLeverageRatio.lastEmaValue: '1985630000000000000 # {precision:-13}'
   stETHTreasury.fToken: FractionalToken
-  stETHTreasury.getCurrentNav._baseNav: '2500.87 # {unit:ether,precision:2}'
+  stETHTreasury.getCurrentNav._baseNav: '2497.25 # {unit:ether,precision:2}'
   stETHTreasury.getCurrentNav._fNav: '1.036 # {unit:ether,precision:3}'
-  stETHTreasury.getCurrentNav._xNav: '1.534 # {unit:ether,precision:3}'
+  stETHTreasury.getCurrentNav._xNav: '1.530 # {unit:ether,precision:3}'
   stETHTreasury.harvestBountyRatio: '10000000000000000'
   stETHTreasury.lastPermissionedPrice: '1836.7853 # {unit:ether}'
   stETHTreasury.leverageRatio: '1.986 # {unit:ether,precision:3}'
   stETHTreasury.market: Market
   stETHTreasury.owner: GnosisSafe__0
   stETHTreasury.platform: PlatformFeeSpliter
-  stETHTreasury.priceOracle: FxETHTwapOracle
+  stETHTreasury.priceOracle: MockFxPriceOracle
   stETHTreasury.rateProvider: '0x0000000000000000000000000000000000000000'
   stETHTreasury.rebalancePool: RebalancePoolSplitter
   stETHTreasury.rebalancePoolRatio: '500000000000000000'
@@ -511,6 +520,7 @@ readings:
   LeveragedToken.balanceOf(GnosisSafe__1): '0.0 # {unit:ether}'
   LeveragedToken.balanceOf(Lido): '0.0 # {unit:ether}'
   LeveragedToken.balanceOf(Market): '0.0 # {unit:ether}'
+  LeveragedToken.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   LeveragedToken.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   LeveragedToken.balanceOf(RebalancePool): '0.0 # {unit:ether}'
   LeveragedToken.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -564,6 +574,7 @@ readings:
   RebalancePool.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   RebalancePool.balanceOf(Lido): '0.0 # {unit:ether}'
   RebalancePool.balanceOf(Market): '0.0 # {unit:ether}'
+  RebalancePool.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   RebalancePool.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   RebalancePool.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
   RebalancePool.balanceOf(RebalancePoolSplitter): '0.0 # {unit:ether}'
@@ -599,6 +610,7 @@ readings:
   RebalancePool.extraRewardState.rate(LeveragedToken): '0'
   RebalancePool.extraRewardState.rate(Lido): '0'
   RebalancePool.extraRewardState.rate(Market): '0'
+  RebalancePool.extraRewardState.rate(MockFxPriceOracle): '0'
   RebalancePool.extraRewardState.rate(PlatformFeeSpliter): '0'
   RebalancePool.extraRewardState.rate(RebalancePoolRegistry): '0'
   RebalancePool.extraRewardState.rate(RebalancePoolSplitter): '0'
@@ -634,6 +646,7 @@ readings:
   RebalancePool.extraRewardState.periodLength(LeveragedToken): '0'
   RebalancePool.extraRewardState.periodLength(Lido): '0'
   RebalancePool.extraRewardState.periodLength(Market): '0'
+  RebalancePool.extraRewardState.periodLength(MockFxPriceOracle): '0'
   RebalancePool.extraRewardState.periodLength(PlatformFeeSpliter): '0'
   RebalancePool.extraRewardState.periodLength(RebalancePoolRegistry): '0'
   RebalancePool.extraRewardState.periodLength(RebalancePoolSplitter): '0'
@@ -669,6 +682,7 @@ readings:
   RebalancePool.extraRewardState.lastUpdate(LeveragedToken): '0'
   RebalancePool.extraRewardState.lastUpdate(Lido): '0'
   RebalancePool.extraRewardState.lastUpdate(Market): '0'
+  RebalancePool.extraRewardState.lastUpdate(MockFxPriceOracle): '0'
   RebalancePool.extraRewardState.lastUpdate(PlatformFeeSpliter): '0'
   RebalancePool.extraRewardState.lastUpdate(RebalancePoolRegistry): '0'
   RebalancePool.extraRewardState.lastUpdate(RebalancePoolSplitter): '0'
@@ -704,6 +718,7 @@ readings:
   RebalancePool.extraRewardState.finishAt(LeveragedToken): '0'
   RebalancePool.extraRewardState.finishAt(Lido): '0'
   RebalancePool.extraRewardState.finishAt(Market): '0'
+  RebalancePool.extraRewardState.finishAt(MockFxPriceOracle): '0'
   RebalancePool.extraRewardState.finishAt(PlatformFeeSpliter): '0'
   RebalancePool.extraRewardState.finishAt(RebalancePoolRegistry): '0'
   RebalancePool.extraRewardState.finishAt(RebalancePoolSplitter): '0'
@@ -739,6 +754,7 @@ readings:
   RebalancePool.extraRewardState.queued(LeveragedToken): '0.0 # {unit:ether}'
   RebalancePool.extraRewardState.queued(Lido): '0.0 # {unit:ether}'
   RebalancePool.extraRewardState.queued(Market): '0.0 # {unit:ether}'
+  RebalancePool.extraRewardState.queued(MockFxPriceOracle): '0.0 # {unit:ether}'
   RebalancePool.extraRewardState.queued(PlatformFeeSpliter): '0.0 # {unit:ether}'
   RebalancePool.extraRewardState.queued(RebalancePoolRegistry): '0.0 # {unit:ether}'
   RebalancePool.extraRewardState.queued(RebalancePoolSplitter): '0.0 # {unit:ether}'
@@ -774,6 +790,7 @@ readings:
   RebalancePool.rewardManager(LeveragedToken): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(Lido): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(Market): '0x0000000000000000000000000000000000000000'
+  RebalancePool.rewardManager(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(PlatformFeeSpliter): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(RebalancePoolRegistry): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(RebalancePoolSplitter): '0x0000000000000000000000000000000000000000'
@@ -809,6 +826,7 @@ readings:
   RebalancePool.unlockedBalanceOf(LeveragedToken): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(Lido): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(Market): '0.0 # {unit:ether}'
+  RebalancePool.unlockedBalanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(RebalancePoolSplitter): '0.0 # {unit:ether}'
@@ -844,6 +862,7 @@ readings:
   RebalancePool.unlockingBalanceOf._balance(LeveragedToken): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._balance(Lido): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._balance(Market): '0.0 # {unit:ether}'
+  RebalancePool.unlockingBalanceOf._balance(MockFxPriceOracle): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._balance(PlatformFeeSpliter): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._balance(RebalancePoolRegistry): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._balance(RebalancePoolSplitter): '0.0 # {unit:ether}'
@@ -879,6 +898,7 @@ readings:
   RebalancePool.unlockingBalanceOf._unlockAt(LeveragedToken): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._unlockAt(Lido): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._unlockAt(Market): '0.0 # {unit:ether}'
+  RebalancePool.unlockingBalanceOf._unlockAt(MockFxPriceOracle): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._unlockAt(PlatformFeeSpliter): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._unlockAt(RebalancePoolRegistry): '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf._unlockAt(RebalancePoolSplitter): '0.0 # {unit:ether}'
@@ -932,6 +952,7 @@ readings:
   BoostableRebalancePool__0.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.balanceOf(Lido): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.balanceOf(Market): '0.0 # {unit:ether}'
+  BoostableRebalancePool__0.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.balanceOf(RebalancePool): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -1019,6 +1040,11 @@ readings:
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__0.boostCheckpoint.veBalance(Market): >-
+    !could not decode result data
+    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
+    }, code=BAD_DATA, version=6.9.0)
+  BoostableRebalancePool__0.boostCheckpoint.veBalance(MockFxPriceOracle): >-
     !could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
@@ -1198,6 +1224,11 @@ readings:
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
+  BoostableRebalancePool__0.boostCheckpoint.veSupply(MockFxPriceOracle): >-
+    !could not decode result data
+    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
+    }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__0.boostCheckpoint.veSupply(PlatformFeeSpliter): >-
     !could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -1373,6 +1404,11 @@ readings:
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
+  BoostableRebalancePool__0.boostCheckpoint.historyIndex(MockFxPriceOracle): >-
+    !could not decode result data
+    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
+    }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__0.boostCheckpoint.historyIndex(PlatformFeeSpliter): >-
     !could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -1492,6 +1528,7 @@ readings:
   BoostableRebalancePool__0.distributors(LeveragedToken): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(Lido): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(Market): '0x0000000000000000000000000000000000000000'
+  BoostableRebalancePool__0.distributors(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(PlatformFeeSpliter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(RebalancePool): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(RebalancePoolRegistry): '0x0000000000000000000000000000000000000000'
@@ -1527,6 +1564,7 @@ readings:
   BoostableRebalancePool__0.getBoostRatio(LeveragedToken): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(Lido): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(Market): '0.0 # {unit:ether}'
+  BoostableRebalancePool__0.getBoostRatio(MockFxPriceOracle): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(PlatformFeeSpliter): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(RebalancePool): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -1562,6 +1600,7 @@ readings:
   BoostableRebalancePool__0.pendingRewards.0(LeveragedToken): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.0(Lido): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.0(Market): '0.0 # {unit:ether,precision:4}'
+  BoostableRebalancePool__0.pendingRewards.0(MockFxPriceOracle): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.0(PlatformFeeSpliter): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.0(RebalancePool): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.0(RebalancePoolRegistry): '0.0 # {unit:ether,precision:4}'
@@ -1597,6 +1636,7 @@ readings:
   BoostableRebalancePool__0.pendingRewards.1(LeveragedToken): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.1(Lido): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.1(Market): '0.0 # {unit:ether,precision:4}'
+  BoostableRebalancePool__0.pendingRewards.1(MockFxPriceOracle): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.1(PlatformFeeSpliter): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.1(RebalancePool): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards.1(RebalancePoolRegistry): '0.0 # {unit:ether,precision:4}'
@@ -1632,6 +1672,7 @@ readings:
   BoostableRebalancePool__0.rewardData.queued(LeveragedToken): '0'
   BoostableRebalancePool__0.rewardData.queued(Lido): '0'
   BoostableRebalancePool__0.rewardData.queued(Market): '0'
+  BoostableRebalancePool__0.rewardData.queued(MockFxPriceOracle): '0'
   BoostableRebalancePool__0.rewardData.queued(PlatformFeeSpliter): '0'
   BoostableRebalancePool__0.rewardData.queued(RebalancePool): '0'
   BoostableRebalancePool__0.rewardData.queued(RebalancePoolRegistry): '0'
@@ -1667,6 +1708,7 @@ readings:
   BoostableRebalancePool__0.rewardData.rate(LeveragedToken): '0'
   BoostableRebalancePool__0.rewardData.rate(Lido): '0'
   BoostableRebalancePool__0.rewardData.rate(Market): '0'
+  BoostableRebalancePool__0.rewardData.rate(MockFxPriceOracle): '0'
   BoostableRebalancePool__0.rewardData.rate(PlatformFeeSpliter): '0'
   BoostableRebalancePool__0.rewardData.rate(RebalancePool): '0'
   BoostableRebalancePool__0.rewardData.rate(RebalancePoolRegistry): '0'
@@ -1702,6 +1744,7 @@ readings:
   BoostableRebalancePool__0.rewardData.lastUpdate(LeveragedToken): '0'
   BoostableRebalancePool__0.rewardData.lastUpdate(Lido): '0'
   BoostableRebalancePool__0.rewardData.lastUpdate(Market): '0'
+  BoostableRebalancePool__0.rewardData.lastUpdate(MockFxPriceOracle): '0'
   BoostableRebalancePool__0.rewardData.lastUpdate(PlatformFeeSpliter): '0'
   BoostableRebalancePool__0.rewardData.lastUpdate(RebalancePool): '0'
   BoostableRebalancePool__0.rewardData.lastUpdate(RebalancePoolRegistry): '0'
@@ -1737,6 +1780,7 @@ readings:
   BoostableRebalancePool__0.rewardData.finishAt(LeveragedToken): '0'
   BoostableRebalancePool__0.rewardData.finishAt(Lido): '0'
   BoostableRebalancePool__0.rewardData.finishAt(Market): '0'
+  BoostableRebalancePool__0.rewardData.finishAt(MockFxPriceOracle): '0'
   BoostableRebalancePool__0.rewardData.finishAt(PlatformFeeSpliter): '0'
   BoostableRebalancePool__0.rewardData.finishAt(RebalancePool): '0'
   BoostableRebalancePool__0.rewardData.finishAt(RebalancePoolRegistry): '0'
@@ -1772,6 +1816,7 @@ readings:
   BoostableRebalancePool__0.rewardReceiver(LeveragedToken): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(Lido): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(Market): '0x0000000000000000000000000000000000000000'
+  BoostableRebalancePool__0.rewardReceiver(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(PlatformFeeSpliter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(RebalancePool): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(RebalancePoolRegistry): '0x0000000000000000000000000000000000000000'
@@ -1827,6 +1872,7 @@ readings:
   BoostableRebalancePool__1.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.balanceOf(Lido): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.balanceOf(Market): '0.0 # {unit:ether}'
+  BoostableRebalancePool__1.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.balanceOf(RebalancePool): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -1914,6 +1960,11 @@ readings:
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__1.boostCheckpoint.veBalance(Market): >-
+    !could not decode result data
+    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
+    }, code=BAD_DATA, version=6.9.0)
+  BoostableRebalancePool__1.boostCheckpoint.veBalance(MockFxPriceOracle): >-
     !could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
@@ -2093,6 +2144,11 @@ readings:
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
+  BoostableRebalancePool__1.boostCheckpoint.veSupply(MockFxPriceOracle): >-
+    !could not decode result data
+    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
+    }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__1.boostCheckpoint.veSupply(PlatformFeeSpliter): >-
     !could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -2268,6 +2324,11 @@ readings:
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
+  BoostableRebalancePool__1.boostCheckpoint.historyIndex(MockFxPriceOracle): >-
+    !could not decode result data
+    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
+    }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__1.boostCheckpoint.historyIndex(PlatformFeeSpliter): >-
     !could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
@@ -2387,6 +2448,7 @@ readings:
   BoostableRebalancePool__1.distributors(LeveragedToken): BoostableRebalancePool__1
   BoostableRebalancePool__1.distributors(Lido): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(Market): '0x0000000000000000000000000000000000000000'
+  BoostableRebalancePool__1.distributors(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(PlatformFeeSpliter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(RebalancePool): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(RebalancePoolRegistry): '0x0000000000000000000000000000000000000000'
@@ -2422,6 +2484,7 @@ readings:
   BoostableRebalancePool__1.getBoostRatio(LeveragedToken): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(Lido): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(Market): '0.0 # {unit:ether}'
+  BoostableRebalancePool__1.getBoostRatio(MockFxPriceOracle): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(PlatformFeeSpliter): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(RebalancePool): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -2457,6 +2520,7 @@ readings:
   BoostableRebalancePool__1.pendingRewards.0(LeveragedToken): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.0(Lido): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.0(Market): '0.0 # {unit:ether,precision:4}'
+  BoostableRebalancePool__1.pendingRewards.0(MockFxPriceOracle): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.0(PlatformFeeSpliter): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.0(RebalancePool): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.0(RebalancePoolRegistry): '0.0 # {unit:ether,precision:4}'
@@ -2492,6 +2556,7 @@ readings:
   BoostableRebalancePool__1.pendingRewards.1(LeveragedToken): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.1(Lido): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.1(Market): '0.0 # {unit:ether,precision:4}'
+  BoostableRebalancePool__1.pendingRewards.1(MockFxPriceOracle): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.1(PlatformFeeSpliter): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.1(RebalancePool): '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards.1(RebalancePoolRegistry): '0.0 # {unit:ether,precision:4}'
@@ -2527,6 +2592,7 @@ readings:
   BoostableRebalancePool__1.rewardData.queued(LeveragedToken): '0'
   BoostableRebalancePool__1.rewardData.queued(Lido): '0'
   BoostableRebalancePool__1.rewardData.queued(Market): '0'
+  BoostableRebalancePool__1.rewardData.queued(MockFxPriceOracle): '0'
   BoostableRebalancePool__1.rewardData.queued(PlatformFeeSpliter): '0'
   BoostableRebalancePool__1.rewardData.queued(RebalancePool): '0'
   BoostableRebalancePool__1.rewardData.queued(RebalancePoolRegistry): '0'
@@ -2562,6 +2628,7 @@ readings:
   BoostableRebalancePool__1.rewardData.rate(LeveragedToken): '0'
   BoostableRebalancePool__1.rewardData.rate(Lido): '0'
   BoostableRebalancePool__1.rewardData.rate(Market): '0'
+  BoostableRebalancePool__1.rewardData.rate(MockFxPriceOracle): '0'
   BoostableRebalancePool__1.rewardData.rate(PlatformFeeSpliter): '0'
   BoostableRebalancePool__1.rewardData.rate(RebalancePool): '0'
   BoostableRebalancePool__1.rewardData.rate(RebalancePoolRegistry): '0'
@@ -2597,6 +2664,7 @@ readings:
   BoostableRebalancePool__1.rewardData.lastUpdate(LeveragedToken): '1707654215'
   BoostableRebalancePool__1.rewardData.lastUpdate(Lido): '0'
   BoostableRebalancePool__1.rewardData.lastUpdate(Market): '0'
+  BoostableRebalancePool__1.rewardData.lastUpdate(MockFxPriceOracle): '0'
   BoostableRebalancePool__1.rewardData.lastUpdate(PlatformFeeSpliter): '0'
   BoostableRebalancePool__1.rewardData.lastUpdate(RebalancePool): '0'
   BoostableRebalancePool__1.rewardData.lastUpdate(RebalancePoolRegistry): '0'
@@ -2632,6 +2700,7 @@ readings:
   BoostableRebalancePool__1.rewardData.finishAt(LeveragedToken): '0'
   BoostableRebalancePool__1.rewardData.finishAt(Lido): '0'
   BoostableRebalancePool__1.rewardData.finishAt(Market): '0'
+  BoostableRebalancePool__1.rewardData.finishAt(MockFxPriceOracle): '0'
   BoostableRebalancePool__1.rewardData.finishAt(PlatformFeeSpliter): '0'
   BoostableRebalancePool__1.rewardData.finishAt(RebalancePool): '0'
   BoostableRebalancePool__1.rewardData.finishAt(RebalancePoolRegistry): '0'
@@ -2667,6 +2736,7 @@ readings:
   BoostableRebalancePool__1.rewardReceiver(LeveragedToken): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(Lido): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(Market): '0x0000000000000000000000000000000000000000'
+  BoostableRebalancePool__1.rewardReceiver(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(PlatformFeeSpliter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(RebalancePool): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(RebalancePoolRegistry): '0x0000000000000000000000000000000000000000'
@@ -2688,6 +2758,10 @@ readings:
   BoostableRebalancePool__1.rewardReceiver(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(xMinter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(xHolderRedeemer): '0x0000000000000000000000000000000000000000'
+  MockFxPriceOracle.getPrice.safePrice: '2497.246700360128004096 # {unit:ether}'
+  MockFxPriceOracle.getPrice.minUnsafePrice: '2497.246700360128004096 # {unit:ether}'
+  MockFxPriceOracle.getPrice.maxUnsafePrice: '2497.246700360128004096 # {unit:ether}'
+  MockFxPriceOracle.price: '2497.246700360128004096 # {unit:ether}'
   RebalancePoolSplitter.owner: GnosisSafe__0
   RebalancePoolSplitter.pendingOwner: '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.getReceivers._receivers($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): []
@@ -2707,6 +2781,7 @@ readings:
   RebalancePoolSplitter.getReceivers._receivers(LeveragedToken): []
   RebalancePoolSplitter.getReceivers._receivers(Lido): []
   RebalancePoolSplitter.getReceivers._receivers(Market): []
+  RebalancePoolSplitter.getReceivers._receivers(MockFxPriceOracle): []
   RebalancePoolSplitter.getReceivers._receivers(PlatformFeeSpliter): []
   RebalancePoolSplitter.getReceivers._receivers(RebalancePool): []
   RebalancePoolSplitter.getReceivers._receivers(RebalancePoolRegistry): []
@@ -2746,6 +2821,7 @@ readings:
   RebalancePoolSplitter.getReceivers._ratios(LeveragedToken): []
   RebalancePoolSplitter.getReceivers._ratios(Lido): []
   RebalancePoolSplitter.getReceivers._ratios(Market): []
+  RebalancePoolSplitter.getReceivers._ratios(MockFxPriceOracle): []
   RebalancePoolSplitter.getReceivers._ratios(PlatformFeeSpliter): []
   RebalancePoolSplitter.getReceivers._ratios(RebalancePool): []
   RebalancePoolSplitter.getReceivers._ratios(RebalancePoolRegistry): []
@@ -2783,6 +2859,7 @@ readings:
   RebalancePoolSplitter.splitter(LeveragedToken): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(Lido): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(Market): '0x0000000000000000000000000000000000000000'
+  RebalancePoolSplitter.splitter(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(PlatformFeeSpliter): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(RebalancePool): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(RebalancePoolRegistry): '0x0000000000000000000000000000000000000000'
@@ -2823,6 +2900,7 @@ readings:
   WstETH.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   WstETH.balanceOf(Lido): '0.0175 # {unit:ether}'
   WstETH.balanceOf(Market): '0.0 # {unit:ether}'
+  WstETH.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   WstETH.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   WstETH.balanceOf(RebalancePool): '1.157354421777380292 # {unit:ether}'
   WstETH.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -2858,6 +2936,7 @@ readings:
   WstETH.nonces(LeveragedToken): '0.0 # {unit:ether}'
   WstETH.nonces(Lido): '0.0 # {unit:ether}'
   WstETH.nonces(Market): '0.0 # {unit:ether}'
+  WstETH.nonces(MockFxPriceOracle): '0.0 # {unit:ether}'
   WstETH.nonces(PlatformFeeSpliter): '0.0 # {unit:ether}'
   WstETH.nonces(RebalancePool): '0.0 # {unit:ether}'
   WstETH.nonces(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -2920,6 +2999,7 @@ readings:
   Gauge_Controller.gauge_relative_weight(LeveragedToken): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(Lido): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(Market): '0.0 # {unit:ether}'
+  Gauge_Controller.gauge_relative_weight(MockFxPriceOracle): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(RebalancePool): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -2955,6 +3035,7 @@ readings:
   Gauge_Controller.gauge_types(LeveragedToken): '!Transaction reverted without a reason string'
   Gauge_Controller.gauge_types(Lido): '!Transaction reverted without a reason string'
   Gauge_Controller.gauge_types(Market): '!Transaction reverted without a reason string'
+  Gauge_Controller.gauge_types(MockFxPriceOracle): '!Transaction reverted without a reason string'
   Gauge_Controller.gauge_types(PlatformFeeSpliter): '!Transaction reverted without a reason string'
   Gauge_Controller.gauge_types(RebalancePool): '!Transaction reverted without a reason string'
   Gauge_Controller.gauge_types(RebalancePoolRegistry): '!Transaction reverted without a reason string'
@@ -2990,6 +3071,7 @@ readings:
   Gauge_Controller.get_gauge_weight(LeveragedToken): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(Lido): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(Market): '0.0 # {unit:ether}'
+  Gauge_Controller.get_gauge_weight(MockFxPriceOracle): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(RebalancePool): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3025,6 +3107,7 @@ readings:
   Gauge_Controller.time_weight(LeveragedToken): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(Lido): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(Market): '0.0 # {unit:ether}'
+  Gauge_Controller.time_weight(MockFxPriceOracle): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(RebalancePool): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3060,6 +3143,7 @@ readings:
   Gauge_Controller.vote_user_power(LeveragedToken): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(Lido): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(Market): '0.0 # {unit:ether}'
+  Gauge_Controller.vote_user_power(MockFxPriceOracle): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(RebalancePool): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3111,6 +3195,7 @@ readings:
   Curve_DAO_Token.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   Curve_DAO_Token.balanceOf(Lido): '0.0 # {unit:ether}'
   Curve_DAO_Token.balanceOf(Market): '0.0 # {unit:ether}'
+  Curve_DAO_Token.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   Curve_DAO_Token.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Curve_DAO_Token.balanceOf(RebalancePool): '0.0 # {unit:ether}'
   Curve_DAO_Token.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3150,13 +3235,14 @@ readings:
   Voting_Escrow.balanceOf(FractionalToken): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(FxnDepositor): '0.0 # {unit:ether}'
-  Voting_Escrow.balanceOf(FxnVoterProxy): '46358.3447843729925258 # {unit:ether}'
+  Voting_Escrow.balanceOf(FxnVoterProxy): '46358.3391865220856231 # {unit:ether}'
   Voting_Escrow.balanceOf(Gauge_Controller): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(GnosisSafe__0): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(GnosisSafe__1): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(Lido): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(Market): '0.0 # {unit:ether}'
+  Voting_Escrow.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(RebalancePool): '0.0 # {unit:ether}'
   Voting_Escrow.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3192,6 +3278,7 @@ readings:
   Voting_Escrow.get_last_user_slope(LeveragedToken): '0'
   Voting_Escrow.get_last_user_slope(Lido): '0'
   Voting_Escrow.get_last_user_slope(Market): '0'
+  Voting_Escrow.get_last_user_slope(MockFxPriceOracle): '0'
   Voting_Escrow.get_last_user_slope(PlatformFeeSpliter): '0'
   Voting_Escrow.get_last_user_slope(RebalancePool): '0'
   Voting_Escrow.get_last_user_slope(RebalancePoolRegistry): '0'
@@ -3227,6 +3314,7 @@ readings:
   Voting_Escrow.locked__end(LeveragedToken): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(Lido): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(Market): '0.0 # {unit:ether}'
+  Voting_Escrow.locked__end(MockFxPriceOracle): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(RebalancePool): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3262,6 +3350,7 @@ readings:
   Voting_Escrow.user_point_epoch(LeveragedToken): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(Lido): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(Market): '0.0 # {unit:ether}'
+  Voting_Escrow.user_point_epoch(MockFxPriceOracle): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(RebalancePool): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3327,6 +3416,7 @@ readings:
   Lido.balanceOf(GnosisSafe__1): '0.0 # {unit:ether}'
   Lido.balanceOf(LeveragedToken): '0.0 # {unit:ether}'
   Lido.balanceOf(Market): '0.000000000000000257 # {unit:ether}'
+  Lido.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   Lido.balanceOf(PlatformFeeSpliter): '5.197900559808995813 # {unit:ether}'
   Lido.balanceOf(RebalancePool): '2.835654645207379804 # {unit:ether}'
   Lido.balanceOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3343,7 +3433,7 @@ readings:
   Lido.balanceOf(WstETH): '3548193.498864804637627201 # {unit:ether}'
   Lido.balanceOf(wstETHWrapper): '0.0 # {unit:ether}'
   Lido.balanceOf(admin): '0.0 # {unit:ether}'
-  Lido.balanceOf(fMinter): '9999.999999999999999999 # {unit:ether}'
+  Lido.balanceOf(fMinter): '19999.999999999999999998 # {unit:ether}'
   Lido.balanceOf(fHolderLiquidator): '0.0 # {unit:ether}'
   Lido.balanceOf(fHolderRedeemer): '0.0 # {unit:ether}'
   Lido.balanceOf(xMinter): '0.0 # {unit:ether}'
@@ -3362,6 +3452,7 @@ readings:
   Lido.nonces(GnosisSafe__1): '0.0 # {unit:ether}'
   Lido.nonces(LeveragedToken): '0.0 # {unit:ether}'
   Lido.nonces(Market): '0.0 # {unit:ether}'
+  Lido.nonces(MockFxPriceOracle): '0.0 # {unit:ether}'
   Lido.nonces(PlatformFeeSpliter): '0.0 # {unit:ether}'
   Lido.nonces(RebalancePool): '0.0 # {unit:ether}'
   Lido.nonces(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3397,6 +3488,7 @@ readings:
   Lido.sharesOf(GnosisSafe__1): '0.0 # {unit:ether}'
   Lido.sharesOf(LeveragedToken): '0.0 # {unit:ether}'
   Lido.sharesOf(Market): '0.000000000000000223 # {unit:ether}'
+  Lido.sharesOf(MockFxPriceOracle): '0.0 # {unit:ether}'
   Lido.sharesOf(PlatformFeeSpliter): '4.49353245346764438 # {unit:ether}'
   Lido.sharesOf(RebalancePool): '2.451394756103965692 # {unit:ether}'
   Lido.sharesOf(RebalancePoolRegistry): '0.0 # {unit:ether}'
@@ -3413,7 +3505,7 @@ readings:
   Lido.sharesOf(WstETH): '3067377.387249938650363244 # {unit:ether}'
   Lido.sharesOf(wstETHWrapper): '0.0 # {unit:ether}'
   Lido.sharesOf(admin): '0.0 # {unit:ether}'
-  Lido.sharesOf(fMinter): '8644.89884283735810299 # {unit:ether}'
+  Lido.sharesOf(fMinter): '17289.79768567471620598 # {unit:ether}'
   Lido.sharesOf(fHolderLiquidator): '0.0 # {unit:ether}'
   Lido.sharesOf(fHolderRedeemer): '0.0 # {unit:ether}'
   Lido.sharesOf(xMinter): '0.0 # {unit:ether}'

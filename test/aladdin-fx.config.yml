@@ -88,7 +88,7 @@ format:
     precision: 1
   - reading: getPrice._maxUnsafePrice
     precision: 1
-  - contractType: Voting Escrow
+  - contract: Voting Escrow
     reading: balanceOf
     precision: 2
   - reading: emaLeverageRatio.lastTime
@@ -103,13 +103,13 @@ format:
   - reading: latestRoundData.answer
     type: int256
     unit: 8
-  - contractType: Market
+  - contract: Market
     type: uint128
     unit: 16
-  - contractType: Market
+  - contract: Market
     type: int128
     unit: 16
-  - contractType: Market
+  - contract: Market
     type: uint64
     unit: 18
   # variable depending when run
@@ -117,18 +117,27 @@ format:
     precision: 4
   - reading: pendingRewards.1
     precision: 4
-  - contractType: "Curve DAO Token"
+  - contract: "Curve DAO Token"
     reading: available_supply
     precision: 0
-  - contractType: "Voting Escrow"
-    reading: totalSupply
+  - reading: totalSupply
     precision: 0
   - reading: price_oracle
     precision: 9
   - reading: leverageRatio
-    precision: 4 # because the price_oracle is not reliable, this isn't
+    precision: 3 # because the price_oracle is not reliable, this isn't
+  - reading: collateralRatio
+    precision: 3
+  - reading: _baseNav
+    precision: 2
+  - reading: _fNav
+    precision: 3
+  - reading: _xNav
+    precision: 3
+  - reading: pendingRewards
+    precision: 4
   # no formatting
-  - contractType: BoostableRebalancePool
+  - contract: BoostableRebalancePool
     reading: numTotalSupplyHistory
   - reading: chainlinkMinMessageCount
   - reading: chainlinkMessageExpiration
