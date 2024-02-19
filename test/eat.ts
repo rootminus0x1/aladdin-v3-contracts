@@ -27,6 +27,8 @@ import {
     parseArg,
     addTokenToWhale,
     whale,
+    makeReader,
+    doReading,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -44,6 +46,10 @@ async function main() {
 
     await dig('base');
     if (getConfig().diagram) writeEatFile('base.diagram.md', await mermaid());
+
+    const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
+    //console.log(`price=${formatEther(startEthPrice)}, baseNav=${formatEther(baseNav)}`);
+
     const [base] = await delve('base'); // get the base readings for comparisons
     writeReadings('base', base);
 
@@ -53,17 +59,26 @@ async function main() {
         .connect(contracts.stETHTreasury.ownerSigner)
         .updatePriceOracle(contracts.MockFxPriceOracle.address);
     // TODO: create a difference between a trigger (no parameters needed) and a trigger template (need to supply parameters)
-    // triggers.ETH = {
-    //     // this is a trigger template
-    //     name: 'ETH',
-    //     pull: async (value: bigint) => {
-    //         return await contracts.MockFxPriceOracle.setPrice(value);
-    //     },
-    // };
-    // const setPrice = await doTrigger(triggers.ETH, startEthPrice); // set to the current eth price, like nothing had changed (approx)
+    triggers.ETH = {
+        // this is a trigger template
+        name: 'ETH',
+        pull: async (value: bigint) => {
+            return await contracts.MockFxPriceOracle.setPrice(value);
+        },
+    };
 
-    const tx0 = await mock.setPrice(startEthPrice);
-    const tx = await contracts.MockFxPriceOracle.setPrice(startEthPrice);
+    const setPrice = await doTrigger(triggers.ETH, baseNav); // set to the current eth price, like nothing had changed (approx)
+    {
+        // check contract calling
+        const checkBaseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
+        if (checkBaseNav != baseNav) console.log('error in baseNav');
+        // check triggers and readers
+        await doTrigger(triggers.ETH, startEthPrice / 2n); // half te price
+        if (startEthPrice / 2n != (await doReading(contracts.stETHTreasury.address, 'getCurrentNav', '_baseNav')).value)
+            console.log('error in trigger and/or reader');
+    }
+
+    await doTrigger(triggers.ETH, baseNav);
 
     // redig
     await dig('mockETH');
@@ -71,7 +86,6 @@ async function main() {
 
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
     writeReadings('mockETH', mockETH);
-    return 0;
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {
