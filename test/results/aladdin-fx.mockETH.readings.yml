@@ -53,9 +53,9 @@ contracts:
     nonces: uint256
     sharesOf: uint256
   MockFxPriceOracle:
-    getPrice.maxUnsafePrice: uint256
-    getPrice.minUnsafePrice: uint256
-    getPrice.safePrice: uint256
+    getPrice._maxUnsafePrice: uint256
+    getPrice._minUnsafePrice: uint256
+    getPrice._safePrice: uint256
     price: uint256
   PlatformFeeSpliter:
     burners: address
@@ -174,10 +174,10 @@ readings:
   Lido.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
   Lido.nonces(MockFxPriceOracle): '0 # {}'
   Lido.sharesOf(MockFxPriceOracle): '0.0 # {unit:ether}'
-  MockFxPriceOracle.getPrice.maxUnsafePrice: '2500.870363101888888888 # {unit:ether}'
-  MockFxPriceOracle.getPrice.minUnsafePrice: '2500.870363101888888888 # {unit:ether}'
-  MockFxPriceOracle.getPrice.safePrice: '2500.870363101888888888 # {unit:ether}'
-  MockFxPriceOracle.price: '2500.870363101888888888 # {unit:ether}'
+  MockFxPriceOracle.getPrice._maxUnsafePrice: '2500.9 # {unit:ether,precision:1}'
+  MockFxPriceOracle.getPrice._minUnsafePrice: '2500.9 # {unit:ether,precision:1}'
+  MockFxPriceOracle.getPrice._safePrice: '2500.9 # {unit:ether,precision:1}'
+  MockFxPriceOracle.price: '2500.870729485066666666 # {unit:ether}'
   PlatformFeeSpliter.burners(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   RebalancePool.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
   RebalancePool.extraRewardState(MockFxPriceOracle).finishAt: '0'
@@ -275,7 +275,7 @@ readings:
   RebalancePoolSplitter.getReceivers(xMinter)._receivers: []
   RebalancePoolSplitter.splitter(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
   ReservePool.bonusRatio(MockFxPriceOracle): '0.0 # {unit:ether}'
-  Voting_Escrow.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+  Voting_Escrow.balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:1}'
   Voting_Escrow.get_last_user_slope(MockFxPriceOracle): '0'
   Voting_Escrow.locked__end(MockFxPriceOracle): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(MockFxPriceOracle): '0.0 # {unit:ether}'

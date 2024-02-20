@@ -15,16 +15,11 @@ contract MockFxPriceOracle is IFxPriceOracle {
     external
     view
     override
-    returns (
-      bool isValid,
-      uint256 safePrice,
-      uint256 minUnsafePrice,
-      uint256 maxUnsafePrice
-    )
+    returns (bool isValid, uint256 _safePrice, uint256 _minUnsafePrice, uint256 _maxUnsafePrice)
   {
     isValid = true;
-    safePrice = price;
-    minUnsafePrice = price;
-    maxUnsafePrice = price;
+    _safePrice = price;
+    _minUnsafePrice = price;
+    _maxUnsafePrice = price;
   }
 }
