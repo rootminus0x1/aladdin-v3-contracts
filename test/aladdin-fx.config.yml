@@ -127,11 +127,11 @@ format:
     precision: 3 # because the price_oracle is not reliable, this isn't
   - reading: collateralRatio
     precision: 3
-  - reading: _baseNav
+  - reading: getCurrentNav._baseNav
     precision: 2
-  - reading: _fNav
+  - reading: getCurrentNav._fNav
     precision: 3
-  - reading: _xNav
+  - reading: getCurrentNav._xNav
     precision: 3
   - reading: pendingRewards
     precision: 4
@@ -144,6 +144,7 @@ format:
   - reading: getChainId
   - reading: getThreshold
   - reading: nonce
+  - reading: nonces
   - reading: decimals
   - reading: epoch
   - reading: time_total

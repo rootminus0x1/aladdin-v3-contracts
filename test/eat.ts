@@ -29,6 +29,9 @@ import {
     whale,
     makeReader,
     doReading,
+    readingsDeltas,
+    withLoggingSync,
+    withLogging,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -85,7 +88,7 @@ async function main() {
     if (getConfig().diagram) writeEatFile('mockETH.diagram.md', await mermaid());
 
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
-    writeReadings('mockETH', mockETH);
+    writeReadings('mockETH', readingsDeltas(mockETH, base));
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {
@@ -285,9 +288,9 @@ async function main() {
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.
-main()
+withLogging(main)()
     .then(() => process.exit(0))
-    .catch((error) => {
+    .catch((error: any) => {
         console.error('Error: %s', error);
         process.exit(1);
     });
