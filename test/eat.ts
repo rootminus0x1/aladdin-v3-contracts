@@ -87,7 +87,8 @@ async function main() {
     if (getConfig().diagram) writeEatFile('mockETH.diagram.md', await mermaid());
 
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
-    writeReadings('mockETH', await readingsDeltas(mockETH, base));
+    writeReadings('mockETH', mockETH);
+    writeReadings('mockETH.delta', await readingsDeltas(mockETH, base));
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {

@@ -5,7 +5,6 @@ addresses:
   Booster: Booster@0x91e575C0CC6E8BC530d897d3d425B57B49A821C6
   Curve_DAO_Token: Curve DAO Token@0x365AccFCa291e7D3914637ABf1F7635dB165Bb09
   FractionalToken: FractionalToken@0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726
-  FxETHTwapOracle: FxETHTwapOracle@0xa84360896cE9152d1780c546305BB54125F962d9
   FxnDepositor: FxnDepositor@0x56B3c8eF8A095f8637B6A84942aA898326B82b91
   FxnVoterProxy: FxnVoterProxy@0xd11a4Ee017cA0BECA8FA45fF2abFe9C6267b7881
   Gauge_Controller: Gauge Controller@0xe60eB8098B34eD775ac44B1ddE864e098C6d7f37
@@ -92,13 +91,6 @@ contracts:
     nav: uint256
     totalSupply: uint256
     treasury: address
-  FxETHTwapOracle:
-    chainlinkETHTwapOracle: address
-    chainlinkStETHTwapOracle: address
-    curvePool: address
-    getPrice._maxUnsafePrice: uint256
-    getPrice._minUnsafePrice: uint256
-    getPrice._safePrice: uint256
   FxnDepositor:
     DENOMINATOR: uint256
     escrow: address
@@ -338,7 +330,6 @@ readings:
   BoostableRebalancePool__0.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__0.balanceOf(fMinter): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__0.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:2}'
-  BoostableRebalancePool__0.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__0.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__0.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__0.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -497,21 +488,6 @@ readings:
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__0.boostCheckpoint(FractionalToken).veSupply: >-
-    could not decode result data
-    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
-    }, code=BAD_DATA, version=6.9.0)
-  BoostableRebalancePool__0.boostCheckpoint(FxETHTwapOracle).historyIndex: >-
-    could not decode result data
-    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
-    }, code=BAD_DATA, version=6.9.0)
-  BoostableRebalancePool__0.boostCheckpoint(FxETHTwapOracle).veBalance: >-
-    could not decode result data
-    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
-    }, code=BAD_DATA, version=6.9.0)
-  BoostableRebalancePool__0.boostCheckpoint(FxETHTwapOracle).veSupply: >-
     could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
@@ -915,7 +891,6 @@ readings:
   BoostableRebalancePool__0.distributors(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(fMinter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(FractionalToken): '0x0000000000000000000000000000000000000000'
-  BoostableRebalancePool__0.distributors(FxETHTwapOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(FxnDepositor): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(FxnVoterProxy): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.distributors(Gauge_Controller): '0x0000000000000000000000000000000000000000'
@@ -957,7 +932,6 @@ readings:
   BoostableRebalancePool__0.getBoostRatio(fHolderRedeemer): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(fMinter): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(FractionalToken): '0.0 # {unit:ether}'
-  BoostableRebalancePool__0.getBoostRatio(FxETHTwapOracle): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(FxnDepositor): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(FxnVoterProxy): '0.0 # {unit:ether}'
   BoostableRebalancePool__0.getBoostRatio(Gauge_Controller): '0.0 # {unit:ether}'
@@ -1008,8 +982,6 @@ readings:
   BoostableRebalancePool__0.pendingRewards(fMinter).1: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards(FractionalToken).0: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards(FractionalToken).1: '0.0 # {unit:ether,precision:4}'
-  BoostableRebalancePool__0.pendingRewards(FxETHTwapOracle).0: '0.0 # {unit:ether,precision:4}'
-  BoostableRebalancePool__0.pendingRewards(FxETHTwapOracle).1: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards(FxnDepositor).0: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards(FxnDepositor).1: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__0.pendingRewards(FxnVoterProxy).0: '0.0 # {unit:ether,precision:4}'
@@ -1099,10 +1071,6 @@ readings:
   BoostableRebalancePool__0.rewardData(FractionalToken).lastUpdate: '0'
   BoostableRebalancePool__0.rewardData(FractionalToken).queued: '0'
   BoostableRebalancePool__0.rewardData(FractionalToken).rate: '0'
-  BoostableRebalancePool__0.rewardData(FxETHTwapOracle).finishAt: '0'
-  BoostableRebalancePool__0.rewardData(FxETHTwapOracle).lastUpdate: '0'
-  BoostableRebalancePool__0.rewardData(FxETHTwapOracle).queued: '0'
-  BoostableRebalancePool__0.rewardData(FxETHTwapOracle).rate: '0'
   BoostableRebalancePool__0.rewardData(FxnDepositor).finishAt: '0'
   BoostableRebalancePool__0.rewardData(FxnDepositor).lastUpdate: '0'
   BoostableRebalancePool__0.rewardData(FxnDepositor).queued: '0'
@@ -1216,7 +1184,6 @@ readings:
   BoostableRebalancePool__0.rewardReceiver(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(fMinter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(FractionalToken): '0x0000000000000000000000000000000000000000'
-  BoostableRebalancePool__0.rewardReceiver(FxETHTwapOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(FxnDepositor): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(FxnVoterProxy): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__0.rewardReceiver(Gauge_Controller): '0x0000000000000000000000000000000000000000'
@@ -1257,7 +1224,6 @@ readings:
   BoostableRebalancePool__1.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__1.balanceOf(fMinter): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__1.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:2}'
-  BoostableRebalancePool__1.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__1.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__1.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   BoostableRebalancePool__1.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -1416,21 +1382,6 @@ readings:
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
     }, code=BAD_DATA, version=6.9.0)
   BoostableRebalancePool__1.boostCheckpoint(FractionalToken).veSupply: >-
-    could not decode result data
-    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
-    }, code=BAD_DATA, version=6.9.0)
-  BoostableRebalancePool__1.boostCheckpoint(FxETHTwapOracle).historyIndex: >-
-    could not decode result data
-    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
-    }, code=BAD_DATA, version=6.9.0)
-  BoostableRebalancePool__1.boostCheckpoint(FxETHTwapOracle).veBalance: >-
-    could not decode result data
-    (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
-    }, code=BAD_DATA, version=6.9.0)
-  BoostableRebalancePool__1.boostCheckpoint(FxETHTwapOracle).veSupply: >-
     could not decode result data
     (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
     info={ "method": "boostCheckpoint", "signature": "boostCheckpoint(address)"
@@ -1834,7 +1785,6 @@ readings:
   BoostableRebalancePool__1.distributors(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(fMinter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(FractionalToken): '0x0000000000000000000000000000000000000000'
-  BoostableRebalancePool__1.distributors(FxETHTwapOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(FxnDepositor): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(FxnVoterProxy): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.distributors(Gauge_Controller): '0x0000000000000000000000000000000000000000'
@@ -1877,7 +1827,6 @@ readings:
   BoostableRebalancePool__1.getBoostRatio(fHolderRedeemer): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(fMinter): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(FractionalToken): '0.0 # {unit:ether}'
-  BoostableRebalancePool__1.getBoostRatio(FxETHTwapOracle): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(FxnDepositor): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(FxnVoterProxy): '0.0 # {unit:ether}'
   BoostableRebalancePool__1.getBoostRatio(Gauge_Controller): '0.0 # {unit:ether}'
@@ -1928,8 +1877,6 @@ readings:
   BoostableRebalancePool__1.pendingRewards(fMinter).1: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards(FractionalToken).0: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards(FractionalToken).1: '0.0 # {unit:ether,precision:4}'
-  BoostableRebalancePool__1.pendingRewards(FxETHTwapOracle).0: '0.0 # {unit:ether,precision:4}'
-  BoostableRebalancePool__1.pendingRewards(FxETHTwapOracle).1: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards(FxnDepositor).0: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards(FxnDepositor).1: '0.0 # {unit:ether,precision:4}'
   BoostableRebalancePool__1.pendingRewards(FxnVoterProxy).0: '0.0 # {unit:ether,precision:4}'
@@ -2019,10 +1966,6 @@ readings:
   BoostableRebalancePool__1.rewardData(FractionalToken).lastUpdate: '0'
   BoostableRebalancePool__1.rewardData(FractionalToken).queued: '0'
   BoostableRebalancePool__1.rewardData(FractionalToken).rate: '0'
-  BoostableRebalancePool__1.rewardData(FxETHTwapOracle).finishAt: '0'
-  BoostableRebalancePool__1.rewardData(FxETHTwapOracle).lastUpdate: '0'
-  BoostableRebalancePool__1.rewardData(FxETHTwapOracle).queued: '0'
-  BoostableRebalancePool__1.rewardData(FxETHTwapOracle).rate: '0'
   BoostableRebalancePool__1.rewardData(FxnDepositor).finishAt: '0'
   BoostableRebalancePool__1.rewardData(FxnDepositor).lastUpdate: '0'
   BoostableRebalancePool__1.rewardData(FxnDepositor).queued: '0'
@@ -2136,7 +2079,6 @@ readings:
   BoostableRebalancePool__1.rewardReceiver(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(fMinter): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(FractionalToken): '0x0000000000000000000000000000000000000000'
-  BoostableRebalancePool__1.rewardReceiver(FxETHTwapOracle): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(FxnDepositor): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(FxnVoterProxy): '0x0000000000000000000000000000000000000000'
   BoostableRebalancePool__1.rewardReceiver(Gauge_Controller): '0x0000000000000000000000000000000000000000'
@@ -2189,7 +2131,6 @@ readings:
   Curve_DAO_Token.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   Curve_DAO_Token.balanceOf(fMinter): '0.0 # {unit:ether,precision:2}'
   Curve_DAO_Token.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:2}'
-  Curve_DAO_Token.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   Curve_DAO_Token.balanceOf(FxnDepositor): '1397.71 # {unit:ether,precision:2}'
   Curve_DAO_Token.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   Curve_DAO_Token.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -2233,7 +2174,6 @@ readings:
   FractionalToken.balanceOf(fHolderLiquidator): '0.0 # {unit:ether,precision:2}'
   FractionalToken.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   FractionalToken.balanceOf(fMinter): '0.0 # {unit:ether,precision:2}'
-  FractionalToken.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   FractionalToken.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:2}'
   FractionalToken.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   FractionalToken.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -2264,12 +2204,6 @@ readings:
   FractionalToken.nav: '1.0 # {unit:ether}'
   FractionalToken.totalSupply: '12136955 # {precision:0,unit:ether}'
   FractionalToken.treasury: stETHTreasury
-  FxETHTwapOracle.chainlinkETHTwapOracle: '0x460B3CdE57DfbA90DBed02fd83d3990a92DA1230'
-  FxETHTwapOracle.chainlinkStETHTwapOracle: '0xD24AC180e6769Fd5F624e7605B93084171074A77'
-  FxETHTwapOracle.curvePool: '0x21E27a5E5513D6e65C4f830167390997aA84843a'
-  FxETHTwapOracle.getPrice._maxUnsafePrice: '2500.9 # {unit:ether,precision:1}'
-  FxETHTwapOracle.getPrice._minUnsafePrice: '2495.1 # {unit:ether,precision:1}'
-  FxETHTwapOracle.getPrice._safePrice: '2500.9 # {unit:ether,precision:1}'
   FxnDepositor.DENOMINATOR: '0.00000000000001 # {unit:ether}'
   FxnDepositor.escrow: Voting_Escrow
   FxnDepositor.fxn: Curve_DAO_Token
@@ -2298,7 +2232,6 @@ readings:
   Gauge_Controller.gauge_relative_weight(fHolderRedeemer): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(fMinter): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(FractionalToken): '0.0 # {unit:ether}'
-  Gauge_Controller.gauge_relative_weight(FxETHTwapOracle): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(FxnDepositor): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(FxnVoterProxy): '0.0 # {unit:ether}'
   Gauge_Controller.gauge_relative_weight(GnosisSafe__0): '0.0 # {unit:ether}'
@@ -2334,7 +2267,6 @@ readings:
   Gauge_Controller.gauge_types(fHolderRedeemer): Transaction reverted without a reason string
   Gauge_Controller.gauge_types(fMinter): Transaction reverted without a reason string
   Gauge_Controller.gauge_types(FractionalToken): Transaction reverted without a reason string
-  Gauge_Controller.gauge_types(FxETHTwapOracle): Transaction reverted without a reason string
   Gauge_Controller.gauge_types(FxnDepositor): Transaction reverted without a reason string
   Gauge_Controller.gauge_types(FxnVoterProxy): Transaction reverted without a reason string
   Gauge_Controller.gauge_types(GnosisSafe__0): Transaction reverted without a reason string
@@ -2370,7 +2302,6 @@ readings:
   Gauge_Controller.get_gauge_weight(fHolderRedeemer): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(fMinter): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(FractionalToken): '0.0 # {unit:ether}'
-  Gauge_Controller.get_gauge_weight(FxETHTwapOracle): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(FxnDepositor): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(FxnVoterProxy): '0.0 # {unit:ether}'
   Gauge_Controller.get_gauge_weight(GnosisSafe__0): '0.0 # {unit:ether}'
@@ -2410,7 +2341,6 @@ readings:
   Gauge_Controller.time_weight(fHolderRedeemer): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(fMinter): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(FractionalToken): '0.0 # {unit:ether}'
-  Gauge_Controller.time_weight(FxETHTwapOracle): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(FxnDepositor): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(FxnVoterProxy): '0.0 # {unit:ether}'
   Gauge_Controller.time_weight(GnosisSafe__0): '0.0 # {unit:ether}'
@@ -2447,7 +2377,6 @@ readings:
   Gauge_Controller.vote_user_power(fHolderRedeemer): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(fMinter): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(FractionalToken): '0.0 # {unit:ether}'
-  Gauge_Controller.vote_user_power(FxETHTwapOracle): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(FxnDepositor): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(FxnVoterProxy): '0.0 # {unit:ether}'
   Gauge_Controller.vote_user_power(GnosisSafe__0): '0.0 # {unit:ether}'
@@ -2506,7 +2435,6 @@ readings:
   LeveragedToken.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   LeveragedToken.balanceOf(fMinter): '0.0 # {unit:ether,precision:2}'
   LeveragedToken.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:2}'
-  LeveragedToken.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   LeveragedToken.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:2}'
   LeveragedToken.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   LeveragedToken.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -2547,7 +2475,6 @@ readings:
   Lido.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   Lido.balanceOf(fMinter): '10000.00 # {unit:ether,precision:2}'
   Lido.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:2}'
-  Lido.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   Lido.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:2}'
   Lido.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   Lido.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -2613,7 +2540,6 @@ readings:
   Lido.nonces(fHolderRedeemer): '0 # {}'
   Lido.nonces(fMinter): '0 # {}'
   Lido.nonces(FractionalToken): '0 # {}'
-  Lido.nonces(FxETHTwapOracle): '0 # {}'
   Lido.nonces(FxnDepositor): '0 # {}'
   Lido.nonces(FxnVoterProxy): '0 # {}'
   Lido.nonces(Gauge_Controller): '0 # {}'
@@ -2649,7 +2575,6 @@ readings:
   Lido.sharesOf(fHolderRedeemer): '0.0 # {unit:ether}'
   Lido.sharesOf(fMinter): '8644.89884283735810299 # {unit:ether}'
   Lido.sharesOf(FractionalToken): '0.0 # {unit:ether}'
-  Lido.sharesOf(FxETHTwapOracle): '0.0 # {unit:ether}'
   Lido.sharesOf(FxnDepositor): '0.0 # {unit:ether}'
   Lido.sharesOf(FxnVoterProxy): '0.0 # {unit:ether}'
   Lido.sharesOf(Gauge_Controller): '0.0 # {unit:ether}'
@@ -2712,7 +2637,6 @@ readings:
   PlatformFeeSpliter.burners(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(fMinter): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(FractionalToken): '0x0000000000000000000000000000000000000000'
-  PlatformFeeSpliter.burners(FxETHTwapOracle): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(FxnDepositor): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(FxnVoterProxy): '0x0000000000000000000000000000000000000000'
   PlatformFeeSpliter.burners(Gauge_Controller): '0x0000000000000000000000000000000000000000'
@@ -2754,7 +2678,6 @@ readings:
   RebalancePool.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   RebalancePool.balanceOf(fMinter): '0.0 # {unit:ether,precision:2}'
   RebalancePool.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:2}'
-  RebalancePool.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   RebalancePool.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:2}'
   RebalancePool.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   RebalancePool.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -2836,11 +2759,6 @@ readings:
   RebalancePool.extraRewardState(FractionalToken).periodLength: '0'
   RebalancePool.extraRewardState(FractionalToken).queued: '0.0 # {unit:ether}'
   RebalancePool.extraRewardState(FractionalToken).rate: '0'
-  RebalancePool.extraRewardState(FxETHTwapOracle).finishAt: '0'
-  RebalancePool.extraRewardState(FxETHTwapOracle).lastUpdate: '0'
-  RebalancePool.extraRewardState(FxETHTwapOracle).periodLength: '0'
-  RebalancePool.extraRewardState(FxETHTwapOracle).queued: '0.0 # {unit:ether}'
-  RebalancePool.extraRewardState(FxETHTwapOracle).rate: '0'
   RebalancePool.extraRewardState(FxnDepositor).finishAt: '0'
   RebalancePool.extraRewardState(FxnDepositor).lastUpdate: '0'
   RebalancePool.extraRewardState(FxnDepositor).periodLength: '0'
@@ -2981,7 +2899,6 @@ readings:
   RebalancePool.rewardManager(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(fMinter): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(FractionalToken): '0x0000000000000000000000000000000000000000'
-  RebalancePool.rewardManager(FxETHTwapOracle): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(FxnDepositor): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(FxnVoterProxy): '0x0000000000000000000000000000000000000000'
   RebalancePool.rewardManager(Gauge_Controller): '0x0000000000000000000000000000000000000000'
@@ -3021,7 +2938,6 @@ readings:
   RebalancePool.unlockedBalanceOf(fHolderRedeemer): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(fMinter): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(FractionalToken): '0.0 # {unit:ether}'
-  RebalancePool.unlockedBalanceOf(FxETHTwapOracle): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(FxnDepositor): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(FxnVoterProxy): '0.0 # {unit:ether}'
   RebalancePool.unlockedBalanceOf(Gauge_Controller): '0.0 # {unit:ether}'
@@ -3067,8 +2983,6 @@ readings:
   RebalancePool.unlockingBalanceOf(fMinter)._unlockAt: '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf(FractionalToken)._balance: '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf(FractionalToken)._unlockAt: '0.0 # {unit:ether}'
-  RebalancePool.unlockingBalanceOf(FxETHTwapOracle)._balance: '0.0 # {unit:ether}'
-  RebalancePool.unlockingBalanceOf(FxETHTwapOracle)._unlockAt: '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf(FxnDepositor)._balance: '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf(FxnDepositor)._unlockAt: '0.0 # {unit:ether}'
   RebalancePool.unlockingBalanceOf(FxnVoterProxy)._balance: '0.0 # {unit:ether}'
@@ -3151,8 +3065,6 @@ readings:
   RebalancePoolSplitter.getReceivers(fMinter)._receivers: []
   RebalancePoolSplitter.getReceivers(FractionalToken)._ratios: []
   RebalancePoolSplitter.getReceivers(FractionalToken)._receivers: []
-  RebalancePoolSplitter.getReceivers(FxETHTwapOracle)._ratios: []
-  RebalancePoolSplitter.getReceivers(FxETHTwapOracle)._receivers: []
   RebalancePoolSplitter.getReceivers(FxnDepositor)._ratios: []
   RebalancePoolSplitter.getReceivers(FxnDepositor)._receivers: []
   RebalancePoolSplitter.getReceivers(FxnVoterProxy)._ratios: []
@@ -3219,7 +3131,6 @@ readings:
   RebalancePoolSplitter.splitter(fHolderRedeemer): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(fMinter): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(FractionalToken): '0x0000000000000000000000000000000000000000'
-  RebalancePoolSplitter.splitter(FxETHTwapOracle): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(FxnDepositor): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(FxnVoterProxy): '0x0000000000000000000000000000000000000000'
   RebalancePoolSplitter.splitter(Gauge_Controller): '0x0000000000000000000000000000000000000000'
@@ -3267,7 +3178,6 @@ readings:
   ReservePool.bonusRatio(fHolderRedeemer): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(fMinter): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(FractionalToken): '0.0 # {unit:ether}'
-  ReservePool.bonusRatio(FxETHTwapOracle): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(FxnDepositor): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(FxnVoterProxy): '0.0 # {unit:ether}'
   ReservePool.bonusRatio(Gauge_Controller): '0.0 # {unit:ether}'
@@ -3341,7 +3251,6 @@ readings:
   Voting_Escrow.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:1}'
   Voting_Escrow.balanceOf(fMinter): '0.0 # {unit:ether,precision:1}'
   Voting_Escrow.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:1}'
-  Voting_Escrow.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:1}'
   Voting_Escrow.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:1}'
   Voting_Escrow.balanceOf(FxnVoterProxy): '46358.3 # {unit:ether,precision:1}'
   Voting_Escrow.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:1}'
@@ -3382,7 +3291,6 @@ readings:
   Voting_Escrow.get_last_user_slope(fHolderRedeemer): '0'
   Voting_Escrow.get_last_user_slope(fMinter): '0'
   Voting_Escrow.get_last_user_slope(FractionalToken): '0'
-  Voting_Escrow.get_last_user_slope(FxETHTwapOracle): '0'
   Voting_Escrow.get_last_user_slope(FxnDepositor): '0'
   Voting_Escrow.get_last_user_slope(FxnVoterProxy): '373190060460180'
   Voting_Escrow.get_last_user_slope(Gauge_Controller): '0'
@@ -3418,7 +3326,6 @@ readings:
   Voting_Escrow.locked__end(fHolderRedeemer): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(fMinter): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(FractionalToken): '0.0 # {unit:ether}'
-  Voting_Escrow.locked__end(FxETHTwapOracle): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(FxnDepositor): '0.0 # {unit:ether}'
   Voting_Escrow.locked__end(FxnVoterProxy): '0.0000000018319392 # {unit:ether}'
   Voting_Escrow.locked__end(Gauge_Controller): '0.0 # {unit:ether}'
@@ -3458,7 +3365,6 @@ readings:
   Voting_Escrow.user_point_epoch(fHolderRedeemer): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(fMinter): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(FractionalToken): '0.0 # {unit:ether}'
-  Voting_Escrow.user_point_epoch(FxETHTwapOracle): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(FxnDepositor): '0.0 # {unit:ether}'
   Voting_Escrow.user_point_epoch(FxnVoterProxy): '0.000000000000000039 # {unit:ether}'
   Voting_Escrow.user_point_epoch(Gauge_Controller): '0.0 # {unit:ether}'
@@ -3494,7 +3400,6 @@ readings:
   WstETH.balanceOf(fHolderRedeemer): '0.0 # {unit:ether,precision:2}'
   WstETH.balanceOf(fMinter): '0.0 # {unit:ether,precision:2}'
   WstETH.balanceOf(FractionalToken): '0.0 # {unit:ether,precision:2}'
-  WstETH.balanceOf(FxETHTwapOracle): '0.0 # {unit:ether,precision:2}'
   WstETH.balanceOf(FxnDepositor): '0.0 # {unit:ether,precision:2}'
   WstETH.balanceOf(FxnVoterProxy): '0.0 # {unit:ether,precision:2}'
   WstETH.balanceOf(Gauge_Controller): '0.0 # {unit:ether,precision:2}'
@@ -3531,7 +3436,6 @@ readings:
   WstETH.nonces(fHolderRedeemer): '0 # {}'
   WstETH.nonces(fMinter): '0 # {}'
   WstETH.nonces(FractionalToken): '0 # {}'
-  WstETH.nonces(FxETHTwapOracle): '0 # {}'
   WstETH.nonces(FxnDepositor): '0 # {}'
   WstETH.nonces(FxnVoterProxy): '0 # {}'
   WstETH.nonces(Gauge_Controller): '0 # {}'
