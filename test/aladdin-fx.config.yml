@@ -82,6 +82,9 @@ events:
     args: []
 
 format:
+  - reading: price
+    contract: MockFxPriceOracle
+    precision: 1
   - reading: getPrice._safePrice
     precision: 1
   - reading: getPrice._minUnsafePrice
@@ -116,9 +119,9 @@ format:
     unit: 18
   # variable depending when run
   - reading: pendingRewards.0
-    precision: 4
+    precision: 3
   - reading: pendingRewards.1
-    precision: 4
+    precision: 3
   - contract: "Curve DAO Token"
     reading: available_supply
     precision: 0
