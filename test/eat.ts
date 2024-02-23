@@ -18,7 +18,6 @@ import {
     writeReadings,
     makeTrigger,
     Trigger,
-    writeEatFile,
     mermaid,
     users,
     getSigner,
@@ -31,6 +30,8 @@ import {
     doReading,
     readingsDeltas,
     withLogging,
+    writeDiagram,
+    writeReadingsDelta,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -47,7 +48,8 @@ async function main() {
     // to the diagram - I think this is just another reading - does etherscan have events?
 
     await dig('base');
-    if (getConfig().diagram) writeEatFile('base.diagram.md', await mermaid());
+    // TODO: wrap this into a config.writeDaigram('base'); which would write .mmd & .md
+    if (getConfig().diagram) writeDiagram('base', await mermaid());
 
     const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
     //console.log(`price=${formatEther(startEthPrice)}, baseNav=${formatEther(baseNav)}`);
@@ -69,6 +71,7 @@ async function main() {
         },
     };
 
+    /*
     const setPrice = await doTrigger(triggers.ETH, baseNav); // set to the current eth price, like nothing had changed (approx)
     {
         // check contract calling
@@ -79,16 +82,15 @@ async function main() {
         if (startEthPrice / 2n != (await doReading(contracts.stETHTreasury.address, 'getCurrentNav', '_baseNav')).value)
             console.log('error in trigger and/or reader');
     }
-
-    await doTrigger(triggers.ETH, baseNav);
-
+   */
+    const outcome = await doTrigger(triggers.ETH, baseNav);
     // redig
     await dig('mockETH');
-    if (getConfig().diagram) writeEatFile('mockETH.diagram.md', await mermaid());
+    if (getConfig().diagram) writeDiagram('mockETH', await mermaid());
 
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
     writeReadings('mockETH', mockETH);
-    writeReadings('mockETH.delta', await readingsDeltas(mockETH, base));
+    writeReadingsDelta('mockETH', await readingsDeltas(mockETH, base), [outcome]);
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {

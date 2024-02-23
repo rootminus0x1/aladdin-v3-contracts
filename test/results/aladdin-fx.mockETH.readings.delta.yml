@@ -1,3 +1,7 @@
+simulation:
+  - trigger:
+      name: ETH
+    gas: 43567n
 addresses:
   BoostableRebalancePool__0: BoostableRebalancePool@0xc6dEe5913e010895F3702bc43a40d661B13a40BD
   BoostableRebalancePool__1: BoostableRebalancePool@0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9

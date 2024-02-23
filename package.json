@@ -17,9 +17,11 @@
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
     "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage",
-    "eat:svg1": "mmdc -i test/results/${0}.diagram.md -o test/results/${0}.diagram.svg && mv test/results/${0}.diagram-1.svg test/results/${0}.diagram.svg",
+    "debug": "find test/results -name \"*.mmd\" -exec basename -s .md {} \\; | xargs mmdc -i ${0}.mmd -o ${0%.md}.svg",
+    "eat:svg": "yarn eat:svg1",
+    "eat:svg1": "cd test/results && find . -name \"${0}*.diagram.mmd\" -exec mmdc -i {} \\;",
     "eat:run1": "ts-node test/eat.ts test/${0}.config.yml",
-    "eat1": "yarn eat:run1 ${0} && yarn eat:svg1 ${0}.base",
+    "eat1": "yarn eat:run1 ${0} && yarn eat:svg1 ${0}",
     "eat": "yarn eat1 aladdin-fx"
   },
   "devDependencies": {
