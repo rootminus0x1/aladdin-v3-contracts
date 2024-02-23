@@ -1,0 +1,252 @@
+simulation:
+  - trigger:
+      name: ETH
+    gas: 43567n
+readings:
+  - BoostableRebalancePool__0: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+    contract: BoostableRebalancePool
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+      - boostCheckpoint.historyIndex: uint32
+        boostCheckpoint.veBalance: uint112
+        boostCheckpoint.veSupply: uint112
+        readings:
+          - boostCheckpoint(MockFxPriceOracle).historyIndex: >-
+              could not decode result data
+              (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              info={ "method": "boostCheckpoint", "signature":
+              "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+          - boostCheckpoint(MockFxPriceOracle).veBalance: >-
+              could not decode result data
+              (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              info={ "method": "boostCheckpoint", "signature":
+              "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+          - boostCheckpoint(MockFxPriceOracle).veSupply: >-
+              could not decode result data
+              (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              info={ "method": "boostCheckpoint", "signature":
+              "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+      - distributors: address
+        readings:
+          - distributors(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
+      - getBoostRatio: uint256
+        readings:
+          - getBoostRatio(MockFxPriceOracle): '0.0 # {unit:ether}'
+      - pendingRewards.0: uint256
+        pendingRewards.1: uint256
+        readings:
+          - pendingRewards(MockFxPriceOracle).0: '0.0 # {unit:ether,precision:3}'
+          - pendingRewards(MockFxPriceOracle).1: '0.0 # {unit:ether,precision:3}'
+          - pendingRewards(WstETH).1: '+0.000 # {unit:ether,precision:3}'
+      - rewardData.finishAt: uint40
+        rewardData.lastUpdate: uint40
+        rewardData.queued: uint96
+        rewardData.rate: uint80
+        readings:
+          - rewardData(MockFxPriceOracle).finishAt: '0'
+          - rewardData(MockFxPriceOracle).lastUpdate: '0'
+          - rewardData(MockFxPriceOracle).queued: '0'
+          - rewardData(MockFxPriceOracle).rate: '0'
+      - rewardReceiver: address
+        readings:
+          - rewardReceiver(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
+  - BoostableRebalancePool__1: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
+    contract: BoostableRebalancePool
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+      - boostCheckpoint.historyIndex: uint32
+        boostCheckpoint.veBalance: uint112
+        boostCheckpoint.veSupply: uint112
+        readings:
+          - boostCheckpoint(MockFxPriceOracle).historyIndex: >-
+              could not decode result data
+              (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              info={ "method": "boostCheckpoint", "signature":
+              "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+          - boostCheckpoint(MockFxPriceOracle).veBalance: >-
+              could not decode result data
+              (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              info={ "method": "boostCheckpoint", "signature":
+              "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+          - boostCheckpoint(MockFxPriceOracle).veSupply: >-
+              could not decode result data
+              (value="0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              info={ "method": "boostCheckpoint", "signature":
+              "boostCheckpoint(address)" }, code=BAD_DATA, version=6.9.0)
+      - distributors: address
+        readings:
+          - distributors(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
+      - getBoostRatio: uint256
+        readings:
+          - getBoostRatio(MockFxPriceOracle): '0.0 # {unit:ether}'
+      - pendingRewards.0: uint256
+        pendingRewards.1: uint256
+        readings:
+          - pendingRewards(MockFxPriceOracle).0: '0.0 # {unit:ether,precision:3}'
+          - pendingRewards(MockFxPriceOracle).1: '0.0 # {unit:ether,precision:3}'
+          - pendingRewards(WstETH).1: '+0.000 # {unit:ether,precision:3}'
+      - rewardData.finishAt: uint40
+        rewardData.lastUpdate: uint40
+        rewardData.queued: uint96
+        rewardData.rate: uint80
+        readings:
+          - rewardData(MockFxPriceOracle).finishAt: '0'
+          - rewardData(MockFxPriceOracle).lastUpdate: '0'
+          - rewardData(MockFxPriceOracle).queued: '0'
+          - rewardData(MockFxPriceOracle).rate: '0'
+      - rewardReceiver: address
+        readings:
+          - rewardReceiver(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
+  - Curve_DAO_Token: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+    contract: Curve DAO Token
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+  - FractionalToken: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    contract: FractionalToken
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+  - Gauge_Controller: '0xe60eB8098B34eD775ac44B1ddE864e098C6d7f37'
+    contract: Gauge Controller
+    functions:
+      - gauge_relative_weight: uint256
+        readings:
+          - gauge_relative_weight(MockFxPriceOracle): '0.0 # {unit:ether}'
+      - gauge_types: int128
+        readings:
+          - gauge_types(MockFxPriceOracle): Transaction reverted without a reason string
+      - get_gauge_weight: uint256
+        readings:
+          - get_gauge_weight(MockFxPriceOracle): '0.0 # {unit:ether}'
+      - time_weight: uint256
+        readings:
+          - time_weight(MockFxPriceOracle): '0.0 # {unit:ether}'
+      - vote_user_power: uint256
+        readings:
+          - vote_user_power(MockFxPriceOracle): '0.0 # {unit:ether}'
+  - LeveragedToken: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    contract: LeveragedToken
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+  - Lido: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    contract: Lido
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+      - nonces: uint256
+        readings:
+          - nonces(MockFxPriceOracle): '0 # {}'
+      - sharesOf: uint256
+        readings:
+          - sharesOf(MockFxPriceOracle): '0.0 # {unit:ether}'
+  - MockFxPriceOracle: '0xF357118EBd576f3C812c7875B1A1651a7f140E9C'
+    contract: MockFxPriceOracle
+    functions:
+      - getPrice._maxUnsafePrice: uint256
+        getPrice._minUnsafePrice: uint256
+        getPrice._safePrice: uint256
+        readings:
+          - getPrice._maxUnsafePrice: '2500.9 # {unit:ether,precision:1}'
+          - getPrice._minUnsafePrice: '2500.9 # {unit:ether,precision:1}'
+          - getPrice._safePrice: '2500.9 # {unit:ether,precision:1}'
+      - price: uint256
+        readings:
+          - price: '2500.9 # {unit:ether,precision:1}'
+  - PlatformFeeSpliter: '0x0084C2e1B1823564e597Ff4848a88D61ac63D703'
+    contract: PlatformFeeSpliter
+    functions:
+      - burners: address
+        readings:
+          - burners(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
+  - RebalancePool: '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
+    contract: RebalancePool
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+      - extraRewardState.finishAt: uint48
+        extraRewardState.lastUpdate: uint48
+        extraRewardState.periodLength: uint32
+        extraRewardState.queued: uint256
+        extraRewardState.rate: uint128
+        readings:
+          - extraRewardState(MockFxPriceOracle).finishAt: '0'
+          - extraRewardState(MockFxPriceOracle).lastUpdate: '0'
+          - extraRewardState(MockFxPriceOracle).periodLength: '0'
+          - extraRewardState(MockFxPriceOracle).queued: '0.0 # {unit:ether}'
+          - extraRewardState(MockFxPriceOracle).rate: '0'
+      - rewardManager: address
+        readings:
+          - rewardManager(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
+      - unlockedBalanceOf: uint256
+        readings:
+          - unlockedBalanceOf(MockFxPriceOracle): '0.0 # {unit:ether}'
+      - unlockingBalanceOf._balance: uint256
+        unlockingBalanceOf._unlockAt: uint256
+        readings:
+          - unlockingBalanceOf(MockFxPriceOracle)._balance: '0.0 # {unit:ether}'
+          - unlockingBalanceOf(MockFxPriceOracle)._unlockAt: '0.0 # {unit:ether}'
+  - RebalancePoolSplitter: '0x79c5f5b0753acE25ecdBdA4c2Bc86Ab074B6c2Bb'
+    contract: RebalancePoolSplitter
+    functions:
+      - getReceivers._ratios: uint256[]
+        getReceivers._receivers: address[]
+        readings:
+          - getReceivers(MockFxPriceOracle)._ratios: []
+          - getReceivers(MockFxPriceOracle)._receivers: []
+      - splitter: address
+        readings:
+          - splitter(MockFxPriceOracle): '0x0000000000000000000000000000000000000000'
+  - ReservePool: '0x5d0Aacf75116d1645Db2B3d1Ca4b303ef0CA3752'
+    contract: ReservePool
+    functions:
+      - bonusRatio: uint256
+        readings:
+          - bonusRatio(MockFxPriceOracle): '0.0 # {unit:ether}'
+  - stETHTreasury: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    contract: stETHTreasury
+    functions:
+      - leverageRatio: uint256
+        readings:
+          - leverageRatio: '+0.000 # {unit:ether,precision:3}'
+      - priceOracle: address
+        readings:
+          - priceOracle: '"FxETHTwapOracle" -> "MockFxPriceOracle}"'
+  - Voting_Escrow: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
+    contract: Voting Escrow
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(FxnVoterProxy): '+0.0 # {unit:ether,precision:1}'
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:1}'
+      - get_last_user_slope: int128
+        readings:
+          - get_last_user_slope(MockFxPriceOracle): '0'
+      - locked__end: uint256
+        readings:
+          - locked__end(MockFxPriceOracle): '0.0 # {unit:ether}'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '+0 # {precision:0,unit:ether}'
+      - user_point_epoch: uint256
+        readings:
+          - user_point_epoch(MockFxPriceOracle): '0.0 # {unit:ether}'
+  - WstETH: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
+    contract: WstETH
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(MockFxPriceOracle): '0.0 # {unit:ether,precision:2}'
+      - nonces: uint256
+        readings:
+          - nonces(MockFxPriceOracle): '0 # {}'

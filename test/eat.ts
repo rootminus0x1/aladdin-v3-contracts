@@ -48,7 +48,6 @@ async function main() {
     // to the diagram - I think this is just another reading - does etherscan have events?
 
     await dig('base');
-    // TODO: wrap this into a config.writeDaigram('base'); which would write .mmd & .md
     if (getConfig().diagram) writeDiagram('base', await mermaid());
 
     const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
