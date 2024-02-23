@@ -22,7 +22,8 @@
     "eat:svg1": "cd test/results && find . -name \"${0}*.diagram.mmd\" -exec mmdc -i {} \\;",
     "eat:run1": "ts-node test/eat.ts test/${0}.config.yml",
     "eat1": "yarn eat:run1 ${0} && yarn eat:svg1 ${0}",
-    "eat": "yarn eat1 aladdin-fx"
+    "eat": "yarn eat1 aladdin-fx",
+    "eat:debug": "yarn eat1 debug"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^10.6.1",

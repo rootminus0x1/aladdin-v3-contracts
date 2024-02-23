@@ -1,0 +1,140 @@
+simulation:
+  - trigger:
+      name: ETH
+      args:
+        - 1600000000000000000000n
+    gas: 26431n
+  - trigger:
+      name: function toString() { [native code] }day
+      args:
+        - 86400
+  - trigger:
+      name: RebalancePool(wstETHWrapper).liquidate
+    gas: 488450n
+readings:
+  - BoostableRebalancePool__0: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+    contract: BoostableRebalancePool
+    functions:
+      - pendingRewards.0: uint256
+        pendingRewards.1: uint256
+        readings:
+          - pendingRewards(WstETH).0: '+0.192 # {unit:ether,precision:3}'
+          - pendingRewards(WstETH).1: '-0.191 # {unit:ether,precision:3}'
+  - BoostableRebalancePool__1: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
+    contract: BoostableRebalancePool
+    functions:
+      - pendingRewards.0: uint256
+        pendingRewards.1: uint256
+        readings:
+          - pendingRewards(WstETH).0: '+0.192 # {unit:ether,precision:3}'
+          - pendingRewards(WstETH).1: '-0.191 # {unit:ether,precision:3}'
+  - Curve_DAO_Token: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+    contract: Curve DAO Token
+    functions:
+      - available_supply: uint256
+        readings:
+          - available_supply: '+269 # {precision:0,unit:ether}'
+      - balanceOf: uint256
+        readings:
+          - balanceOf(RebalanceWithBonusToken__0): '-2.0 # {unit:ether,precision:2}'
+  - FractionalToken: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    contract: FractionalToken
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(RebalancePool): '-33956.49 # {unit:ether,precision:2}'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '-33956 # {precision:0,unit:ether}'
+  - LeveragedToken: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    contract: LeveragedToken
+    functions:
+      - nav: uint256
+        readings:
+          - nav: '-0.00062814224340701 # {unit:ether}'
+  - Lido: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    contract: Lido
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(stETHTreasury): '-20.94 # {unit:ether,precision:2}'
+          - balanceOf(WstETH): '+20.95 # {unit:ether,precision:2}'
+      - sharesOf: uint256
+        readings:
+          - sharesOf(stETHTreasury): '-18.110387494707531184 # {unit:ether}'
+          - sharesOf(WstETH): '+18.110387494707531184 # {unit:ether}'
+  - MockFxPriceOracle: '0xF357118EBd576f3C812c7875B1A1651a7f140E9C'
+    contract: MockFxPriceOracle
+    functions:
+      - getPrice._maxUnsafePrice: uint256
+        getPrice._minUnsafePrice: uint256
+        getPrice._safePrice: uint256
+        readings:
+          - getPrice._maxUnsafePrice: '-900.8 # {unit:ether,precision:1}'
+          - getPrice._minUnsafePrice: '-900.8 # {unit:ether,precision:1}'
+          - getPrice._safePrice: '-900.8 # {unit:ether,precision:1}'
+      - price: uint256
+        readings:
+          - price: '-900.8 # {unit:ether,precision:1}'
+  - RebalancePool: '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
+    contract: RebalancePool
+    functions:
+      - epochState.epoch: uint64
+        readings:
+          - epochState.epoch: '1'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '-14241 # {precision:0,unit:ether}'
+      - totalUnlocking: uint256
+        readings:
+          - totalUnlocking: '-19714.952389819415148249 # {unit:ether}'
+  - RebalancePoolRegistry: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
+    contract: RebalancePoolRegistry
+    functions:
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '-14241 # {precision:0,unit:ether}'
+  - stETHTreasury: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    contract: stETHTreasury
+    functions:
+      - collateralRatio: uint256
+        readings:
+          - collateralRatio: '-0.616 # {unit:ether,precision:3}'
+      - emaLeverageRatio.lastEmaValue: uint96
+        emaLeverageRatio.lastTime: uint40
+        emaLeverageRatio.lastValue: uint96
+        readings:
+          - emaLeverageRatio.lastEmaValue: '-1180000000000000 # {precision:-13}'
+          - emaLeverageRatio.lastTime: '+90210 # {precision:-1}'
+          - emaLeverageRatio.lastValue: '2509075626690550212'
+      - getCurrentNav._baseNav: uint256
+        getCurrentNav._fNav: uint256
+        getCurrentNav._xNav: uint256
+        readings:
+          - getCurrentNav._baseNav: '-900.87 # {unit:ether,precision:2}'
+          - getCurrentNav._fNav: '-0.049 # {unit:ether,precision:3}'
+          - getCurrentNav._xNav: '-1.099 # {unit:ether,precision:3}'
+      - leverageRatio: uint256
+        readings:
+          - leverageRatio: '-0.001 # {unit:ether,precision:3}'
+      - totalBaseToken: uint256
+        readings:
+          - totalBaseToken: '-20.949218520599238952 # {unit:ether}'
+  - Voting_Escrow: '0xEC6B8A3F3605B083F7044C0F31f2cac0caf1d469'
+    contract: Voting Escrow
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(FxnVoterProxy): '-32.2 # {unit:ether,precision:1}'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '-81 # {precision:0,unit:ether}'
+  - WstETH: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
+    contract: WstETH
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(RebalancePool): '+18.11 # {unit:ether,precision:2}'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '+18 # {precision:0,unit:ether}'

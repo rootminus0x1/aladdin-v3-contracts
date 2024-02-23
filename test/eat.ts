@@ -32,6 +32,8 @@ import {
     withLogging,
     writeDiagram,
     writeReadingsDelta,
+    Reading,
+    log,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -39,74 +41,72 @@ import { delve } from 'eat';
 
 import { MockFxPriceOracle } from '@types';
 
+// TODO: take a snapshot here
+const goBase = async (): Promise<Reading[]> => {
+    const startEthPrice = await getEthPrice(getConfig().timestamp);
+
+    await dig('base');
+    // if (getConfig().diagram) writeDiagram('base', await mermaid());
+    const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
+    // const [base] = await delve('base'); // get the base readings for comparisons
+    // writeReadings('base', base);
+
+    // add the mock price contract
+    await deploy<MockFxPriceOracle>('MockFxPriceOracle');
+    await contracts.stETHTreasury
+        .connect(contracts.stETHTreasury.ownerSigner)
+        .updatePriceOracle(contracts.MockFxPriceOracle.address);
+
+    // redig
+    await dig('mockETH');
+    writeDiagram('mockETH', await mermaid());
+
+    const tx = await contracts.MockFxPriceOracle.setPrice(baseNav);
+    const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
+    // writeReadings('mockETH', mockETH);
+    // writeReadingsDelta('mockETH', await readingsDeltas(mockETH, base), []);
+
+    return mockETH;
+};
+
 async function main() {
     await setupBlockchain();
-    const startEthPrice = await getEthPrice(getConfig().timestamp);
+
+    const base = await goBase();
 
     // TODO: scan event logs for events like UpdateSettleWhitelist(_account, _status)
     // the description of what parameters to gleem and how they are presented (array of addresses)
     // to the diagram - I think this is just another reading - does etherscan have events?
 
-    await dig('base');
-    if (getConfig().diagram) writeDiagram('base', await mermaid());
-
-    const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
-    //console.log(`price=${formatEther(startEthPrice)}, baseNav=${formatEther(baseNav)}`);
-
-    const [base] = await delve('base'); // get the base readings for comparisons
-    writeReadings('base', base);
-
-    // add the mock price contract
-    const mock = await deploy<MockFxPriceOracle>('MockFxPriceOracle');
-    await contracts.stETHTreasury
-        .connect(contracts.stETHTreasury.ownerSigner)
-        .updatePriceOracle(contracts.MockFxPriceOracle.address);
     // TODO: create a difference between a trigger (no parameters needed) and a trigger template (need to supply parameters)
-    triggers.ETH = {
-        // this is a trigger template
-        name: 'ETH',
-        pull: async (value: bigint) => {
-            return await contracts.MockFxPriceOracle.setPrice(value);
-        },
+    const makeEthTrigger = (price: bigint) => {
+        return {
+            name: 'ETH',
+            args: [price],
+            pull: async (value: bigint) => {
+                const tx = await contracts.MockFxPriceOracle.setPrice(value);
+                return tx;
+            },
+        };
     };
-
-    /*
-    const setPrice = await doTrigger(triggers.ETH, baseNav); // set to the current eth price, like nothing had changed (approx)
-    {
-        // check contract calling
-        const checkBaseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
-        if (checkBaseNav != baseNav) console.log('error in baseNav');
-        // check triggers and readers
-        await doTrigger(triggers.ETH, startEthPrice / 2n); // half te price
-        if (startEthPrice / 2n != (await doReading(contracts.stETHTreasury.address, 'getCurrentNav', '_baseNav')).value)
-            console.log('error in trigger and/or reader');
-    }
-   */
-    const outcome = await doTrigger(triggers.ETH, baseNav);
-    // redig
-    await dig('mockETH');
-    if (getConfig().diagram) writeDiagram('mockETH', await mermaid());
-
-    const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
-    writeReadings('mockETH', mockETH);
-    writeReadingsDelta('mockETH', await readingsDeltas(mockETH, base), [outcome]);
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {
             name: by.toString + units,
-            args: [BigInt(parseTime(by, units))],
+            args: [parseTime(by, units)],
             pull: async (increment: number) => {
+                //log('rolling...');
                 const target = (await time.latest()) + increment;
-                console.log(`moving time to ${asDateString(target)}...`);
+                //log(`rolling time to ${asDateString(target)}...`);
                 await time.increaseTo(target);
-                return target - getConfig().timestamp; // delta time
+                return undefined;
             },
         };
     };
 
     triggers.doLeverageRatio = {
-        setMarket: async () => {
-            await doTrigger(triggers.harvest); // maybe a less intrusive way to do this
+        pull: async () => {
+            return await doTrigger(triggers.harvest); // maybe a less intrusive way to do this
         },
     };
     //}
@@ -132,6 +132,7 @@ async function main() {
                 if (!liquidatorAddress) throw Error(`could not find liquidator for ${pool.name}`);
                 const liquidator = contracts[liquidatorAddress];
                 const tx = await liquidator.liquidate(0n);
+                /*
                 const receipt = await tx.wait();
                 // console.log(`liquidate on ${pool.name} ${pool.address} via ${liquidator.name}`);
 
@@ -142,6 +143,8 @@ async function main() {
                 await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
                 // event Liquidate(uint256 liquidated, uint256 baseGained);
                 return { liquidated: formatEther(events[0].args[0]), baseGained: formatEther(events[0].args[1]) };
+                */
+                return tx;
             },
         };
     };
@@ -281,11 +284,11 @@ async function main() {
             );
             */
     const [r, s] = await delve('drop,liquidate', [
-        makeTrigger(triggers.ETH, parseEther('1600')),
+        makeEthTrigger(parseEther('1600')),
         makeRollTrigger(1, 'day'),
         await makeLiquidateEvent(0),
     ]);
-    writeReadings('drop,liquidate', r, s);
+    writeReadingsDelta('drop,liquidate', await readingsDeltas(r, base), s);
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.
