@@ -92,7 +92,7 @@ async function main() {
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {
-            name: by.toString + units,
+            name: `roll(${by.toString()}${units})`,
             args: [parseTime(by, units)],
             pull: async (increment: number) => {
                 //log('rolling...');
@@ -111,15 +111,15 @@ async function main() {
     };
     //}
     //if (events.ETH && contracts.FractionalToken && contracts.RebalancePool) {
-    const makeLiquidateEvent = async (poolIndex: number): Promise<Trigger> => {
-        const pools = await contracts.RebalancePoolRegistry.getPools();
-        const poolAddress = pools[poolIndex];
-        const pool = contracts[poolAddress];
+    const makeLiquidateEvent = async (contractName: string): Promise<Trigger> => {
+        //const pools = await contracts.RebalancePoolRegistry.getPools();
+        //const poolAddress = pools[poolIndex];
+        const pool = contracts[contractName];
         const wrapperAddress = await pool.wrapper();
         const wrapper = contracts[wrapperAddress];
         const poolName = `${pool.name}(${wrapper.name})`;
         return {
-            name: `${poolName}.liquidate`,
+            name: `${contractName}.liquidate - ${wrapper.name} wrapper`,
             pull: async () => {
                 let liquidatorAddress = undefined;
                 if (pool.roles) {
@@ -283,12 +283,12 @@ async function main() {
                 [events.mintFToken_1000eth, marketEvent(events.ETH, parseEther('1300')), events.mintFToken_1000eth],
             );
             */
-    const [r, s] = await delve('drop,liquidate', [
+    const [r, s] = await delve('drop,liquidate(0)', [
         makeEthTrigger(parseEther('1600')),
-        makeRollTrigger(1, 'day'),
-        await makeLiquidateEvent(0),
+        //makeRollTrigger(1, 'day'),
+        await makeLiquidateEvent('RebalancePool'),
     ]);
-    writeReadingsDelta('drop,liquidate', await readingsDeltas(r, base), s);
+    writeReadingsDelta('ETH=1600,RebalancePool.liquidate', await readingsDeltas(r, base), s);
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.
