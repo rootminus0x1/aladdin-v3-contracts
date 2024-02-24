@@ -6,6 +6,7 @@ simulation:
     gas: 26431n
   - trigger:
       name: RebalancePool.liquidate - wstETHWrapper wrapper
+      args: []
     gas: 488408n
 readings:
   - Curve_DAO_Token: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
@@ -43,13 +44,13 @@ readings:
   - MockFxPriceOracle: '0xF357118EBd576f3C812c7875B1A1651a7f140E9C'
     contract: MockFxPriceOracle
     functions:
-      - getPrice._maxUnsafePrice: uint256
+      - getPrice._safePrice: uint256
         getPrice._minUnsafePrice: uint256
-        getPrice._safePrice: uint256
+        getPrice._maxUnsafePrice: uint256
         readings:
-          - getPrice._maxUnsafePrice: '-900.8 # {unit:ether,precision:1}'
-          - getPrice._minUnsafePrice: '-900.8 # {unit:ether,precision:1}'
           - getPrice._safePrice: '-900.8 # {unit:ether,precision:1}'
+          - getPrice._minUnsafePrice: '-900.8 # {unit:ether,precision:1}'
+          - getPrice._maxUnsafePrice: '-900.8 # {unit:ether,precision:1}'
       - price: uint256
         readings:
           - price: '-900.8 # {unit:ether,precision:1}'
@@ -77,13 +78,13 @@ readings:
       - collateralRatio: uint256
         readings:
           - collateralRatio: '-0.616 # {unit:ether,precision:3}'
-      - emaLeverageRatio.lastEmaValue: uint96
-        emaLeverageRatio.lastTime: uint40
+      - emaLeverageRatio.lastTime: uint40
         emaLeverageRatio.lastValue: uint96
+        emaLeverageRatio.lastEmaValue: uint96
         readings:
-          - emaLeverageRatio.lastEmaValue: '-70000000000000 # {precision:-13}'
           - emaLeverageRatio.lastTime: '+3810 # {precision:-1}'
           - emaLeverageRatio.lastValue: '2509075626690550212'
+          - emaLeverageRatio.lastEmaValue: '-70000000000000 # {precision:-13}'
       - getCurrentNav._baseNav: uint256
         getCurrentNav._fNav: uint256
         getCurrentNav._xNav: uint256

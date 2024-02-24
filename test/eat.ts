@@ -11,7 +11,7 @@ import {
     deploy,
     getEthPrice,
     doTrigger,
-    triggers,
+    triggerTemplate,
     Role,
     parseTime,
     asDateString,
@@ -23,33 +23,33 @@ import {
     getSigner,
     nodes,
     digOne,
-    parseArg,
     addTokenToWhale,
     whale,
-    makeReader,
-    doReading,
     readingsDeltas,
     withLogging,
     writeDiagram,
     writeReadingsDelta,
     Reading,
     log,
+    makeTriggerSeries,
+    TriggerTemplate,
+    readerTemplates,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
 import { delve } from 'eat';
 
-import { MockFxPriceOracle } from '@types';
+import { MockFxPriceOracle, StETHTreasury__factory } from '@types';
 
 // TODO: take a snapshot here
 const goBase = async (): Promise<Reading[]> => {
     const startEthPrice = await getEthPrice(getConfig().timestamp);
 
     await dig('base');
-    // if (getConfig().diagram) writeDiagram('base', await mermaid());
+    // writeDiagram('base', await mermaid());
     const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
     // const [base] = await delve('base'); // get the base readings for comparisons
-    // writeReadings('base', base);
+    /// writeReadings('base', base);
 
     // add the mock price contract
     await deploy<MockFxPriceOracle>('MockFxPriceOracle');
@@ -63,7 +63,7 @@ const goBase = async (): Promise<Reading[]> => {
 
     const tx = await contracts.MockFxPriceOracle.setPrice(baseNav);
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
-    // writeReadings('mockETH', mockETH);
+    writeReadings('mockETH', mockETH);
     // writeReadingsDelta('mockETH', await readingsDeltas(mockETH, base), []);
 
     return mockETH;
@@ -79,10 +79,10 @@ async function main() {
     // to the diagram - I think this is just another reading - does etherscan have events?
 
     // TODO: create a difference between a trigger (no parameters needed) and a trigger template (need to supply parameters)
-    const makeEthTrigger = (price: bigint) => {
+
+    const makeEthTemplate = (): TriggerTemplate => {
         return {
             name: 'ETH',
-            args: [price],
             pull: async (value: bigint) => {
                 const tx = await contracts.MockFxPriceOracle.setPrice(value);
                 return tx;
@@ -104,14 +104,16 @@ async function main() {
         };
     };
 
-    triggers.doLeverageRatio = {
+    /*
+    triggerTemplate.doLeverageRatio = {
         pull: async () => {
             return await doTrigger(triggers.harvest); // maybe a less intrusive way to do this
         },
     };
+    */
     //}
     //if (events.ETH && contracts.FractionalToken && contracts.RebalancePool) {
-    const makeLiquidateEvent = async (contractName: string): Promise<Trigger> => {
+    const makeLiquidateTrigger = async (contractName: string): Promise<Trigger> => {
         //const pools = await contracts.RebalancePoolRegistry.getPools();
         //const poolAddress = pools[poolIndex];
         const pool = contracts[contractName];
@@ -120,6 +122,7 @@ async function main() {
         const poolName = `${pool.name}(${wrapper.name})`;
         return {
             name: `${contractName}.liquidate - ${wrapper.name} wrapper`,
+            args: [],
             pull: async () => {
                 let liquidatorAddress = undefined;
                 if (pool.roles) {
@@ -284,11 +287,21 @@ async function main() {
             );
             */
     const [r, s] = await delve('drop,liquidate(0)', [
-        makeEthTrigger(parseEther('1600')),
+        makeTrigger(makeEthTemplate(), parseEther('1600')),
         //makeRollTrigger(1, 'day'),
-        await makeLiquidateEvent('RebalancePool'),
+        await makeLiquidateTrigger('RebalancePool'),
     ]);
     writeReadingsDelta('ETH=1600,RebalancePool.liquidate', await readingsDeltas(r, base), s);
+    /*
+    await delvePlot(
+        'ETHxCR+',
+        'Ether Price (USD)',
+        makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
+        readers.get('stETHTreasury.getCurrentNav._baseNav'),
+        'Collateral ratio',
+        [readers.get('stETHTreasury.collateralRatio')],
+    );
+*/
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.

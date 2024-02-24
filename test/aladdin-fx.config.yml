@@ -152,7 +152,6 @@ format:
   - reading: nonce
   - reading: nonces
   - reading: decimals
-  - reading: epoch
   - reading: time_total
   - reading: numTotalSupplyHistory
   - reading: latestRoundData.startedAt
