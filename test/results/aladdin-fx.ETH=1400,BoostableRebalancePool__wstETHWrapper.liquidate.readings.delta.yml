@@ -1,0 +1,115 @@
+simulation:
+  - trigger:
+      name: ETH
+      argTypes:
+        - uint256
+      args:
+        - 1400000000000000000000n
+    gas: 26443n
+  - trigger:
+      name: liquidate BoostableRebalancePool__wstETHWrapper
+      argTypes:
+        - address
+      args:
+        - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+    gas: 521640n
+readings:
+  - BoostableRebalancePool__wstETHWrapper: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+    contract: BoostableRebalancePool
+    functions:
+      - numTotalSupplyHistory: uint256
+        readings:
+          - numTotalSupplyHistory: '1'
+      - pendingRewards.0: uint256
+        readings:
+          - pendingRewards(WstETH).0: '-0.140'
+      - rewardData.lastUpdate: uint40
+        readings:
+          - rewardData(Curve_DAO_Token).lastUpdate: '63205'
+          - rewardData(WstETH).lastUpdate: '63205'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '-5688690'
+  - Curve_DAO_Token: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+    contract: Curve DAO Token
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(RebalanceWithBonusToken__1): '-1.0'
+  - FractionalToken: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    contract: FractionalToken
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(BoostableRebalancePool__wstETHWrapper): '-5688690.98'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '-5688690'
+  - LeveragedToken: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    contract: LeveragedToken
+    functions:
+      - nav: uint256
+        readings:
+          - nav: '-0.221846582650157656'
+  - Lido: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    contract: Lido
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(stETHTreasury): '-3966.72'
+          - balanceOf(WstETH): '+3966.72'
+      - sharesOf: uint256
+        readings:
+          - sharesOf(stETHTreasury): '-3429.193396792909397492'
+          - sharesOf(WstETH): '+3429.193396792909397492'
+  - MockFxPriceOracle: '0xF357118EBd576f3C812c7875B1A1651a7f140E9C'
+    contract: MockFxPriceOracle
+    functions:
+      - getPrice._safePrice: uint256
+        getPrice._minUnsafePrice: uint256
+        getPrice._maxUnsafePrice: uint256
+        readings:
+          - getPrice._safePrice: '-1100.8'
+          - getPrice._minUnsafePrice: '-1100.8'
+          - getPrice._maxUnsafePrice: '-1100.8'
+      - price: uint256
+        readings:
+          - price: '-1100.8'
+  - RebalancePoolRegistry: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
+    contract: RebalancePoolRegistry
+    functions:
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '-5688690'
+  - stETHTreasury: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    contract: stETHTreasury
+    functions:
+      - collateralRatio: uint256
+        readings:
+          - collateralRatio: '-0.659'
+      - emaLeverageRatio.lastTime: uint40
+        emaLeverageRatio.lastValue: uint96
+        emaLeverageRatio.lastEmaValue: uint96
+        readings:
+          - emaLeverageRatio.lastTime: '+3830'
+          - emaLeverageRatio.lastValue: '6979912715325685813'
+          - emaLeverageRatio.lastEmaValue: '-70000000000000'
+      - getCurrentNav._baseNav: uint256
+        getCurrentNav._fNav: uint256
+        getCurrentNav._xNav: uint256
+        readings:
+          - getCurrentNav._baseNav: '-1100.87'
+          - getCurrentNav._fNav: '-0.059'
+          - getCurrentNav._xNav: '-1.343'
+      - totalBaseToken: uint256
+        readings:
+          - totalBaseToken: '-3966.724723024529392841'
+  - WstETH: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
+    contract: WstETH
+    functions:
+      - balanceOf: uint256
+        readings:
+          - balanceOf(BoostableRebalancePool__wstETHWrapper): '+3429.19'
+      - totalSupply: uint256
+        readings:
+          - totalSupply: '+3429'

@@ -33,7 +33,8 @@ import {
     log,
     makeTriggerSeries,
     TriggerTemplate,
-    readerTemplates,
+    delvePlot,
+    makeReader,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -51,6 +52,8 @@ const goBase = async (): Promise<Reading[]> => {
     // const [base] = await delve('base'); // get the base readings for comparisons
     /// writeReadings('base', base);
 
+    makeReader('stETHTreasury', 'collateralRatio');
+
     // add the mock price contract
     await deploy<MockFxPriceOracle>('MockFxPriceOracle');
     await contracts.stETHTreasury
@@ -60,6 +63,8 @@ const goBase = async (): Promise<Reading[]> => {
     // redig
     await dig('mockETH');
     writeDiagram('mockETH', await mermaid());
+
+    makeReader('MockFxPriceOracle', 'getPrice', '_safePrice');
 
     const tx = await contracts.MockFxPriceOracle.setPrice(baseNav);
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
@@ -83,6 +88,7 @@ async function main() {
     const makeEthTemplate = (): TriggerTemplate => {
         return {
             name: 'ETH',
+            argTypes: ['uint256'],
             pull: async (value: bigint) => {
                 const tx = await contracts.MockFxPriceOracle.setPrice(value);
                 return tx;
@@ -94,6 +100,7 @@ async function main() {
         return {
             name: `roll(${by.toString()}${units})`,
             args: [parseTime(by, units)],
+            argTypes: ['unit256'],
             pull: async (increment: number) => {
                 //log('rolling...');
                 const target = (await time.latest()) + increment;
@@ -104,26 +111,29 @@ async function main() {
         };
     };
 
-    /*
-    triggerTemplate.doLeverageRatio = {
-        pull: async () => {
-            return await doTrigger(triggers.harvest); // maybe a less intrusive way to do this
-        },
+    const makeHarvestTrigger = () => {
+        return {
+            name: `harvest`,
+            args: [],
+            argTypes: [],
+            pull: async () => {
+                return await contracts.stETHTreasury.harvest();
+            },
+        };
     };
-    */
+
     //}
     //if (events.ETH && contracts.FractionalToken && contracts.RebalancePool) {
     const makeLiquidateTrigger = async (contractName: string): Promise<Trigger> => {
         //const pools = await contracts.RebalancePoolRegistry.getPools();
         //const poolAddress = pools[poolIndex];
-        const pool = contracts[contractName];
-        const wrapperAddress = await pool.wrapper();
-        const wrapper = contracts[wrapperAddress];
-        const poolName = `${pool.name}(${wrapper.name})`;
+        const pool = contracts[contractName].address;
         return {
-            name: `${contractName}.liquidate - ${wrapper.name} wrapper`,
-            args: [],
-            pull: async () => {
+            name: `liquidate ${contractName}`,
+            argTypes: ['address'],
+            args: [pool],
+            pull: async (poolAddress: string) => {
+                const pool = contracts[poolAddress];
                 let liquidatorAddress = undefined;
                 if (pool.roles) {
                     const role = pool.roles.find((r: Role) => r.name === 'LIQUIDATOR_ROLE');
@@ -286,22 +296,53 @@ async function main() {
                 [events.mintFToken_1000eth, marketEvent(events.ETH, parseEther('1300')), events.mintFToken_1000eth],
             );
             */
-    const [r, s] = await delve('drop,liquidate(0)', [
-        makeTrigger(makeEthTemplate(), parseEther('1600')),
-        //makeRollTrigger(1, 'day'),
-        await makeLiquidateTrigger('RebalancePool'),
-    ]);
-    writeReadingsDelta('ETH=1600,RebalancePool.liquidate', await readingsDeltas(r, base), s);
-    /*
+
     await delvePlot(
-        'ETHxCR+',
-        'Ether Price (USD)',
-        makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
-        readers.get('stETHTreasury.getCurrentNav._baseNav'),
-        'Collateral ratio',
-        [readers.get('stETHTreasury.collateralRatio')],
+        'ETHxCR',
+        {
+            label: 'Ether Price (USD)',
+            reversed: true,
+            cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
+            reader: makeReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
+        },
+        {
+            label: 'Collateral ratio',
+            label2: 'Leverage ratio',
+            simulation: [makeHarvestTrigger(), makeRollTrigger(30, 'day')],
+            lines: [
+                { reader: makeReader('stETHTreasury', 'collateralRatio') },
+                { reader: makeReader('stETHTreasury', 'leverageRatio'), axis2: true },
+            ],
+        },
     );
-*/
+
+    for (const pool of [
+        'RebalancePool',
+        'BoostableRebalancePool__StETHAndxETHWrapper',
+        'BoostableRebalancePool__wstETHWrapper',
+    ]) {
+        const [readings, outcomes] = await delve('drop,liquidate', [
+            makeTrigger(makeEthTemplate(), parseEther('1400')),
+            //makeRollTrigger(1, 'day'),
+            await makeLiquidateTrigger(pool),
+        ]);
+        writeReadingsDelta(`ETH=1400,${pool}.liquidate`, await readingsDeltas(readings, base), outcomes);
+
+        await delvePlot(
+            `ETHxCR+liquidate-${pool}`,
+            {
+                label: 'Ether Price (USD)',
+                reversed: true,
+                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
+                reader: makeReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
+            },
+            {
+                label: 'Collateral ratio',
+                simulation: [await makeLiquidateTrigger(pool)],
+                lines: [{ reader: makeReader('stETHTreasury', 'collateralRatio') }],
+            },
+        );
+    }
 }
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.
