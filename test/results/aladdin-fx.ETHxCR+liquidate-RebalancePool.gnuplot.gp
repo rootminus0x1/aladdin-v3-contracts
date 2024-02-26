@@ -1,3 +1,4 @@
+set title "ETHxCR+liquidate-RebalancePool"
 datafile = "aladdin-fx.ETHxCR+liquidate-RebalancePool.gnuplot.csv"
 # additional imformation and error in aladdin-fx.ETHxCR+liquidate-RebalancePool.error.csv
 set datafile separator comma
@@ -7,10 +8,17 @@ set key bmargin
 # set output "aladdin-fx.ETHxCR+liquidate-RebalancePool.gnuplot.png
 set terminal svg enhanced size 800 500 background rgb "gray90"
 set autoscale
-# set output "aladdin-fx.ETHxCR+liquidate-RebalancePool.gnuplot.svg
-set xlabel "Ether Price (USD)"
 set colorsequence default
+# set output "aladdin-fx.ETHxCR+liquidate-RebalancePool.gnuplot.svg
+set xrange reverse
+set xlabel "Ether Price (USD)"
+set xtics
+set xtics nomirror
 set ylabel "Collateral ratio"
 set ytics
-set xrange reverse
-plot datafile using ($3):($4) with lines  
+set ytics nomirror
+set y2label "Total Supply (1,000,000s)"
+set y2tics
+set y2tics nomirror
+plot datafile using ($2):($4) with lines  ,\
+     datafile using ($2):($5) with lines  axes x1y2

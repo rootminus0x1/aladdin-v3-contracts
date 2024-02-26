@@ -1,3 +1,4 @@
+set title "ETHxCR"
 datafile = "aladdin-fx.ETHxCR.gnuplot.csv"
 # additional imformation and error in aladdin-fx.ETHxCR.error.csv
 set datafile separator comma
@@ -7,13 +8,17 @@ set key bmargin
 # set output "aladdin-fx.ETHxCR.gnuplot.png
 set terminal svg enhanced size 800 500 background rgb "gray90"
 set autoscale
-# set output "aladdin-fx.ETHxCR.gnuplot.svg
-set xlabel "Ether Price (USD)"
 set colorsequence default
+# set output "aladdin-fx.ETHxCR.gnuplot.svg
+set xrange reverse
+set xlabel "Ether Price (USD)"
+set xtics
+set xtics nomirror
 set ylabel "Collateral ratio"
 set ytics
+set ytics nomirror
 set y2label "Leverage ratio"
 set y2tics
-set xrange reverse
-plot datafile using ($4):($5) with lines  ,\
-     datafile using ($4):($6) with lines  axes x1y2
+set y2tics nomirror
+plot datafile using ($2):($5) with lines  ,\
+     datafile using ($2):($6) with lines  axes x1y2

@@ -300,19 +300,15 @@ async function main() {
     await delvePlot(
         'ETHxCR',
         {
+            cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
             label: 'Ether Price (USD)',
             reversed: true,
-            cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
             reader: makeReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
         },
         {
-            label: 'Collateral ratio',
-            label2: 'Leverage ratio',
             simulation: [makeHarvestTrigger(), makeRollTrigger(30, 'day')],
-            lines: [
-                { reader: makeReader('stETHTreasury', 'collateralRatio') },
-                { reader: makeReader('stETHTreasury', 'leverageRatio'), axis2: true },
-            ],
+            y: { label: 'Collateral ratio', lines: [{ reader: makeReader('stETHTreasury', 'collateralRatio') }] },
+            y2: { label: 'Leverage ratio', lines: [{ reader: makeReader('stETHTreasury', 'leverageRatio') }] },
         },
     );
 
@@ -337,9 +333,13 @@ async function main() {
                 reader: makeReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
             },
             {
-                label: 'Collateral ratio',
                 simulation: [await makeLiquidateTrigger(pool)],
-                lines: [{ reader: makeReader('stETHTreasury', 'collateralRatio') }],
+                y: { label: 'Collateral ratio', lines: [{ reader: makeReader('stETHTreasury', 'collateralRatio') }] },
+                y2: {
+                    label: 'Total Supply',
+                    scale: 1000000,
+                    lines: [{ reader: makeReader('FractionalToken', 'totalSupply') }],
+                },
             },
         );
     }
