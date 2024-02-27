@@ -1,4 +1,4 @@
-Collateral ratio,0x0.CR,liquidate RebalancePool,FractionalToken.balanceOf(RebalancePool),LeveragedToken.balanceOf(RebalancePool),Lido.balanceOf(stETHTreasury)-delta,Lido.balanceOf(WstETH)-delta,Lido.balanceOf(PlatformFeeSpliter)-delta,WstETH.balanceOf(RebalancePool)-delta,Curve_DAO_Token.balanceOf(RebalanceWithBonusToken__0)-delta
+Collateral ratio,0x0.CR,liquidate RebalancePool,fETH.balanceOf(RebalancePool),xETH.balanceOf(RebalancePool),stETH.balanceOf(stETHTreasury)-delta,stETH.balanceOf(wstETH)-delta,stETH.balanceOf(PlatformFeeSpliter)-delta,wstETH.balanceOf(RebalancePool)-delta,FXN.balanceOf(RebalanceWithBonusToken__0)-delta
 gas:26k,1.812082272114073875,cannot liquidate,33956.49,0.0,0.0,0.0,0.0,0.0,0.0
 gas:26k,1.805485645011848301,cannot liquidate,33956.49,0.0,0.0,0.0,0.0,0.0,0.0
 gas:26k,1.79888204143721316,cannot liquidate,33956.49,0.0,0.0,0.0,0.0,0.0,0.0

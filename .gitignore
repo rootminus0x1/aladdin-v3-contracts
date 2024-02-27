@@ -21,6 +21,7 @@ cache/
 artifacts/
 out/
 *.svg
+*.png
 
 .store
 

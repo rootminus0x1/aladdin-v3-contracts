@@ -16,11 +16,11 @@ set xlabel "Collateral ratio" noenhanced
 set xtics
 set xtics nomirror
 set xrange [1.5:0.9]
-set ylabel "Pool balance of Fractional/Leveraged Tokens" noenhanced
+set ylabel "Pool balance of fETH/xETH" noenhanced
 set ytics
 set ytics nomirror
 set yrange [-10000:*<100000000]
-set y2label "Change in balance of (ETH-like)" noenhanced
+set y2label "Change in balance of (ETH-ish)" noenhanced
 set y2tics
 set y2tics nomirror
 plot datafile using ($2):($4) with lines linetype 2 linewidth 2 dashtype 2 ,\

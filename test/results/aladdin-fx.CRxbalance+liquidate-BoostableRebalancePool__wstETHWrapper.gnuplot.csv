@@ -1,4 +1,4 @@
-Collateral ratio,0x0.CR,liquidate BoostableRebalancePool__wstETHWrapper,FractionalToken.balanceOf(BoostableRebalancePool__wstETHWrapper),LeveragedToken.balanceOf(BoostableRebalancePool__wstETHWrapper),Lido.balanceOf(stETHTreasury)-delta,Lido.balanceOf(WstETH)-delta,Lido.balanceOf(PlatformFeeSpliter)-delta,WstETH.balanceOf(BoostableRebalancePool__wstETHWrapper)-delta,Curve_DAO_Token.balanceOf(RebalanceWithBonusToken__1)-delta
+Collateral ratio,0x0.CR,liquidate BoostableRebalancePool__wstETHWrapper,fETH.balanceOf(BoostableRebalancePool__wstETHWrapper),xETH.balanceOf(BoostableRebalancePool__wstETHWrapper),stETH.balanceOf(stETHTreasury)-delta,stETH.balanceOf(wstETH)-delta,stETH.balanceOf(PlatformFeeSpliter)-delta,wstETH.balanceOf(BoostableRebalancePool__wstETHWrapper)-delta,FXN.balanceOf(RebalanceWithBonusToken__1)-delta
 gas:26k,1.812082272114073875,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
 gas:26k,1.805485645011848301,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
 gas:26k,1.79888204143721316,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
