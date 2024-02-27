@@ -1,0 +1,142 @@
+Collateral ratio,0x0.CR,liquidate BoostableRebalancePool__wstETHWrapper,FractionalToken.balanceOf(BoostableRebalancePool__wstETHWrapper),LeveragedToken.balanceOf(BoostableRebalancePool__wstETHWrapper),Lido.balanceOf(stETHTreasury)-delta,Lido.balanceOf(WstETH)-delta,Lido.balanceOf(PlatformFeeSpliter)-delta,WstETH.balanceOf(BoostableRebalancePool__wstETHWrapper)-delta,Curve_DAO_Token.balanceOf(RebalanceWithBonusToken__1)-delta
+gas:26k,1.812082272114073875,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.805485645011848301,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.79888204143721316,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.792271450317028266,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.785653860554707138,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.779029261030154901,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.772397640599706015,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.76575898809606177,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.75911329232822762,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.752460542081450292,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.745800726117154696,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.739133833172880653,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.732459851962219397,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.725778771174749894,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.719090579475974941,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.712395265507257077,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.705692817885754274,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.698983225204355437,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.692266476031615686,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.68554255891169143,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.678811462364275251,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.672073174884530551,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.66532768494302602,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.658574980985669863,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.651815051433643846,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.645047884683337107,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.63827346910627976,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.631491793049076301,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.62470284483333877,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.617906612755619732,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.611103085087345012,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.604292250074746233,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.597474095938793132,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.590648610875125646,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.5838157830539858,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.576975600620149352,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.570128051692857243,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.563273124365746795,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.556410806706782713,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.549541086758187854,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.542663952536373761,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.535779392031870994,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.528887393209259215,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.521987944007097059,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.515081032337851767,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.508166646087828608,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.501244773117100048,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.494315401259434706,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.487378518322226076,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.480434112086421009,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.473482170306447979,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.466522680710145091,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.459555630998687878,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.452581008846516852,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.445598801901264811,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.438608997783683927,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.431611584087572578,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.424606548379701955,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.417593878199742419,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.41057356106018962,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.40354558444629038,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.396509935815968319,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.389466602599749259,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.382415572200686358,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.375356831994285025,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.368290369328427559,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.361216171523297573,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.354134225871304144,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.347044519637005719,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.339947040057033787,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.332841774340016274,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.325728709666500712,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.318607833188877126,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.311479132031300702,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,1.304342593289614163,gas:547k,5642709.34,0.0,-27.43,27.43,0.0,23.72,-1.0
+gas:26k,1.297198204031269918,gas:547k,5358875.85,0.0,-197.85,197.86,0.0,171.04,-1.0
+gas:26k,1.290045951295251939,gas:547k,5074729.97,0.0,-370.35,370.36,0.0,320.17,-1.0
+gas:26k,1.282885822091997378,gas:547k,4790271.16,0.0,-544.97,544.97,0.0,471.12,-1.0
+gas:26k,1.275717803403317942,gas:547k,4505498.92,0.0,-721.74,721.75,0.0,623.94,-1.0
+gas:26k,1.268541882182320985,gas:547k,4220412.72,0.0,-900.71,900.71,0.0,778.66,-1.0
+gas:26k,1.261358045353330355,gas:547k,3935012.06,0.0,-1081.91,1081.92,0.0,935.31,-1.0
+gas:26k,1.254166279811806974,gas:547k,3649296.40,0.0,-1265.40,1265.40,0.0,1093.93,-1.0
+gas:26k,1.246966572424269155,gas:547k,3363265.22,0.0,-1451.21,1451.21,0.0,1254.56,-1.0
+gas:26k,1.239758910028212654,gas:547k,3076918.01,0.0,-1639.38,1639.39,0.0,1417.23,-1.0
+gas:26k,1.232543279432030454,gas:547k,2790254.23,0.0,-1829.97,1829.97,0.0,1581.99,-1.0
+gas:26k,1.225319667414932298,gas:547k,2503273.37,0.0,-2023.02,2023.02,0.0,1748.88,-1.0
+gas:26k,1.218088060726863926,gas:547k,2215974.89,0.0,-2218.57,2218.57,0.0,1917.94,-1.0
+gas:26k,1.210848446088426078,gas:547k,1928358.28,0.0,-2416.68,2416.68,0.0,2089.20,-1.0
+gas:26k,1.203600810190793198,gas:547k,1640422.99,0.0,-2617.40,2617.40,0.0,2262.72,-1.0
+gas:26k,1.196345139695631887,gas:547k,1352168.50,0.0,-2820.77,2820.78,0.0,2438.53,-1.0
+gas:26k,1.18908142123501908,gas:547k,1063594.28,0.0,-3026.86,3026.86,0.0,2616.69,-1.0
+gas:26k,1.181809641411359938,gas:547k,774699.80,0.0,-3235.71,3235.71,0.0,2797.24,-1.0
+gas:26k,1.17452978679730549,gas:547k,485484.53,0.0,-3447.38,3447.39,0.0,2980.23,-1.0
+gas:26k,1.167241843935669977,gas:547k,195947.92,0.0,-3661.94,3661.95,0.0,3165.71,-1.0
+gas:26k,1.15994579933934794,gas:521k,0.0,0.0,-3816.43,3816.44,0.0,3299.27,-1.0
+gas:26k,1.152641639491231014,gas:521k,0.0,0.0,-3840.62,3840.62,0.0,3320.18,-1.0
+gas:26k,1.145329350844124457,gas:521k,0.0,0.0,-3865.14,3865.14,0.0,3341.38,-1.0
+gas:26k,1.138008919820663397,gas:521k,0.0,0.0,-3890.00,3890.00,0.0,3362.87,-1.0
+gas:26k,1.130680332813228791,gas:521k,0.0,0.0,-3915.21,3915.22,0.0,3384.67,-1.0
+gas:26k,1.123343576183863118,gas:521k,0.0,0.0,-3940.78,3940.79,0.0,3406.77,-1.0
+gas:26k,1.115998636264185774,gas:521k,0.0,0.0,-3966.72,3966.72,0.0,3429.19,-1.0
+gas:26k,1.108645499355308197,gas:521k,0.0,0.0,-3993.03,3993.03,0.0,3451.94,-1.0
+gas:26k,1.101284151727748698,gas:521k,0.0,0.0,-4019.72,4019.72,0.0,3475.01,-1.0
+gas:26k,1.093914579621347013,gas:521k,0.0,0.0,-4046.80,4046.81,0.0,3498.42,-1.0
+gas:26k,1.086536769245178566,gas:521k,0.0,0.0,-4074.28,4074.28,0.0,3522.18,-1.0
+gas:26k,1.079150706777468438,gas:521k,0.0,0.0,-4102.16,4102.17,0.0,3546.28,-1.0
+gas:26k,1.071756378365505063,gas:521k,0.0,0.0,-4130.47,4130.47,0.0,3570.75,-1.0
+gas:26k,1.064353770125553619,gas:521k,0.0,0.0,-4159.19,4159.20,0.0,3595.59,-1.0
+gas:26k,1.056942868142769132,gas:521k,0.0,0.0,-4188.36,4188.36,0.0,3620.80,-1.0
+gas:26k,1.049523658471109293,gas:521k,0.0,0.0,-4217.97,4217.97,0.0,3646.39,-1.0
+gas:26k,1.042096127133246976,gas:521k,0.0,0.0,-4248.03,4248.03,0.0,3672.38,-1.0
+gas:26k,1.034660260120482462,gas:521k,0.0,0.0,-4278.56,4278.56,0.0,3698.77,-1.0
+gas:26k,1.027216043392655369,gas:521k,0.0,0.0,-4309.56,4309.57,0.0,3725.58,-1.0
+gas:26k,1.019763462878056288,gas:521k,0.0,0.0,-4341.06,4341.06,0.0,3752.81,-1.0
+gas:26k,1.012302504473338111,gas:521k,0.0,0.0,-4373.05,4373.06,0.0,3780.47,-1.0
+gas:26k,1.004833154043427074,gas:521k,0.0,0.0,-4405.56,4405.57,0.0,3808.57,-1.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0
+gas:26k,SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0

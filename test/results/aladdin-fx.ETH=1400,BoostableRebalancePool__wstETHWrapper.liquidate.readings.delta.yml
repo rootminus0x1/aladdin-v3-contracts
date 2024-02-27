@@ -17,8 +17,8 @@ readings:
   - BoostableRebalancePool__wstETHWrapper:
       - numTotalSupplyHistory: '1'
       - pendingRewards(WstETH).0: '-0.140'
-      - rewardData(Curve_DAO_Token).lastUpdate: '63205'
-      - rewardData(WstETH).lastUpdate: '63205'
+      - rewardData(Curve_DAO_Token).lastUpdate: '63206'
+      - rewardData(WstETH).lastUpdate: '63206'
       - totalSupply: '-5688690'
   - Curve_DAO_Token:
       - balanceOf(RebalanceWithBonusToken__1): '-1.0'

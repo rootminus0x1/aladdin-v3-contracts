@@ -1,72 +1,72 @@
-"""Ether Price (USD)""",MockFxPriceOracle.getPrice._safePrice,liquidate RebalancePool,stETHTreasury.collateralRatio,FractionalToken.totalSupply
-"""gas: 26443""",2400.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.812,12.136955
-"""gas: 26443""",2380.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.799,12.136955
-"""gas: 26443""",2360.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.786,12.136955
-"""gas: 26443""",2340.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.772,12.136955
-"""gas: 26443""",2320.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.759,12.136955
-"""gas: 26443""",2300.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.746,12.136955
-"""gas: 26443""",2280.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.732,12.136955
-"""gas: 26443""",2260.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.719,12.136955
-"""gas: 26431""",2240.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.706,12.136955
-"""gas: 26443""",2220.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.692,12.136955
-"""gas: 26443""",2200.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.679,12.136955
-"""gas: 26443""",2180.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.665,12.136955
-"""gas: 26443""",2160.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.652,12.136955
-"""gas: 26443""",2140.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.638,12.136955
-"""gas: 26443""",2120.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.625,12.136955
-"""gas: 26443""",2100.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.611,12.136955
-"""gas: 26443""",2080.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.597,12.136955
-"""gas: 26443""",2060.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.584,12.136955
-"""gas: 26443""",2040.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.570,12.136955
-"""gas: 26443""",2020.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.556,12.136955
-"""gas: 26443""",2000.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.543,12.136955
-"""gas: 26443""",1980.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.529,12.136955
-"""gas: 26443""",1960.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.515,12.136955
-"""gas: 26443""",1940.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.501,12.136955
-"""gas: 26431""",1920.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.487,12.136955
-"""gas: 26443""",1900.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.473,12.136955
-"""gas: 26443""",1880.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.460,12.136955
-"""gas: 26443""",1860.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.446,12.136955
-"""gas: 26443""",1840.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.432,12.136955
-"""gas: 26443""",1820.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.418,12.136955
-"""gas: 26443""",1800.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.404,12.136955
-"""gas: 26443""",1780.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.389,12.136955
-"""gas: 26443""",1760.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.375,12.136955
-"""gas: 26443""",1740.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.361,12.136955
-"""gas: 26443""",1720.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.347,12.136955
-"""gas: 26443""",1700.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.333,12.136955
-"""gas: 26443""",1680.0,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",1.319,12.136955
-"""gas: 26443""",1660.0,"""gas: 488408""",1.305,12.102998
-"""gas: 26443""",1640.0,"""gas: 488408""",1.291,12.102998
-"""gas: 26443""",1620.0,"""gas: 488408""",1.276,12.102998
-"""gas: 26431""",1600.0,"""gas: 488408""",1.262,12.102998
-"""gas: 26443""",1580.0,"""gas: 488408""",1.248,12.102998
-"""gas: 26443""",1560.0,"""gas: 488408""",1.233,12.102998
-"""gas: 26443""",1540.0,"""gas: 488408""",1.219,12.102998
-"""gas: 26443""",1520.0,"""gas: 488408""",1.204,12.102998
-"""gas: 26443""",1500.0,"""gas: 488408""",1.190,12.102998
-"""gas: 26443""",1480.0,"""gas: 488408""",1.175,12.102998
-"""gas: 26443""",1460.0,"""gas: 488408""",1.160,12.102998
-"""gas: 26443""",1440.0,"""gas: 488408""",1.146,12.102998
-"""gas: 26443""",1420.0,"""gas: 488408""",1.131,12.102998
-"""gas: 26443""",1400.0,"""gas: 488408""",1.116,12.102998
-"""gas: 26443""",1380.0,"""gas: 488408""",1.102,12.102998
-"""gas: 26443""",1360.0,"""gas: 488408""",1.087,12.102998
-"""gas: 26443""",1340.0,"""gas: 488408""",1.072,12.102998
-"""gas: 26443""",1320.0,"""gas: 488408""",1.057,12.102998
-"""gas: 26443""",1300.0,"""gas: 488408""",1.042,12.102998
-"""gas: 26431""",1280.0,"""gas: 488408""",1.027,12.102998
-"""gas: 26443""",1260.0,"""gas: 488408""",1.012,12.102998
-"""gas: 26443""",1240.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1220.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1200.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1180.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1160.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1140.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1120.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1100.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1080.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1060.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1040.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1020.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
-"""gas: 26443""",1000.0,"""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",12.136955
+"""Collateral ratio""",stETHTreasury.collateralRatio,liquidate RebalancePool,FractionalToken.totalSupply-delta,Lido.balanceOf(stETHTreasury)-delta,Lido.balanceOf(WstETH)-delta
+"""gas: 26443""",1.812,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.799,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.786,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.772,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.759,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.746,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.732,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.719,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26431""",1.706,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.692,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.679,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.665,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.652,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.638,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.625,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.611,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.597,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.584,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.570,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.556,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.543,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.529,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.515,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.501,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26431""",1.487,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.473,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.460,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.446,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.432,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.418,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.404,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.389,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.375,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.361,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.347,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.333,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.319,"""VM Exception while processing transaction: reverted with reason string 'cannot liquidate'""",0,0.0,0.0
+"""gas: 26443""",1.304,"""gas: 488408""",-33.956,-20.25,20.26
+"""gas: 26443""",1.290,"""gas: 488408""",-33.956,-20.48,20.48
+"""gas: 26443""",1.276,"""gas: 488408""",-33.956,-20.71,20.71
+"""gas: 26431""",1.261,"""gas: 488408""",-33.956,-20.94,20.95
+"""gas: 26443""",1.247,"""gas: 488408""",-33.956,-21.19,21.19
+"""gas: 26443""",1.233,"""gas: 488408""",-33.956,-21.43,21.44
+"""gas: 26443""",1.218,"""gas: 488408""",-33.956,-21.69,21.69
+"""gas: 26443""",1.204,"""gas: 488408""",-33.956,-21.95,21.95
+"""gas: 26443""",1.189,"""gas: 488408""",-33.956,-22.22,22.22
+"""gas: 26443""",1.175,"""gas: 488408""",-33.956,-22.49,22.50
+"""gas: 26443""",1.160,"""gas: 488408""",-33.956,-22.78,22.78
+"""gas: 26443""",1.145,"""gas: 488408""",-33.956,-23.07,23.07
+"""gas: 26443""",1.131,"""gas: 488408""",-33.956,-23.37,23.37
+"""gas: 26443""",1.116,"""gas: 488408""",-33.956,-23.67,23.68
+"""gas: 26443""",1.101,"""gas: 488408""",-33.956,-23.99,23.99
+"""gas: 26443""",1.087,"""gas: 488408""",-33.956,-24.31,24.32
+"""gas: 26443""",1.072,"""gas: 488408""",-33.956,-24.65,24.66
+"""gas: 26443""",1.057,"""gas: 488408""",-33.956,-25.00,25.00
+"""gas: 26443""",1.042,"""gas: 488408""",-33.956,-25.35,25.36
+"""gas: 26431""",1.027,"""gas: 488408""",-33.956,-25.72,25.72
+"""gas: 26443""",1.012,"""gas: 488408""",-33.956,-26.10,26.10
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0
+"""gas: 26443""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""","""VM Exception while processing transaction: reverted with reason string 'SafeMath: subtraction overflow'""",0,0.0,0.0

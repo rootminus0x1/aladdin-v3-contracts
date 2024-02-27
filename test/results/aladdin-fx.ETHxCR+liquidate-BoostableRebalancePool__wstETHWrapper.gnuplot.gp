@@ -11,14 +11,15 @@ set autoscale
 set colorsequence default
 # set output "aladdin-fx.ETHxCR+liquidate-BoostableRebalancePool__wstETHWrapper.gnuplot.svg
 set xrange reverse
-set xlabel "Ether Price (USD)"
+set xlabel "Collateral ratio"
 set xtics
 set xtics nomirror
-set ylabel "Collateral ratio"
+set ylabel "Total supply of Fractional Tokens (1,000s)"
 set ytics
 set ytics nomirror
-set y2label "Total Supply (1,000,000s)"
+set y2label "Change in balance of stETH"
 set y2tics
 set y2tics nomirror
 plot datafile using ($2):($4) with lines  ,\
-     datafile using ($2):($5) with lines  axes x1y2
+     datafile using ($2):($5) with lines  axes x1y2,\
+     datafile using ($2):($6) with lines  axes x1y2

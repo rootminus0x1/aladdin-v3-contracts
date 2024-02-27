@@ -34,7 +34,11 @@ import {
     makeTriggerSeries,
     TriggerTemplate,
     delvePlot,
+    findReader,
+    callReader,
+    findDeltaReader,
     makeReader,
+    makeCalculator,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -52,7 +56,9 @@ const goBase = async (): Promise<Reading[]> => {
     // const [base] = await delve('base'); // get the base readings for comparisons
     /// writeReadings('base', base);
 
-    makeReader('stETHTreasury', 'collateralRatio');
+    //log(`${(await callReader(findReader('stETHTreasury', 'collateralRatio'))).value}`);
+    //log(`${(await callReader(findReader('Lido', 'balanceOf', '', 'stETHTreasury'))).value}`);
+    //log(`${(await callReader(findReader('FractionalToken', 'totalSupply'))).value}`);
 
     // add the mock price contract
     await deploy<MockFxPriceOracle>('MockFxPriceOracle');
@@ -64,7 +70,7 @@ const goBase = async (): Promise<Reading[]> => {
     await dig('mockETH');
     writeDiagram('mockETH', await mermaid());
 
-    makeReader('MockFxPriceOracle', 'getPrice', '_safePrice');
+    findReader('MockFxPriceOracle', 'getPrice', '_safePrice');
 
     const tx = await contracts.MockFxPriceOracle.setPrice(baseNav);
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
@@ -95,6 +101,17 @@ async function main() {
             },
         };
     };
+
+    const calculateCR = makeCalculator('CR', async () => {
+        //=COLLATERAL_VALUE_USD/(FTOKEN_SUPPLY*FTOKEN_PRICE_USD)
+        const precision = 10n ** 18n;
+        const collatStETH: bigint = await contracts.stETHTreasury.totalBaseToken();
+        const navs = await contracts.stETHTreasury.getCurrentNav();
+        const collatUSD = (collatStETH * BigInt(navs._baseNav)) / precision;
+        const fTokenSupply: bigint = await contracts.FractionalToken.totalSupply();
+        const fTokenUSD = (fTokenSupply * BigInt(navs._fNav)) / precision;
+        return (collatUSD * precision) / fTokenUSD;
+    });
 
     const makeRollTrigger = (by: number, units: string): Trigger => {
         return {
@@ -165,100 +182,6 @@ async function main() {
     // TODO: plot the below against a beta = 0 set up
     // TODO: could do a plot of beta against collateral ratio, would like beta=0 to have the highest, I suspect it doesn't
     // TODO: plot collateral ratio against minted x & f tokens, base the amount on the current collateral stETHTreasury.totalBaseToken
-    /*
-        await delvePlot(
-            marketEvents(
-                { name: 'ETH', precision: 3, setMarket: setPrice },
-                parseEther('4000'),
-                parseEther('1010'),
-                parseEther('-50'),
-            ),
-            [{ contract: 'stETHTreasury', functions: ['collateralRatio', 'leverageRatio'] }],
-            'ratio',
-        );
-        */
-
-    //await ethers.provider.send('evm_setAutomine', [false]);
-    /*
-    for (const [index, pool] of ['RebalancePool', 'BoostableRebalancePool__0', 'BoostableRebalancePool__1'].entries()) {
-        await delvePlot(
-            `CR+balanceOfxETH(${pool})`,
-            'Ether Price (USD)',
-            marketEvents(events.ETH, parseEther('2400'), parseEther('1000'), parseEther('-20')),
-            ['collateral ratio', `FractionalToken.balanceOf(${pool})`],
-            [
-                {
-                    calculations: [
-                        {
-                            match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
-                            lineStyle: 'linetype 8 linewidth 3 dashtype 3',
-                        },
-                    ],
-                },
-                {
-                    simulation: [await makeLiquidateEvent(index)],
-                    calculations: [
-                        {
-                            match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
-                            lineStyle: 'linetype 1',
-                        },
-                        {
-                            match: {
-                                contract: 'FractionalToken',
-                                reading: 'balanceOf',
-                                target: contracts[pool].address,
-                            },
-                            lineStyle: 'linetype 2',
-                            y2axis: true,
-                        },
-                    ],
-                },
-
-                    {
-                        simulation: [await makeLiquidateEvent(1)],
-                        calculations: [
-                            {
-                                match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
-                                lineStyle: 'linetype 2',
-                            },
-                            {
-                                match: {
-                                    contract: 'FractionalToken',
-                                    reading: 'balanceOf',
-                                    target: contracts['BoostableRebalancePool__0'].address,
-                                },
-                                lineStyle: 'linetype 2 linewidth 2 dashtype 2',
-                                y2axis: true,
-                            },
-                        ],
-                    },
-                    {
-                        simulation: [await makeLiquidateEvent(2)],
-                        calculations: [
-                            {
-                                match: { contract: 'stETHTreasury', reading: 'collateralRatio' },
-                                lineStyle: 'linetype 4',
-                            },
-                            {
-                                match: {
-                                    contract: 'FractionalToken',
-                                    reading: 'balanceOf',
-                                    target: contracts['BoostableRebalancePool__1'].address,
-                                },
-                                lineStyle: 'linetype 4 linewidth 2 dashtype 2',
-                                y2axis: true,
-                            },
-                        ],
-                    },
-
-            ],
-
-                'leverage ratio',
-                [{ simulation: [events.doLeverageRatio, makeRollEvent(2, "week")], match: [{ contract: 'stETHTreasury', functions: ['leverageRatio'] }] }],
-
-        );
-    }
-    */
 
     // TODO: drive a collateral ratio < 130% with eth price. then run a liquidation bot to see what changes
     // beforehand either get a depositor's address, or deposit some from one of my users
@@ -303,42 +226,150 @@ async function main() {
             cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
             label: 'Ether Price (USD)',
             reversed: true,
-            reader: makeReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
+            reader: findReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
         },
         {
             simulation: [makeHarvestTrigger(), makeRollTrigger(30, 'day')],
-            y: { label: 'Collateral ratio', lines: [{ reader: makeReader('stETHTreasury', 'collateralRatio') }] },
-            y2: { label: 'Leverage ratio', lines: [{ reader: makeReader('stETHTreasury', 'leverageRatio') }] },
+            y: {
+                label: 'Collateral ratio',
+                lines: [{ reader: findReader('stETHTreasury', 'collateralRatio') }],
+            },
+            y2: {
+                label: 'Leverage ratio',
+                lines: [{ reader: findReader('stETHTreasury', 'leverageRatio') }],
+            },
         },
     );
 
-    for (const pool of [
-        'RebalancePool',
-        'BoostableRebalancePool__StETHAndxETHWrapper',
-        'BoostableRebalancePool__wstETHWrapper',
+    for (const [pool, liquidator] of [
+        ['RebalancePool', 'RebalanceWithBonusToken__0'],
+        ['BoostableRebalancePool__wstETHWrapper', 'RebalanceWithBonusToken__1'],
+        ['BoostableRebalancePool__StETHAndxETHWrapper', 'RebalanceWithBonusToken__2'],
     ]) {
+        /*
         const [readings, outcomes] = await delve('drop,liquidate', [
             makeTrigger(makeEthTemplate(), parseEther('1400')),
             //makeRollTrigger(1, 'day'),
             await makeLiquidateTrigger(pool),
         ]);
         writeReadingsDelta(`ETH=1400,${pool}.liquidate`, await readingsDeltas(readings, base), outcomes);
+        */
+
+        /*
+                                calculations: [
+                            {
+                                match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                                lineStyle: 'linetype 8 linewidth 3 dashtype 3',
+                            },
+                        ],
+                    },
+                    {
+                        simulation: [await makeLiquidateEvent(0)],
+                        calculations: [
+                            {
+                                match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                                lineStyle: 'linetype 1',
+                            },
+                            {
+                                match: {
+                                    contract: 'FractionalToken',
+                                    measurement: 'balanceOf',
+                                    target: contracts['RebalancePool'].address,
+                                },
+                                lineStyle: 'linetype 1 linewidth 2 dashtype 2',
+                                y2axis: true,
+                            },
+                        ],
+                    },
+                    {
+                        simulation: [await makeLiquidateEvent(1)],
+                        calculations: [
+                            {
+                                match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                                lineStyle: 'linetype 2',
+                            },
+                            {
+                                match: {
+                                    contract: 'FractionalToken',
+                                    measurement: 'balanceOf',
+                                    target: contracts['BoostableRebalancePool__0'].address,
+                                },
+                                lineStyle: 'linetype 2 linewidth 2 dashtype 2',
+                                y2axis: true,
+                            },
+                        ],
+                    },
+                    {
+                        simulation: [await makeLiquidateEvent(2)],
+                        calculations: [
+                            {
+                                match: { contract: 'stETHTreasury', measurement: 'collateralRatio' },
+                                lineStyle: 'linetype 4',
+                            },
+                            {
+                                match: {
+                                    contract: 'FractionalToken',
+                                    measurement: 'balanceOf',
+                                    target: contracts['BoostableRebalancePool__1'].address,
+                                },
+                                lineStyle: 'linetype 4 linewidth 2 dashtype 2',
+                                y2axis: true,
+                            },
+                        ],
+                    },
+                ],
+
+        */
 
         await delvePlot(
-            `ETHxCR+liquidate-${pool}`,
+            `CRxbalance+liquidate-${pool}`,
             {
-                label: 'Ether Price (USD)',
+                //label: 'Ether Price (USD)',
                 reversed: true,
-                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-20')),
-                reader: makeReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
+                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-10')),
+                //reader: findReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
+                label: 'Collateral ratio',
+                range: [1.5, 0.9],
+                //reader: findReader('stETHTreasury', 'collateralRatio'),
+                reader: calculateCR,
             },
             {
                 simulation: [await makeLiquidateTrigger(pool)],
-                y: { label: 'Collateral ratio', lines: [{ reader: makeReader('stETHTreasury', 'collateralRatio') }] },
+                y: {
+                    label: `Pool balance of Fractional/Leveraged Tokens`,
+                    //scale: 1000,
+                    range: [-10000, '*<100000000'],
+                    //nonlinear: 'sinh',
+                    lines: [
+                        {
+                            reader: await findReader('FractionalToken', 'balanceOf', '', pool),
+                            style: 'linetype 2 linewidth 2 dashtype 2',
+                        },
+                        {
+                            reader: await findReader('LeveragedToken', 'balanceOf', '', pool),
+                            style: 'linetype 1 linewidth 2 dashtype 2',
+                        },
+                    ],
+                },
                 y2: {
-                    label: 'Total Supply',
-                    scale: 1000000,
-                    lines: [{ reader: makeReader('FractionalToken', 'totalSupply') }],
+                    label: 'Change in balance of (ETH-ish)',
+                    // nonlinear: '',
+                    lines: [
+                        {
+                            reader: await findDeltaReader('Lido', 'balanceOf', '', 'stETHTreasury'),
+                            style: 'linetype 1',
+                        },
+                        { reader: await findDeltaReader('Lido', 'balanceOf', '', 'WstETH'), style: 'linetype 2' },
+                        {
+                            reader: await findDeltaReader('Lido', 'balanceOf', '', 'PlatformFeeSpliter'),
+                            style: 'linetype 4',
+                        },
+                        { reader: await findDeltaReader('WstETH', 'balanceOf', '', pool), style: 'linetype 6' },
+                        {
+                            reader: await findDeltaReader('Curve_DAO_Token', 'balanceOf', '', liquidator),
+                            style: 'linetype 8',
+                        },
+                    ],
                 },
             },
         );
