@@ -1004,7 +1004,7 @@ readings:
       - treasury: stETHTreasury
   - FXN:
       - admin: GnosisSafe__0
-      - available_supply: '1059377.795915778786441406'
+      - available_supply: '1059377.79'
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '20.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '20.0'

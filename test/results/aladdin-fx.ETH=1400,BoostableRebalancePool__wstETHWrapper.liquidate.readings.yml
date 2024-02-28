@@ -15,27 +15,20 @@ simulation:
         - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
     gas: 521640n
     events:
-      - >-
-        fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=0.0)
-      - >-
-        fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=5688690.989)
-      - >-
-        fETH->Transfer(from=BoostableRebalancePool__wstETHWrapper,to=0x0,value=5688690.989)
+      - fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=0.0)
+      - fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=5688690.989)
+      - fETH->Transfer(from=BoostableRebalancePool__wstETHWrapper,to=0x0,value=5688690.989)
       - stETH->Transfer(from=stETHTreasury,to=Market,value=3966.725)
       - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=3429.193)
       - stETH->Transfer(from=Market,to=wstETHWrapper,value=3966.725)
       - stETH->TransferShares(from=Market,to=wstETHWrapper,sharesValue=3429.193)
-      - >-
-        Market->Redeem(owner=BoostableRebalancePool__wstETHWrapper,recipient=wstETHWrapper,fTokenBurned=5688690.989,xTokenBurned=0.0,baseTokenOut=3966.725,redeemFee=0.0)
-      - >-
-        BoostableRebalancePool__wstETHWrapper->Liquidate(liquidated=5688690.989,baseGained=3966.725)
+      - Market->Redeem(owner=BoostableRebalancePool__wstETHWrapper,recipient=wstETHWrapper,fTokenBurned=5688690.989,xTokenBurned=0.0,baseTokenOut=3966.725,redeemFee=0.0)
+      - BoostableRebalancePool__wstETHWrapper->Liquidate(liquidated=5688690.989,baseGained=3966.725)
       - wstETH->Transfer(from=0x0,to=wstETHWrapper,value=3429.193)
       - stETH->Transfer(from=wstETHWrapper,to=wstETH,value=3966.725)
       - stETH->TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=3429.193)
-      - >-
-        wstETH->Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=3429.193)
-      - >-
-        FXN->Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
+      - wstETH->Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=3429.193)
+      - FXN->Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
 readings:
   - BoostableRebalancePool__StETHAndxETHWrapper:
       - asset: fETH
@@ -839,7 +832,7 @@ readings:
       - rewardData(fMinter).finishAt: '0'
       - rewardData(FXN).queued: '0'
       - rewardData(FXN).rate: '0'
-      - rewardData(FXN).lastUpdate: '1707717412'
+      - rewardData(FXN).lastUpdate: '1707717411'
       - rewardData(FXN).finishAt: '0'
       - rewardData(FxnDepositor).queued: '0'
       - rewardData(FxnDepositor).rate: '0'
@@ -931,7 +924,7 @@ readings:
       - rewardData(veFXN).finishAt: '0'
       - rewardData(wstETH).queued: '492028'
       - rewardData(wstETH).rate: '2217091562984'
-      - rewardData(wstETH).lastUpdate: '1707717412'
+      - rewardData(wstETH).lastUpdate: '1707717411'
       - rewardData(wstETH).finishAt: '1708259015'
       - rewardData(wstETHWrapper).queued: '0'
       - rewardData(wstETHWrapper).rate: '0'
@@ -1042,7 +1035,7 @@ readings:
       - treasury: stETHTreasury
   - FXN:
       - admin: GnosisSafe__0
-      - available_supply: '1059377.854959411460211057'
+      - available_supply: '1059377.85'
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '20.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '20.0'
