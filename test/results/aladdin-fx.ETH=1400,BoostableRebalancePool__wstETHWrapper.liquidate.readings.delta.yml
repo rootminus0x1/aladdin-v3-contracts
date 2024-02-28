@@ -16,22 +16,16 @@ simulation:
 readings:
   - BoostableRebalancePool__wstETHWrapper:
       - numTotalSupplyHistory: '1'
-      - pendingRewards(WstETH).0: '-0.140'
-      - rewardData(Curve_DAO_Token).lastUpdate: '63206'
-      - rewardData(WstETH).lastUpdate: '63206'
+      - pendingRewards(wstETH).0: '-0.140'
+      - rewardData(FXN).lastUpdate: '63195'
+      - rewardData(wstETH).lastUpdate: '63195'
       - totalSupply: '-5688690'
-  - Curve_DAO_Token:
-      - balanceOf(RebalanceWithBonusToken__1): '-1.0'
-  - FractionalToken:
+  - fETH:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '-5688690.98'
       - totalSupply: '-5688690'
-  - LeveragedToken:
-      - nav: '-0.221846582650157656'
-  - Lido:
-      - balanceOf(stETHTreasury): '-3966.72'
-      - balanceOf(WstETH): '+3966.72'
-      - sharesOf(stETHTreasury): '-3429.193396792909397492'
-      - sharesOf(WstETH): '+3429.193396792909397492'
+  - FXN:
+      - available_supply: '+0.055936073059360722'
+      - balanceOf(RebalanceWithBonusToken__1): '-1.0'
   - MockFxPriceOracle:
       - getPrice._safePrice: '-1100.8'
       - getPrice._minUnsafePrice: '-1100.8'
@@ -39,15 +33,22 @@ readings:
       - price: '-1100.8'
   - RebalancePoolRegistry:
       - totalSupply: '-5688690'
+  - stETH:
+      - balanceOf(stETHTreasury): '-3966.72'
+      - balanceOf(wstETH): '+3966.72'
+      - sharesOf(stETHTreasury): '-3429.193396792909397492'
+      - sharesOf(wstETH): '+3429.193396792909397492'
   - stETHTreasury:
       - collateralRatio: '-0.659'
-      - emaLeverageRatio.lastTime: '+3830'
+      - emaLeverageRatio.lastTime: '+3820'
       - emaLeverageRatio.lastValue: '6979912715325685813'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1100.87'
       - getCurrentNav._fNav: '-0.059'
       - getCurrentNav._xNav: '-1.343'
       - totalBaseToken: '-3966.724723024529392841'
-  - WstETH:
+  - wstETH:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '+3429.19'
       - totalSupply: '+3429'
+  - xETH:
+      - nav: '-0.221846582650157656'

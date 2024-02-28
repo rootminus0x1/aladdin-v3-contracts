@@ -49,7 +49,7 @@ import { MockFxPriceOracle, StETHTreasury__factory } from '@types';
 
 // TODO: take a snapshot here
 const goBase = async (): Promise<Reading[]> => {
-    const startEthPrice = await getEthPrice(getConfig().timestamp);
+    //const startEthPrice = await getEthPrice(getConfig().timestamp);
 
     await dig('base');
     writeDiagram('base', await mermaid());
@@ -70,6 +70,7 @@ const goBase = async (): Promise<Reading[]> => {
     // redig
     await dig('mockETH');
     writeDiagram('mockETH', await mermaid());
+    await digUsers();
 
     findReader('MockFxPriceOracle', 'getPrice', '_safePrice');
 
@@ -78,7 +79,6 @@ const goBase = async (): Promise<Reading[]> => {
     writeReadings('mockETH', mockETH);
     // writeReadingsDelta('mockETH', await readingsDeltas(mockETH, base), []);
 
-    await digUsers();
     return mockETH;
 };
 
@@ -221,7 +221,7 @@ async function main() {
                 [events.mintFToken_1000eth, marketEvent(events.ETH, parseEther('1300')), events.mintFToken_1000eth],
             );
             */
-
+    /*
     await delvePlot(
         'ETHxCR',
         {
@@ -242,7 +242,7 @@ async function main() {
             },
         },
     );
-
+        */
     for (const [pool, liquidator] of [
         ['RebalancePool', 'RebalanceWithBonusToken__0'],
         ['BoostableRebalancePool__wstETHWrapper', 'RebalanceWithBonusToken__1'],
@@ -253,6 +253,7 @@ async function main() {
             //makeRollTrigger(1, 'day'),
             await makeLiquidateTrigger(pool),
         ]);
+        writeReadings(`ETH=1400,${pool}.liquidate`, readings, outcomes);
         writeReadingsDelta(`ETH=1400,${pool}.liquidate`, await readingsDeltas(readings, base), outcomes);
 
         await delvePlot(

@@ -1,3 +1,18 @@
+simulation:
+  - trigger:
+      name: ETH
+      argTypes:
+        - uint256
+      args:
+        - 1400000000000000000000n
+    gas: 26443n
+  - trigger:
+      name: liquidate BoostableRebalancePool__wstETHWrapper
+      argTypes:
+        - address
+      args:
+        - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+    gas: 521640n
 readings:
   - BoostableRebalancePool__StETHAndxETHWrapper:
       - asset: fETH
@@ -699,7 +714,7 @@ readings:
       - liquidatableCollateralRatio: '1.3055'
       - market: Market
       - minter: Token_Minter
-      - numTotalSupplyHistory: '136'
+      - numTotalSupplyHistory: '137'
       - pendingRewards($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).0: '0.0'
       - pendingRewards($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).1: '0.0'
       - pendingRewards(admin).0: '0.0'
@@ -760,7 +775,7 @@ readings:
       - pendingRewards(Token_Minter).1: '0.0'
       - pendingRewards(veFXN).0: '0.0'
       - pendingRewards(veFXN).1: '0.0'
-      - pendingRewards(wstETH).0: '0.140'
+      - pendingRewards(wstETH).0: '0.0'
       - pendingRewards(wstETH).1: '1.201'
       - pendingRewards(wstETHWrapper).0: '0.0'
       - pendingRewards(wstETHWrapper).1: '0.0'
@@ -805,7 +820,7 @@ readings:
       - rewardData(fMinter).finishAt: '0'
       - rewardData(FXN).queued: '0'
       - rewardData(FXN).rate: '0'
-      - rewardData(FXN).lastUpdate: '1707654215'
+      - rewardData(FXN).lastUpdate: '1707717410'
       - rewardData(FXN).finishAt: '0'
       - rewardData(FxnDepositor).queued: '0'
       - rewardData(FxnDepositor).rate: '0'
@@ -893,7 +908,7 @@ readings:
       - rewardData(veFXN).finishAt: '0'
       - rewardData(wstETH).queued: '492028'
       - rewardData(wstETH).rate: '2217091562984'
-      - rewardData(wstETH).lastUpdate: '1707654215'
+      - rewardData(wstETH).lastUpdate: '1707717410'
       - rewardData(wstETH).finishAt: '1708259015'
       - rewardData(wstETHWrapper).queued: '0'
       - rewardData(wstETHWrapper).rate: '0'
@@ -946,7 +961,7 @@ readings:
       - rewardReceiver(xETH): '0x0000000000000000000000000000000000000000'
       - rewardReceiver(xHolderRedeemer): '0x0000000000000000000000000000000000000000'
       - rewardReceiver(xMinter): '0x0000000000000000000000000000000000000000'
-      - totalSupply: '5688691'
+      - totalSupply: '0'
       - treasury: stETHTreasury
       - ve: veFXN
       - wrapper: wstETHWrapper
@@ -966,7 +981,7 @@ readings:
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '16.49'
       - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '5769148.34'
-      - balanceOf(BoostableRebalancePool__wstETHWrapper): '5688690.99'
+      - balanceOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - balanceOf(Booster): '0.0'
       - balanceOf(fHolderLiquidator): '0.0'
       - balanceOf(fHolderRedeemer): '0.0'
@@ -1000,11 +1015,11 @@ readings:
       - balanceOf(xMinter): '0.0'
       - decimals: '18'
       - nav: '1.0'
-      - totalSupply: '12136955'
+      - totalSupply: '6448264'
       - treasury: stETHTreasury
   - FXN:
       - admin: GnosisSafe__0
-      - available_supply: '1059377.792808219172032477'
+      - available_supply: '1059377.848744292231393199'
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
       - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '20.0'
@@ -1026,7 +1041,7 @@ readings:
       - balanceOf(RebalancePoolRegistry): '0.0'
       - balanceOf(RebalancePoolSplitter): '0.0'
       - balanceOf(RebalanceWithBonusToken__0): '100.0'
-      - balanceOf(RebalanceWithBonusToken__1): '20.0'
+      - balanceOf(RebalanceWithBonusToken__1): '19.0'
       - balanceOf(RebalanceWithBonusToken__2): '20.0'
       - balanceOf(ReservePool): '0.0'
       - balanceOf(SmartWalletWhitelist): '0.0'
@@ -1298,10 +1313,10 @@ readings:
       - xTokenRedeemFeeRatio.defaultFeeRatio: '1.0'
       - xTokenRedeemFeeRatio.extraFeeRatio: '7.0'
   - MockFxPriceOracle:
-      - getPrice._safePrice: '2500.9'
-      - getPrice._minUnsafePrice: '2500.9'
-      - getPrice._maxUnsafePrice: '2500.9'
-      - price: '2500.9'
+      - getPrice._safePrice: '1400.0'
+      - getPrice._minUnsafePrice: '1400.0'
+      - getPrice._maxUnsafePrice: '1400.0'
+      - price: '1400.0'
   - PlatformFeeSpliter:
       - burners($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0000000000000000000000000000000000000000'
       - burners(admin): '0x0000000000000000000000000000000000000000'
@@ -1718,7 +1733,7 @@ readings:
           - BoostableRebalancePool__StETHAndxETHWrapper
       - owner: GnosisSafe__0
       - pendingOwner: '0x0000000000000000000000000000000000000000'
-      - totalSupply: '11472081'
+      - totalSupply: '5783390'
   - RebalancePoolSplitter:
       - getReceivers($0x11E91BB6d1334585AA37D8F4fde3932C7960B938)._receivers: []
       - getReceivers($0x11E91BB6d1334585AA37D8F4fde3932C7960B938)._ratios: []
@@ -1920,10 +1935,10 @@ readings:
       - balanceOf(ReservePool): '33.53'
       - balanceOf(SmartWalletWhitelist): '0.0'
       - balanceOf(StETHAndxETHWrapper): '0.0'
-      - balanceOf(stETHTreasury): '9444.81'
+      - balanceOf(stETHTreasury): '5478.08'
       - balanceOf(Token_Minter): '0.0'
       - balanceOf(veFXN): '0.0'
-      - balanceOf(wstETH): '3548193.50'
+      - balanceOf(wstETH): '3552160.22'
       - balanceOf(wstETHWrapper): '0.0'
       - balanceOf(xETH): '0.0'
       - balanceOf(xHolderRedeemer): '0.0'
@@ -2020,10 +2035,10 @@ readings:
       - sharesOf(ReservePool): '28.990166673141510048'
       - sharesOf(SmartWalletWhitelist): '0.0'
       - sharesOf(StETHAndxETHWrapper): '0.0'
-      - sharesOf(stETHTreasury): '8164.940765030775329617'
+      - sharesOf(stETHTreasury): '4735.747368237865932125'
       - sharesOf(Token_Minter): '0.0'
       - sharesOf(veFXN): '0.0'
-      - sharesOf(wstETH): '3067377.387249938650363244'
+      - sharesOf(wstETH): '3070806.580646731559760736'
       - sharesOf(wstETHWrapper): '0.0'
       - sharesOf(xETH): '0.0'
       - sharesOf(xHolderRedeemer): '0.0'
@@ -2038,15 +2053,15 @@ readings:
       - baseToken: stETH
       - baseTokenCap: '10000.0'
       - beta: '0.1'
-      - collateralRatio: '1.878'
-      - emaLeverageRatio.lastTime: '1707713590'
+      - collateralRatio: '1.218'
+      - emaLeverageRatio.lastTime: '1707717410'
       - emaLeverageRatio.sampleInterval: '86400'
-      - emaLeverageRatio.lastValue: '1983800545126983346'
-      - emaLeverageRatio.lastEmaValue: '1985630000000000000'
+      - emaLeverageRatio.lastValue: '8963713260452669159'
+      - emaLeverageRatio.lastEmaValue: '1985550000000000000'
       - fToken: fETH
-      - getCurrentNav._baseNav: '2500.87'
-      - getCurrentNav._fNav: '1.036'
-      - getCurrentNav._xNav: '1.534'
+      - getCurrentNav._baseNav: '1400.0'
+      - getCurrentNav._fNav: '0.976'
+      - getCurrentNav._xNav: '0.191'
       - harvestBountyRatio: '10000000000000000'
       - lastPermissionedPrice: '1836.7853'
       - leverageRatio: '1.986'
@@ -2059,7 +2074,7 @@ readings:
       - rebalancePoolRatio: '500000000000000000'
       - strategy: '0x0000000000000000000000000000000000000000'
       - strategyUnderlying: '0.0'
-      - totalBaseToken: '9444.807757115345432463'
+      - totalBaseToken: '5478.083034090816039622'
       - xToken: xETH
   - Token_Minter:
       - controller: Gauge_Controller
@@ -2219,7 +2234,7 @@ readings:
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
       - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '8.28'
-      - balanceOf(BoostableRebalancePool__wstETHWrapper): '8.36'
+      - balanceOf(BoostableRebalancePool__wstETHWrapper): '3437.55'
       - balanceOf(Booster): '0.0'
       - balanceOf(fETH): '0.0'
       - balanceOf(fHolderLiquidator): '0.0'
@@ -2290,7 +2305,7 @@ readings:
       - stETH: stETH
       - stEthPerToken: '1.156751534262936691'
       - tokensPerStEth: '0.86448988428373581'
-      - totalSupply: '3067377'
+      - totalSupply: '3070807'
   - wstETHWrapper:
       - dst: wstETH
       - src: stETH
@@ -2332,6 +2347,6 @@ readings:
       - balanceOf(xMinter): '0.0'
       - decimals: '18'
       - fToken: fETH
-      - nav: '0.723751949545094451'
+      - nav: '0.501905366894936795'
       - totalSupply: '7200159'
       - treasury: stETHTreasury

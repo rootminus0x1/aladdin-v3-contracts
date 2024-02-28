@@ -14,18 +14,12 @@ simulation:
         - '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
     gas: 488408n
 readings:
-  - Curve_DAO_Token:
-      - balanceOf(RebalanceWithBonusToken__0): '-2.0'
-  - FractionalToken:
+  - fETH:
       - balanceOf(RebalancePool): '-33956.49'
       - totalSupply: '-33956'
-  - LeveragedToken:
-      - nav: '-0.001324229397344726'
-  - Lido:
-      - balanceOf(stETHTreasury): '-23.67'
-      - balanceOf(WstETH): '+23.68'
-      - sharesOf(stETHTreasury): '-20.469274987095949981'
-      - sharesOf(WstETH): '+20.469274987095949981'
+  - FXN:
+      - available_supply: '+0.006215119228817858'
+      - balanceOf(RebalanceWithBonusToken__0): '-2.0'
   - MockFxPriceOracle:
       - getPrice._safePrice: '-1100.8'
       - getPrice._minUnsafePrice: '-1100.8'
@@ -37,15 +31,22 @@ readings:
       - totalUnlocking: '-19714.952389819415148249'
   - RebalancePoolRegistry:
       - totalSupply: '-14241'
+  - stETH:
+      - balanceOf(stETHTreasury): '-23.67'
+      - balanceOf(wstETH): '+23.68'
+      - sharesOf(stETHTreasury): '-20.469274987095949981'
+      - sharesOf(wstETH): '+20.469274987095949981'
   - stETHTreasury:
       - collateralRatio: '-0.761'
-      - emaLeverageRatio.lastTime: '+3820'
+      - emaLeverageRatio.lastTime: '+3800'
       - emaLeverageRatio.lastValue: '6979912715325685813'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1100.87'
       - getCurrentNav._fNav: '-0.059'
       - getCurrentNav._xNav: '-1.343'
       - totalBaseToken: '-23.677865246573193793'
-  - WstETH:
+  - wstETH:
       - balanceOf(RebalancePool): '+20.47'
       - totalSupply: '+20'
+  - xETH:
+      - nav: '-0.001324229397344726'

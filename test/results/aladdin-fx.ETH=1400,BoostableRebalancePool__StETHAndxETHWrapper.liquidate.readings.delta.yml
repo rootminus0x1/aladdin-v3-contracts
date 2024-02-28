@@ -16,25 +16,17 @@ simulation:
 readings:
   - BoostableRebalancePool__StETHAndxETHWrapper:
       - numTotalSupplyHistory: '1'
-      - pendingRewards(WstETH).0: '-0.140'
-      - rewardData(Curve_DAO_Token).lastUpdate: '63198'
-      - rewardData(LeveragedToken).lastUpdate: '63198'
-      - rewardData(WstETH).lastUpdate: '63198'
+      - pendingRewards(wstETH).0: '-0.140'
+      - rewardData(FXN).lastUpdate: '63212'
+      - rewardData(wstETH).lastUpdate: '63212'
+      - rewardData(xETH).lastUpdate: '63212'
       - totalSupply: '-5769148'
-  - Curve_DAO_Token:
-      - balanceOf(RebalanceWithBonusToken__2): '-1.0'
-  - FractionalToken:
+  - fETH:
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '-5769148.33'
       - totalSupply: '-5769148'
-  - LeveragedToken:
-      - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '+29237139.51'
-      - nav: '-0.424243715429883611'
-      - totalSupply: '+29237140'
-  - Lido:
-      - balanceOf(PlatformFeeSpliter): '+36.48'
-      - balanceOf(stETHTreasury): '-36.48'
-      - sharesOf(PlatformFeeSpliter): '+31.536872326256900055'
-      - sharesOf(stETHTreasury): '-31.536872326256900055'
+  - FXN:
+      - available_supply: '+0.108764586504312515'
+      - balanceOf(RebalanceWithBonusToken__2): '-1.0'
   - MockFxPriceOracle:
       - getPrice._safePrice: '-1100.8'
       - getPrice._minUnsafePrice: '-1100.8'
@@ -42,12 +34,23 @@ readings:
       - price: '-1100.8'
   - RebalancePoolRegistry:
       - totalSupply: '-5769148'
+  - stETH:
+      - balanceOf(PlatformFeeSpliter): '+36.48'
+      - balanceOf(stETHTreasury): '-36.48'
+      - sharesOf(PlatformFeeSpliter): '+31.536872326256900055'
+      - sharesOf(stETHTreasury): '-31.536872326256900055'
   - stETHTreasury:
       - collateralRatio: '+0.241'
-      - emaLeverageRatio.lastTime: '+3820'
+      - emaLeverageRatio.lastTime: '+3840'
       - emaLeverageRatio.lastValue: '3194462129757860720'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1100.87'
       - getCurrentNav._fNav: '-0.059'
       - getCurrentNav._xNav: '-1.343'
       - totalBaseToken: '-36.480325449252018493'
+  - veFXN:
+      - balanceOf(FxnVoterProxy): '-0.01'
+  - xETH:
+      - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '+29237139.51'
+      - nav: '-0.424243715429883611'
+      - totalSupply: '+29237140'
