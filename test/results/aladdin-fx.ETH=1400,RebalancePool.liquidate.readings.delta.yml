@@ -6,6 +6,7 @@ simulation:
       args:
         - 1400000000000000000000n
     gas: 26443n
+    events: []
   - trigger:
       name: liquidate RebalancePool
       argTypes:
@@ -13,6 +14,23 @@ simulation:
       args:
         - '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
     gas: 488408n
+    events:
+      - fETH.Approval(RebalancePool,Market,0.0)
+      - fETH.Approval(RebalancePool,Market,33956.49258989810449867)
+      - fETH.Transfer(RebalancePool,0x0,33956.49258989810449867)
+      - stETH.Transfer(stETHTreasury,Market,23.677865246573193793)
+      - stETH.TransferShares(stETHTreasury,Market,20.469274987095949981)
+      - stETH.Transfer(Market,wstETHWrapper,23.677865246573193793)
+      - stETH.TransferShares(Market,wstETHWrapper,20.469274987095949981)
+      - >-
+        Market.Redeem(RebalancePool,wstETHWrapper,33956.49258989810449867,0.0,23.677865246573193793,0.0)
+      - RebalancePool.Liquidate(33956.49258989810449867,23.677865246573193793)
+      - wstETH.Transfer(0x0,wstETHWrapper,20.469274987095949981)
+      - stETH.Transfer(wstETHWrapper,wstETH,23.677865246573193793)
+      - stETH.TransferShares(wstETHWrapper,wstETH,20.469274987095949981)
+      - wstETH.Transfer(wstETHWrapper,RebalancePool,20.469274987095949981)
+      - >-
+        FXN.Transfer(RebalanceWithBonusToken__0,0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,2.0)
 readings:
   - fETH:
       - balanceOf(RebalancePool): '-33956.49'
@@ -26,7 +44,7 @@ readings:
       - getPrice._maxUnsafePrice: '-1100.8'
       - price: '-1100.8'
   - RebalancePool:
-      - epochState.epoch: '1'
+      - epochState.epoch: '+1'
       - totalSupply: '-14241'
       - totalUnlocking: '-19714.952389819415148249'
   - RebalancePoolRegistry:
@@ -39,7 +57,7 @@ readings:
   - stETHTreasury:
       - collateralRatio: '-0.761'
       - emaLeverageRatio.lastTime: '+3800'
-      - emaLeverageRatio.lastValue: '6979912715325685813'
+      - emaLeverageRatio.lastValue: '+6979912715325685813'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1100.87'
       - getCurrentNav._fNav: '-0.059'

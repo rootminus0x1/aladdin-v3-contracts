@@ -6,6 +6,7 @@ simulation:
       args:
         - 1400000000000000000000n
     gas: 26443n
+    events: []
   - trigger:
       name: liquidate BoostableRebalancePool__StETHAndxETHWrapper
       argTypes:
@@ -13,19 +14,48 @@ simulation:
       args:
         - '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
     gas: 625398n
+    events:
+      - fETH.Approval(BoostableRebalancePool__StETHAndxETHWrapper,Market,0.0)
+      - >-
+        fETH.Approval(BoostableRebalancePool__StETHAndxETHWrapper,Market,5769148.339830873300346477)
+      - >-
+        fETH.Transfer(BoostableRebalancePool__StETHAndxETHWrapper,0x0,5769148.339830873300346477)
+      - stETH.Transfer(stETHTreasury,Market,4022.827640880821033497)
+      - stETH.TransferShares(stETHTreasury,Market,3477.693801758474893451)
+      - stETH.Transfer(Market,StETHAndxETHWrapper,4022.827640880821033497)
+      - stETH.TransferShares(Market,StETHAndxETHWrapper,3477.693801758474893451)
+      - >-
+        Market.Redeem(BoostableRebalancePool__StETHAndxETHWrapper,StETHAndxETHWrapper,5769148.339830873300346477,0.0,4022.827640880821033497,0.0)
+      - >-
+        BoostableRebalancePool__StETHAndxETHWrapper.Liquidate(5769148.339830873300346477,4022.827640880821033497)
+      - >-
+        stETH.Transfer(StETHAndxETHWrapper,PlatformFeeSpliter,36.480325449252018493)
+      - >-
+        stETH.TransferShares(StETHAndxETHWrapper,PlatformFeeSpliter,31.536872326256900055)
+      - >-
+        stETH.Transfer(StETHAndxETHWrapper,stETHTreasury,3986.347315431569015004)
+      - >-
+        stETH.TransferShares(StETHAndxETHWrapper,stETHTreasury,3446.156929432217993396)
+      - xETH.Transfer(0x0,StETHAndxETHWrapper,29237139.511298261737131105)
+      - >-
+        Market.Mint(StETHAndxETHWrapper,StETHAndxETHWrapper,4022.827640880821033497,0.0,29237139.511298261737131105,36.480325449252018493)
+      - >-
+        xETH.Transfer(StETHAndxETHWrapper,BoostableRebalancePool__StETHAndxETHWrapper,29237139.511298261737131105)
+      - >-
+        FXN.Transfer(RebalanceWithBonusToken__2,0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,1.0)
 readings:
   - BoostableRebalancePool__StETHAndxETHWrapper:
-      - numTotalSupplyHistory: '1'
+      - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '63212'
-      - rewardData(wstETH).lastUpdate: '63212'
-      - rewardData(xETH).lastUpdate: '63212'
+      - rewardData(FXN).lastUpdate: '+63211'
+      - rewardData(wstETH).lastUpdate: '+63211'
+      - rewardData(xETH).lastUpdate: '+63211'
       - totalSupply: '-5769148'
   - fETH:
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '-5769148.33'
       - totalSupply: '-5769148'
   - FXN:
-      - available_supply: '+0.108764586504312515'
+      - available_supply: '+0.102549467275494657'
       - balanceOf(RebalanceWithBonusToken__2): '-1.0'
   - MockFxPriceOracle:
       - getPrice._safePrice: '-1100.8'
@@ -42,7 +72,7 @@ readings:
   - stETHTreasury:
       - collateralRatio: '+0.241'
       - emaLeverageRatio.lastTime: '+3840'
-      - emaLeverageRatio.lastValue: '3194462129757860720'
+      - emaLeverageRatio.lastValue: '+3194462129757860720'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1100.87'
       - getCurrentNav._fNav: '-0.059'

@@ -164,18 +164,9 @@ async function main() {
                 if (!liquidatorAddress) throw Error(`could not find liquidator for ${pool.name}`);
                 const liquidator = contracts[liquidatorAddress];
                 const tx = await liquidator.liquidate(0n);
-                /*
-                const receipt = await tx.wait();
-                // console.log(`liquidate on ${pool.name} ${pool.address} via ${liquidator.name}`);
 
-                // TODO: extract the last event and extract the content
-                const events = receipt.logs
-                    .map((log: any) => pool.interface.parseLog(log))
-                    .filter((event: any) => event !== null);
-                await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
-                // event Liquidate(uint256 liquidated, uint256 baseGained);
-                return { liquidated: formatEther(events[0].args[0]), baseGained: formatEther(events[0].args[1]) };
-                */
+                // await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
+
                 return tx;
             },
         };
