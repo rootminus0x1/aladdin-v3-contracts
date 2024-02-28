@@ -15,28 +15,29 @@ simulation:
         - '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
     gas: 488408n
     events:
-      - fETH.Approval(RebalancePool,Market,0.0)
-      - fETH.Approval(RebalancePool,Market,33956.49258989810449867)
-      - fETH.Transfer(RebalancePool,0x0,33956.49258989810449867)
-      - stETH.Transfer(stETHTreasury,Market,23.677865246573193793)
-      - stETH.TransferShares(stETHTreasury,Market,20.469274987095949981)
-      - stETH.Transfer(Market,wstETHWrapper,23.677865246573193793)
-      - stETH.TransferShares(Market,wstETHWrapper,20.469274987095949981)
+      - fETH->Approval(owner=RebalancePool,spender=Market,value=0.0)
+      - fETH->Approval(owner=RebalancePool,spender=Market,value=33956.493)
+      - fETH->Transfer(from=RebalancePool,to=0x0,value=33956.493)
+      - stETH->Transfer(from=stETHTreasury,to=Market,value=23.678)
+      - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=20.469)
+      - stETH->Transfer(from=Market,to=wstETHWrapper,value=23.678)
+      - stETH->TransferShares(from=Market,to=wstETHWrapper,sharesValue=20.469)
       - >-
-        Market.Redeem(RebalancePool,wstETHWrapper,33956.49258989810449867,0.0,23.677865246573193793,0.0)
-      - RebalancePool.Liquidate(33956.49258989810449867,23.677865246573193793)
-      - wstETH.Transfer(0x0,wstETHWrapper,20.469274987095949981)
-      - stETH.Transfer(wstETHWrapper,wstETH,23.677865246573193793)
-      - stETH.TransferShares(wstETHWrapper,wstETH,20.469274987095949981)
-      - wstETH.Transfer(wstETHWrapper,RebalancePool,20.469274987095949981)
+        Market->Redeem(owner=RebalancePool,recipient=wstETHWrapper,fTokenBurned=33956.493,xTokenBurned=0.0,baseTokenOut=23.678,redeemFee=0.0)
+      - RebalancePool->Liquidate(liquidated=33956.493,baseGained=23.678)
+      - wstETH->Transfer(from=0x0,to=wstETHWrapper,value=20.469)
+      - stETH->Transfer(from=wstETHWrapper,to=wstETH,value=23.678)
+      - stETH->TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=20.469)
+      - wstETH->Transfer(from=wstETHWrapper,to=RebalancePool,value=20.469)
       - >-
-        FXN.Transfer(RebalanceWithBonusToken__0,0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,2.0)
+        FXN->Transfer(_from=RebalanceWithBonusToken__0,_to=liquidator,_value=2.0)
 readings:
   - fETH:
       - balanceOf(RebalancePool): '-33956.49'
       - totalSupply: '-33956'
   - FXN:
       - available_supply: '+0.006215119228817858'
+      - balanceOf(liquidator): '+2.0'
       - balanceOf(RebalanceWithBonusToken__0): '-2.0'
   - MockFxPriceOracle:
       - getPrice._safePrice: '-1100.8'

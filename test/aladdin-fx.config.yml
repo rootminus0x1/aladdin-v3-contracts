@@ -55,7 +55,8 @@ plot:
             measurement: collateralRatio
 
 users:
-  - name: admin # bao admin
+  #  - name: admin # bao admin
+  - name: liquidator # calls the various liquidators (maybe create )
   - name: fMinter #user who mints fTokens
     wallet:
       - { contract: stETH, amount: 10000 ether }

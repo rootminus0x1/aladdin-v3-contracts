@@ -69,8 +69,8 @@ const goBase = async (): Promise<Reading[]> => {
 
     // redig
     await dig('mockETH');
+    await digUsers(); // add the users (also on the graph)
     writeDiagram('mockETH', await mermaid());
-    await digUsers();
 
     findReader('MockFxPriceOracle', 'getPrice', '_safePrice');
 
@@ -163,7 +163,7 @@ async function main() {
                 }
                 if (!liquidatorAddress) throw Error(`could not find liquidator for ${pool.name}`);
                 const liquidator = contracts[liquidatorAddress];
-                const tx = await liquidator.liquidate(0n);
+                const tx = await liquidator.connect(users.liquidator).liquidate(0n); // no minimum
 
                 // await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
 

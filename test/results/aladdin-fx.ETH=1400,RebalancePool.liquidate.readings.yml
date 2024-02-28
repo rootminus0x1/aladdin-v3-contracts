@@ -15,27 +15,26 @@ simulation:
         - '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
     gas: 488408n
     events:
-      - fETH.Approval(RebalancePool,Market,0.0)
-      - fETH.Approval(RebalancePool,Market,33956.49258989810449867)
-      - fETH.Transfer(RebalancePool,0x0,33956.49258989810449867)
-      - stETH.Transfer(stETHTreasury,Market,23.677865246573193793)
-      - stETH.TransferShares(stETHTreasury,Market,20.469274987095949981)
-      - stETH.Transfer(Market,wstETHWrapper,23.677865246573193793)
-      - stETH.TransferShares(Market,wstETHWrapper,20.469274987095949981)
+      - fETH->Approval(owner=RebalancePool,spender=Market,value=0.0)
+      - fETH->Approval(owner=RebalancePool,spender=Market,value=33956.493)
+      - fETH->Transfer(from=RebalancePool,to=0x0,value=33956.493)
+      - stETH->Transfer(from=stETHTreasury,to=Market,value=23.678)
+      - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=20.469)
+      - stETH->Transfer(from=Market,to=wstETHWrapper,value=23.678)
+      - stETH->TransferShares(from=Market,to=wstETHWrapper,sharesValue=20.469)
       - >-
-        Market.Redeem(RebalancePool,wstETHWrapper,33956.49258989810449867,0.0,23.677865246573193793,0.0)
-      - RebalancePool.Liquidate(33956.49258989810449867,23.677865246573193793)
-      - wstETH.Transfer(0x0,wstETHWrapper,20.469274987095949981)
-      - stETH.Transfer(wstETHWrapper,wstETH,23.677865246573193793)
-      - stETH.TransferShares(wstETHWrapper,wstETH,20.469274987095949981)
-      - wstETH.Transfer(wstETHWrapper,RebalancePool,20.469274987095949981)
+        Market->Redeem(owner=RebalancePool,recipient=wstETHWrapper,fTokenBurned=33956.493,xTokenBurned=0.0,baseTokenOut=23.678,redeemFee=0.0)
+      - RebalancePool->Liquidate(liquidated=33956.493,baseGained=23.678)
+      - wstETH->Transfer(from=0x0,to=wstETHWrapper,value=20.469)
+      - stETH->Transfer(from=wstETHWrapper,to=wstETH,value=23.678)
+      - stETH->TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=20.469)
+      - wstETH->Transfer(from=wstETHWrapper,to=RebalancePool,value=20.469)
       - >-
-        FXN.Transfer(RebalanceWithBonusToken__0,0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,2.0)
+        FXN->Transfer(_from=RebalanceWithBonusToken__0,_to=liquidator,_value=2.0)
 readings:
   - BoostableRebalancePool__StETHAndxETHWrapper:
       - asset: fETH
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - balanceOf(Booster): '0.0'
       - balanceOf(fETH): '0.0'
@@ -48,6 +47,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '0.0'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'
@@ -73,9 +73,6 @@ readings:
       - boostCheckpoint($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).historyIndex: 'could not decode result data: boostCheckpoint'
-      - boostCheckpoint(admin).veBalance: 'could not decode result data: boostCheckpoint'
-      - boostCheckpoint(admin).veSupply: 'could not decode result data: boostCheckpoint'
-      - boostCheckpoint(admin).historyIndex: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(BoostableRebalancePool__wstETHWrapper).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(BoostableRebalancePool__wstETHWrapper).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(BoostableRebalancePool__wstETHWrapper).historyIndex: 'could not decode result data: boostCheckpoint'
@@ -112,6 +109,9 @@ readings:
       - boostCheckpoint(GnosisSafe__1).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(GnosisSafe__1).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(GnosisSafe__1).historyIndex: 'could not decode result data: boostCheckpoint'
+      - boostCheckpoint(liquidator).veBalance: 'could not decode result data: boostCheckpoint'
+      - boostCheckpoint(liquidator).veSupply: 'could not decode result data: boostCheckpoint'
+      - boostCheckpoint(liquidator).historyIndex: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(Market).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(Market).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(Market).historyIndex: 'could not decode result data: boostCheckpoint'
@@ -176,7 +176,6 @@ readings:
       - boostCheckpoint(xMinter).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(xMinter).historyIndex: 'could not decode result data: boostCheckpoint'
       - distributors($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0'
-      - distributors(admin): '0x0'
       - distributors(BoostableRebalancePool__wstETHWrapper): '0x0'
       - distributors(Booster): '0x0'
       - distributors(fETH): '0x0'
@@ -189,6 +188,7 @@ readings:
       - distributors(Gauge_Controller): '0x0'
       - distributors(GnosisSafe__0): '0x0'
       - distributors(GnosisSafe__1): '0x0'
+      - distributors(liquidator): '0x0'
       - distributors(Market): '0x0'
       - distributors(MockFxPriceOracle): '0x0'
       - distributors(PlatformFeeSpliter): '0x0'
@@ -218,7 +218,6 @@ readings:
           - xETH
           - FXN
       - getBoostRatio($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - getBoostRatio(admin): '0.0'
       - getBoostRatio(BoostableRebalancePool__wstETHWrapper): '0.0'
       - getBoostRatio(Booster): '0.0'
       - getBoostRatio(fETH): '0.0'
@@ -231,6 +230,7 @@ readings:
       - getBoostRatio(Gauge_Controller): '0.0'
       - getBoostRatio(GnosisSafe__0): '0.0'
       - getBoostRatio(GnosisSafe__1): '0.0'
+      - getBoostRatio(liquidator): '0.0'
       - getBoostRatio(Market): '0.0'
       - getBoostRatio(MockFxPriceOracle): '0.0'
       - getBoostRatio(PlatformFeeSpliter): '0.0'
@@ -260,8 +260,6 @@ readings:
       - numTotalSupplyHistory: '149'
       - pendingRewards($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).0: '0.0'
       - pendingRewards($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).1: '0.0'
-      - pendingRewards(admin).0: '0.0'
-      - pendingRewards(admin).1: '0.0'
       - pendingRewards(BoostableRebalancePool__wstETHWrapper).0: '0.0'
       - pendingRewards(BoostableRebalancePool__wstETHWrapper).1: '0.0'
       - pendingRewards(Booster).0: '0.0'
@@ -286,6 +284,8 @@ readings:
       - pendingRewards(GnosisSafe__0).1: '0.0'
       - pendingRewards(GnosisSafe__1).0: '0.0'
       - pendingRewards(GnosisSafe__1).1: '0.0'
+      - pendingRewards(liquidator).0: '0.0'
+      - pendingRewards(liquidator).1: '0.0'
       - pendingRewards(Market).0: '0.0'
       - pendingRewards(Market).1: '0.0'
       - pendingRewards(MockFxPriceOracle).0: '0.0'
@@ -333,10 +333,6 @@ readings:
       - rewardData($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).rate: '0'
       - rewardData($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).lastUpdate: '0'
       - rewardData($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).finishAt: '0'
-      - rewardData(admin).queued: '0'
-      - rewardData(admin).rate: '0'
-      - rewardData(admin).lastUpdate: '0'
-      - rewardData(admin).finishAt: '0'
       - rewardData(BoostableRebalancePool__wstETHWrapper).queued: '0'
       - rewardData(BoostableRebalancePool__wstETHWrapper).rate: '0'
       - rewardData(BoostableRebalancePool__wstETHWrapper).lastUpdate: '0'
@@ -385,6 +381,10 @@ readings:
       - rewardData(GnosisSafe__1).rate: '0'
       - rewardData(GnosisSafe__1).lastUpdate: '0'
       - rewardData(GnosisSafe__1).finishAt: '0'
+      - rewardData(liquidator).queued: '0'
+      - rewardData(liquidator).rate: '0'
+      - rewardData(liquidator).lastUpdate: '0'
+      - rewardData(liquidator).finishAt: '0'
       - rewardData(Market).queued: '0'
       - rewardData(Market).rate: '0'
       - rewardData(Market).lastUpdate: '0'
@@ -470,7 +470,6 @@ readings:
       - rewardData(xMinter).lastUpdate: '0'
       - rewardData(xMinter).finishAt: '0'
       - rewardReceiver($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0'
-      - rewardReceiver(admin): '0x0'
       - rewardReceiver(BoostableRebalancePool__wstETHWrapper): '0x0'
       - rewardReceiver(Booster): '0x0'
       - rewardReceiver(fETH): '0x0'
@@ -483,6 +482,7 @@ readings:
       - rewardReceiver(Gauge_Controller): '0x0'
       - rewardReceiver(GnosisSafe__0): '0x0'
       - rewardReceiver(GnosisSafe__1): '0x0'
+      - rewardReceiver(liquidator): '0x0'
       - rewardReceiver(Market): '0x0'
       - rewardReceiver(MockFxPriceOracle): '0x0'
       - rewardReceiver(PlatformFeeSpliter): '0x0'
@@ -511,7 +511,6 @@ readings:
   - BoostableRebalancePool__wstETHWrapper:
       - asset: fETH
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - balanceOf(Booster): '0.0'
       - balanceOf(fETH): '0.0'
@@ -524,6 +523,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '0.0'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'
@@ -549,9 +549,6 @@ readings:
       - boostCheckpoint($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).historyIndex: 'could not decode result data: boostCheckpoint'
-      - boostCheckpoint(admin).veBalance: 'could not decode result data: boostCheckpoint'
-      - boostCheckpoint(admin).veSupply: 'could not decode result data: boostCheckpoint'
-      - boostCheckpoint(admin).historyIndex: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(BoostableRebalancePool__StETHAndxETHWrapper).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(BoostableRebalancePool__StETHAndxETHWrapper).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(BoostableRebalancePool__StETHAndxETHWrapper).historyIndex: 'could not decode result data: boostCheckpoint'
@@ -588,6 +585,9 @@ readings:
       - boostCheckpoint(GnosisSafe__1).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(GnosisSafe__1).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(GnosisSafe__1).historyIndex: 'could not decode result data: boostCheckpoint'
+      - boostCheckpoint(liquidator).veBalance: 'could not decode result data: boostCheckpoint'
+      - boostCheckpoint(liquidator).veSupply: 'could not decode result data: boostCheckpoint'
+      - boostCheckpoint(liquidator).historyIndex: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(Market).veBalance: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(Market).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(Market).historyIndex: 'could not decode result data: boostCheckpoint'
@@ -652,7 +652,6 @@ readings:
       - boostCheckpoint(xMinter).veSupply: 'could not decode result data: boostCheckpoint'
       - boostCheckpoint(xMinter).historyIndex: 'could not decode result data: boostCheckpoint'
       - distributors($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0'
-      - distributors(admin): '0x0'
       - distributors(BoostableRebalancePool__StETHAndxETHWrapper): '0x0'
       - distributors(Booster): '0x0'
       - distributors(fETH): '0x0'
@@ -665,6 +664,7 @@ readings:
       - distributors(Gauge_Controller): '0x0'
       - distributors(GnosisSafe__0): '0x0'
       - distributors(GnosisSafe__1): '0x0'
+      - distributors(liquidator): '0x0'
       - distributors(Market): '0x0'
       - distributors(MockFxPriceOracle): '0x0'
       - distributors(PlatformFeeSpliter): '0x0'
@@ -693,7 +693,6 @@ readings:
           - wstETH
           - FXN
       - getBoostRatio($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - getBoostRatio(admin): '0.0'
       - getBoostRatio(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - getBoostRatio(Booster): '0.0'
       - getBoostRatio(fETH): '0.0'
@@ -706,6 +705,7 @@ readings:
       - getBoostRatio(Gauge_Controller): '0.0'
       - getBoostRatio(GnosisSafe__0): '0.0'
       - getBoostRatio(GnosisSafe__1): '0.0'
+      - getBoostRatio(liquidator): '0.0'
       - getBoostRatio(Market): '0.0'
       - getBoostRatio(MockFxPriceOracle): '0.0'
       - getBoostRatio(PlatformFeeSpliter): '0.0'
@@ -735,8 +735,6 @@ readings:
       - numTotalSupplyHistory: '136'
       - pendingRewards($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).0: '0.0'
       - pendingRewards($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).1: '0.0'
-      - pendingRewards(admin).0: '0.0'
-      - pendingRewards(admin).1: '0.0'
       - pendingRewards(BoostableRebalancePool__StETHAndxETHWrapper).0: '0.0'
       - pendingRewards(BoostableRebalancePool__StETHAndxETHWrapper).1: '0.0'
       - pendingRewards(Booster).0: '0.0'
@@ -761,6 +759,8 @@ readings:
       - pendingRewards(GnosisSafe__0).1: '0.0'
       - pendingRewards(GnosisSafe__1).0: '0.0'
       - pendingRewards(GnosisSafe__1).1: '0.0'
+      - pendingRewards(liquidator).0: '0.0'
+      - pendingRewards(liquidator).1: '0.0'
       - pendingRewards(Market).0: '0.0'
       - pendingRewards(Market).1: '0.0'
       - pendingRewards(MockFxPriceOracle).0: '0.0'
@@ -808,10 +808,6 @@ readings:
       - rewardData($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).rate: '0'
       - rewardData($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).lastUpdate: '0'
       - rewardData($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).finishAt: '0'
-      - rewardData(admin).queued: '0'
-      - rewardData(admin).rate: '0'
-      - rewardData(admin).lastUpdate: '0'
-      - rewardData(admin).finishAt: '0'
       - rewardData(BoostableRebalancePool__StETHAndxETHWrapper).queued: '0'
       - rewardData(BoostableRebalancePool__StETHAndxETHWrapper).rate: '0'
       - rewardData(BoostableRebalancePool__StETHAndxETHWrapper).lastUpdate: '0'
@@ -860,6 +856,10 @@ readings:
       - rewardData(GnosisSafe__1).rate: '0'
       - rewardData(GnosisSafe__1).lastUpdate: '0'
       - rewardData(GnosisSafe__1).finishAt: '0'
+      - rewardData(liquidator).queued: '0'
+      - rewardData(liquidator).rate: '0'
+      - rewardData(liquidator).lastUpdate: '0'
+      - rewardData(liquidator).finishAt: '0'
       - rewardData(Market).queued: '0'
       - rewardData(Market).rate: '0'
       - rewardData(Market).lastUpdate: '0'
@@ -945,7 +945,6 @@ readings:
       - rewardData(xMinter).lastUpdate: '0'
       - rewardData(xMinter).finishAt: '0'
       - rewardReceiver($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0'
-      - rewardReceiver(admin): '0x0'
       - rewardReceiver(BoostableRebalancePool__StETHAndxETHWrapper): '0x0'
       - rewardReceiver(Booster): '0x0'
       - rewardReceiver(fETH): '0x0'
@@ -958,6 +957,7 @@ readings:
       - rewardReceiver(Gauge_Controller): '0x0'
       - rewardReceiver(GnosisSafe__0): '0x0'
       - rewardReceiver(GnosisSafe__1): '0x0'
+      - rewardReceiver(liquidator): '0x0'
       - rewardReceiver(Market): '0x0'
       - rewardReceiver(MockFxPriceOracle): '0x0'
       - rewardReceiver(PlatformFeeSpliter): '0x0'
@@ -997,7 +997,6 @@ readings:
       - rewardManager: '0xe7Ac460137CCD6173DB6992529013D672d4F0087'
   - fETH:
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '16.49'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '5769148.34'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '5688690.99'
       - balanceOf(Booster): '0.0'
@@ -1010,6 +1009,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '9802.39'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'
@@ -1039,7 +1039,6 @@ readings:
       - admin: GnosisSafe__0
       - available_supply: '1059377.802130898015259264'
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '20.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '20.0'
       - balanceOf(Booster): '0.0'
@@ -1052,6 +1051,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '7119.92'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '2.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'
@@ -1103,7 +1103,6 @@ readings:
       - admin: GnosisSafe__0
       - future_admin: '0x0'
       - gauge_relative_weight($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - gauge_relative_weight(admin): '0.0'
       - gauge_relative_weight(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - gauge_relative_weight(BoostableRebalancePool__wstETHWrapper): '0.0'
       - gauge_relative_weight(Booster): '0.0'
@@ -1116,6 +1115,7 @@ readings:
       - gauge_relative_weight(FxnVoterProxy): '0.0'
       - gauge_relative_weight(GnosisSafe__0): '0.0'
       - gauge_relative_weight(GnosisSafe__1): '0.0'
+      - gauge_relative_weight(liquidator): '0.0'
       - gauge_relative_weight(Market): '0.0'
       - gauge_relative_weight(MockFxPriceOracle): '0.0'
       - gauge_relative_weight(PlatformFeeSpliter): '0.0'
@@ -1138,7 +1138,6 @@ readings:
       - gauge_relative_weight(xHolderRedeemer): '0.0'
       - gauge_relative_weight(xMinter): '0.0'
       - gauge_types($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): Transaction reverted without a reason string
-      - gauge_types(admin): Transaction reverted without a reason string
       - gauge_types(BoostableRebalancePool__StETHAndxETHWrapper): Transaction reverted without a reason string
       - gauge_types(BoostableRebalancePool__wstETHWrapper): Transaction reverted without a reason string
       - gauge_types(Booster): Transaction reverted without a reason string
@@ -1151,6 +1150,7 @@ readings:
       - gauge_types(FxnVoterProxy): Transaction reverted without a reason string
       - gauge_types(GnosisSafe__0): Transaction reverted without a reason string
       - gauge_types(GnosisSafe__1): Transaction reverted without a reason string
+      - gauge_types(liquidator): Transaction reverted without a reason string
       - gauge_types(Market): Transaction reverted without a reason string
       - gauge_types(MockFxPriceOracle): Transaction reverted without a reason string
       - gauge_types(PlatformFeeSpliter): Transaction reverted without a reason string
@@ -1173,7 +1173,6 @@ readings:
       - gauge_types(xHolderRedeemer): Transaction reverted without a reason string
       - gauge_types(xMinter): Transaction reverted without a reason string
       - get_gauge_weight($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - get_gauge_weight(admin): '0.0'
       - get_gauge_weight(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - get_gauge_weight(BoostableRebalancePool__wstETHWrapper): '0.0'
       - get_gauge_weight(Booster): '0.0'
@@ -1186,6 +1185,7 @@ readings:
       - get_gauge_weight(FxnVoterProxy): '0.0'
       - get_gauge_weight(GnosisSafe__0): '0.0'
       - get_gauge_weight(GnosisSafe__1): '0.0'
+      - get_gauge_weight(liquidator): '0.0'
       - get_gauge_weight(Market): '0.0'
       - get_gauge_weight(MockFxPriceOracle): '0.0'
       - get_gauge_weight(PlatformFeeSpliter): '0.0'
@@ -1212,7 +1212,6 @@ readings:
       - n_gauges: '0'
       - time_total: '1694649600'
       - time_weight($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - time_weight(admin): '0.0'
       - time_weight(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - time_weight(BoostableRebalancePool__wstETHWrapper): '0.0'
       - time_weight(Booster): '0.0'
@@ -1225,6 +1224,7 @@ readings:
       - time_weight(FxnVoterProxy): '0.0'
       - time_weight(GnosisSafe__0): '0.0'
       - time_weight(GnosisSafe__1): '0.0'
+      - time_weight(liquidator): '0.0'
       - time_weight(Market): '0.0'
       - time_weight(MockFxPriceOracle): '0.0'
       - time_weight(PlatformFeeSpliter): '0.0'
@@ -1248,7 +1248,6 @@ readings:
       - time_weight(xMinter): '0.0'
       - token: FXN
       - vote_user_power($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - vote_user_power(admin): '0.0'
       - vote_user_power(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - vote_user_power(BoostableRebalancePool__wstETHWrapper): '0.0'
       - vote_user_power(Booster): '0.0'
@@ -1261,6 +1260,7 @@ readings:
       - vote_user_power(FxnVoterProxy): '0.0'
       - vote_user_power(GnosisSafe__0): '0.0'
       - vote_user_power(GnosisSafe__1): '0.0'
+      - vote_user_power(liquidator): '0.0'
       - vote_user_power(Market): '0.0'
       - vote_user_power(MockFxPriceOracle): '0.0'
       - vote_user_power(PlatformFeeSpliter): '0.0'
@@ -1337,7 +1337,6 @@ readings:
       - price: '1400.0'
   - PlatformFeeSpliter:
       - burners($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0'
-      - burners(admin): '0x0'
       - burners(BoostableRebalancePool__StETHAndxETHWrapper): '0x0'
       - burners(BoostableRebalancePool__wstETHWrapper): '0x0'
       - burners(Booster): '0x0'
@@ -1351,6 +1350,7 @@ readings:
       - burners(Gauge_Controller): '0x0'
       - burners(GnosisSafe__0): '0x0'
       - burners(GnosisSafe__1): '0x0'
+      - burners(liquidator): '0x0'
       - burners(Market): '0x0'
       - burners(MockFxPriceOracle): '0x0'
       - burners(RebalancePool): '0x0'
@@ -1379,7 +1379,6 @@ readings:
   - RebalancePool:
       - asset: fETH
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - balanceOf(Booster): '0.0'
@@ -1393,6 +1392,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '0.0'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'
@@ -1424,11 +1424,6 @@ readings:
       - extraRewardState($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).lastUpdate: '0'
       - extraRewardState($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).finishAt: '0'
       - extraRewardState($0x11E91BB6d1334585AA37D8F4fde3932C7960B938).queued: '0.0'
-      - extraRewardState(admin).rate: '0'
-      - extraRewardState(admin).periodLength: '0'
-      - extraRewardState(admin).lastUpdate: '0'
-      - extraRewardState(admin).finishAt: '0'
-      - extraRewardState(admin).queued: '0.0'
       - extraRewardState(BoostableRebalancePool__StETHAndxETHWrapper).rate: '0'
       - extraRewardState(BoostableRebalancePool__StETHAndxETHWrapper).periodLength: '0'
       - extraRewardState(BoostableRebalancePool__StETHAndxETHWrapper).lastUpdate: '0'
@@ -1494,6 +1489,11 @@ readings:
       - extraRewardState(GnosisSafe__1).lastUpdate: '0'
       - extraRewardState(GnosisSafe__1).finishAt: '0'
       - extraRewardState(GnosisSafe__1).queued: '0.0'
+      - extraRewardState(liquidator).rate: '0'
+      - extraRewardState(liquidator).periodLength: '0'
+      - extraRewardState(liquidator).lastUpdate: '0'
+      - extraRewardState(liquidator).finishAt: '0'
+      - extraRewardState(liquidator).queued: '0.0'
       - extraRewardState(Market).rate: '0'
       - extraRewardState(Market).periodLength: '0'
       - extraRewardState(Market).lastUpdate: '0'
@@ -1600,7 +1600,6 @@ readings:
       - market: Market
       - owner: GnosisSafe__0
       - rewardManager($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0'
-      - rewardManager(admin): '0x0'
       - rewardManager(BoostableRebalancePool__StETHAndxETHWrapper): '0x0'
       - rewardManager(BoostableRebalancePool__wstETHWrapper): '0x0'
       - rewardManager(Booster): '0x0'
@@ -1614,6 +1613,7 @@ readings:
       - rewardManager(Gauge_Controller): '0x0'
       - rewardManager(GnosisSafe__0): '0x0'
       - rewardManager(GnosisSafe__1): '0x0'
+      - rewardManager(liquidator): '0x0'
       - rewardManager(Market): '0x0'
       - rewardManager(MockFxPriceOracle): '0x0'
       - rewardManager(PlatformFeeSpliter): '0x0'
@@ -1639,7 +1639,6 @@ readings:
       - treasury: stETHTreasury
       - unlockDuration: '0.0'
       - unlockedBalanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - unlockedBalanceOf(admin): '0.0'
       - unlockedBalanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - unlockedBalanceOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - unlockedBalanceOf(Booster): '0.0'
@@ -1653,6 +1652,7 @@ readings:
       - unlockedBalanceOf(Gauge_Controller): '0.0'
       - unlockedBalanceOf(GnosisSafe__0): '0.0'
       - unlockedBalanceOf(GnosisSafe__1): '0.0'
+      - unlockedBalanceOf(liquidator): '0.0'
       - unlockedBalanceOf(Market): '0.0'
       - unlockedBalanceOf(MockFxPriceOracle): '0.0'
       - unlockedBalanceOf(PlatformFeeSpliter): '0.0'
@@ -1675,8 +1675,6 @@ readings:
       - unlockedBalanceOf(xMinter): '0.0'
       - unlockingBalanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938)._balance: '0.0'
       - unlockingBalanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938)._unlockAt: '0.0'
-      - unlockingBalanceOf(admin)._balance: '0.0'
-      - unlockingBalanceOf(admin)._unlockAt: '0.0'
       - unlockingBalanceOf(BoostableRebalancePool__StETHAndxETHWrapper)._balance: '0.0'
       - unlockingBalanceOf(BoostableRebalancePool__StETHAndxETHWrapper)._unlockAt: '0.0'
       - unlockingBalanceOf(BoostableRebalancePool__wstETHWrapper)._balance: '0.0'
@@ -1703,6 +1701,8 @@ readings:
       - unlockingBalanceOf(GnosisSafe__0)._unlockAt: '0.0'
       - unlockingBalanceOf(GnosisSafe__1)._balance: '0.0'
       - unlockingBalanceOf(GnosisSafe__1)._unlockAt: '0.0'
+      - unlockingBalanceOf(liquidator)._balance: '0.0'
+      - unlockingBalanceOf(liquidator)._unlockAt: '0.0'
       - unlockingBalanceOf(Market)._balance: '0.0'
       - unlockingBalanceOf(Market)._unlockAt: '0.0'
       - unlockingBalanceOf(MockFxPriceOracle)._balance: '0.0'
@@ -1755,8 +1755,6 @@ readings:
   - RebalancePoolSplitter:
       - getReceivers($0x11E91BB6d1334585AA37D8F4fde3932C7960B938)._receivers: []
       - getReceivers($0x11E91BB6d1334585AA37D8F4fde3932C7960B938)._ratios: []
-      - getReceivers(admin)._receivers: []
-      - getReceivers(admin)._ratios: []
       - getReceivers(BoostableRebalancePool__StETHAndxETHWrapper)._receivers: []
       - getReceivers(BoostableRebalancePool__StETHAndxETHWrapper)._ratios: []
       - getReceivers(BoostableRebalancePool__wstETHWrapper)._receivers: []
@@ -1787,6 +1785,8 @@ readings:
       - getReceivers(GnosisSafe__0)._ratios: []
       - getReceivers(GnosisSafe__1)._receivers: []
       - getReceivers(GnosisSafe__1)._ratios: []
+      - getReceivers(liquidator)._receivers: []
+      - getReceivers(liquidator)._ratios: []
       - getReceivers(Market)._receivers: []
       - getReceivers(Market)._ratios: []
       - getReceivers(MockFxPriceOracle)._receivers: []
@@ -1834,7 +1834,6 @@ readings:
       - owner: GnosisSafe__0
       - pendingOwner: '0x0'
       - splitter($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0x0'
-      - splitter(admin): '0x0'
       - splitter(BoostableRebalancePool__StETHAndxETHWrapper): '0x0'
       - splitter(BoostableRebalancePool__wstETHWrapper): '0x0'
       - splitter(Booster): '0x0'
@@ -1848,6 +1847,7 @@ readings:
       - splitter(Gauge_Controller): '0x0'
       - splitter(GnosisSafe__0): '0x0'
       - splitter(GnosisSafe__1): '0x0'
+      - splitter(liquidator): '0x0'
       - splitter(Market): '0x0'
       - splitter(MockFxPriceOracle): '0x0'
       - splitter(PlatformFeeSpliter): '0x0'
@@ -1885,7 +1885,6 @@ readings:
       - stabilityPool: BoostableRebalancePool__wstETHWrapper
   - ReservePool:
       - bonusRatio($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - bonusRatio(admin): '0.0'
       - bonusRatio(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - bonusRatio(BoostableRebalancePool__wstETHWrapper): '0.0'
       - bonusRatio(Booster): '0.0'
@@ -1899,6 +1898,7 @@ readings:
       - bonusRatio(Gauge_Controller): '0.0'
       - bonusRatio(GnosisSafe__0): '0.0'
       - bonusRatio(GnosisSafe__1): '0.0'
+      - bonusRatio(liquidator): '0.0'
       - bonusRatio(Market): '0.0'
       - bonusRatio(MockFxPriceOracle): '0.0'
       - bonusRatio(PlatformFeeSpliter): '0.0'
@@ -1927,7 +1927,6 @@ readings:
       - owner: GnosisSafe__0
   - stETH:
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.08'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - balanceOf(Booster): '0.0'
@@ -1941,6 +1940,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '0.12'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.00'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '5.20'
@@ -1992,7 +1992,6 @@ readings:
       - getTreasury: '0x3e40D73EB977Dc6a537aF587D48316feE66E9C8c'
       - kernel: '0xb8FFC3Cd6e7Cf5a098A1c92F48009765B24088Dc'
       - nonces($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0'
-      - nonces(admin): '0'
       - nonces(BoostableRebalancePool__StETHAndxETHWrapper): '0'
       - nonces(BoostableRebalancePool__wstETHWrapper): '0'
       - nonces(Booster): '0'
@@ -2006,6 +2005,7 @@ readings:
       - nonces(Gauge_Controller): '0'
       - nonces(GnosisSafe__0): '0'
       - nonces(GnosisSafe__1): '0'
+      - nonces(liquidator): '0'
       - nonces(Market): '0'
       - nonces(MockFxPriceOracle): '0'
       - nonces(PlatformFeeSpliter): '0'
@@ -2027,7 +2027,6 @@ readings:
       - nonces(xHolderRedeemer): '0'
       - nonces(xMinter): '0'
       - sharesOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.067576111815704987'
-      - sharesOf(admin): '0.0'
       - sharesOf(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - sharesOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - sharesOf(Booster): '0.0'
@@ -2041,6 +2040,7 @@ readings:
       - sharesOf(Gauge_Controller): '0.0'
       - sharesOf(GnosisSafe__0): '0.103633390821223128'
       - sharesOf(GnosisSafe__1): '0.0'
+      - sharesOf(liquidator): '0.0'
       - sharesOf(Market): '0.000000000000000223'
       - sharesOf(MockFxPriceOracle): '0.0'
       - sharesOf(PlatformFeeSpliter): '4.49353245346764438'
@@ -2100,7 +2100,6 @@ readings:
   - veFXN:
       - admin: GnosisSafe__0
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - balanceOf(Booster): '0.0'
@@ -2114,6 +2113,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '0.0'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'
@@ -2140,7 +2140,6 @@ readings:
       - future_admin: GnosisSafe__0
       - future_smart_wallet_checker: SmartWalletWhitelist
       - get_last_user_slope($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0'
-      - get_last_user_slope(admin): '0'
       - get_last_user_slope(BoostableRebalancePool__StETHAndxETHWrapper): '0'
       - get_last_user_slope(BoostableRebalancePool__wstETHWrapper): '0'
       - get_last_user_slope(Booster): '0'
@@ -2154,6 +2153,7 @@ readings:
       - get_last_user_slope(Gauge_Controller): '0'
       - get_last_user_slope(GnosisSafe__0): '0'
       - get_last_user_slope(GnosisSafe__1): '0'
+      - get_last_user_slope(liquidator): '0'
       - get_last_user_slope(Market): '0'
       - get_last_user_slope(MockFxPriceOracle): '0'
       - get_last_user_slope(PlatformFeeSpliter): '0'
@@ -2175,7 +2175,6 @@ readings:
       - get_last_user_slope(xHolderRedeemer): '0'
       - get_last_user_slope(xMinter): '0'
       - locked__end($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - locked__end(admin): '0.0'
       - locked__end(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - locked__end(BoostableRebalancePool__wstETHWrapper): '0.0'
       - locked__end(Booster): '0.0'
@@ -2189,6 +2188,7 @@ readings:
       - locked__end(Gauge_Controller): '0.0'
       - locked__end(GnosisSafe__0): '0.0'
       - locked__end(GnosisSafe__1): '0.0'
+      - locked__end(liquidator): '0.0'
       - locked__end(Market): '0.0'
       - locked__end(MockFxPriceOracle): '0.0'
       - locked__end(PlatformFeeSpliter): '0.0'
@@ -2214,7 +2214,6 @@ readings:
       - token: FXN
       - totalSupply: '97569'
       - user_point_epoch($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - user_point_epoch(admin): '0.0'
       - user_point_epoch(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - user_point_epoch(BoostableRebalancePool__wstETHWrapper): '0.0'
       - user_point_epoch(Booster): '0.0'
@@ -2228,6 +2227,7 @@ readings:
       - user_point_epoch(Gauge_Controller): '0.0'
       - user_point_epoch(GnosisSafe__0): '0.0'
       - user_point_epoch(GnosisSafe__1): '0.0'
+      - user_point_epoch(liquidator): '0.0'
       - user_point_epoch(Market): '0.0'
       - user_point_epoch(MockFxPriceOracle): '0.0'
       - user_point_epoch(PlatformFeeSpliter): '0.0'
@@ -2250,7 +2250,6 @@ readings:
       - user_point_epoch(xMinter): '0.0'
   - wstETH:
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '8.28'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '8.36'
       - balanceOf(Booster): '0.0'
@@ -2264,6 +2263,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '0.00'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'
@@ -2286,7 +2286,6 @@ readings:
       - balanceOf(xMinter): '0.0'
       - decimals: '18'
       - nonces($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0'
-      - nonces(admin): '0'
       - nonces(BoostableRebalancePool__StETHAndxETHWrapper): '0'
       - nonces(BoostableRebalancePool__wstETHWrapper): '0'
       - nonces(Booster): '0'
@@ -2300,6 +2299,7 @@ readings:
       - nonces(Gauge_Controller): '0'
       - nonces(GnosisSafe__0): '0'
       - nonces(GnosisSafe__1): '0'
+      - nonces(liquidator): '0'
       - nonces(Market): '0'
       - nonces(MockFxPriceOracle): '0'
       - nonces(PlatformFeeSpliter): '0'
@@ -2329,7 +2329,6 @@ readings:
       - src: stETH
   - xETH:
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '21.99'
-      - balanceOf(admin): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '0.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '0.0'
       - balanceOf(Booster): '0.0'
@@ -2343,6 +2342,7 @@ readings:
       - balanceOf(Gauge_Controller): '0.0'
       - balanceOf(GnosisSafe__0): '217352.17'
       - balanceOf(GnosisSafe__1): '0.0'
+      - balanceOf(liquidator): '0.0'
       - balanceOf(Market): '0.0'
       - balanceOf(MockFxPriceOracle): '0.0'
       - balanceOf(PlatformFeeSpliter): '0.0'

@@ -15,38 +15,40 @@ simulation:
         - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
     gas: 521640n
     events:
-      - fETH.Approval(BoostableRebalancePool__wstETHWrapper,Market,0.0)
       - >-
-        fETH.Approval(BoostableRebalancePool__wstETHWrapper,Market,5688690.988856864319720448)
+        fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=0.0)
       - >-
-        fETH.Transfer(BoostableRebalancePool__wstETHWrapper,0x0,5688690.988856864319720448)
-      - stETH.Transfer(stETHTreasury,Market,3966.724723024529392841)
-      - stETH.TransferShares(stETHTreasury,Market,3429.193396792909397492)
-      - stETH.Transfer(Market,wstETHWrapper,3966.724723024529392841)
-      - stETH.TransferShares(Market,wstETHWrapper,3429.193396792909397492)
+        fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=5688690.989)
       - >-
-        Market.Redeem(BoostableRebalancePool__wstETHWrapper,wstETHWrapper,5688690.988856864319720448,0.0,3966.724723024529392841,0.0)
+        fETH->Transfer(from=BoostableRebalancePool__wstETHWrapper,to=0x0,value=5688690.989)
+      - stETH->Transfer(from=stETHTreasury,to=Market,value=3966.725)
+      - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=3429.193)
+      - stETH->Transfer(from=Market,to=wstETHWrapper,value=3966.725)
+      - stETH->TransferShares(from=Market,to=wstETHWrapper,sharesValue=3429.193)
       - >-
-        BoostableRebalancePool__wstETHWrapper.Liquidate(5688690.988856864319720448,3966.724723024529392841)
-      - wstETH.Transfer(0x0,wstETHWrapper,3429.193396792909397492)
-      - stETH.Transfer(wstETHWrapper,wstETH,3966.724723024529392841)
-      - stETH.TransferShares(wstETHWrapper,wstETH,3429.193396792909397492)
+        Market->Redeem(owner=BoostableRebalancePool__wstETHWrapper,recipient=wstETHWrapper,fTokenBurned=5688690.989,xTokenBurned=0.0,baseTokenOut=3966.725,redeemFee=0.0)
       - >-
-        wstETH.Transfer(wstETHWrapper,BoostableRebalancePool__wstETHWrapper,3429.193396792909397492)
+        BoostableRebalancePool__wstETHWrapper->Liquidate(liquidated=5688690.989,baseGained=3966.725)
+      - wstETH->Transfer(from=0x0,to=wstETHWrapper,value=3429.193)
+      - stETH->Transfer(from=wstETHWrapper,to=wstETH,value=3966.725)
+      - stETH->TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=3429.193)
       - >-
-        FXN.Transfer(RebalanceWithBonusToken__1,0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,1.0)
+        wstETH->Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=3429.193)
+      - >-
+        FXN->Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
 readings:
   - BoostableRebalancePool__wstETHWrapper:
       - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '+63195'
-      - rewardData(wstETH).lastUpdate: '+63195'
+      - rewardData(FXN).lastUpdate: '+63197'
+      - rewardData(wstETH).lastUpdate: '+63197'
       - totalSupply: '-5688690'
   - fETH:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '-5688690.98'
       - totalSupply: '-5688690'
   - FXN:
-      - available_supply: '+0.052828513444951793'
+      - available_supply: '+0.059043632673769651'
+      - balanceOf(liquidator): '+1.0'
       - balanceOf(RebalanceWithBonusToken__1): '-1.0'
   - MockFxPriceOracle:
       - getPrice._safePrice: '-1100.8'
