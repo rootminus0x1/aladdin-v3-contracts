@@ -234,10 +234,10 @@ async function main() {
         },
     );
         */
-    for (const [pool, liquidator] of [
-        ['RebalancePool', 'RebalanceWithBonusToken__0'],
-        ['BoostableRebalancePool__wstETHWrapper', 'RebalanceWithBonusToken__1'],
-        ['BoostableRebalancePool__StETHAndxETHWrapper', 'RebalanceWithBonusToken__2'],
+    for (const [pool, wrapper, liquidatorContract] of [
+        ['RebalancePool', 'wstETHWrapper', 'RebalanceWithBonusToken__0'],
+        ['BoostableRebalancePool__wstETHWrapper', 'wstETHWrapper', 'RebalanceWithBonusToken__1'],
+        ['BoostableRebalancePool__StETHAndxETHWrapper', 'StETHAndxETHWrapper', 'RebalanceWithBonusToken__2'],
     ]) {
         const [readings, outcomes] = await delve('drop,liquidate', [
             makeTrigger(makeEthTemplate(), parseEther('1400')),
@@ -252,7 +252,7 @@ async function main() {
             {
                 //label: 'Ether Price (USD)',
                 reversed: true,
-                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2400'), parseEther('1000'), parseEther('-10')),
+                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2000'), parseEther('1100'), parseEther('-20')),
                 //reader: findReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
                 label: 'Collateral ratio',
                 range: [1.5, 0.9],
@@ -263,37 +263,65 @@ async function main() {
                 simulation: [await makeLiquidateTrigger(pool)],
                 y: {
                     label: `Pool balance of fETH/xETH`,
-                    //scale: 1000,
-                    range: [-10000, '*<100000000'],
-                    //nonlinear: 'sinh',
+                    // scale: 'log',
+                    range: [-10000, '*<50000000'],
                     lines: [
                         {
-                            reader: await findReader('fETH', 'balanceOf', '', pool),
+                            reader: await findReader('fETH', 'balanceOf', '', pool), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
                             style: 'linetype 2 linewidth 2 dashtype 2',
                         },
                         {
-                            reader: await findReader('xETH', 'balanceOf', '', pool),
+                            reader: await findReader('xETH', 'balanceOf', '', pool), // BoostableRebalancePool__StETHAndxETHWrapper
                             style: 'linetype 1 linewidth 2 dashtype 2',
+                            ignore0: true,
+                        },
+                        {
+                            reader: await findReader('xETH', 'balanceOf', '', wrapper), // BoostableRebalancePool__StETHAndxETHWrapper
+                            style: 'linetype 1 linewidth 4 dashtype 3',
+                            ignore0: true,
                         },
                     ],
                 },
                 y2: {
                     label: 'Change in balance of (ETH-ish)',
-                    // nonlinear: '',
                     lines: [
                         {
-                            reader: await findDeltaReader('stETH', 'balanceOf', '', 'stETHTreasury'),
-                            style: 'linetype 1',
+                            reader: await findDeltaReader('stETH', 'balanceOf', '', 'stETHTreasury'), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                            style: 'linetype 4 pointtype 1',
                         },
-                        { reader: await findDeltaReader('stETH', 'balanceOf', '', 'wstETH'), style: 'linetype 2' },
                         {
-                            reader: await findDeltaReader('stETH', 'balanceOf', '', 'PlatformFeeSpliter'),
-                            style: 'linetype 4',
+                            reader: await findDeltaReader('stETH', 'balanceOf', '', 'Market'), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                            style: 'linetype 4 pointtype 2',
                         },
-                        { reader: await findDeltaReader('wstETH', 'balanceOf', '', pool), style: 'linetype 6' },
                         {
-                            reader: await findDeltaReader('FXN', 'balanceOf', '', liquidator),
-                            style: 'linetype 8',
+                            reader: await findDeltaReader('stETH', 'balanceOf', '', wrapper), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                            style: 'linetype 4 pointtype 4',
+                        },
+                        {
+                            reader: await findDeltaReader('stETH', 'balanceOf', '', 'wstETH'), // RebalancePool, BoostableRebalancePool__wstETHWrapper
+                            style: 'linetype 4 pointtype 6',
+                        },
+                        {
+                            reader: await findDeltaReader('stETH', 'balanceOf', '', 'PlatformFeeSpliter'), // BoostableRebalancePool__StETHAndxETHWrapper
+                            style: 'linetype 4 pointtype 8',
+                        },
+                        {
+                            reader: await findDeltaReader('wstETH', 'balanceOf', '', wrapper), // REbalancePool, BoostableRebalancePool__wstETHWrapper
+                            style: 'linetype 6 pointtype 1',
+                            ignore0: true,
+                        },
+                        {
+                            reader: await findDeltaReader('wstETH', 'balanceOf', '', pool), // REbalancePool, BoostableRebalancePool__wstETHWrapper
+                            style: 'linetype 6 pointtype 2',
+                            ignore0: true,
+                        },
+                        {
+                            reader: await findDeltaReader('FXN', 'balanceOf', '', liquidatorContract), // REbalancePool, BoostableRebalancePool__wstETHWrapper
+                            style: 'linetype 8 pointtype 1',
+                        },
+                        {
+                            reader: await findDeltaReader('FXN', 'balanceOf', '', users.liquidator.address), // REbalancePool, BoostableRebalancePool__wstETHWrapper
+                            style: 'linetype 8 pointtype 2',
                         },
                     ],
                 },

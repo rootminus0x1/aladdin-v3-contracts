@@ -33,14 +33,14 @@ readings:
   - BoostableRebalancePool__wstETHWrapper:
       - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '+63196'
-      - rewardData(wstETH).lastUpdate: '+63196'
+      - rewardData(FXN).lastUpdate: '+63186'
+      - rewardData(wstETH).lastUpdate: '+63186'
       - totalSupply: '-5688690'
   - fETH:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '-5688690.98'
       - totalSupply: '-5688690'
   - FXN:
-      - available_supply: '+0.06'
+      - available_supply: '+0.03'
       - balanceOf(liquidator): '+1.0'
       - balanceOf(RebalanceWithBonusToken__1): '-1.0'
   - MockFxPriceOracle:
@@ -57,7 +57,7 @@ readings:
       - sharesOf(wstETH): '+3429.193396792909397492'
   - stETHTreasury:
       - collateralRatio: '-0.659'
-      - emaLeverageRatio.lastTime: '+3820'
+      - emaLeverageRatio.lastTime: '+3810'
       - emaLeverageRatio.lastValue: '+6979912715325685813'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1100.87'

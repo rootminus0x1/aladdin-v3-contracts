@@ -832,7 +832,7 @@ readings:
       - rewardData(fMinter).finishAt: '0'
       - rewardData(FXN).queued: '0'
       - rewardData(FXN).rate: '0'
-      - rewardData(FXN).lastUpdate: '1707717411'
+      - rewardData(FXN).lastUpdate: '1707717401'
       - rewardData(FXN).finishAt: '0'
       - rewardData(FxnDepositor).queued: '0'
       - rewardData(FxnDepositor).rate: '0'
@@ -924,7 +924,7 @@ readings:
       - rewardData(veFXN).finishAt: '0'
       - rewardData(wstETH).queued: '492028'
       - rewardData(wstETH).rate: '2217091562984'
-      - rewardData(wstETH).lastUpdate: '1707717411'
+      - rewardData(wstETH).lastUpdate: '1707717401'
       - rewardData(wstETH).finishAt: '1708259015'
       - rewardData(wstETHWrapper).queued: '0'
       - rewardData(wstETHWrapper).rate: '0'
@@ -1035,7 +1035,7 @@ readings:
       - treasury: stETHTreasury
   - FXN:
       - admin: GnosisSafe__0
-      - available_supply: '1059377.85'
+      - available_supply: '1059377.82'
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '20.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '20.0'
@@ -2070,7 +2070,7 @@ readings:
       - baseTokenCap: '10000.0'
       - beta: '0.1'
       - collateralRatio: '1.218'
-      - emaLeverageRatio.lastTime: '1707717410'
+      - emaLeverageRatio.lastTime: '1707717400'
       - emaLeverageRatio.sampleInterval: '86400'
       - emaLeverageRatio.lastValue: '8963713260452669159'
       - emaLeverageRatio.lastEmaValue: '1985550000000000000'
