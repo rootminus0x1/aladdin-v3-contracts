@@ -40,6 +40,7 @@ import {
     makeReader,
     makeCalculator,
     digUsers,
+    augment,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
@@ -248,15 +249,38 @@ async function main() {
         writeReadingsDelta(`ETH=1400,${pool}.liquidate`, await readingsDeltas(readings, base), outcomes);
 
         await delvePlot(
-            `CRxbalance+liquidate-${pool}`,
+            `CR_before_and_after_liquidate-${pool}`,
             {
-                //label: 'Ether Price (USD)',
                 reversed: true,
                 cause: makeTriggerSeries(makeEthTemplate(), parseEther('2000'), parseEther('1100'), parseEther('-20')),
-                //reader: findReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
+                label: 'ETH v USD price',
+                reader: findReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
+            },
+            {
+                y: {
+                    label: `Collateral ratio`,
+                    lines: [
+                        {
+                            reader: augment(findReader('stETHTreasury', 'collateralRatio'), 'before'),
+                            style: 'linetype 1',
+                        },
+                        {
+                            simulation: [await makeLiquidateTrigger(pool)],
+                            reader: augment(findReader('stETHTreasury', 'collateralRatio'), 'after'),
+                            style: 'linetype 2',
+                        },
+                    ],
+                },
+            },
+        );
+
+        await delvePlot(
+            `CRxbalance+liquidate-${pool}`,
+            {
+                reversed: true,
+                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2000'), parseEther('1100'), parseEther('-20')),
                 label: 'Collateral ratio',
                 range: [1.5, 0.9],
-                //reader: findReader('stETHTreasury', 'collateralRatio'),
                 reader: calculateCR,
             },
             {

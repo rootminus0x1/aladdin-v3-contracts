@@ -1,0 +1,47 @@
+ETH v USD price,MockFxPriceOracle.getPrice._safePrice,stETHTreasury.collateralRatio-before,liquidate BoostableRebalancePool__StETHAndxETHWrapper,stETHTreasury.collateralRatio-after
+gas:26k,2000.0,1.543,reverted with an unrecognized custom error ,1.543
+gas:26k,1980.0,1.529,reverted with an unrecognized custom error ,1.529
+gas:26k,1960.0,1.515,reverted with an unrecognized custom error ,1.515
+gas:26k,1940.0,1.501,reverted with an unrecognized custom error ,1.501
+gas:26k,1920.0,1.487,reverted with an unrecognized custom error ,1.487
+gas:26k,1900.0,1.473,reverted with an unrecognized custom error ,1.473
+gas:26k,1880.0,1.460,reverted with an unrecognized custom error ,1.460
+gas:26k,1860.0,1.446,reverted with an unrecognized custom error ,1.446
+gas:26k,1840.0,1.432,reverted with an unrecognized custom error ,1.432
+gas:26k,1820.0,1.418,reverted with an unrecognized custom error ,1.418
+gas:26k,1800.0,1.404,reverted with an unrecognized custom error ,1.404
+gas:26k,1780.0,1.389,reverted with an unrecognized custom error ,1.389
+gas:26k,1760.0,1.375,reverted with an unrecognized custom error ,1.375
+gas:26k,1740.0,1.361,reverted with an unrecognized custom error ,1.361
+gas:26k,1720.0,1.347,reverted with an unrecognized custom error ,1.347
+gas:26k,1700.0,1.333,reverted with an unrecognized custom error ,1.333
+gas:26k,1680.0,1.319,reverted with an unrecognized custom error ,1.319
+gas:26k,1660.0,1.304,gas:643k,1.309
+gas:26k,1640.0,1.290,gas:643k,1.358
+gas:26k,1620.0,1.276,gas:662k,1.412
+gas:26k,1600.0,1.261,gas:643k,1.473
+gas:26k,1580.0,1.247,gas:643k,1.540
+gas:26k,1560.0,1.233,gas:662k,1.616
+gas:26k,1540.0,1.218,gas:662k,1.702
+gas:26k,1520.0,1.204,gas:662k,1.801
+gas:26k,1500.0,1.189,gas:643k,1.915
+gas:26k,1480.0,1.175,gas:643k,2.048
+gas:26k,1460.0,1.160,gas:625k,2.202
+gas:26k,1440.0,1.145,gas:625k,2.174
+gas:26k,1420.0,1.131,gas:645k,2.147
+gas:26k,1400.0,1.116,gas:625k,2.119
+gas:26k,1380.0,1.101,gas:645k,2.091
+gas:26k,1360.0,1.087,gas:625k,2.063
+gas:26k,1340.0,1.072,gas:645k,2.035
+gas:26k,1320.0,1.057,gas:625k,2.007
+gas:26k,1300.0,1.042,gas:625k,1.979
+gas:26k,1280.0,1.027,gas:645k,1.951
+gas:26k,1260.0,1.012,gas:625k,1.923
+gas:26k,1240.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+gas:26k,1220.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+gas:26k,1200.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+gas:26k,1180.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+gas:26k,1160.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+gas:26k,1140.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+gas:26k,1120.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+gas:26k,1100.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow

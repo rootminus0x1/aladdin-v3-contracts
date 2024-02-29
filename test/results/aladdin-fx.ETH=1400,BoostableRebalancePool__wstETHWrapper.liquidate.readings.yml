@@ -832,7 +832,7 @@ readings:
       - rewardData(fMinter).finishAt: '0'
       - rewardData(FXN).queued: '0'
       - rewardData(FXN).rate: '0'
-      - rewardData(FXN).lastUpdate: '1707717401'
+      - rewardData(FXN).lastUpdate: '1707717395'
       - rewardData(FXN).finishAt: '0'
       - rewardData(FxnDepositor).queued: '0'
       - rewardData(FxnDepositor).rate: '0'
@@ -924,7 +924,7 @@ readings:
       - rewardData(veFXN).finishAt: '0'
       - rewardData(wstETH).queued: '492028'
       - rewardData(wstETH).rate: '2217091562984'
-      - rewardData(wstETH).lastUpdate: '1707717401'
+      - rewardData(wstETH).lastUpdate: '1707717395'
       - rewardData(wstETH).finishAt: '1708259015'
       - rewardData(wstETHWrapper).queued: '0'
       - rewardData(wstETHWrapper).rate: '0'
@@ -1035,7 +1035,7 @@ readings:
       - treasury: stETHTreasury
   - FXN:
       - admin: GnosisSafe__0
-      - available_supply: '1059377.82'
+      - available_supply: '1059377.80'
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '0.0'
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '20.0'
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '20.0'
