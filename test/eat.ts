@@ -41,12 +41,109 @@ import {
     makeCalculator,
     digUsers,
     augment,
+    inverse,
+    makeTriggerList,
+    eatFileName,
+    writeEatFile,
 } from 'eat';
 import { getConfig, setupBlockchain, getSignerAt } from 'eat';
 import { dig } from 'eat';
 import { delve } from 'eat';
 
 import { MockFxPriceOracle, StETHTreasury__factory } from '@types';
+import { writeFile } from 'fs';
+import { JSONreplacer } from 'lib/eat/src/friendly';
+
+const makeEthPriceTemplate = (): TriggerTemplate => {
+    return {
+        name: 'ETH',
+        argTypes: ['uint256'],
+        pull: async (value: bigint) => {
+            const tx = await contracts.MockFxPriceOracle.setPrice(value);
+            return tx;
+        },
+    };
+};
+
+const makeCRTrigger = async (cr: bigint) => {
+    return makeTrigger(
+        makeEthPriceTemplate(),
+        await inverse(
+            cr,
+            async () => await contracts.stETHTreasury.collateralRatio(),
+            async (x: bigint) => await contracts.MockFxPriceOracle.setPrice(x),
+            [parseEther('1030'), parseEther('10000')],
+        ),
+    );
+};
+
+const calculateCR = makeCalculator('CR', async () => {
+    //=COLLATERAL_VALUE_USD/(FTOKEN_SUPPLY*FTOKEN_PRICE_USD)
+    const precision = 10n ** 18n;
+    const collatStETH: bigint = await contracts.stETHTreasury.totalBaseToken();
+    const navs = await contracts.stETHTreasury.getCurrentNav();
+    const collatUSD = (collatStETH * BigInt(navs._baseNav)) / precision;
+    const fTokenSupply: bigint = await contracts.fETH.totalSupply();
+    const fTokenUSD = (fTokenSupply * BigInt(navs._fNav)) / precision;
+    return (collatUSD * precision) / fTokenUSD;
+});
+
+const makeRollTrigger = (by: number, units: string): Trigger => {
+    return {
+        name: `roll(${by.toString()}${units})`,
+        args: [parseTime(by, units)],
+        argTypes: ['unit256'],
+        pull: async (increment: number) => {
+            //log('rolling...');
+            const target = (await time.latest()) + increment;
+            //log(`rolling time to ${asDateString(target)}...`);
+            await time.increaseTo(target);
+            return undefined;
+        },
+    };
+};
+
+const makeHarvestTrigger = () => {
+    return {
+        name: `harvest`,
+        args: [],
+        argTypes: [],
+        pull: async () => {
+            return await contracts.stETHTreasury.harvest();
+        },
+    };
+};
+
+//}
+//if (events.ETH && contracts.fETH && contracts.RebalancePool) {
+const makeLiquidateTrigger = async (contractName: string): Promise<Trigger> => {
+    //const pools = await contracts.RebalancePoolRegistry.getPools();
+    //const poolAddress = pools[poolIndex];
+    const pool = contracts[contractName].address;
+    return {
+        name: `liquidate ${contractName}`,
+        argTypes: ['address'],
+        args: [pool],
+        pull: async (poolAddress: string) => {
+            const pool = contracts[poolAddress];
+            let liquidatorAddress = undefined;
+            if (pool.roles) {
+                const role = pool.roles.find((r: Role) => r.name === 'LIQUIDATOR_ROLE');
+                if (role) liquidatorAddress = role.addresses[0];
+            }
+            if (!liquidatorAddress && pool.interface.hasFunction('liquidator')) {
+                liquidatorAddress = await pool.liquidator();
+            }
+            if (!liquidatorAddress) throw Error(`could not find liquidator for ${pool.name}`);
+            const liquidator = contracts[liquidatorAddress];
+            const tx = await liquidator.connect(users.liquidator).liquidate(0n); // no minimum
+
+            // await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
+
+            return tx;
+        },
+    };
+};
 
 // TODO: take a snapshot here
 const goBase = async (): Promise<Reading[]> => {
@@ -55,7 +152,7 @@ const goBase = async (): Promise<Reading[]> => {
     await dig('base');
     writeDiagram('base', await mermaid());
     const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
-    // const [base] = await delve('base'); // get the base readings for comparisons
+    //const [base] = await delve('base'); // get the base readings for comparisons
     /// writeReadings('base', base);
 
     //log(`${(await callReader(findReader('stETHTreasury', 'collateralRatio'))).value}`);
@@ -70,6 +167,11 @@ const goBase = async (): Promise<Reading[]> => {
 
     // redig
     await dig('mockETH');
+
+    // for (const cr of ['1.3030', '1.2990']) {
+    //     await makeCRTrigger(parseEther(cr));
+    // }
+
     await digUsers(); // add the users (also on the graph)
     writeDiagram('mockETH', await mermaid());
 
@@ -77,8 +179,8 @@ const goBase = async (): Promise<Reading[]> => {
 
     const tx = await contracts.MockFxPriceOracle.setPrice(baseNav);
     const [mockETH] = await delve('mockETH'); // get the base readings for comparisons
-    writeReadings('mockETH', mockETH);
-    // writeReadingsDelta('mockETH', await readingsDeltas(mockETH, base), []);
+    //writeReadings('mockETH', mockETH);
+    //writeReadingsDelta('mockETH', await readingsDeltas(mockETH, base), []);
 
     return mockETH;
 };
@@ -87,91 +189,6 @@ async function main() {
     await setupBlockchain();
 
     const base = await goBase();
-
-    // TODO: scan event logs for events like UpdateSettleWhitelist(_account, _status)
-    // the description of what parameters to gleem and how they are presented (array of addresses)
-    // to the diagram - I think this is just another reading - does etherscan have events?
-
-    // TODO: create a difference between a trigger (no parameters needed) and a trigger template (need to supply parameters)
-
-    const makeEthTemplate = (): TriggerTemplate => {
-        return {
-            name: 'ETH',
-            argTypes: ['uint256'],
-            pull: async (value: bigint) => {
-                const tx = await contracts.MockFxPriceOracle.setPrice(value);
-                return tx;
-            },
-        };
-    };
-
-    const calculateCR = makeCalculator('CR', async () => {
-        //=COLLATERAL_VALUE_USD/(FTOKEN_SUPPLY*FTOKEN_PRICE_USD)
-        const precision = 10n ** 18n;
-        const collatStETH: bigint = await contracts.stETHTreasury.totalBaseToken();
-        const navs = await contracts.stETHTreasury.getCurrentNav();
-        const collatUSD = (collatStETH * BigInt(navs._baseNav)) / precision;
-        const fTokenSupply: bigint = await contracts.fETH.totalSupply();
-        const fTokenUSD = (fTokenSupply * BigInt(navs._fNav)) / precision;
-        return (collatUSD * precision) / fTokenUSD;
-    });
-
-    const makeRollTrigger = (by: number, units: string): Trigger => {
-        return {
-            name: `roll(${by.toString()}${units})`,
-            args: [parseTime(by, units)],
-            argTypes: ['unit256'],
-            pull: async (increment: number) => {
-                //log('rolling...');
-                const target = (await time.latest()) + increment;
-                //log(`rolling time to ${asDateString(target)}...`);
-                await time.increaseTo(target);
-                return undefined;
-            },
-        };
-    };
-
-    const makeHarvestTrigger = () => {
-        return {
-            name: `harvest`,
-            args: [],
-            argTypes: [],
-            pull: async () => {
-                return await contracts.stETHTreasury.harvest();
-            },
-        };
-    };
-
-    //}
-    //if (events.ETH && contracts.fETH && contracts.RebalancePool) {
-    const makeLiquidateTrigger = async (contractName: string): Promise<Trigger> => {
-        //const pools = await contracts.RebalancePoolRegistry.getPools();
-        //const poolAddress = pools[poolIndex];
-        const pool = contracts[contractName].address;
-        return {
-            name: `liquidate ${contractName}`,
-            argTypes: ['address'],
-            args: [pool],
-            pull: async (poolAddress: string) => {
-                const pool = contracts[poolAddress];
-                let liquidatorAddress = undefined;
-                if (pool.roles) {
-                    const role = pool.roles.find((r: Role) => r.name === 'LIQUIDATOR_ROLE');
-                    if (role) liquidatorAddress = role.addresses[0];
-                }
-                if (!liquidatorAddress && pool.interface.hasFunction('liquidator')) {
-                    liquidatorAddress = await pool.liquidator();
-                }
-                if (!liquidatorAddress) throw Error(`could not find liquidator for ${pool.name}`);
-                const liquidator = contracts[liquidatorAddress];
-                const tx = await liquidator.connect(users.liquidator).liquidate(0n); // no minimum
-
-                // await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
-
-                return tx;
-            },
-        };
-    };
 
     // TODO: plot the below against a beta = 0 set up
     // TODO: could do a plot of beta against collateral ratio, would like beta=0 to have the highest, I suspect it doesn't
@@ -240,19 +257,42 @@ async function main() {
         ['BoostableRebalancePool__wstETHWrapper', 'wstETHWrapper', 'RebalanceWithBonusToken__1'],
         ['BoostableRebalancePool__StETHAndxETHWrapper', 'StETHAndxETHWrapper', 'RebalanceWithBonusToken__2'],
     ]) {
-        const [readings, outcomes] = await delve('drop,liquidate', [
-            makeTrigger(makeEthTemplate(), parseEther('1400')),
-            //makeRollTrigger(1, 'day'),
-            await makeLiquidateTrigger(pool),
-        ]);
-        writeReadings(`ETH=1400,${pool}.liquidate`, readings, outcomes);
-        writeReadingsDelta(`ETH=1400,${pool}.liquidate`, await readingsDeltas(readings, base), outcomes);
+        // currently ratios are (from etherscan):
+        //stabilityRatio   uint64 :  1305500000000000000
+        //liquidationRatio   uint64 :  1206700000000000000
+        //selfLiquidationRatio   uint64 :  1143900000000000000
+        //recapRatio   uint64 :  1000000000000000000
+        //                      1.3055    1.2067    1.1439    1.0000
+        log('doing CR...');
+        for (const cr of ['1.3100', '1.2500', '1.1700', '1.0700']) {
+            const [readings, outcomes] = await delve(`CR=${cr},liquidate`, [
+                await makeCRTrigger(parseEther(cr)),
+                //makeRollTrigger(1, 'day'),
+                await makeLiquidateTrigger(pool),
+            ]);
+            //writeEatFile('CR.JSON', JSON.stringify(readings, JSONreplacer));
+            //writeReadings(`CR=${cr},${pool}.liquidate`, readings, outcomes);
+            writeReadingsDelta(`CR=${cr},${pool}.liquidate`, await readingsDeltas(readings, base), outcomes);
+        }
+
+        // const [readings, outcomes] = await delve('drop,liquidate', [
+        //     makeTrigger(makeEthPriceTemplate(), parseEther('1400')),
+        //     //makeRollTrigger(1, 'day'),
+        //     await makeLiquidateTrigger(pool),
+        // ]);
+        // writeReadings(`ETH=1400,${pool}.liquidate`, readings, outcomes);
+        // writeReadingsDelta(`ETH=1400,${pool}.liquidate`, await readingsDeltas(readings, base), outcomes);
 
         await delvePlot(
             `CR_before_and_after_liquidate-${pool}`,
             {
                 reversed: true,
-                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2000'), parseEther('1100'), parseEther('-20')),
+                cause: makeTriggerSeries(
+                    makeEthPriceTemplate(),
+                    parseEther('2000'),
+                    parseEther('1100'),
+                    parseEther('-20'),
+                ),
                 label: 'ETH v USD price',
                 reader: findReader('MockFxPriceOracle', 'getPrice', '_safePrice'),
             },
@@ -278,7 +318,12 @@ async function main() {
             `CRxbalance+liquidate-${pool}`,
             {
                 reversed: true,
-                cause: makeTriggerSeries(makeEthTemplate(), parseEther('2000'), parseEther('1100'), parseEther('-20')),
+                cause: makeTriggerSeries(
+                    makeEthPriceTemplate(),
+                    parseEther('2000'),
+                    parseEther('1100'),
+                    parseEther('-20'),
+                ),
                 label: 'Collateral ratio',
                 range: [1.5, 0.9],
                 reader: calculateCR,

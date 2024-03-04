@@ -1,0 +1,82 @@
+simulation:
+  - trigger:
+      name: ETH
+      argTypes:
+        - uint256
+      args:
+        - 1584248610143900351659n
+    gas: 23667n
+    events: []
+  - trigger:
+      name: liquidate BoostableRebalancePool__StETHAndxETHWrapper
+      argTypes:
+        - address
+      args:
+        - '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
+    gas: 662916n
+    events:
+      - fETH->Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=0.0)
+      - fETH->Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=2203863.691)
+      - fETH->Transfer(from=BoostableRebalancePool__StETHAndxETHWrapper,to=0x0,value=2203863.691)
+      - stETH->Transfer(from=stETHTreasury,to=Market,value=1371.984)
+      - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=1186.066)
+      - stETH->Transfer(from=Market,to=StETHAndxETHWrapper,value=1371.984)
+      - stETH->TransferShares(from=Market,to=StETHAndxETHWrapper,sharesValue=1186.066)
+      - Market->Redeem(owner=BoostableRebalancePool__StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,fTokenBurned=2203863.691,xTokenBurned=0.0,baseTokenOut=1371.984,redeemFee=0.0)
+      - BoostableRebalancePool__StETHAndxETHWrapper->Liquidate(liquidated=2203863.691,baseGained=1371.984)
+      - stETH->Transfer(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,value=13.720)
+      - stETH->TransferShares(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,sharesValue=11.861)
+      - stETH->Transfer(from=StETHAndxETHWrapper,to=stETHTreasury,value=1358.264)
+      - stETH->TransferShares(from=StETHAndxETHWrapper,to=stETHTreasury,sharesValue=1174.205)
+      - xETH->Transfer(from=0x0,to=StETHAndxETHWrapper,value=5176859.437)
+      - Market->Mint(owner=StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,baseTokenIn=1371.984,fTokenOut=0.0,xTokenOut=5176859.437,mintFee=13.720)
+      - xETH->Transfer(from=StETHAndxETHWrapper,to=BoostableRebalancePool__StETHAndxETHWrapper,value=5176859.437)
+      - FXN->Transfer(_from=RebalanceWithBonusToken__2,_to=liquidator,_value=1.0)
+readings:
+  - BoostableRebalancePool__StETHAndxETHWrapper:
+      - lastAssetLossError: '+5358308.955096730756305583'
+      - numTotalSupplyHistory: '+1'
+      - pendingRewards(wstETH).0: '-0.140'
+      - pendingRewards(wstETH).1: '-0.002'
+      - rewardData(FXN).lastUpdate: '+64081'
+      - rewardData(wstETH).lastUpdate: '+64081'
+      - rewardData(xETH).lastUpdate: '+64081'
+      - totalSupply: '-2203863'
+  - BoostableRebalancePool__wstETHWrapper:
+      - pendingRewards(wstETH).0: '+0.002'
+      - pendingRewards(wstETH).1: '-0.002'
+  - fETH:
+      - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '-2203863.69'
+      - totalSupply: '-2203863'
+  - FXN:
+      - available_supply: '+2.81'
+      - balanceOf(liquidator): '+1.0'
+      - balanceOf(RebalanceWithBonusToken__2): '-1.0'
+  - MockFxPriceOracle:
+      - getPrice._safePrice: '-916.6'
+      - getPrice._minUnsafePrice: '-916.6'
+      - getPrice._maxUnsafePrice: '-916.6'
+      - price: '-916.6'
+  - RebalancePoolRegistry:
+      - totalSupply: '-2203863'
+  - stETH:
+      - balanceOf(PlatformFeeSpliter): '+13.72'
+      - balanceOf(stETHTreasury): '-13.71'
+      - sharesOf(PlatformFeeSpliter): '+11.860659479374892797'
+      - sharesOf(StETHAndxETHWrapper): '+0.000000000000000001'
+      - sharesOf(stETHTreasury): '-11.860659479374892798'
+  - stETHTreasury:
+      - collateralRatio: '-0.353'
+      - emaLeverageRatio.lastTime: '+4710'
+      - emaLeverageRatio.lastValue: '+2007194024332697874'
+      - emaLeverageRatio.lastEmaValue: '-90000000000000'
+      - getCurrentNav._baseNav: '-916.62'
+      - getCurrentNav._fNav: '-0.049'
+      - getCurrentNav._xNav: '-1.118'
+      - totalBaseToken: '-13.71983605013715117'
+  - veFXN:
+      - balanceOf(FxnVoterProxy): '-0.33'
+  - xETH:
+      - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '+5176859.44'
+      - nav: '-0.126694390811587009'
+      - totalSupply: '+5176859'

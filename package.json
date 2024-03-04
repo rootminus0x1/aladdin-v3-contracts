@@ -19,10 +19,10 @@
     "coverage": "hardhat coverage",
     "eat:svg:mmd": "cd test/results && find . -name \"*.diagram.mmd\" -exec mmdc -i {} \\;",
     "eat:svg:gp": "cd test/results && find . -name \"*.gnuplot.gp\" -exec gnuplot -e \"set output '{}.svg'\" {} \\;",
-    "eat:svg": "yarn eat:svg:mmd; yarn eat:svg:gp",
+    "eat:svg": "yarn eat:svg:mmd && yarn eat:svg:gp",
     "eat:png": "cd test/results && find . -name \"*.svg\" -exec convert {} {}.png \\;",
     "eat:run1": "ts-node test/eat.ts test/${0}.config.yml",
-    "eat1": "yarn eat:run1 ${0}; yarn eat:svg; yarn eat:png",
+    "eat1": "yarn eat:run1 ${0} && yarn eat:svg && yarn eat:png",
     "eat": "yarn eat1 aladdin-fx"
   },
   "devDependencies": {

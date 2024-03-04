@@ -1,0 +1,71 @@
+simulation:
+  - trigger:
+      name: ETH
+      argTypes:
+        - uint256
+      args:
+        - 1473884233170904157115n
+    gas: 23667n
+    events: []
+  - trigger:
+      name: liquidate RebalancePool
+      argTypes:
+        - address
+      args:
+        - '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
+    gas: 488408n
+    events:
+      - fETH->Approval(owner=RebalancePool,spender=Market,value=0.0)
+      - fETH->Approval(owner=RebalancePool,spender=Market,value=33956.493)
+      - fETH->Transfer(from=RebalancePool,to=0x0,value=33956.493)
+      - stETH->Transfer(from=stETHTreasury,to=Market,value=22.584)
+      - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=19.523)
+      - stETH->Transfer(from=Market,to=wstETHWrapper,value=22.584)
+      - stETH->TransferShares(from=Market,to=wstETHWrapper,sharesValue=19.523)
+      - Market->Redeem(owner=RebalancePool,recipient=wstETHWrapper,fTokenBurned=33956.493,xTokenBurned=0.0,baseTokenOut=22.584,redeemFee=0.0)
+      - RebalancePool->Liquidate(liquidated=33956.493,baseGained=22.584)
+      - wstETH->Transfer(from=0x0,to=wstETHWrapper,value=19.523)
+      - stETH->Transfer(from=wstETHWrapper,to=wstETH,value=22.584)
+      - stETH->TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=19.523)
+      - wstETH->Transfer(from=wstETHWrapper,to=RebalancePool,value=19.523)
+      - FXN->Transfer(_from=RebalanceWithBonusToken__0,_to=liquidator,_value=2.0)
+readings:
+  - fETH:
+      - balanceOf(RebalancePool): '-33956.49'
+      - totalSupply: '-33956'
+  - FXN:
+      - available_supply: '+0.85'
+      - balanceOf(liquidator): '+2.0'
+      - balanceOf(RebalanceWithBonusToken__0): '-2.0'
+  - MockFxPriceOracle:
+      - getPrice._safePrice: '-1026.9'
+      - getPrice._minUnsafePrice: '-1026.9'
+      - getPrice._maxUnsafePrice: '-1026.9'
+      - price: '-1026.9'
+  - RebalancePool:
+      - epochState.epoch: '+1'
+      - totalSupply: '-14241'
+      - totalUnlocking: '-19714.952389819415148249'
+  - RebalancePoolRegistry:
+      - totalSupply: '-14241'
+  - stETH:
+      - balanceOf(stETHTreasury): '-22.58'
+      - balanceOf(wstETH): '+22.58'
+      - sharesOf(stETHTreasury): '-19.523287020936080327'
+      - sharesOf(wstETH): '+19.523287020936080327'
+  - stETHTreasury:
+      - collateralRatio: '-0.707'
+      - emaLeverageRatio.lastTime: '+4080'
+      - emaLeverageRatio.lastValue: '+4424195378047316150'
+      - emaLeverageRatio.lastEmaValue: '-80000000000000'
+      - getCurrentNav._baseNav: '-1026.98'
+      - getCurrentNav._fNav: '-0.055'
+      - getCurrentNav._xNav: '-1.252'
+      - totalBaseToken: '-22.583592215323489535'
+  - veFXN:
+      - balanceOf(FxnVoterProxy): '-0.10'
+  - wstETH:
+      - balanceOf(RebalancePool): '+19.52'
+      - totalSupply: '+20'
+  - xETH:
+      - nav: '-0.001045076587747682'

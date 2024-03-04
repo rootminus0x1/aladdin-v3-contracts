@@ -1,0 +1,31 @@
+simulation:
+  - trigger:
+      name: ETH
+      argTypes:
+        - uint256
+      args:
+        - 1667890377680335724280n
+    gas: 23667n
+    events: []
+  - trigger:
+      name: liquidate RebalancePool
+      argTypes:
+        - address
+      args:
+        - '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
+    error: 'VM Exception while processing transaction: reverted with reason string ''cannot liquidate'''
+readings:
+  - FXN:
+      - available_supply: '+0.29'
+  - MockFxPriceOracle:
+      - getPrice._safePrice: '-832.9'
+      - getPrice._minUnsafePrice: '-832.9'
+      - getPrice._maxUnsafePrice: '-832.9'
+      - price: '-832.9'
+  - stETHTreasury:
+      - collateralRatio: '-0.568'
+      - getCurrentNav._baseNav: '-832.98'
+      - getCurrentNav._fNav: '-0.045'
+      - getCurrentNav._xNav: '-1.016'
+  - veFXN:
+      - balanceOf(FxnVoterProxy): '-0.03'
