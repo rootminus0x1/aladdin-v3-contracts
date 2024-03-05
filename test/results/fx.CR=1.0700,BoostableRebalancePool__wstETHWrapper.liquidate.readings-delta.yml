@@ -29,43 +29,60 @@ simulation:
       - stETH->TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=3576.680)
       - wstETH->Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=3576.680)
       - FXN->Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
-readings:
-  - BoostableRebalancePool__wstETHWrapper:
+deployments:
+  - contract: BoostableRebalancePool
+    address: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
+    readings:
       - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '+63187'
-      - rewardData(wstETH).lastUpdate: '+63187'
+      - rewardData(FXN).lastUpdate: '+63200'
+      - rewardData(wstETH).lastUpdate: '+63200'
       - totalSupply: '-5688690'
-  - fETH:
+  - contract: fETH
+    address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    readings:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '-5688690.98'
       - totalSupply: '-5688690'
-  - FXN:
-      - available_supply: '+0.03'
+  - contract: FXN
+    address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+    readings:
       - balanceOf(liquidator): '+1.0'
       - balanceOf(RebalanceWithBonusToken__1): '-1.0'
-  - MockFxPriceOracle:
+  - contract: MockFxPriceOracle
+    address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'
+    readings:
       - getPrice._safePrice: '-1163.2'
       - getPrice._minUnsafePrice: '-1163.2'
       - getPrice._maxUnsafePrice: '-1163.2'
       - price: '-1163.2'
-  - RebalancePoolRegistry:
+  - contract: RebalancePoolRegistry
+    address: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
+    readings:
       - totalSupply: '-5688690'
-  - stETH:
+  - contract: stETH
+    address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    readings:
       - balanceOf(stETHTreasury): '-4137.33'
       - balanceOf(wstETH): '+4137.33'
       - sharesOf(stETHTreasury): '-3576.680108547972119244'
       - sharesOf(wstETH): '+3576.680108547972119244'
-  - stETHTreasury:
+  - contract: stETHTreasury
+    address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    readings:
       - collateralRatio: '-0.746'
-      - emaLeverageRatio.lastTime: '+3810'
+      - emaLeverageRatio.lastTime: '+3800'
       - emaLeverageRatio.lastValue: '+12265427591538018208'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1163.27'
       - getCurrentNav._fNav: '-0.063'
       - getCurrentNav._xNav: '-1.419'
       - totalBaseToken: '-4137.330203130593696553'
-  - wstETH:
+  - contract: wstETH
+    address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
+    readings:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '+3576.68'
       - totalSupply: '+3577'
-  - xETH:
+  - contract: xETH
+    address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    readings:
       - nav: '-0.265368626732584404'

@@ -14,15 +14,17 @@ simulation:
       args:
         - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
     error: 'VM Exception while processing transaction: reverted with an unrecognized custom error (return data: 0xbf87c7d5)'
-readings:
-  - FXN:
-      - available_supply: '+0.02'
-  - MockFxPriceOracle:
+deployments:
+  - contract: MockFxPriceOracle
+    address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'
+    readings:
       - getPrice._safePrice: '-832.9'
       - getPrice._minUnsafePrice: '-832.9'
       - getPrice._maxUnsafePrice: '-832.9'
       - price: '-832.9'
-  - stETHTreasury:
+  - contract: stETHTreasury
+    address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    readings:
       - collateralRatio: '-0.568'
       - getCurrentNav._baseNav: '-832.98'
       - getCurrentNav._fNav: '-0.045'

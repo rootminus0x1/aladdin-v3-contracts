@@ -83,6 +83,8 @@ events:
     args: []
 
 format:
+  - reading: rewardData.lastUpdate
+    precision: -2
   - reading: available_supply
     precision: 2
   - reading: price
@@ -100,7 +102,7 @@ format:
   - reading: balanceOf
     precision: 2
   - reading: emaLeverageRatio.lastTime
-    precision: -1
+    precision: -2
   - reading: emaLeverageRatio.lastEmaValue
     precision: -13
   - type: uint256
@@ -128,6 +130,9 @@ format:
   - contract: "Curve DAO Token"
     reading: available_supply
     precision: 0
+  - contract: FXN
+    reading: available_supply
+    precision: 1
   - reading: totalSupply
     precision: 0
   - reading: price_oracle

@@ -32,44 +32,59 @@ simulation:
       - Market->Mint(owner=StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,baseTokenIn=4195.846,fTokenOut=0.0,xTokenOut=48510941.603,mintFee=33.987)
       - xETH->Transfer(from=StETHAndxETHWrapper,to=BoostableRebalancePool__StETHAndxETHWrapper,value=48510941.603)
       - FXN->Transfer(_from=RebalanceWithBonusToken__2,_to=liquidator,_value=1.0)
-readings:
-  - BoostableRebalancePool__StETHAndxETHWrapper:
+deployments:
+  - contract: BoostableRebalancePool
+    address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
+    readings:
       - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '+63192'
-      - rewardData(wstETH).lastUpdate: '+63192'
-      - rewardData(xETH).lastUpdate: '+63192'
+      - rewardData(FXN).lastUpdate: '+63200'
+      - rewardData(wstETH).lastUpdate: '+63200'
+      - rewardData(xETH).lastUpdate: '+63200'
       - totalSupply: '-5769148'
-  - fETH:
+  - contract: fETH
+    address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    readings:
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '-5769148.33'
       - totalSupply: '-5769148'
-  - FXN:
-      - available_supply: '+0.05'
+  - contract: FXN
+    address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+    readings:
       - balanceOf(liquidator): '+1.0'
       - balanceOf(RebalanceWithBonusToken__2): '-1.0'
-  - MockFxPriceOracle:
+  - contract: MockFxPriceOracle
+    address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'
+    readings:
       - getPrice._safePrice: '-1163.2'
       - getPrice._minUnsafePrice: '-1163.2'
       - getPrice._maxUnsafePrice: '-1163.2'
       - price: '-1163.2'
-  - RebalancePoolRegistry:
+  - contract: RebalancePoolRegistry
+    address: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
+    readings:
       - totalSupply: '-5769148'
-  - stETH:
+  - contract: stETH
+    address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    readings:
       - balanceOf(PlatformFeeSpliter): '+33.99'
       - balanceOf(stETHTreasury): '-33.98'
       - sharesOf(PlatformFeeSpliter): '+29.381574506202212489'
       - sharesOf(StETHAndxETHWrapper): '+0.000000000000000001'
       - sharesOf(stETHTreasury): '-29.38157450620221249'
-  - stETHTreasury:
+  - contract: stETHTreasury
+    address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    readings:
       - collateralRatio: '+0.154'
-      - emaLeverageRatio.lastTime: '+3820'
+      - emaLeverageRatio.lastTime: '+3800'
       - emaLeverageRatio.lastValue: '+5967574219879909331'
       - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1163.27'
       - getCurrentNav._fNav: '-0.063'
       - getCurrentNav._xNav: '-1.419'
       - totalBaseToken: '-33.987181389110195809'
-  - xETH:
+  - contract: xETH
+    address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    readings:
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '+48510941.60'
       - nav: '-0.527779330325536909'
       - totalSupply: '+48510942'
