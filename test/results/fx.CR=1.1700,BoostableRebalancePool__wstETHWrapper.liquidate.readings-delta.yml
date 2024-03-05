@@ -5,7 +5,7 @@ simulation:
         - uint256
       args:
         - 1473884233170904157115n
-    gas: 23667n
+    gas: 26467n
     events: []
   - trigger:
       name: liquidate BoostableRebalancePool__wstETHWrapper
@@ -30,22 +30,18 @@ simulation:
       - wstETH->Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=3093.370)
       - FXN->Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
 readings:
-  - BoostableRebalancePool__StETHAndxETHWrapper:
-      - pendingRewards(wstETH).0: '+0.001'
-      - pendingRewards(wstETH).1: '-0.001'
   - BoostableRebalancePool__wstETHWrapper:
       - lastAssetLossError: '+1676206.081050967160624128'
       - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - pendingRewards(wstETH).1: '-0.001'
-      - rewardData(FXN).lastUpdate: '+63812'
-      - rewardData(wstETH).lastUpdate: '+63812'
+      - rewardData(FXN).lastUpdate: '+63185'
+      - rewardData(wstETH).lastUpdate: '+63185'
       - totalSupply: '-5380242'
   - fETH:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '-5380242.10'
       - totalSupply: '-5380242'
   - FXN:
-      - available_supply: '+1.98'
+      - available_supply: '+0.02'
       - balanceOf(liquidator): '+1.0'
       - balanceOf(RebalanceWithBonusToken__1): '-1.0'
   - MockFxPriceOracle:
@@ -62,15 +58,13 @@ readings:
       - sharesOf(wstETH): '+3093.370450716855293072'
   - stETHTreasury:
       - collateralRatio: '-0.572'
-      - emaLeverageRatio.lastTime: '+4440'
+      - emaLeverageRatio.lastTime: '+3810'
       - emaLeverageRatio.lastValue: '+4424195378047316150'
-      - emaLeverageRatio.lastEmaValue: '-90000000000000'
+      - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1026.98'
       - getCurrentNav._fNav: '-0.055'
       - getCurrentNav._xNav: '-1.252'
       - totalBaseToken: '-3578.261014910354352446'
-  - veFXN:
-      - balanceOf(FxnVoterProxy): '-0.23'
   - wstETH:
       - balanceOf(BoostableRebalancePool__wstETHWrapper): '+3093.37'
       - totalSupply: '+3093'

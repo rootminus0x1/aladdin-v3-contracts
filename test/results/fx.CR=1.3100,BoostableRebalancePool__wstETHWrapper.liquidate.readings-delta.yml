@@ -5,7 +5,7 @@ simulation:
         - uint256
       args:
         - 1667890377680335724280n
-    gas: 23667n
+    gas: 26467n
     events: []
   - trigger:
       name: liquidate BoostableRebalancePool__wstETHWrapper
@@ -15,14 +15,8 @@ simulation:
         - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
     error: 'VM Exception while processing transaction: reverted with an unrecognized custom error (return data: 0xbf87c7d5)'
 readings:
-  - BoostableRebalancePool__StETHAndxETHWrapper:
-      - pendingRewards(wstETH).0: '+0.001'
-      - pendingRewards(wstETH).1: '-0.001'
-  - BoostableRebalancePool__wstETHWrapper:
-      - pendingRewards(wstETH).0: '+0.001'
-      - pendingRewards(wstETH).1: '-0.001'
   - FXN:
-      - available_supply: '+1.41'
+      - available_supply: '+0.02'
   - MockFxPriceOracle:
       - getPrice._safePrice: '-832.9'
       - getPrice._minUnsafePrice: '-832.9'
@@ -33,5 +27,3 @@ readings:
       - getCurrentNav._baseNav: '-832.98'
       - getCurrentNav._fNav: '-0.045'
       - getCurrentNav._xNav: '-1.016'
-  - veFXN:
-      - balanceOf(FxnVoterProxy): '-0.16'

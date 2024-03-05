@@ -1,16 +1,16 @@
 set title "CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper" noenhanced
-datafile = "aladdin-fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.gnuplot.csv"
-# additional imformation and error in aladdin-fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.error.csv
+datafile = "fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.gnuplot.csv"
+# additional imformation and error in fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.error.csv
 set datafile separator comma
 set key autotitle columnheader noenhanced
 set key bmargin
 set key title " "
 # set terminal pngcairo
-# set output "aladdin-fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.gnuplot.png"
+# set output "fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.gnuplot.png"
 set terminal svg enhanced size 800 566.5 background rgb "gray90"
 set autoscale
 set colorsequence default
-# set output "aladdin-fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.gnuplot.svg"
+# set output "fx.CR_before_and_after_liquidate-BoostableRebalancePool__StETHAndxETHWrapper.gnuplot.svg"
 set xrange reverse
 set xlabel "ETH v USD price" noenhanced
 set xtics

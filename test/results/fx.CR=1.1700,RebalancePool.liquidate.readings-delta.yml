@@ -5,7 +5,7 @@ simulation:
         - uint256
       args:
         - 1473884233170904157115n
-    gas: 23667n
+    gas: 26467n
     events: []
   - trigger:
       name: liquidate RebalancePool
@@ -34,7 +34,6 @@ readings:
       - balanceOf(RebalancePool): '-33956.49'
       - totalSupply: '-33956'
   - FXN:
-      - available_supply: '+0.85'
       - balanceOf(liquidator): '+2.0'
       - balanceOf(RebalanceWithBonusToken__0): '-2.0'
   - MockFxPriceOracle:
@@ -55,15 +54,13 @@ readings:
       - sharesOf(wstETH): '+19.523287020936080327'
   - stETHTreasury:
       - collateralRatio: '-0.707'
-      - emaLeverageRatio.lastTime: '+4080'
+      - emaLeverageRatio.lastTime: '+3800'
       - emaLeverageRatio.lastValue: '+4424195378047316150'
-      - emaLeverageRatio.lastEmaValue: '-80000000000000'
+      - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1026.98'
       - getCurrentNav._fNav: '-0.055'
       - getCurrentNav._xNav: '-1.252'
       - totalBaseToken: '-22.583592215323489535'
-  - veFXN:
-      - balanceOf(FxnVoterProxy): '-0.10'
   - wstETH:
       - balanceOf(RebalancePool): '+19.52'
       - totalSupply: '+20'

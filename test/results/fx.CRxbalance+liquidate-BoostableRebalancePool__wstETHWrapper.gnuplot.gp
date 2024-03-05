@@ -1,16 +1,16 @@
 set title "CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper" noenhanced
-datafile = "aladdin-fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.gnuplot.csv"
-# additional imformation and error in aladdin-fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.error.csv
+datafile = "fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.gnuplot.csv"
+# additional imformation and error in fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.error.csv
 set datafile separator comma
 set key autotitle columnheader noenhanced
 set key bmargin
 set key title " "
 # set terminal pngcairo
-# set output "aladdin-fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.gnuplot.png"
+# set output "fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.gnuplot.png"
 set terminal svg enhanced size 800 756.5 background rgb "gray90"
 set autoscale
 set colorsequence default
-# set output "aladdin-fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.gnuplot.svg"
+# set output "fx.CRxbalance+liquidate-BoostableRebalancePool__wstETHWrapper.gnuplot.svg"
 set xrange reverse
 set xlabel "Collateral ratio" noenhanced
 set xtics

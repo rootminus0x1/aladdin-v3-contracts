@@ -5,7 +5,7 @@ simulation:
         - uint256
       args:
         - 1473884233170904157115n
-    gas: 23667n
+    gas: 26467n
     events: []
   - trigger:
       name: liquidate BoostableRebalancePool__StETHAndxETHWrapper
@@ -37,19 +37,15 @@ readings:
       - lastAssetLossError: '+5276225.805106553761909397'
       - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - pendingRewards(wstETH).1: '-0.002'
-      - rewardData(FXN).lastUpdate: '+64172'
-      - rewardData(wstETH).lastUpdate: '+64172'
-      - rewardData(xETH).lastUpdate: '+64172'
+      - rewardData(FXN).lastUpdate: '+63191'
+      - rewardData(wstETH).lastUpdate: '+63191'
+      - rewardData(xETH).lastUpdate: '+63191'
       - totalSupply: '-5380242'
-  - BoostableRebalancePool__wstETHWrapper:
-      - pendingRewards(wstETH).0: '+0.002'
-      - pendingRewards(wstETH).1: '-0.002'
   - fETH:
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '-5380242.10'
       - totalSupply: '-5380242'
   - FXN:
-      - available_supply: '+3.10'
+      - available_supply: '+0.04'
       - balanceOf(liquidator): '+1.0'
       - balanceOf(RebalanceWithBonusToken__2): '-1.0'
   - MockFxPriceOracle:
@@ -67,15 +63,13 @@ readings:
       - sharesOf(stETHTreasury): '-30.933704507168552931'
   - stETHTreasury:
       - collateralRatio: '+0.216'
-      - emaLeverageRatio.lastTime: '+4800'
+      - emaLeverageRatio.lastTime: '+3820'
       - emaLeverageRatio.lastValue: '+2026861983879429236'
-      - emaLeverageRatio.lastEmaValue: '-90000000000000'
+      - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1026.98'
       - getCurrentNav._fNav: '-0.055'
       - getCurrentNav._xNav: '-1.252'
       - totalBaseToken: '-35.782610149103543524'
-  - veFXN:
-      - balanceOf(FxnVoterProxy): '-0.37'
   - xETH:
       - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '+18579431.68'
       - nav: '-0.315458180450329985'
