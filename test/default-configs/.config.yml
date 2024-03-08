@@ -1,0 +1,38 @@
+diagram:
+  renderer: "elk"
+
+users:
+  #  - name: admin # bao admin
+  - name: liquidator # calls the various liquidators (maybe create )
+  - name: fMinter #user who mints fTokens
+    wallet:
+      - { token: stETH, amount: 10000 ether }
+    approve:
+      - Market
+  - name: xMinter # user who mint/redeems xTokens
+    wallet:
+      - { token: stETH, amount: 10000 ether }
+    approve:
+      - Market
+  - name: xHolderRedeemer # user who mint/redeems xTokens
+  - name: fHolderLiquidator # user who mints/liquidates fTokens
+  - name: fHolderRedeemer # user who mint/redeems fTokens
+
+format:
+  - type: uint256
+    unit: ether
+  - reading: latestAnswer
+    type: int256
+    unit: 8
+  - reading: latestRoundData.answer
+    type: int256
+    unit: 8
+  - contract: Market
+    type: uint128
+    unit: 16
+  - contract: Market
+    type: int128
+    unit: 16
+  - contract: Market
+    type: uint64
+    unit: 18

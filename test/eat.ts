@@ -1,24 +1,25 @@
-import * as dotenv from 'dotenv';
-import * as dotenvExpand from 'dotenv-expand';
-dotenvExpand.expand(dotenv.config());
-
 import { withLogging, eatMain } from 'eat';
 import { EatCollateralRatio } from './EatCollateralRatio';
+import { EatFees } from './EatFees';
 
 const main = async () => {
     // TODO: plot the below against a beta = 0 set up
     // TODO: could do a plot of beta against collateral ratio, would like beta=0 to have the highest, I suspect it doesn't
     // TODO: plot collateral ratio against minted x & f tokens, base the amount on the current collateral stETHTreasury.totalBaseToken
 
-    // TODO: drive a collateral ratio < 130% with eth price. then run a liquidation bot to see what changes
-    // beforehand either get a depositor's address, or deposit some from one of my users
     // TODO: when running the liquidator bot, we should get the return values of the liquidate function - see doUserEvent in delve.ts
     // TODO: run a couple of deposits with a reward cycle between them and see the rewards distributed
     // TODO: reserve pool?
     // small price change
     // await delve('2500 price', [{ name: 'ETH', precision: 0, setMarket: setPrice, value: parseEther('2500') }]);
 
-    await eatMain([new EatCollateralRatio()]);
+    await eatMain(
+        [
+            //new EatCollateralRatio(),
+            new EatFees(),
+        ],
+        true,
+    );
 };
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.

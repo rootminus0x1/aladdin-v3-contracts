@@ -1,6 +1,8 @@
 import { time } from '@nomicfoundation/hardhat-network-helpers';
-import { parseEther } from 'ethers';
+import { formatEther, parseEther } from 'ethers';
 import { Role, Trigger, TriggerTemplate, contracts, inverse, makeCalculator, makeTrigger, parseTime, users } from 'eat';
+import { nameToAddress } from 'eat';
+import { log } from 'console';
 
 export const makeEthPriceTemplate = (): TriggerTemplate => {
     return {
@@ -47,6 +49,18 @@ export const makeHarvestTrigger = () => {
         argTypes: [],
         pull: async () => {
             return await contracts.stETHTreasury.harvest();
+        },
+    };
+};
+
+export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
+    log(`set up mintingF ${formatEther(amountInEth)} by ${user.name} ${user.address}`);
+    return {
+        name: `mintFToken`,
+        args: [amountInEth],
+        argTypes: ['uint256'],
+        pull: async (amountInEth: bigint) => {
+            return await contracts.Market.connect(user).mintFToken(amountInEth, user.address, 0n);
         },
     };
 };
