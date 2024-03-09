@@ -1,19 +1,8 @@
 simulation:
-  - trigger:
-      name: ETH
-      argTypes:
-        - uint256
-      args:
-        - 1667890377680335724280n
-    gas: 26467n
+  - ETH(1667.8904): gas:26,467
     events: []
-  - trigger:
-      name: liquidate RebalancePool
-      argTypes:
-        - address
-      args:
-        - '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
-    error: 'VM Exception while processing transaction: reverted with reason string ''cannot liquidate'''
+  - liquidate RebalancePool(RebalancePool): cannot liquidate
+    events: []
 deployments:
   - contract: MockFxPriceOracle
     address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'

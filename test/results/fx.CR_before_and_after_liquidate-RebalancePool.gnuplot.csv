@@ -1,47 +1,47 @@
 ETH v USD price,MockFxPriceOracle.getPrice._safePrice,stETHTreasury.collateralRatio-before,liquidate RebalancePool,stETHTreasury.collateralRatio-after
-gas:26k,2000.0,1.543,cannot liquidate,1.543
-gas:26k,1980.0,1.529,cannot liquidate,1.529
-gas:26k,1960.0,1.515,cannot liquidate,1.515
-gas:26k,1940.0,1.501,cannot liquidate,1.501
-gas:26k,1920.0,1.487,cannot liquidate,1.487
-gas:26k,1900.0,1.473,cannot liquidate,1.473
-gas:26k,1880.0,1.460,cannot liquidate,1.460
-gas:26k,1860.0,1.446,cannot liquidate,1.446
-gas:26k,1840.0,1.432,cannot liquidate,1.432
-gas:26k,1820.0,1.418,cannot liquidate,1.418
-gas:26k,1800.0,1.404,cannot liquidate,1.404
-gas:26k,1780.0,1.389,cannot liquidate,1.389
-gas:26k,1760.0,1.375,cannot liquidate,1.375
-gas:26k,1740.0,1.361,cannot liquidate,1.361
-gas:26k,1720.0,1.347,cannot liquidate,1.347
-gas:26k,1700.0,1.333,cannot liquidate,1.333
-gas:26k,1680.0,1.319,cannot liquidate,1.319
-gas:26k,1660.0,1.304,gas:488k,1.305
-gas:26k,1640.0,1.290,gas:488k,1.291
-gas:26k,1620.0,1.276,gas:488k,1.276
-gas:26k,1600.0,1.261,gas:488k,1.262
-gas:26k,1580.0,1.247,gas:488k,1.248
-gas:26k,1560.0,1.233,gas:488k,1.233
-gas:26k,1540.0,1.218,gas:488k,1.219
-gas:26k,1520.0,1.204,gas:488k,1.204
-gas:26k,1500.0,1.189,gas:488k,1.190
-gas:26k,1480.0,1.175,gas:488k,1.175
-gas:26k,1460.0,1.160,gas:488k,1.160
-gas:26k,1440.0,1.145,gas:488k,1.146
-gas:26k,1420.0,1.131,gas:488k,1.131
-gas:26k,1400.0,1.116,gas:488k,1.116
-gas:26k,1380.0,1.101,gas:488k,1.102
-gas:26k,1360.0,1.087,gas:488k,1.087
-gas:26k,1340.0,1.072,gas:488k,1.072
-gas:26k,1320.0,1.057,gas:488k,1.057
-gas:26k,1300.0,1.042,gas:488k,1.042
-gas:26k,1280.0,1.027,gas:488k,1.027
-gas:26k,1260.0,1.012,gas:488k,1.012
-gas:26k,1240.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-gas:26k,1220.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-gas:26k,1200.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-gas:26k,1180.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-gas:26k,1160.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-gas:26k,1140.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-gas:26k,1120.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-gas:26k,1100.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",2000.0,1.543,cannot liquidate,1.543
+"gas:26,443",1980.0,1.529,cannot liquidate,1.529
+"gas:26,443",1960.0,1.515,cannot liquidate,1.515
+"gas:26,443",1940.0,1.501,cannot liquidate,1.501
+"gas:26,431",1920.0,1.487,cannot liquidate,1.487
+"gas:26,443",1900.0,1.473,cannot liquidate,1.473
+"gas:26,443",1880.0,1.460,cannot liquidate,1.460
+"gas:26,443",1860.0,1.446,cannot liquidate,1.446
+"gas:26,443",1840.0,1.432,cannot liquidate,1.432
+"gas:26,443",1820.0,1.418,cannot liquidate,1.418
+"gas:26,443",1800.0,1.404,cannot liquidate,1.404
+"gas:26,443",1780.0,1.389,cannot liquidate,1.389
+"gas:26,443",1760.0,1.375,cannot liquidate,1.375
+"gas:26,443",1740.0,1.361,cannot liquidate,1.361
+"gas:26,443",1720.0,1.347,cannot liquidate,1.347
+"gas:26,443",1700.0,1.333,cannot liquidate,1.333
+"gas:26,443",1680.0,1.319,cannot liquidate,1.319
+"gas:26,443",1660.0,1.304,"gas:488,408",1.305
+"gas:26,443",1640.0,1.290,"gas:488,408",1.291
+"gas:26,443",1620.0,1.276,"gas:488,408",1.276
+"gas:26,431",1600.0,1.261,"gas:488,408",1.262
+"gas:26,443",1580.0,1.247,"gas:488,408",1.248
+"gas:26,443",1560.0,1.233,"gas:488,408",1.233
+"gas:26,443",1540.0,1.218,"gas:488,408",1.219
+"gas:26,443",1520.0,1.204,"gas:488,408",1.204
+"gas:26,443",1500.0,1.189,"gas:488,408",1.190
+"gas:26,443",1480.0,1.175,"gas:488,408",1.175
+"gas:26,443",1460.0,1.160,"gas:488,408",1.160
+"gas:26,443",1440.0,1.145,"gas:488,408",1.146
+"gas:26,443",1420.0,1.131,"gas:488,408",1.131
+"gas:26,443",1400.0,1.116,"gas:488,408",1.116
+"gas:26,443",1380.0,1.101,"gas:488,408",1.102
+"gas:26,443",1360.0,1.087,"gas:488,408",1.087
+"gas:26,443",1340.0,1.072,"gas:488,408",1.072
+"gas:26,443",1320.0,1.057,"gas:488,408",1.057
+"gas:26,443",1300.0,1.042,"gas:488,408",1.042
+"gas:26,431",1280.0,1.027,"gas:488,408",1.027
+"gas:26,443",1260.0,1.012,"gas:488,408",1.012
+"gas:26,443",1240.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1220.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1200.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1180.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1160.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1140.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1120.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1100.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow

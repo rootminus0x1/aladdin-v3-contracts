@@ -1,6 +1,6 @@
 import { time } from '@nomicfoundation/hardhat-network-helpers';
 import { MaxUint256, formatEther, parseEther } from 'ethers';
-import { Role, Trigger, TriggerTemplate, contracts, inverse, makeTrigger, parseTime, users } from 'eat';
+import { Role, Trigger, TriggerTemplate, contracts, formatBigInt, inverse, makeTrigger, parseTime, users } from 'eat';
 import { nameToAddress } from 'eat';
 import { log } from 'console';
 
@@ -53,10 +53,8 @@ export const makeHarvestTrigger = () => {
     };
 };
 
-const formatEth = (amount: bigint) => (amount === MaxUint256 ? 'all' : formatEther(amount));
-
 export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
-    log(`set up mintingF ${formatEth(amountInEth)} by ${user.name} ${user.address}`);
+    // log(`set up mintingF ${formatBigInt(amountInEth)} by ${user.name} ${user.address}`);
     return {
         name: `mintFToken`,
         args: [amountInEth],
@@ -68,7 +66,7 @@ export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
 };
 
 export const makeRedeemFTokenTrigger = (amount: bigint, user: any) => {
-    //log(`set up mintingF ${formatEth(amount)} by ${user.name} ${user.address}`);
+    // log(`set up mintingF ${formatBigInt(amount)} by ${user.name} ${user.address}`);
     return {
         name: `redeemFToken`,
         args: [amount],
@@ -80,7 +78,7 @@ export const makeRedeemFTokenTrigger = (amount: bigint, user: any) => {
 };
 
 export const makeMintXTokenTrigger = (amountInEth: bigint, user: any) => {
-    //log(`set up mintingF ${formatEth(amountInEth)} by ${user.name} ${user.address}`);
+    //log(`set up mintingF ${formatBigInt(amountInEth)} by ${user.name} ${user.address}`);
     return {
         name: `mintXToken`,
         args: [amountInEth],
@@ -92,7 +90,7 @@ export const makeMintXTokenTrigger = (amountInEth: bigint, user: any) => {
 };
 
 export const makeRedeemXTokenTrigger = (amount: bigint, user: any) => {
-    //log(`set up mintingF ${formatEth(amount)} by ${user.name} ${user.address}`);
+    //log(`set up mintingF ${formatBigInt(amount)} by ${user.name} ${user.address}`);
     return {
         name: `redeemXToken`,
         args: [amount],

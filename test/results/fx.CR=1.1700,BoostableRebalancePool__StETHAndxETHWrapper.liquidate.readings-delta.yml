@@ -1,47 +1,35 @@
 simulation:
-  - trigger:
-      name: ETH
-      argTypes:
-        - uint256
-      args:
-        - 1473884233170904157115n
-    gas: 26467n
+  - ETH(1473.8842): gas:26,467
     events: []
-  - trigger:
-      name: liquidate BoostableRebalancePool__StETHAndxETHWrapper
-      argTypes:
-        - address
-      args:
-        - '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
-    gas: 662916n
+  - liquidate BoostableRebalancePool__StETHAndxETHWrapper(BoostableRebalancePool__StETHAndxETHWrapper): gas:662,916
     events:
-      - fETH->Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=0.0)
-      - fETH->Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=5380242.101)
-      - fETH->Transfer(from=BoostableRebalancePool__StETHAndxETHWrapper,to=0x0,value=5380242.101)
-      - stETH->Transfer(from=stETHTreasury,to=Market,value=3578.261)
-      - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=3093.370)
-      - stETH->Transfer(from=Market,to=StETHAndxETHWrapper,value=3578.261)
-      - stETH->TransferShares(from=Market,to=StETHAndxETHWrapper,sharesValue=3093.370)
-      - Market->Redeem(owner=BoostableRebalancePool__StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,fTokenBurned=5380242.101,xTokenBurned=0.0,baseTokenOut=3578.261,redeemFee=0.0)
-      - BoostableRebalancePool__StETHAndxETHWrapper->Liquidate(liquidated=5380242.101,baseGained=3578.261)
-      - stETH->Transfer(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,value=35.783)
-      - stETH->TransferShares(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,sharesValue=30.934)
-      - stETH->Transfer(from=StETHAndxETHWrapper,to=stETHTreasury,value=3542.478)
-      - stETH->TransferShares(from=StETHAndxETHWrapper,to=stETHTreasury,sharesValue=3062.437)
-      - xETH->Transfer(from=0x0,to=StETHAndxETHWrapper,value=18579431.685)
-      - Market->Mint(owner=StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,baseTokenIn=3578.261,fTokenOut=0.0,xTokenOut=18579431.685,mintFee=35.783)
-      - xETH->Transfer(from=StETHAndxETHWrapper,to=BoostableRebalancePool__StETHAndxETHWrapper,value=18579431.685)
-      - FXN->Transfer(_from=RebalanceWithBonusToken__2,_to=liquidator,_value=1.0)
+      - fETH.Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=0.0)
+      - fETH.Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=5380242.1014)
+      - fETH.Transfer(from=BoostableRebalancePool__StETHAndxETHWrapper,to=0x0,value=5380242.1014)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=3578.2610)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=3093.3705)
+      - stETH.Transfer(from=Market,to=StETHAndxETHWrapper,value=3578.2610)
+      - stETH.TransferShares(from=Market,to=StETHAndxETHWrapper,sharesValue=3093.3705)
+      - Market.Redeem(owner=BoostableRebalancePool__StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,fTokenBurned=5380242.1014,xTokenBurned=0.0,baseTokenOut=3578.2610,redeemFee=0.0)
+      - BoostableRebalancePool__StETHAndxETHWrapper.Liquidate(liquidated=5380242.1014,baseGained=3578.2610)
+      - stETH.Transfer(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,value=35.7826)
+      - stETH.TransferShares(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,sharesValue=30.9337)
+      - stETH.Transfer(from=StETHAndxETHWrapper,to=stETHTreasury,value=3542.4784)
+      - stETH.TransferShares(from=StETHAndxETHWrapper,to=stETHTreasury,sharesValue=3062.4367)
+      - xETH.Transfer(from=0x0,to=StETHAndxETHWrapper,value=18579431.6848)
+      - Market.Mint(owner=StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,baseTokenIn=3578.2610,fTokenOut=0.0,xTokenOut=18579431.6848,mintFee=35.7826)
+      - xETH.Transfer(from=StETHAndxETHWrapper,to=BoostableRebalancePool__StETHAndxETHWrapper,value=18579431.6848)
+      - FXN.Transfer(_from=RebalanceWithBonusToken__2,_to=liquidator,_value=1.0)
 deployments:
   - contract: BoostableRebalancePool
     address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
     readings:
       - lastAssetLossError: '+5276225.805106553761909397'
-      - numTotalSupplyHistory: '+1'
+      - numTotalSupplyHistory: '+0.000000000000000001'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '+63200'
-      - rewardData(wstETH).lastUpdate: '+63200'
-      - rewardData(xETH).lastUpdate: '+63200'
+      - rewardData(FXN).lastUpdate: '+00'
+      - rewardData(wstETH).lastUpdate: '+00'
+      - rewardData(xETH).lastUpdate: '+00'
       - totalSupply: '-5380242'
   - contract: fETH
     address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
@@ -76,9 +64,9 @@ deployments:
     address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
     readings:
       - collateralRatio: '+0.216'
-      - emaLeverageRatio.lastTime: '+3800'
-      - emaLeverageRatio.lastValue: '+2026861983879429236'
-      - emaLeverageRatio.lastEmaValue: '-70000000000000'
+      - emaLeverageRatio.lastTime: '+00'
+      - emaLeverageRatio.lastValue: '+2.026861983879429236'
+      - emaLeverageRatio.lastEmaValue: '0000000000000'
       - getCurrentNav._baseNav: '-1026.98'
       - getCurrentNav._fNav: '-0.055'
       - getCurrentNav._xNav: '-1.252'

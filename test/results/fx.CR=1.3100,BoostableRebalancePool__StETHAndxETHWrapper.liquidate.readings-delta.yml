@@ -1,19 +1,8 @@
 simulation:
-  - trigger:
-      name: ETH
-      argTypes:
-        - uint256
-      args:
-        - 1667890377680335724280n
-    gas: 26467n
+  - ETH(1667.8904): gas:26,467
     events: []
-  - trigger:
-      name: liquidate BoostableRebalancePool__StETHAndxETHWrapper
-      argTypes:
-        - address
-      args:
-        - '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
-    error: 'VM Exception while processing transaction: reverted with an unrecognized custom error (return data: 0xbf87c7d5)'
+  - liquidate BoostableRebalancePool__StETHAndxETHWrapper(BoostableRebalancePool__StETHAndxETHWrapper): 'reverted with an unrecognized custom error '
+    events: []
 deployments:
   - contract: MockFxPriceOracle
     address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'

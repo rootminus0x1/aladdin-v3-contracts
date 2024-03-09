@@ -1,43 +1,31 @@
 simulation:
-  - trigger:
-      name: ETH
-      argTypes:
-        - uint256
-      args:
-        - 1473884233170904157115n
-    gas: 26467n
+  - ETH(1473.8842): gas:26,467
     events: []
-  - trigger:
-      name: liquidate BoostableRebalancePool__wstETHWrapper
-      argTypes:
-        - address
-      args:
-        - '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
-    gas: 547079n
+  - liquidate BoostableRebalancePool__wstETHWrapper(BoostableRebalancePool__wstETHWrapper): gas:547,079
     events:
-      - fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=0.0)
-      - fETH->Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=5380242.101)
-      - fETH->Transfer(from=BoostableRebalancePool__wstETHWrapper,to=0x0,value=5380242.101)
-      - stETH->Transfer(from=stETHTreasury,to=Market,value=3578.261)
-      - stETH->TransferShares(from=stETHTreasury,to=Market,sharesValue=3093.370)
-      - stETH->Transfer(from=Market,to=wstETHWrapper,value=3578.261)
-      - stETH->TransferShares(from=Market,to=wstETHWrapper,sharesValue=3093.370)
-      - Market->Redeem(owner=BoostableRebalancePool__wstETHWrapper,recipient=wstETHWrapper,fTokenBurned=5380242.101,xTokenBurned=0.0,baseTokenOut=3578.261,redeemFee=0.0)
-      - BoostableRebalancePool__wstETHWrapper->Liquidate(liquidated=5380242.101,baseGained=3578.261)
-      - wstETH->Transfer(from=0x0,to=wstETHWrapper,value=3093.370)
-      - stETH->Transfer(from=wstETHWrapper,to=wstETH,value=3578.261)
-      - stETH->TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=3093.370)
-      - wstETH->Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=3093.370)
-      - FXN->Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
+      - fETH.Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=0.0)
+      - fETH.Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=5380242.1014)
+      - fETH.Transfer(from=BoostableRebalancePool__wstETHWrapper,to=0x0,value=5380242.1014)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=3578.2610)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=3093.3705)
+      - stETH.Transfer(from=Market,to=wstETHWrapper,value=3578.2610)
+      - stETH.TransferShares(from=Market,to=wstETHWrapper,sharesValue=3093.3705)
+      - Market.Redeem(owner=BoostableRebalancePool__wstETHWrapper,recipient=wstETHWrapper,fTokenBurned=5380242.1014,xTokenBurned=0.0,baseTokenOut=3578.2610,redeemFee=0.0)
+      - BoostableRebalancePool__wstETHWrapper.Liquidate(liquidated=5380242.1014,baseGained=3578.2610)
+      - wstETH.Transfer(from=0x0,to=wstETHWrapper,value=3093.3705)
+      - stETH.Transfer(from=wstETHWrapper,to=wstETH,value=3578.2610)
+      - stETH.TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=3093.3705)
+      - wstETH.Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=3093.3705)
+      - FXN.Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
 deployments:
   - contract: BoostableRebalancePool
     address: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
     readings:
       - lastAssetLossError: '+1676206.081050967160624128'
-      - numTotalSupplyHistory: '+1'
+      - numTotalSupplyHistory: '+0.000000000000000001'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '+63200'
-      - rewardData(wstETH).lastUpdate: '+63200'
+      - rewardData(FXN).lastUpdate: '+00'
+      - rewardData(wstETH).lastUpdate: '+00'
       - totalSupply: '-5380242'
   - contract: fETH
     address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
@@ -71,9 +59,9 @@ deployments:
     address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
     readings:
       - collateralRatio: '-0.572'
-      - emaLeverageRatio.lastTime: '+3800'
-      - emaLeverageRatio.lastValue: '+4424195378047316150'
-      - emaLeverageRatio.lastEmaValue: '-70000000000000'
+      - emaLeverageRatio.lastTime: '+00'
+      - emaLeverageRatio.lastValue: '+4.42419537804731615'
+      - emaLeverageRatio.lastEmaValue: '0000000000000'
       - getCurrentNav._baseNav: '-1026.98'
       - getCurrentNav._fNav: '-0.055'
       - getCurrentNav._xNav: '-1.252'
