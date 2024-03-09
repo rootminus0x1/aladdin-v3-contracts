@@ -1,5 +1,5 @@
 import { withLogging, eatMain } from 'eat';
-import { EatCollateralRatio } from './EatCollateralRatioFx';
+import { EatCollateralRatio } from './EatCollateralRatio_fx';
 import { EatFees } from './EatFees_fx';
 
 const main = async () => {
