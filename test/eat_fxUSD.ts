@@ -1,6 +1,6 @@
 import { withLogging, eatMain } from 'eat';
-import { EatCollateralRatio } from './EatCollateralRatio_fx';
-import { EatFees } from './EatFees_fx';
+import { EatCollateralRatio } from './EatCollateralRatio_fxUSD';
+import { EatFees } from './EatFees_fxUSD';
 
 const main = async () => {
     // TODO: plot the below against a beta = 0 set up
