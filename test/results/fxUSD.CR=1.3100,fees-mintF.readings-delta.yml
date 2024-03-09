@@ -1,0 +1,57 @@
+simulation:
+  - trigger:
+      name: ETH
+      argTypes:
+        - uint256
+      args:
+        - 1667890377680335724280n
+    gas: 26467n
+    events: []
+  - trigger:
+      name: mintFToken
+      args:
+        - 1000000000000000n
+      argTypes:
+        - uint256
+    gas: 257983n
+    events:
+      - stETH->Transfer(from=fMinter,to=PlatformFeeSpliter,value=0.000)
+      - stETH->TransferShares(from=fMinter,to=PlatformFeeSpliter,sharesValue=0.000)
+      - stETH->Transfer(from=fMinter,to=stETHTreasury,value=0.001)
+      - stETH->TransferShares(from=fMinter,to=stETHTreasury,sharesValue=0.001)
+      - fETH->Transfer(from=0x0,to=fMinter,value=1.679)
+      - Market->Mint(owner=fMinter,recipient=fMinter,baseTokenIn=0.001,fTokenOut=1.679,xTokenOut=0.0,mintFee=0.000)
+deployments:
+  - contract: fETH
+    address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    readings:
+      - balanceOf(fMinter): '+1.68'
+      - totalSupply: '+2'
+  - contract: MockFxPriceOracle
+    address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'
+    readings:
+      - getPrice._safePrice: '-832.9'
+      - getPrice._minUnsafePrice: '-832.9'
+      - getPrice._maxUnsafePrice: '-832.9'
+      - price: '-832.9'
+  - contract: stETH
+    address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    readings:
+      - sharesOf(fMinter): '-0.000864489884283735'
+      - sharesOf(PlatformFeeSpliter): '+0.000002161224710709'
+      - sharesOf(stETHTreasury): '+0.000862328659573026'
+  - contract: stETHTreasury
+    address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    readings:
+      - collateralRatio: '-0.568'
+      - emaLeverageRatio.lastTime: '+3800'
+      - emaLeverageRatio.lastValue: '+1949330683048308349'
+      - emaLeverageRatio.lastEmaValue: '-70000000000000'
+      - getCurrentNav._baseNav: '-832.98'
+      - getCurrentNav._fNav: '-0.045'
+      - getCurrentNav._xNav: '-1.016'
+      - totalBaseToken: '+0.0009975'
+  - contract: xETH
+    address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    readings:
+      - nav: '+0.000000021254054484'

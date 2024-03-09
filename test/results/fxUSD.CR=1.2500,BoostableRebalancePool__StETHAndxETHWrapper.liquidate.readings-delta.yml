@@ -1,0 +1,79 @@
+simulation:
+  - ETH(1584.2486): gas:26,467
+    events: []
+  - liquidate BoostableRebalancePool__StETHAndxETHWrapper(BoostableRebalancePool__StETHAndxETHWrapper): gas:662,916
+    events:
+      - fETH.Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=0.0)
+      - fETH.Approval(owner=BoostableRebalancePool__StETHAndxETHWrapper,spender=Market,value=2203863.6908)
+      - fETH.Transfer(from=BoostableRebalancePool__StETHAndxETHWrapper,to=0x0,value=2203863.6908)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=1371.9836)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=1186.0659)
+      - stETH.Transfer(from=Market,to=StETHAndxETHWrapper,value=1371.9836)
+      - stETH.TransferShares(from=Market,to=StETHAndxETHWrapper,sharesValue=1186.0659)
+      - Market.Redeem(owner=BoostableRebalancePool__StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,fTokenBurned=2203863.6908,xTokenBurned=0.0,baseTokenOut=1371.9836,redeemFee=0.0)
+      - BoostableRebalancePool__StETHAndxETHWrapper.Liquidate(liquidated=2203863.6908,baseGained=1371.9836)
+      - stETH.Transfer(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,value=13.7198)
+      - stETH.TransferShares(from=StETHAndxETHWrapper,to=PlatformFeeSpliter,sharesValue=11.8607)
+      - stETH.Transfer(from=StETHAndxETHWrapper,to=stETHTreasury,value=1358.2638)
+      - stETH.TransferShares(from=StETHAndxETHWrapper,to=stETHTreasury,sharesValue=1174.2053)
+      - xETH.Transfer(from=0x0,to=StETHAndxETHWrapper,value=5176859.4372)
+      - Market.Mint(owner=StETHAndxETHWrapper,recipient=StETHAndxETHWrapper,baseTokenIn=1371.9836,fTokenOut=0.0,xTokenOut=5176859.4372,mintFee=13.7198)
+      - xETH.Transfer(from=StETHAndxETHWrapper,to=BoostableRebalancePool__StETHAndxETHWrapper,value=5176859.4372)
+      - FXN.Transfer(_from=RebalanceWithBonusToken__2,_to=liquidator,_value=1.0)
+deployments:
+  - contract: BoostableRebalancePool
+    address: '0xB87A8332dFb1C76Bb22477dCfEdDeB69865cA9f9'
+    readings:
+      - lastAssetLossError: '+5358308.955096730756305583'
+      - numTotalSupplyHistory: '+0.000000000000000001'
+      - pendingRewards(wstETH).0: '-0.140'
+      - rewardData(FXN).lastUpdate: '+00'
+      - rewardData(wstETH).lastUpdate: '+00'
+      - rewardData(xETH).lastUpdate: '+00'
+      - totalSupply: '-2203863'
+  - contract: fETH
+    address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    readings:
+      - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '-2203863.69'
+      - totalSupply: '-2203863'
+  - contract: FXN
+    address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+    readings:
+      - balanceOf(liquidator): '+1.0'
+      - balanceOf(RebalanceWithBonusToken__2): '-1.0'
+  - contract: MockFxPriceOracle
+    address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'
+    readings:
+      - getPrice._safePrice: '-916.6'
+      - getPrice._minUnsafePrice: '-916.6'
+      - getPrice._maxUnsafePrice: '-916.6'
+      - price: '-916.6'
+  - contract: RebalancePoolRegistry
+    address: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
+    readings:
+      - totalSupply: '-2203863'
+  - contract: stETH
+    address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    readings:
+      - balanceOf(PlatformFeeSpliter): '+13.72'
+      - balanceOf(stETHTreasury): '-13.71'
+      - sharesOf(PlatformFeeSpliter): '+11.860659479374892797'
+      - sharesOf(StETHAndxETHWrapper): '+0.000000000000000001'
+      - sharesOf(stETHTreasury): '-11.860659479374892798'
+  - contract: stETHTreasury
+    address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    readings:
+      - collateralRatio: '-0.353'
+      - emaLeverageRatio.lastTime: '+00'
+      - emaLeverageRatio.lastValue: '+2.007194024332697874'
+      - emaLeverageRatio.lastEmaValue: '0000000000000'
+      - getCurrentNav._baseNav: '-916.62'
+      - getCurrentNav._fNav: '-0.049'
+      - getCurrentNav._xNav: '-1.118'
+      - totalBaseToken: '-13.71983605013715117'
+  - contract: xETH
+    address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    readings:
+      - balanceOf(BoostableRebalancePool__StETHAndxETHWrapper): '+5176859.44'
+      - nav: '-0.126694390811587009'
+      - totalSupply: '+5176859'

@@ -14,7 +14,7 @@ cd "$directory_path" || exit 1
 for file in "$old_prefix"*; do
     if [ -e "$file" ]; then
         new_name="${file/$old_prefix/$new_prefix}"
-        mv "$file" "$new_name"
-        echo "Renamed: $file to $new_name"
+        cp "$file" "$new_name"
+        echo "cp $file $new_name"
     fi
 done

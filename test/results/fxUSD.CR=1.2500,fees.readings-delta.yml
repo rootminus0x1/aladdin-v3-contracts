@@ -1,0 +1,53 @@
+simulation:
+  - mintFToken(0.001): fToken mint paused
+    events: []
+  - redeemFToken(MaxUint256): gas:286,617
+    events:
+      - fETH.Transfer(from=fMinter,to=0x0,value=2.4076)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=0.0015)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=0.0013)
+      - stETH.Transfer(from=Market,to=fMinter,value=0.0015)
+      - stETH.TransferShares(from=Market,to=fMinter,sharesValue=0.0013)
+      - Market.Redeem(owner=fMinter,recipient=fMinter,fTokenBurned=2.4076,xTokenBurned=0.0,baseTokenOut=0.0015,redeemFee=0.0)
+  - mintXToken(0.001): gas:260,072
+    events:
+      - stETH.Transfer(from=xMinter,to=stETHTreasury,value=0.001)
+      - stETH.TransferShares(from=xMinter,to=stETHTreasury,sharesValue=0.0009)
+      - xETH.Transfer(from=0x0,to=xMinter,value=3.8114)
+      - Market.Mint(owner=xMinter,recipient=xMinter,baseTokenIn=0.001,fTokenOut=0.0,xTokenOut=3.8114,mintFee=0.0)
+  - redeemXToken(MaxUint256): gas:259,813
+    events:
+      - xETH.Transfer(from=xMinter,to=0x0,value=5.4255)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=0.0014)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=0.0012)
+      - stETH.Transfer(from=Market,to=PlatformFeeSpliter,value=0.0001)
+      - stETH.TransferShares(from=Market,to=PlatformFeeSpliter,sharesValue=0.0001)
+      - stETH.Transfer(from=Market,to=xMinter,value=0.0013)
+      - stETH.TransferShares(from=Market,to=xMinter,sharesValue=0.0011)
+      - Market.Redeem(owner=xMinter,recipient=xMinter,fTokenBurned=0.0,xTokenBurned=5.4255,baseTokenOut=0.0013,redeemFee=0.0001)
+deployments:
+  - contract: fETH
+    address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
+    readings:
+      - balanceOf(fMinter): '-2.40'
+      - totalSupply: '-2'
+  - contract: stETH
+    address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    readings:
+      - sharesOf(fMinter): '+0.001295698517775126'
+      - sharesOf(Market): '+0.000000000000000001'
+      - sharesOf(PlatformFeeSpliter): '+0.000098447246152406'
+      - sharesOf(stETHTreasury): '-0.001661799210396473'
+      - sharesOf(xMinter): '+0.00026765344646894'
+  - contract: stETHTreasury
+    address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    readings:
+      - emaLeverageRatio.lastValue: '+2.670993202870824129'
+      - emaLeverageRatio.lastEmaValue: '+0000000000000'
+      - totalBaseToken: '-0.001922288786263056'
+  - contract: xETH
+    address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
+    readings:
+      - balanceOf(xMinter): '-1.61'
+      - nav: '+0.000000006240292536'
+      - totalSupply: '-1'
