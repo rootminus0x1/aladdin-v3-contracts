@@ -1,6 +1,6 @@
 import { time } from '@nomicfoundation/hardhat-network-helpers';
-import { formatEther, parseEther } from 'ethers';
-import { Role, Trigger, TriggerTemplate, contracts, inverse, makeCalculator, makeTrigger, parseTime, users } from 'eat';
+import { MaxUint256, formatEther, parseEther } from 'ethers';
+import { Role, Trigger, TriggerTemplate, contracts, inverse, makeTrigger, parseTime, users } from 'eat';
 import { nameToAddress } from 'eat';
 import { log } from 'console';
 
@@ -53,14 +53,52 @@ export const makeHarvestTrigger = () => {
     };
 };
 
+const formatEth = (amount: bigint) => (amount === MaxUint256 ? 'all' : formatEther(amount));
+
 export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
-    log(`set up mintingF ${formatEther(amountInEth)} by ${user.name} ${user.address}`);
+    log(`set up mintingF ${formatEth(amountInEth)} by ${user.name} ${user.address}`);
     return {
         name: `mintFToken`,
         args: [amountInEth],
         argTypes: ['uint256'],
         pull: async (amountInEth: bigint) => {
             return await contracts.Market.connect(user).mintFToken(amountInEth, user.address, 0n);
+        },
+    };
+};
+
+export const makeRedeemFTokenTrigger = (amount: bigint, user: any) => {
+    //log(`set up mintingF ${formatEth(amount)} by ${user.name} ${user.address}`);
+    return {
+        name: `redeemFToken`,
+        args: [amount],
+        argTypes: ['uint256'],
+        pull: async (amount: bigint) => {
+            return await contracts.Market.connect(user).redeem(amount, 0n, user.address, 0n);
+        },
+    };
+};
+
+export const makeMintXTokenTrigger = (amountInEth: bigint, user: any) => {
+    //log(`set up mintingF ${formatEth(amountInEth)} by ${user.name} ${user.address}`);
+    return {
+        name: `mintXToken`,
+        args: [amountInEth],
+        argTypes: ['uint256'],
+        pull: async (amountInEth: bigint) => {
+            return await contracts.Market.connect(user).mintXToken(amountInEth, user.address, 0n);
+        },
+    };
+};
+
+export const makeRedeemXTokenTrigger = (amount: bigint, user: any) => {
+    //log(`set up mintingF ${formatEth(amount)} by ${user.name} ${user.address}`);
+    return {
+        name: `redeemXToken`,
+        args: [amount],
+        argTypes: ['uint256'],
+        pull: async (amount: bigint) => {
+            return await contracts.Market.connect(user).redeem(0n, amount, user.address, 0n);
         },
     };
 };

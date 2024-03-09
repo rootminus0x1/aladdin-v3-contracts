@@ -1,6 +1,12 @@
 import { IEat, Reading, parseArg, delve, readingsDeltas, users, writeReadingsDelta } from 'eat';
-import { makeCRTrigger, makeMintFTokenTrigger } from './triggers';
-import { parseEther } from 'ethers';
+import {
+    makeCRTrigger,
+    makeMintFTokenTrigger,
+    makeMintXTokenTrigger,
+    makeRedeemFTokenTrigger,
+    makeRedeemXTokenTrigger,
+} from './triggers';
+import { MaxUint256, parseEther } from 'ethers';
 import { EatCollateralRatio } from './EatCollateralRatio';
 
 export class EatFees extends EatCollateralRatio implements IEat {
@@ -8,11 +14,17 @@ export class EatFees extends EatCollateralRatio implements IEat {
 
     public doStuff = async (base: Reading[]) => {
         await this.forEachCR('', async (cr: string) => {
-            const [readings, outcomes] = await delve(`CR=${cr},fees-mintF`, [
-                await makeCRTrigger(parseEther(cr)),
-                await makeMintFTokenTrigger(parseArg('1 finney'), users.fMinter),
-            ]);
-            writeReadingsDelta(`CR=${cr},fees-mintF`, await readingsDeltas(readings, base), outcomes);
+            {
+                const [baseAtCR] = await delve(`base,CR=${cr}`);
+                const [readings, outcomes] = await delve(`CR=${cr},fees-mintF`, [
+                    await makeCRTrigger(parseEther(cr)),
+                    await makeMintFTokenTrigger(parseArg('1 finney'), users.fMinter),
+                    await makeRedeemFTokenTrigger(MaxUint256, users.fMinter),
+                    await makeMintXTokenTrigger(parseArg('1 finney'), users.xMinter),
+                    await makeRedeemXTokenTrigger(MaxUint256, users.xMinter),
+                ]);
+                writeReadingsDelta(`CR=${cr},fees`, await readingsDeltas(readings, baseAtCR), outcomes);
+            }
 
             /*await delvePlot(
                 `Fees`,

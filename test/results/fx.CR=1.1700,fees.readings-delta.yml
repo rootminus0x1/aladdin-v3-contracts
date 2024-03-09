@@ -1,0 +1,76 @@
+simulation:
+  - trigger:
+      name: ETH
+      argTypes:
+        - uint256
+      args:
+        - 1473884233170904157115n
+    gas: 26467n
+    events: []
+  - trigger:
+      name: mintFToken
+      args:
+        - 1000000000000000n
+      argTypes:
+        - uint256
+    error: 'VM Exception while processing transaction: reverted with reason string ''fToken mint paused'''
+  - trigger:
+      name: redeemFToken
+      args:
+        - 115792089237316195423570985008687907853269984665640564039457584007913129639935n
+      argTypes:
+        - uint256
+    error: 'VM Exception while processing transaction: reverted with reason string ''redeem zero amount'''
+  - trigger:
+      name: mintXToken
+      args:
+        - 1000000000000000n
+      argTypes:
+        - uint256
+    gas: 277172n
+    events:
+      - stETH.Transfer(from=xMinter,to=stETHTreasury,value=0.001)
+      - stETH.TransferShares(from=xMinter,to=stETHTreasury,sharesValue=0.000864489884283735)
+      - xETH.Transfer(from=0x0,to=xMinter,value=5.244755101350433337)
+      - Market.Mint(owner=xMinter,recipient=xMinter,baseTokenIn=0.001,fTokenOut=0.0,xTokenOut=5.244755101350433337,mintFee=0.0)
+  - trigger:
+      name: redeemXToken
+      args:
+        - 115792089237316195423570985008687907853269984665640564039457584007913129639935n
+      argTypes:
+        - uint256
+    gas: 257013n
+    events:
+      - xETH.Transfer(from=xMinter,to=0x0,value=5.244755101350433337)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=0.000999999999999999)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=0.000864489884283734)
+      - stETH.Transfer(from=Market,to=PlatformFeeSpliter,value=0.000079999999999999)
+      - stETH.TransferShares(from=Market,to=PlatformFeeSpliter,sharesValue=0.000069159190742698)
+      - stETH.Transfer(from=Market,to=xMinter,value=0.00092)
+      - stETH.TransferShares(from=Market,to=xMinter,sharesValue=0.000795330693541036)
+      - Market.Redeem(owner=xMinter,recipient=xMinter,fTokenBurned=0.0,xTokenBurned=5.244755101350433337,baseTokenOut=0.00092,redeemFee=0.000079999999999999)
+deployments:
+  - contract: MockFxPriceOracle
+    address: '0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820'
+    readings:
+      - getPrice._safePrice: '-1026.9'
+      - getPrice._minUnsafePrice: '-1026.9'
+      - getPrice._maxUnsafePrice: '-1026.9'
+      - price: '-1026.9'
+  - contract: stETH
+    address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
+    readings:
+      - sharesOf(PlatformFeeSpliter): '+0.000069159190742698'
+      - sharesOf(stETHTreasury): '+0.000000000000000001'
+      - sharesOf(xMinter): '-0.000069159190742699'
+  - contract: stETHTreasury
+    address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
+    readings:
+      - collateralRatio: '-0.708'
+      - emaLeverageRatio.lastTime: '+3800'
+      - emaLeverageRatio.lastValue: '+4424191438746323651'
+      - emaLeverageRatio.lastEmaValue: '-20000000000000'
+      - getCurrentNav._baseNav: '-1026.98'
+      - getCurrentNav._fNav: '-0.055'
+      - getCurrentNav._xNav: '-1.252'
+      - totalBaseToken: '+0.000000000000000001'
