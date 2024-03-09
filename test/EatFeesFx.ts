@@ -5,9 +5,9 @@ import {
     makeMintXTokenTrigger,
     makeRedeemFTokenTrigger,
     makeRedeemXTokenTrigger,
-} from './triggers';
+} from './triggersFx';
 import { MaxUint256, parseEther } from 'ethers';
-import { EatCollateralRatio } from './EatCollateralRatio';
+import { EatCollateralRatio } from './EatCollateralRatioFx';
 
 export class EatFees extends EatCollateralRatio implements IEat {
     public name = 'Fees';

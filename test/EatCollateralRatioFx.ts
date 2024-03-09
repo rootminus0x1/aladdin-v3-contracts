@@ -15,7 +15,7 @@ import {
     users,
     writeReadingsDelta,
 } from 'eat';
-import { makeCRTrigger, makeEthPriceTemplate, makeLiquidateTrigger } from './triggers';
+import { makeCRTrigger, makeEthPriceTemplate, makeLiquidateTrigger } from './triggersFx';
 import { parseEther } from 'ethers';
 import { calculateCR } from './readers';
 
