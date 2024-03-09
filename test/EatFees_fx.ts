@@ -5,7 +5,7 @@ import {
     makeMintXTokenTrigger,
     makeRedeemFTokenTrigger,
     makeRedeemXTokenTrigger,
-} from './triggersFx';
+} from './triggers_fx';
 import { MaxUint256, parseEther } from 'ethers';
 import { EatCollateralRatio } from './EatCollateralRatioFx';
 
