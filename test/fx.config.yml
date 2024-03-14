@@ -18,6 +18,18 @@ suffix:
   - contract: BoostableRebalancePool
     fields: [wrapper]
 
+users:
+  - name: fMinter #user who mints fTokens
+    wallet:
+      - { token: stETH, amount: 10000 ether }
+    approve:
+      - Market
+  - name: xMinter # user who mint/redeems xTokens
+    wallet:
+      - { token: stETH, amount: 10000 ether }
+    approve:
+      - Market
+
 format:
   - reading: rewardData.lastUpdate
     precision: -2
@@ -88,18 +100,3 @@ format:
   # no formatting
   - contract: BoostableRebalancePool
     reading: numTotalSupplyHistory
-  - reading: chainlinkMinMessageCount
-  - reading: chainlinkMessageExpiration
-  - reading: start_epoch_time
-  - reading: getChainId
-  - reading: getThreshold
-  - reading: nonce
-  - reading: nonces
-  - reading: decimals
-  - reading: time_total
-  - reading: numTotalSupplyHistory
-  - reading: latestRoundData.startedAt
-  - reading: latestRoundData.updatedAt
-  - reading: latestTimestamp
-  - reading: version
-  - reading: getRewardCount

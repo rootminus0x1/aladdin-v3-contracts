@@ -21,4 +21,16 @@ leaf:
   - "0x4a2ab45D27428901E826db4a52Dae00594b68022" # FxUSDShareableRebalancePool__sfrxETH_FXN_xfrxETH
 
 prune:
-  - "0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF" # GnosisSafe
+#  - "0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF" # GnosisSafe
+
+users:
+  - name: fMinter #user who mints fTokens
+    wallet:
+      - { token: wstETH, amount: 10000 ether }
+    approve:
+      - MarketV2__wstETH_fstETH_xstETH
+  - name: xMinter # user who mint/redeems xTokens
+    wallet:
+      - { token: wstETH, amount: 10000 ether }
+    approve:
+      - MarketV2__wstETH_fstETH_xstETH

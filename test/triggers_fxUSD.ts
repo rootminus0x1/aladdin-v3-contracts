@@ -20,7 +20,7 @@ export const makeCRTrigger = async (cr: bigint) => {
         makeEthPriceTemplate(),
         await inverse(
             cr,
-            async () => await contracts.stETHTreasury.collateralRatio(),
+            async () => await contracts.WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.collateralRatio(),
             async (x: bigint) => await contracts.MockFxPriceOracle.setPrice(x),
             [parseEther('1030'), parseEther('10000')],
         ),
@@ -48,7 +48,7 @@ export const makeHarvestTrigger = () => {
         args: [],
         argTypes: [],
         pull: async () => {
-            return await contracts.stETHTreasury.harvest();
+            return await contracts.WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.harvest();
         },
     };
 };
@@ -60,7 +60,11 @@ export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
         args: [amountInEth],
         argTypes: ['uint256'],
         pull: async (amountInEth: bigint) => {
-            return await contracts.Market.connect(user).mintFToken(amountInEth, user.address, 0n);
+            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).mintFToken(
+                amountInEth,
+                user.address,
+                0n,
+            );
         },
     };
 };
@@ -72,7 +76,7 @@ export const makeRedeemFTokenTrigger = (amount: bigint, user: any) => {
         args: [amount],
         argTypes: ['uint256'],
         pull: async (amount: bigint) => {
-            return await contracts.Market.connect(user).redeem(amount, 0n, user.address, 0n);
+            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).redeem(amount, 0n, user.address, 0n);
         },
     };
 };
@@ -84,7 +88,11 @@ export const makeMintXTokenTrigger = (amountInEth: bigint, user: any) => {
         args: [amountInEth],
         argTypes: ['uint256'],
         pull: async (amountInEth: bigint) => {
-            return await contracts.Market.connect(user).mintXToken(amountInEth, user.address, 0n);
+            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).mintXToken(
+                amountInEth,
+                user.address,
+                0n,
+            );
         },
     };
 };
@@ -96,32 +104,19 @@ export const makeRedeemXTokenTrigger = (amount: bigint, user: any) => {
         args: [amount],
         argTypes: ['uint256'],
         pull: async (amount: bigint) => {
-            return await contracts.Market.connect(user).redeem(0n, amount, user.address, 0n);
+            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).redeem(0n, amount, user.address, 0n);
         },
     };
 };
 
 export const makeLiquidateTrigger = async (contractName: string): Promise<Trigger> => {
-    //const pools = await contracts.RebalancePoolRegistry.getPools();
-    //const poolAddress = pools[poolIndex];
-    const pool = contracts[contractName].address;
+    const poolAddress = contracts[contractName].address;
     return {
         name: `liquidate ${contractName}`,
         argTypes: ['address'],
-        args: [pool],
+        args: [poolAddress],
         pull: async (poolAddress: string) => {
-            const pool = contracts[poolAddress];
-            let liquidatorAddress = undefined;
-            if (pool.roles) {
-                const role = pool.roles.find((r: Role) => r.name === 'LIQUIDATOR_ROLE');
-                if (role) liquidatorAddress = role.addresses[0];
-            }
-            if (!liquidatorAddress && pool.interface.hasFunction('liquidator')) {
-                liquidatorAddress = await pool.liquidator();
-            }
-            if (!liquidatorAddress) throw Error(`could not find liquidator for ${pool.name}`);
-            const liquidator = contracts[liquidatorAddress];
-            const tx = await liquidator.connect(users.liquidator).liquidate(0n); // no minimum
+            const tx = await contracts.FxUSDRebalancer.connect(users.liquidator).liquidate(poolAddress, 0n); // no minimum
 
             // await mine(1, { interval: parseTime(1, 'hour') }); // liquidate and mine before the next liquidate
 

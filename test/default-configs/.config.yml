@@ -4,19 +4,9 @@ diagram:
 users:
   #  - name: admin # bao admin
   - name: liquidator # calls the various liquidators (maybe create )
-  - name: fMinter #user who mints fTokens
-    wallet:
-      - { token: stETH, amount: 10000 ether }
-    approve:
-      - Market
-  - name: xMinter # user who mint/redeems xTokens
-    wallet:
-      - { token: stETH, amount: 10000 ether }
-    approve:
-      - Market
-  - name: xHolderRedeemer # user who mint/redeems xTokens
-  - name: fHolderLiquidator # user who mints/liquidates fTokens
-  - name: fHolderRedeemer # user who mint/redeems fTokens
+#  - name: xHolderRedeemer # user who mint/redeems xTokens
+#  - name: fHolderLiquidator # user who mints/liquidates fTokens
+#  - name: fHolderRedeemer # user who mint/redeems fTokens
 
 format:
   - type: uint256
@@ -36,3 +26,19 @@ format:
   - contract: Market
     type: uint64
     unit: 18
+  # no formatting
+  - reading: chainlinkMinMessageCount
+  - reading: chainlinkMessageExpiration
+  - reading: start_epoch_time
+  - reading: getChainId
+  - reading: getThreshold
+  - reading: nonce
+  - reading: nonces
+  - reading: decimals
+  - reading: time_total
+  - reading: numTotalSupplyHistory
+  - reading: latestRoundData.startedAt
+  - reading: latestRoundData.updatedAt
+  - reading: latestTimestamp
+  - reading: version
+  - reading: getRewardCount

@@ -3,6 +3,7 @@ import {
     IEat,
     Reading,
     augment,
+    callReader,
     contracts,
     delve,
     delvePlot,
@@ -17,24 +18,24 @@ import {
 } from 'eat';
 import { makeCRTrigger, makeEthPriceTemplate, makeLiquidateTrigger } from './triggers_fxUSD';
 import { parseEther } from 'ethers';
-import { calculateCR } from './readers';
+import { calculateCR } from './readers_fxUSD';
 
 export class EatCollateralRatio implements IEat {
     public name = 'CR';
 
     public addContracts = async () => {
-        //const startEthPrice = await getEthPrice(getConfig().timestamp);
-        const baseNav = (await contracts.stETHTreasury.getCurrentNav())._baseNav;
+        const baseNav = await contracts.WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.currentBaseTokenPrice();
 
-        //log(`${(await callReader(findReader('stETHTreasury', 'collateralRatio'))).value}`);
-        //log(`${(await callReader(findReader('stETH', 'balanceOf', '', 'stETHTreasury'))).value}`);
+        //log(`${(await callReader(findReader('WrappedTokenTreasuryV2__wstETH_fstETH_xstETH', 'collateralRatio'))).value}`);
+        //log(`${(await callReader(findReader('stETH', 'balanceOf', '', 'WrappedTokenTreasuryV2__wstETH_fstETH_xstETH'))).value}`);
         //log(`${(await callReader(findReader('fETH', 'totalSupply'))).value}`);
 
         // add the mock price contract
         await deploy<MockFxPriceOracle>('MockFxPriceOracle');
-        await contracts.stETHTreasury
-            .connect(contracts.stETHTreasury.ownerSigner)
-            .updatePriceOracle(contracts.MockFxPriceOracle.address);
+        const treasury = contracts.WrappedTokenTreasuryV2__wstETH_fstETH_xstETH;
+        await contracts.WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.connect(
+            contracts.WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.ownerSigner,
+        ).updatePriceOracle(contracts.MockFxPriceOracle.address);
 
         const tx = await contracts.MockFxPriceOracle.setPrice(baseNav);
 
@@ -57,9 +58,7 @@ export class EatCollateralRatio implements IEat {
     public doStuff = async (base: Reading[]) => {
         // above and below the 130% CR
         for (const [pool, wrapper, liquidatorContract] of [
-            ['RebalancePool', 'wstETHWrapper', 'RebalanceWithBonusToken__0'],
-            ['BoostableRebalancePool__wstETHWrapper', 'wstETHWrapper', 'RebalanceWithBonusToken__1'],
-            ['BoostableRebalancePool__StETHAndxETHWrapper', 'StETHAndxETHWrapper', 'RebalanceWithBonusToken__2'],
+            ['FxUSDShareableRebalancePool__wstETH_FXN', 'wstETH', 'FxUSDBalancer'],
         ]) {
             await this.forEachCR(pool, async (cr: string) => {
                 const [readings, outcomes] = await delve(`CR=${cr},liquidate`, [
@@ -88,12 +87,18 @@ export class EatCollateralRatio implements IEat {
                             label: `Collateral ratio`,
                             lines: [
                                 {
-                                    reader: augment(findReader('stETHTreasury', 'collateralRatio'), 'before'),
+                                    reader: augment(
+                                        findReader('WrappedTokenTreasuryV2__wstETH_fstETH_xstETH', 'collateralRatio'),
+                                        'before',
+                                    ),
                                     style: 'linetype 1',
                                 },
                                 {
                                     simulation: [await makeLiquidateTrigger(pool)],
-                                    reader: augment(findReader('stETHTreasury', 'collateralRatio'), 'after'),
+                                    reader: augment(
+                                        findReader('WrappedTokenTreasuryV2__wstETH_fstETH_xstETH', 'collateralRatio'),
+                                        'after',
+                                    ),
                                     style: 'linetype 2',
                                 },
                             ],
@@ -118,47 +123,54 @@ export class EatCollateralRatio implements IEat {
                     {
                         simulation: [await makeLiquidateTrigger(pool)],
                         y: {
-                            label: `Pool balance of fETH/xETH`,
+                            label: `Pool balance of fToken/xToken`,
                             // scale: 'log',
                             range: [-10000, '*<50000000'],
                             lines: [
                                 {
-                                    reader: await findReader('fETH', 'balanceOf', '', pool), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findReader('fstETH', 'balanceOf', '', pool), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 2 linewidth 2 dashtype 2',
                                 },
                                 {
-                                    reader: await findReader('xETH', 'balanceOf', '', pool), // BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findReader('xstETH', 'balanceOf', '', pool), // BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 1 linewidth 2 dashtype 2',
                                     ignore0: true,
                                 },
+                                /*
                                 {
                                     reader: await findReader('xETH', 'balanceOf', '', wrapper), // BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 1 linewidth 4 dashtype 3',
                                     ignore0: true,
                                 },
+                                */
                             ],
                         },
                         y2: {
                             label: 'Change in balance of (ETH-ish)',
                             lines: [
                                 {
-                                    reader: await findDeltaReader('stETH', 'balanceOf', '', 'stETHTreasury'), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findDeltaReader(
+                                        'wstETH',
+                                        'balanceOf',
+                                        '',
+                                        'WrappedTokenTreasuryV2__wstETH_fstETH_xstETH',
+                                    ), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 4 pointtype 1',
                                 },
                                 {
-                                    reader: await findDeltaReader('stETH', 'balanceOf', '', 'Market'), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', 'Market'), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 4 pointtype 2',
                                 },
                                 {
-                                    reader: await findDeltaReader('stETH', 'balanceOf', '', wrapper), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', wrapper), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 4 pointtype 4',
                                 },
                                 {
-                                    reader: await findDeltaReader('stETH', 'balanceOf', '', 'wstETH'), // RebalancePool, BoostableRebalancePool__wstETHWrapper
+                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', 'wstETH'), // RebalancePool, BoostableRebalancePool__wstETHWrapper
                                     style: 'linetype 4 pointtype 6',
                                 },
                                 {
-                                    reader: await findDeltaReader('stETH', 'balanceOf', '', 'PlatformFeeSpliter'), // BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', 'PlatformFeeSpliter'), // BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 4 pointtype 8',
                                 },
                                 {

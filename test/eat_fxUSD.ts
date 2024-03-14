@@ -15,7 +15,8 @@ const main = async () => {
 
     await eatMain(
         [
-            /*new EatCollateralRatio(), new EatFees()*/
+            new EatCollateralRatio(),
+            //new EatFees(),
         ],
         true,
     );

@@ -17,7 +17,7 @@ import {
 } from 'eat';
 import { makeCRTrigger, makeEthPriceTemplate, makeLiquidateTrigger } from './triggers_fx';
 import { parseEther } from 'ethers';
-import { calculateCR } from './readers';
+import { calculateCR } from './readers_fx';
 
 export class EatCollateralRatio implements IEat {
     public name = 'CR';
