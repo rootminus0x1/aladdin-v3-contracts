@@ -41,3 +41,14 @@ suffix:
     fields: [baseToken, fToken, xToken]
   - contract: WrappedTokenTreasuryV2
     fields: [baseToken, fToken, xToken]
+
+format:
+  - contract: MarketV2
+    type: uint128
+    unit: 16
+  - contract: MarketV2
+    type: int128
+    unit: 16
+  - contract: MarketV2
+    type: uint64
+    unit: 18

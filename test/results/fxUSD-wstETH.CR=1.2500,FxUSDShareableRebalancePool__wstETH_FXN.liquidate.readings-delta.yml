@@ -1,0 +1,75 @@
+simulation:
+  - ETH(1501.6586): gas:26,467
+    events: []
+  - liquidate FxUSDShareableRebalancePool__wstETH_FXN(FxUSDShareableRebalancePool__wstETH_FXN): gas:441,368
+    events:
+      - fstETH.Approval(owner=FxUSDShareableRebalancePool__wstETH_FXN,spender=MarketV2__wstETH_fstETH_xstETH,value=0.0)
+      - fstETH.Approval(owner=FxUSDShareableRebalancePool__wstETH_FXN,spender=MarketV2__wstETH_fstETH_xstETH,value=542496.4811)
+      - fstETH.Transfer(from=FxUSDShareableRebalancePool__wstETH_FXN,to=0x0,value=542496.4811)
+      - wstETH.Transfer(from=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,to=MarketV2__wstETH_fstETH_xstETH,value=311.5967)
+      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=FxUSDShareableRebalancePool__wstETH_FXN,value=311.5967)
+      - >-
+        MarketV2__wstETH_fstETH_xstETH.RedeemFToken(owner=FxUSDShareableRebalancePool__wstETH_FXN,recipient=FxUSDShareableRebalancePool__wstETH_FXN,fTokenBurned=542496.4811,baseTokenOut=311.5967,bonus=0.0,redeemFee=0.0)
+      - FxUSDShareableRebalancePool__wstETH_FXN.Liquidate(liquidated=542496.4811,baseGained=311.5967)
+      - FXN.Transfer(_from=FxUSDRebalancer,_to=liquidator,_value=1.0)
+deployments:
+  - contract: fstETH
+    address: '0xD6B8162e2fb9F3EFf09bb8598ca0C8958E33A23D'
+    readings:
+      - balanceOf(FxUSDShareableRebalancePool__wstETH_FXN): '-542496.48'
+      - totalSupply: '-542496'
+  - contract: FXN
+    address: '0x365AccFCa291e7D3914637ABf1F7635dB165Bb09'
+    readings:
+      - balanceOf(FxUSDRebalancer): '-1.0'
+      - balanceOf(liquidator): '+1.0'
+  - contract: FxUSDShareableRebalancePool
+    address: '0x9aD382b028e03977D446635Ba6b8492040F829b7'
+    readings:
+      - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '-22.36'
+      - lastAssetLossError: '+499441.517294012433919632'
+      - numTotalSupplyHistory: '+1'
+      - pendingRewards(FXN).0: '-10.579'
+      - pendingRewards(wstETH).0: '-0.021'
+      - rewardData(FXN).lastUpdate: '+54600'
+      - rewardData(wstETH).lastUpdate: '+54600'
+      - totalSupply: '-542496'
+  - contract: MockFxPriceOracle
+    address: '0x0D92d35D311E54aB8EEA0394d7E773Fc5144491a'
+    readings:
+      - getPrice._safePrice: '-2305.6'
+      - getPrice._minUnsafePrice: '-2305.6'
+      - getPrice._maxUnsafePrice: '-2305.6'
+      - price: '-2305.6'
+  - contract: RebalancePoolRegistry
+    address: '0x86e987a89Fd7345457d97b9e82906f346D61Df39'
+    readings:
+      - totalSupply: '-542496'
+  - contract: sfrxETH
+    address: '0xac3E018457B222d93114458476f3E3416Abbe38F'
+    readings:
+      - maxWithdraw($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '+0.000000000102818404'
+      - maxWithdraw(FxUSDShareableRebalancePool__sfrxETH_FXN_xfrxETH): '+0.000000000665625863'
+      - maxWithdraw(FxUSDShareableRebalancePool__sfrxETH_FXN): '+0.000000000671774613'
+      - maxWithdraw(PlatformFeeSpliter): '+0.000000005014903997'
+      - maxWithdraw(ReservePoolV2): '+0.000000007379293291'
+      - pricePerShare: '+0.000000005140920464'
+      - totalAssets: '+0.001029347266609623'
+  - contract: WrappedTokenTreasuryV2
+    address: '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
+    readings:
+      - collateralRatio: '-1.863'
+      - currentBaseTokenPrice: '-2305.629518133506250001'
+      - emaLeverageRatio.lastTime: '+33800'
+      - emaLeverageRatio.lastValue: '+3530123987392535266'
+      - emaLeverageRatio.lastEmaValue: '-23850000000000000'
+      - totalBaseToken: '-361.264850851218256682'
+  - contract: wstETH
+    address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
+    readings:
+      - balanceOf(FxUSDShareableRebalancePool__wstETH_FXN): '+311.60'
+      - balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH): '-311.59'
+  - contract: xstETH
+    address: '0x5a097b014C547718e79030a077A91Ae37679EfF5'
+    readings:
+      - nav: '-1.180002185216842236'

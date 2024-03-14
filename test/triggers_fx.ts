@@ -54,7 +54,7 @@ export const makeHarvestTrigger = () => {
 };
 
 export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
-    // log(`set up mintingF ${formatBigInt(amountInEth)} by ${user.name} ${user.address}`);
+    // log(`set up mintingF ${formatBigInt(amountInEth, "ether")} by ${user.name} ${user.address}`);
     return {
         name: `mintFToken`,
         args: [amountInEth],
@@ -66,7 +66,7 @@ export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
 };
 
 export const makeRedeemFTokenTrigger = (amount: bigint, user: any) => {
-    // log(`set up mintingF ${formatBigInt(amount)} by ${user.name} ${user.address}`);
+    // log(`set up mintingF ${formatBigInt(amount, "ether")} by ${user.name} ${user.address}`);
     return {
         name: `redeemFToken`,
         args: [amount],
@@ -78,7 +78,7 @@ export const makeRedeemFTokenTrigger = (amount: bigint, user: any) => {
 };
 
 export const makeMintXTokenTrigger = (amountInEth: bigint, user: any) => {
-    //log(`set up mintingF ${formatBigInt(amountInEth)} by ${user.name} ${user.address}`);
+    //log(`set up mintingF ${formatBigInt(amountInEth, "ether")} by ${user.name} ${user.address}`);
     return {
         name: `mintXToken`,
         args: [amountInEth],
@@ -90,7 +90,7 @@ export const makeMintXTokenTrigger = (amountInEth: bigint, user: any) => {
 };
 
 export const makeRedeemXTokenTrigger = (amount: bigint, user: any) => {
-    //log(`set up mintingF ${formatBigInt(amount)} by ${user.name} ${user.address}`);
+    //log(`set up mintingF ${formatBigInt(amount, "ether")} by ${user.name} ${user.address}`);
     return {
         name: `redeemXToken`,
         args: [amount],

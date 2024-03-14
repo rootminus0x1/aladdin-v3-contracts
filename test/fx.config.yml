@@ -31,36 +31,6 @@ users:
       - Market
 
 format:
-  - reading: rewardData.lastUpdate
-    precision: -2
-  - reading: available_supply
-    precision: 2
-  - reading: price
-    contract: MockFxPriceOracle
-    precision: 1
-  - reading: getPrice._safePrice
-    precision: 1
-  - reading: getPrice._minUnsafePrice
-    precision: 1
-  - reading: getPrice._maxUnsafePrice
-    precision: 1
-  - reading: balanceOf
-    contract: Voting Escrow
-    precision: 1
-  - reading: balanceOf
-    precision: 2
-  - reading: emaLeverageRatio.lastTime
-    precision: -2
-  - reading: emaLeverageRatio.lastEmaValue
-    precision: -13
-  - type: uint256
-    unit: ether
-  - reading: latestAnswer
-    type: int256
-    unit: 8
-  - reading: latestRoundData.answer
-    type: int256
-    unit: 8
   - contract: Market
     type: uint128
     unit: 16
@@ -70,33 +40,7 @@ format:
   - contract: Market
     type: uint64
     unit: 18
-  # variable depending when run
-  - reading: pendingRewards.0
-    precision: 3
-  - reading: pendingRewards.1
-    precision: 3
-  - contract: "Curve DAO Token"
-    reading: available_supply
-    precision: 0
-  - contract: FXN
-    reading: available_supply
-    precision: 1
-  - reading: totalSupply
-    precision: 0
-  - reading: price_oracle
-    precision: 9
-  - reading: leverageRatio
-    precision: 3 # because the price_oracle is not reliable, this isn't
-  - reading: collateralRatio
-    precision: 3
-  - reading: getCurrentNav._baseNav
-    precision: 2
-  - reading: getCurrentNav._fNav
-    precision: 3
-  - reading: getCurrentNav._xNav
-    precision: 3
-  - reading: pendingRewards
-    precision: 4
+
   # no formatting
   - contract: BoostableRebalancePool
     reading: numTotalSupplyHistory
