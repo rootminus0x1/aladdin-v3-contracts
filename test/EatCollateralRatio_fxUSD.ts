@@ -130,7 +130,7 @@ export class EatCollateralRatio implements IEat {
                             parseEther('-20'),
                         ),
                         label: 'Collateral ratio',
-                        range: [1.5, 0.9],
+                        range: [1.5, 0.8],
                         reader: findReader(treasury, 'collateralRatio'),
                     },
                     {
@@ -138,7 +138,7 @@ export class EatCollateralRatio implements IEat {
                         y: {
                             label: `Pool balance of fToken/xToken`,
                             // scale: 'log',
-                            range: [-10000, '*<50000000'],
+                            range: [-10000, '*<10000000'],
                             lines: [
                                 {
                                     reader: await findReader(fToken, 'balanceOf', '', pool),

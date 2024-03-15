@@ -15,11 +15,11 @@ set xrange reverse
 set xlabel "Collateral ratio" noenhanced
 set xtics
 set xtics nomirror
-set xrange [1.5:0.9]
+set xrange [1.5:0.8]
 set ylabel "Pool balance of fToken/xToken" noenhanced
 set ytics
 set ytics nomirror
-set yrange [-10000:*<50000000]
+set yrange [-10000:*<10000000]
 set y2label "Change in balance of (ETH-ish)" noenhanced
 set y2tics
 set y2tics nomirror

@@ -35,8 +35,8 @@ deployments:
     readings:
       - lastAssetLossError: '+3972.67816673715183381'
       - numTotalSupplyHistory: '+1'
-      - pendingRewards(FXN).0: '-6.796'
-      - pendingRewards(FXN).1: '-0.001'
+      - pendingRewards(FXN).0: '-6.797'
+      - pendingRewards(FXN).1: '-0.002'
       - pendingRewards(wstETH).0: '-0.014'
       - rewardData(FXN).lastUpdate: '+35100'
       - rewardData(wstETH).lastUpdate: '+35100'
@@ -45,8 +45,8 @@ deployments:
   - contract: FxUSDShareableRebalancePool
     address: '0x9aD382b028e03977D446635Ba6b8492040F829b7'
     readings:
-      - pendingRewards(FXN).0: '+0.001'
-      - pendingRewards(FXN).1: '-0.001'
+      - pendingRewards(FXN).0: '+0.003'
+      - pendingRewards(FXN).1: '-0.002'
   - contract: MockFxPriceOracle
     address: '0x0D92d35D311E54aB8EEA0394d7E773Fc5144491a'
     readings:

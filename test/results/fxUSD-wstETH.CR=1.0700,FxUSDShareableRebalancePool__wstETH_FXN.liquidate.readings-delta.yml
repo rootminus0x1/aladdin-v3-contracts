@@ -24,11 +24,17 @@ deployments:
       - balanceOf(FxUSDRebalancer): '-1.0'
       - balanceOf(liquidator): '+1.0'
   - contract: FxUSDShareableRebalancePool
+    address: '0x0417CE2934899d7130229CDa39Db456Ff2332685'
+    readings:
+      - pendingRewards(FXN).0: '+0.002'
+      - pendingRewards(FXN).1: '-0.001'
+  - contract: FxUSDShareableRebalancePool
     address: '0x9aD382b028e03977D446635Ba6b8492040F829b7'
     readings:
       - balanceOf($0x11E91BB6d1334585AA37D8F4fde3932C7960B938): '-56.84'
       - numTotalSupplyHistory: '+1'
       - pendingRewards(FXN).0: '-10.579'
+      - pendingRewards(FXN).1: '-0.001'
       - pendingRewards(wstETH).0: '-0.021'
       - rewardData(FXN).lastUpdate: '+54600'
       - rewardData(wstETH).lastUpdate: '+54600'
