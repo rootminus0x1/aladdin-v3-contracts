@@ -1,0 +1,47 @@
+Collateral ratio,WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.collateralRatio,liquidate FxUSDShareableRebalancePool__wstETH_FXN_xstETH,[<-Y-axis]fstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN_xstETH),[<-Y-axis]xstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN_xstETH),[<-Y-axis]xstETH.balanceOf(LeveragedTokenWrapper),[Y-axis->]wstETH.balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(MarketV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(LeveragedTokenWrapper)-changes,[Y-axis->]wstETH.balanceOf(PlatformFeeSpliter)-changes,[Y-axis->]xstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN_xstETH)-changes,[Y-axis->]FXN.balanceOf(FxUSDRebalancer)-changes,[Y-axis->]FXN.balanceOf(liquidator)-changes
+"gas:26,443",1.665,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.648,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.632,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.615,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.598,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.582,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.565,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.548,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.532,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.515,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.498,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.482,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.465,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.448,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.432,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.415,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.399,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.382,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.365,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.349,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.332,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.315,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.299,"gas:573,151",1374252.99,362683.56,0.0,-0.37,0.0,0.0,0.37,362683.56,-1.0,1.0
+"gas:26,443",1.282,"gas:573,151",1211337.09,1314457.17,0.0,-1.28,0.0,0.0,1.29,1314457.17,-1.0,1.0
+"gas:26,443",1.265,"gas:573,151",1048421.19,2385676.24,0.0,-2.23,0.0,0.0,2.23,2385676.24,-1.0,1.0
+"gas:26,443",1.249,"gas:573,151",885505.29,3600331.37,0.0,-3.19,0.0,0.0,3.20,3600331.37,-1.0,1.0
+"gas:26,443",1.232,"gas:573,151",722589.40,4989298.80,0.0,-4.18,0.0,0.0,4.19,4989298.80,-1.0,1.0
+"gas:26,443",1.215,"gas:573,151",559673.50,6593001.80,0.0,-5.20,0.0,0.0,5.21,6593001.80,-1.0,1.0
+"gas:26,443",1.199,"gas:573,151",396757.60,8465409.67,0.0,-6.25,0.0,0.0,6.26,8465409.67,-1.0,1.0
+"gas:26,443",1.182,"gas:573,151",233841.70,10680230.78,0.0,-7.33,0.0,0.0,7.34,10680230.78,-1.0,1.0
+"gas:26,443",1.165,"gas:573,151",70925.80,13340845.19,0.0,-8.44,0.0,0.0,8.44,13340845.19,-1.0,1.0
+"gas:26,443",1.149,"gas:562,713",0.0,15604381.01,0.0,-8.83,0.0,0.0,8.83,15604381.01,-1.0,1.0
+"gas:26,443",1.132,"gas:562,713",0.0,17576652.04,0.0,-8.64,0.0,0.0,8.65,17576652.04,-1.0,1.0
+"gas:26,443",1.115,"gas:562,713",0.0,20117584.51,0.0,-8.45,0.0,0.0,8.46,20117584.51,-1.0,1.0
+"gas:26,443",1.099,"gas:562,713",0.0,23514548.64,0.0,-8.25,0.0,0.0,8.26,23514548.64,-1.0,1.0
+"gas:26,443",1.082,"gas:562,713",0.0,28287766.23,0.0,-8.05,0.0,0.0,8.06,28287766.23,-1.0,1.0
+"gas:26,431",1.066,"gas:562,713",0.0,35486067.43,0.0,-7.84,0.0,0.0,7.85,35486067.43,-1.0,1.0
+"gas:26,443",1.049,"gas:562,713",0.0,47586944.24,0.0,-7.63,0.0,0.0,7.63,47586944.24,-1.0,1.0
+"gas:26,443",1.032,"gas:562,713",0.0,72185250.21,0.0,-7.40,0.0,0.0,7.41,72185250.21,-1.0,1.0
+"gas:26,443",1.016,"gas:562,713",0.0,149313813.27,0.0,-7.17,0.0,0.0,7.18,149313813.27,-1.0,1.0
+"gas:26,443",0.999,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.982,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.966,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.949,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.932,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.916,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

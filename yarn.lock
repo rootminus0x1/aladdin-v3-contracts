@@ -1184,16 +1184,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mermaid-js/mermaid-cli@npm:^10.6.1":
-  version: 10.6.1
-  resolution: "@mermaid-js/mermaid-cli@npm:10.6.1"
+"@mermaid-js/mermaid-cli@npm:^10.8.0":
+  version: 10.8.0
+  resolution: "@mermaid-js/mermaid-cli@npm:10.8.0"
   dependencies:
     chalk: "npm:^5.0.1"
     commander: "npm:^10.0.0"
     puppeteer: "npm:^19.0.0"
   bin:
     mmdc: src/cli.js
-  checksum: 10c0/247d8369d5cb64c68c9082f613fac64c9fbe93b523c8cf572323185c27564286d5f8986f7a2bbf62d71b30612fb487b5342e5cde4d8d21101a649de0ecb61c1c
+  checksum: 10c0/d7860681dc8f429b472e31fa56e6efcc86c9d00f1b957baa6c3ec54bdcb5318d139094ea9c02e4c8458fcb26c048f64a7a49251e755d0206629c5167546383dc
   languageName: node
   linkType: hard
 
@@ -2616,7 +2616,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aladdin-v3-contracts@workspace:."
   dependencies:
-    "@mermaid-js/mermaid-cli": "npm:^10.6.1"
+    "@mermaid-js/mermaid-cli": "npm:^10.8.0"
     "@nomicfoundation/ethereumjs-block": "npm:^5.0.3"
     "@nomicfoundation/hardhat-chai-matchers": "npm:^2.0.2"
     "@nomicfoundation/hardhat-ethers": "npm:^3.0.4"

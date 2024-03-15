@@ -18,8 +18,10 @@ import {
 } from 'eat';
 import { makeCRTrigger, makeEthPriceTemplate, makeLiquidateTrigger } from './triggers_fxUSD';
 import { parseEther } from 'ethers';
-import { calculateCR } from './readers_fxUSD';
 
+const If = <T>(control: string, value: T): T[] => {
+    return control ? [value] : [];
+};
 export class EatCollateralRatio implements IEat {
     public name = 'CR';
 
@@ -57,8 +59,25 @@ export class EatCollateralRatio implements IEat {
 
     public doStuff = async (base: Reading[]) => {
         // above and below the 130% CR
-        for (const [pool, wrapper, liquidatorContract] of [
-            ['FxUSDShareableRebalancePool__wstETH_FXN', 'wstETH', 'FxUSDBalancer'],
+        for (const [treasury, market, pool, collateral, fToken, xToken, xTokenWrapper] of [
+            [
+                'WrappedTokenTreasuryV2__wstETH_fstETH_xstETH',
+                'MarketV2__wstETH_fstETH_xstETH',
+                'FxUSDShareableRebalancePool__wstETH_FXN',
+                'wstETH',
+                'fstETH',
+                'xstETH',
+                '',
+            ],
+            [
+                'WrappedTokenTreasuryV2__wstETH_fstETH_xstETH',
+                'MarketV2__wstETH_fstETH_xstETH',
+                'FxUSDShareableRebalancePool__wstETH_FXN_xstETH',
+                'wstETH',
+                'fstETH',
+                'xstETH',
+                'LeveragedTokenWrapper',
+            ],
         ]) {
             await this.forEachCR(pool, async (cr: string) => {
                 const [readings, outcomes] = await delve(`CR=${cr},liquidate`, [
@@ -76,7 +95,7 @@ export class EatCollateralRatio implements IEat {
                         cause: makeTriggerSeries(
                             makeEthPriceTemplate(),
                             parseEther('2000'),
-                            parseEther('1100'),
+                            parseEther('800'),
                             parseEther('-20'),
                         ),
                         label: 'ETH v USD price',
@@ -87,18 +106,12 @@ export class EatCollateralRatio implements IEat {
                             label: `Collateral ratio`,
                             lines: [
                                 {
-                                    reader: augment(
-                                        findReader('WrappedTokenTreasuryV2__wstETH_fstETH_xstETH', 'collateralRatio'),
-                                        'before',
-                                    ),
+                                    reader: augment(findReader(treasury, 'collateralRatio'), 'before'),
                                     style: 'linetype 1',
                                 },
                                 {
                                     simulation: [await makeLiquidateTrigger(pool)],
-                                    reader: augment(
-                                        findReader('WrappedTokenTreasuryV2__wstETH_fstETH_xstETH', 'collateralRatio'),
-                                        'after',
-                                    ),
+                                    reader: augment(findReader(treasury, 'collateralRatio'), 'after'),
                                     style: 'linetype 2',
                                 },
                             ],
@@ -118,7 +131,7 @@ export class EatCollateralRatio implements IEat {
                         ),
                         label: 'Collateral ratio',
                         range: [1.5, 0.9],
-                        reader: calculateCR,
+                        reader: findReader(treasury, 'collateralRatio'),
                     },
                     {
                         simulation: [await makeLiquidateTrigger(pool)],
@@ -128,63 +141,60 @@ export class EatCollateralRatio implements IEat {
                             range: [-10000, '*<50000000'],
                             lines: [
                                 {
-                                    reader: await findReader('fstETH', 'balanceOf', '', pool), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findReader(fToken, 'balanceOf', '', pool),
                                     style: 'linetype 2 linewidth 2 dashtype 2',
                                 },
                                 {
-                                    reader: await findReader('xstETH', 'balanceOf', '', pool), // BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findReader(xToken, 'balanceOf', '', pool),
                                     style: 'linetype 1 linewidth 2 dashtype 2',
                                     ignore0: true,
                                 },
-                                /*
-                                {
-                                    reader: await findReader('xETH', 'balanceOf', '', wrapper), // BoostableRebalancePool__StETHAndxETHWrapper
+                                ...If(xTokenWrapper, {
+                                    reader: await findReader(xToken, 'balanceOf', '', xTokenWrapper),
                                     style: 'linetype 1 linewidth 4 dashtype 3',
                                     ignore0: true,
-                                },
-                                */
+                                }),
                             ],
                         },
                         y2: {
                             label: 'Change in balance of (ETH-ish)',
+                            //scale: 'log',
                             lines: [
                                 {
-                                    reader: await findDeltaReader(
-                                        'wstETH',
-                                        'balanceOf',
-                                        '',
-                                        'WrappedTokenTreasuryV2__wstETH_fstETH_xstETH',
-                                    ), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findDeltaReader(collateral, 'balanceOf', '', treasury),
                                     style: 'linetype 4 pointtype 1',
                                 },
                                 {
-                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', 'Market'), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findDeltaReader(collateral, 'balanceOf', '', market), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 4 pointtype 2',
                                 },
-                                {
-                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', wrapper), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
+                                ...If(xTokenWrapper, {
+                                    reader: await findDeltaReader(collateral, 'balanceOf', '', xTokenWrapper), // RebalancePool, BoostableRebalancePool__wstETHWrapper, BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 4 pointtype 4',
-                                },
+                                }),
+                                /* collateral is wrapped
                                 {
-                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', 'wstETH'), // RebalancePool, BoostableRebalancePool__wstETHWrapper
+                                    reader: await findDeltaReader(collateral, 'balanceOf', '', 'wstETH'), // RebalancePool, BoostableRebalancePool__wstETHWrapper
                                     style: 'linetype 4 pointtype 6',
                                 },
+                                */
                                 {
-                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', 'PlatformFeeSpliter'), // BoostableRebalancePool__StETHAndxETHWrapper
+                                    reader: await findDeltaReader(collateral, 'balanceOf', '', 'PlatformFeeSpliter'), // BoostableRebalancePool__StETHAndxETHWrapper
                                     style: 'linetype 4 pointtype 8',
                                 },
-                                {
-                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', wrapper), // REbalancePool, BoostableRebalancePool__wstETHWrapper
-                                    style: 'linetype 6 pointtype 1',
+                                /*...If(xTokenWrapper, {
+                                    reader: await findDeltaReader(xToken, 'balanceOf', '', xTokenWrapper),
+                                    style: 'linetype 1 pointtype 1',
                                     ignore0: true,
-                                },
-                                {
-                                    reader: await findDeltaReader('wstETH', 'balanceOf', '', pool), // REbalancePool, BoostableRebalancePool__wstETHWrapper
-                                    style: 'linetype 6 pointtype 2',
+                                }),
+                                */
+                                ...If(xTokenWrapper, {
+                                    reader: await findDeltaReader(xToken, 'balanceOf', '', pool),
+                                    style: 'linetype 1 pointtype 2',
                                     ignore0: true,
-                                },
+                                }),
                                 {
-                                    reader: await findDeltaReader('FXN', 'balanceOf', '', liquidatorContract), // REbalancePool, BoostableRebalancePool__wstETHWrapper
+                                    reader: await findDeltaReader('FXN', 'balanceOf', '', 'FxUSDRebalancer'), // REbalancePool, BoostableRebalancePool__wstETHWrapper
                                     style: 'linetype 8 pointtype 1',
                                 },
                                 {

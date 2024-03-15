@@ -7,7 +7,7 @@ set key bmargin
 set key title " "
 # set terminal pngcairo
 # set output "fxUSD-wstETH.CRxbalance+liquidate-FxUSDShareableRebalancePool__wstETH_FXN.gnuplot.png"
-set terminal svg enhanced size 800 737.5 background rgb "gray90"
+set terminal svg enhanced size 800 661.5 background rgb "gray90"
 set autoscale
 set colorsequence default
 # set output "fxUSD-wstETH.CRxbalance+liquidate-FxUSDShareableRebalancePool__wstETH_FXN.gnuplot.svg"
@@ -27,13 +27,9 @@ plot datafile using ($2):($4) with lines linetype 2 linewidth 2 dashtype 2,\
      datafile using ($2):($5 == 0 ? 1/0 : $5) with lines linetype 1 linewidth 2 dashtype 2,\
      datafile using ($2):($6) with linespoints linetype 4 pointtype 1 axes x1y2,\
      datafile using ($2):($7) with linespoints linetype 4 pointtype 2 axes x1y2,\
-     datafile using ($2):($8) with linespoints linetype 4 pointtype 4 axes x1y2,\
-     datafile using ($2):($9) with linespoints linetype 4 pointtype 6 axes x1y2,\
-     datafile using ($2):($10) with linespoints linetype 4 pointtype 8 axes x1y2,\
-     datafile using ($2):($11 == 0 ? 1/0 : $11) with linespoints linetype 6 pointtype 1 axes x1y2,\
-     datafile using ($2):($12 == 0 ? 1/0 : $12) with linespoints linetype 6 pointtype 2 axes x1y2,\
-     datafile using ($2):($13) with linespoints linetype 8 pointtype 1 axes x1y2,\
-     datafile using ($2):($14) with linespoints linetype 8 pointtype 2 axes x1y2
+     datafile using ($2):($8) with linespoints linetype 4 pointtype 8 axes x1y2,\
+     datafile using ($2):($9) with linespoints linetype 8 pointtype 1 axes x1y2,\
+     datafile using ($2):($10) with linespoints linetype 8 pointtype 2 axes x1y2
 # stats datafile using 1 nooutput
 # min = STATS_min
 # max = STATS_max

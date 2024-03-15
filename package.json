@@ -26,7 +26,7 @@
     "eat": "yarn eat1 fxUSD  && yarn eat:svg && yarn eat:png"
   },
   "devDependencies": {
-    "@mermaid-js/mermaid-cli": "^10.6.1",
+    "@mermaid-js/mermaid-cli": "^10.8.0",
     "@nomicfoundation/ethereumjs-block": "^5.0.3",
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.2",
     "@nomicfoundation/hardhat-ethers": "^3.0.4",
@@ -95,5 +95,5 @@
   "engines": {
     "node": ">=10.4.0"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.1"
 }

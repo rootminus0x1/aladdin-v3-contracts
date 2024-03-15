@@ -1,7 +1,7 @@
 simulation:
   - ETH(1573.6530): gas:26,467
     events: []
-  - liquidate FxUSDShareableRebalancePool__wstETH_FXN(FxUSDShareableRebalancePool__wstETH_FXN): 'reverted with an unrecognized custom error '
+  - liquidate FxUSDShareableRebalancePool__wstETH_FXN_xstETH(FxUSDShareableRebalancePool__wstETH_FXN_xstETH): 'reverted with an unrecognized custom error '
     events: []
 deployments:
   - contract: MockFxPriceOracle

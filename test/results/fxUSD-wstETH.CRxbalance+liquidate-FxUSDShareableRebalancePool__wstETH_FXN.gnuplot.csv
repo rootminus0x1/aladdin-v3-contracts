@@ -1,47 +1,47 @@
-Collateral ratio,0x0.CR,liquidate FxUSDShareableRebalancePool__wstETH_FXN,[<-Y-axis]fstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN),[<-Y-axis]xstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN),[Y-axis->]wstETH.balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(Market)-changes,[Y-axis->]wstETH.balanceOf(wstETH)-changes,[Y-axis->]wstETH.balanceOf(wstETH)-changes,[Y-axis->]wstETH.balanceOf(PlatformFeeSpliter)-changes,[Y-axis->]wstETH.balanceOf(wstETH)-changes,[Y-axis->]wstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN)-changes,[Y-axis->]FXN.balanceOf(FxUSDBalancer)-changes,[Y-axis->]FXN.balanceOf(liquidator)-changes
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,431",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,431",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,a.toString.join is not a function,0.0,0.0,0.0,0.0,0.0,a.toString.join is not a function,0.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",1311644.25,0.0,-37.18,a.toString.join is not a function,0.0,0.0,0.0,0.0,37.19,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",1148728.35,0.0,-128.91,a.toString.join is not a function,0.0,0.0,0.0,0.0,128.92,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",985812.46,0.0,-223.05,a.toString.join is not a function,0.0,0.0,0.0,0.0,223.06,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",822896.56,0.0,-319.71,a.toString.join is not a function,0.0,0.0,0.0,0.0,319.71,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",659980.66,0.0,-418.97,a.toString.join is not a function,0.0,0.0,0.0,0.0,418.97,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",497064.76,0.0,-520.95,a.toString.join is not a function,0.0,0.0,0.0,0.0,520.96,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",334148.86,0.0,-625.77,a.toString.join is not a function,0.0,0.0,0.0,0.0,625.78,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",171232.96,0.0,-733.54,a.toString.join is not a function,0.0,0.0,0.0,0.0,733.55,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:441,368",8317.07,0.0,-844.39,a.toString.join is not a function,0.0,0.0,0.0,0.0,844.39,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-861.83,a.toString.join is not a function,0.0,0.0,0.0,0.0,861.83,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-874.50,a.toString.join is not a function,0.0,0.0,0.0,0.0,874.50,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-887.55,a.toString.join is not a function,0.0,0.0,0.0,0.0,887.56,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-901.00,a.toString.join is not a function,0.0,0.0,0.0,0.0,901.00,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-914.86,a.toString.join is not a function,0.0,0.0,0.0,0.0,914.87,a.toString.join is not a function,1.0
-"gas:26,431",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-929.16,a.toString.join is not a function,0.0,0.0,0.0,0.0,929.16,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-943.90,a.toString.join is not a function,0.0,0.0,0.0,0.0,943.91,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-959.13,a.toString.join is not a function,0.0,0.0,0.0,0.0,959.13,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:415,929",0.0,0.0,-974.85,a.toString.join is not a function,0.0,0.0,0.0,0.0,974.86,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:414,475",0.0,0.0,-990.05,a.toString.join is not a function,0.0,0.0,0.0,0.0,990.06,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:414,475",0.0,0.0,-990.05,a.toString.join is not a function,0.0,0.0,0.0,0.0,990.06,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:414,475",0.0,0.0,-990.05,a.toString.join is not a function,0.0,0.0,0.0,0.0,990.06,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:414,475",0.0,0.0,-990.05,a.toString.join is not a function,0.0,0.0,0.0,0.0,990.06,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:414,475",0.0,0.0,-990.05,a.toString.join is not a function,0.0,0.0,0.0,0.0,990.06,a.toString.join is not a function,1.0
-"gas:26,443",Cannot read properties of undefined ,"gas:414,475",0.0,0.0,-990.05,a.toString.join is not a function,0.0,0.0,0.0,0.0,990.06,a.toString.join is not a function,1.0
+Collateral ratio,WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.collateralRatio,liquidate FxUSDShareableRebalancePool__wstETH_FXN,[<-Y-axis]fstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN),[<-Y-axis]xstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN),[Y-axis->]wstETH.balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(MarketV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(PlatformFeeSpliter)-changes,[Y-axis->]FXN.balanceOf(FxUSDRebalancer)-changes,[Y-axis->]FXN.balanceOf(liquidator)-changes
+"gas:26,443",1.665,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.648,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.632,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.615,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.598,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.582,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.565,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.548,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.532,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.515,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.498,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.482,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.465,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.448,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.432,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.415,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.399,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.382,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.365,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.349,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.332,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.315,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.299,"gas:441,368",1311644.25,0.0,-37.18,0.0,0.0,-1.0,1.0
+"gas:26,443",1.282,"gas:441,368",1148728.35,0.0,-128.91,0.0,0.0,-1.0,1.0
+"gas:26,443",1.265,"gas:441,368",985812.46,0.0,-223.05,0.0,0.0,-1.0,1.0
+"gas:26,443",1.249,"gas:441,368",822896.56,0.0,-319.71,0.0,0.0,-1.0,1.0
+"gas:26,443",1.232,"gas:441,368",659980.66,0.0,-418.97,0.0,0.0,-1.0,1.0
+"gas:26,443",1.215,"gas:441,368",497064.76,0.0,-520.95,0.0,0.0,-1.0,1.0
+"gas:26,443",1.199,"gas:441,368",334148.86,0.0,-625.77,0.0,0.0,-1.0,1.0
+"gas:26,443",1.182,"gas:441,368",171232.96,0.0,-733.54,0.0,0.0,-1.0,1.0
+"gas:26,443",1.165,"gas:441,368",8317.07,0.0,-844.39,0.0,0.0,-1.0,1.0
+"gas:26,443",1.149,"gas:415,929",0.0,0.0,-861.83,0.0,0.0,-1.0,1.0
+"gas:26,443",1.132,"gas:415,929",0.0,0.0,-874.50,0.0,0.0,-1.0,1.0
+"gas:26,443",1.115,"gas:415,929",0.0,0.0,-887.55,0.0,0.0,-1.0,1.0
+"gas:26,443",1.099,"gas:415,929",0.0,0.0,-901.00,0.0,0.0,-1.0,1.0
+"gas:26,443",1.082,"gas:415,929",0.0,0.0,-914.86,0.0,0.0,-1.0,1.0
+"gas:26,431",1.066,"gas:415,929",0.0,0.0,-929.16,0.0,0.0,-1.0,1.0
+"gas:26,443",1.049,"gas:415,929",0.0,0.0,-943.90,0.0,0.0,-1.0,1.0
+"gas:26,443",1.032,"gas:415,929",0.0,0.0,-959.13,0.0,0.0,-1.0,1.0
+"gas:26,443",1.016,"gas:415,929",0.0,0.0,-974.85,0.0,0.0,-1.0,1.0
+"gas:26,443",0.999,"gas:414,475",0.0,0.0,-990.05,0.0,0.0,-1.0,1.0
+"gas:26,443",0.982,"gas:414,475",0.0,0.0,-990.05,0.0,0.0,-1.0,1.0
+"gas:26,443",0.966,"gas:414,475",0.0,0.0,-990.05,0.0,0.0,-1.0,1.0
+"gas:26,443",0.949,"gas:414,475",0.0,0.0,-990.05,0.0,0.0,-1.0,1.0
+"gas:26,443",0.932,"gas:414,475",0.0,0.0,-990.05,0.0,0.0,-1.0,1.0
+"gas:26,443",0.916,"gas:414,475",0.0,0.0,-990.05,0.0,0.0,-1.0,1.0
