@@ -987,7 +987,7 @@ deployments:
       - pendingRewards(FxInitialFund).0: '0.0'
       - pendingRewards(FxInitialFund).1: '0.0'
       - pendingRewards(FXN).0: '6.797'
-      - pendingRewards(FXN).1: '99.326'
+      - pendingRewards(FXN).1: '99.325'
       - pendingRewards(FxnDepositor).0: '0.0'
       - pendingRewards(FxnDepositor).1: '0.0'
       - pendingRewards(FxnVoterProxy).0: '0.0'

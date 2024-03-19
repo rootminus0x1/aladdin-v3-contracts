@@ -1,7 +1,7 @@
 simulation:
-  - mintFToken(1000000000000000): 'reverted with an unrecognized custom error '
+  - mintFToken(1000000000000000): ErrorCallerNotFUSD
     events: []
-  - redeemFToken(MaxUint256): 'reverted with an unrecognized custom error '
+  - redeemFToken(MaxUint256): ErrorRedeemZeroAmount
     events: []
   - mintXToken(1000000000000000): gas:234,543
     events:
@@ -21,7 +21,7 @@ deployments:
     address: '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
     readings:
       - emaLeverageRatio.lastValue: '+5421560178874493159'
-      - emaLeverageRatio.lastEmaValue: '+88730000000000000'
+      - emaLeverageRatio.lastEmaValue: '+88620000000000000'
       - harvestable: '+0.000000000000000001'
       - leverageRatio: '+0.089'
       - totalBaseToken: '-0.000243644998066588'

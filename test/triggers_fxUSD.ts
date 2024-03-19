@@ -4,6 +4,8 @@ import { Role, Trigger, TriggerTemplate, contracts, formatBigInt, inverse, makeT
 import { nameToAddress } from 'eat';
 import { log } from 'console';
 
+import { MarketV2 } from '@eat';
+
 export const makeEthPriceTemplate = (): TriggerTemplate => {
     return {
         name: 'ETH',
@@ -60,11 +62,14 @@ export const makeMintFTokenTrigger = (amountInEth: bigint, user: any) => {
         args: [amountInEth],
         argTypes: ['uint256'],
         pull: async (amountInEth: bigint) => {
-            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).mintFToken(
-                amountInEth,
-                user.address,
-                0n,
-            );
+            return await (contracts.MarketV2__wstETH_fstETH_xstETH as MarketV2)
+                .connect(user)
+                .mintFToken(amountInEth, user.address, 0n);
+            // await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).mintFToken(
+            //     amountInEth,
+            //     user.address,
+            //     0n,
+            // );
         },
     };
 };

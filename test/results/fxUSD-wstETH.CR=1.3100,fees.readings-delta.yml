@@ -1,7 +1,7 @@
 simulation:
-  - mintFToken(1000000000000000): 'reverted with an unrecognized custom error '
+  - mintFToken(1000000000000000): ErrorCallerNotFUSD
     events: []
-  - redeemFToken(MaxUint256): 'reverted with an unrecognized custom error '
+  - redeemFToken(MaxUint256): ErrorRedeemZeroAmount
     events: []
   - mintXToken(1000000000000000): gas:204,369
     events:

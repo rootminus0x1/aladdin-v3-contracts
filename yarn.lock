@@ -2655,6 +2655,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^3.4.0"
     eslint-plugin-promise: "npm:^5.1.0"
     ethers: "npm:^6.9.0"
+    ethers-decode-error: "npm:^2.1.3"
     firebase: "npm:^9.8.2"
     hardhat: "npm:^2.19.2"
     hardhat-gas-reporter: "npm:^1.0.4"
@@ -4645,6 +4646,15 @@ __metadata:
     ethereum-cryptography: "npm:^0.1.3"
     rlp: "npm:^2.2.4"
   checksum: 10c0/8b9487f35ecaa078bf9af6858eba6855fc61c73cc2b90c8c37486fcf94faf4fc1c5cda9758e6769f9ef2658daedaf2c18b366312ac461f8c8a122b392e3041eb
+  languageName: node
+  linkType: hard
+
+"ethers-decode-error@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "ethers-decode-error@npm:2.1.3"
+  peerDependencies:
+    ethers: ^6.0.0
+  checksum: 10c0/ef750bb8d7f90ee3e6ae35617cd9fb9fbd900d82653e2199bc28edb3b539d228303dbaaa27186e94fd544b07cc47154c71bd34818e8d782afe81a796dc9b1288
   languageName: node
   linkType: hard
 
