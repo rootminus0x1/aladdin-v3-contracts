@@ -17,6 +17,7 @@ test/data/run/
 forge-cache/
 eat-cache/
 eat-source/
+eat-typechain-types/
 cache/
 artifacts/
 out/
@@ -27,5 +28,5 @@ out/
 
 deployments/fork*
 
-# debug filed
+# debug files
 test/results/debug*

@@ -22,7 +22,7 @@ export const makeCRTrigger = async (cr: bigint) => {
             cr,
             async () => await contracts.WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.collateralRatio(),
             async (x: bigint) => await contracts.MockFxPriceOracle.setPrice(x),
-            [parseEther('1030'), parseEther('10000')],
+            [parseEther('100'), parseEther('10000')],
         ),
     );
 };
@@ -76,7 +76,7 @@ export const makeRedeemFTokenTrigger = (amount: bigint, user: any) => {
         args: [amount],
         argTypes: ['uint256'],
         pull: async (amount: bigint) => {
-            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).redeem(amount, 0n, user.address, 0n);
+            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).redeemFToken(amount, user.address, 0n);
         },
     };
 };
@@ -104,7 +104,7 @@ export const makeRedeemXTokenTrigger = (amount: bigint, user: any) => {
         args: [amount],
         argTypes: ['uint256'],
         pull: async (amount: bigint) => {
-            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).redeem(0n, amount, user.address, 0n);
+            return await contracts.MarketV2__wstETH_fstETH_xstETH.connect(user).redeemXToken(amount, user.address, 0n);
         },
     };
 };

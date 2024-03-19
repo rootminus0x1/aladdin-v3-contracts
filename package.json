@@ -17,6 +17,7 @@
     "prettier:solidity": "./node_modules/.bin/prettier --write 'contracts/**/*.sol'",
     "prettier": "./node_modules/.bin/prettier --write 'test/**/*.ts' 'scripts/**/*.ts' '*.ts' 'contracts/**/*.sol'",
     "coverage": "hardhat coverage",
+    "eat:typechain": "hardhat typechain --show-stack-traces --config eat.hardhat.config.ts",
     "eat:svg:mmd": "cd test/results && find . -name \"*.diagram.mmd\" -exec mmdc -i {} \\;",
     "eat:svg:gp": "cd test/results && find . -name \"*.gnuplot.gp\" -exec gnuplot -e \"set output '{}.svg'\" {} \\;",
     "eat:svg": "yarn eat:svg:mmd && yarn eat:svg:gp",
