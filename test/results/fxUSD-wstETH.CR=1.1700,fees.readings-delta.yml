@@ -1,30 +1,29 @@
 simulation:
-  - mintFToken(1000000000000000): ErrorCallerNotFUSD
+  - mintFToken(1000000000000000): ErrorMarketInStabilityMode
     events: []
-  - redeemFToken(MaxUint256): ErrorRedeemZeroAmount
+  - redeemFToken(MaxUint256): ERC20 burn amount exceeds balance
     events: []
   - mintXToken(1000000000000000): gas:234,543
     events:
-      - wstETH.Transfer(from=xMinter,to=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,value=1000000000000000)
-      - wstETH.Approval(owner=xMinter,spender=MarketV2__wstETH_fstETH_xstETH,value=115792089237316195423570985008687907853269984665640564039457582007913129639935)
-      - xstETH.Transfer(from=0x0,to=xMinter,value=15591515330921417854)
-      - MarketV2__wstETH_fstETH_xstETH.MintXToken(owner=xMinter,recipient=xMinter,baseTokenIn=1000000000000000,xTokenOut=15591515330921417854,bonus=0,mintFee=0)
+      - wstETH.Transfer(from=xMinter,to=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,value=0.001)
+      - wstETH.Approval(owner=xMinter,spender=MarketV2__wstETH_fstETH_xstETH,value=MaxUint256)
+      - xstETH.Transfer(from=0x0,to=xMinter,value=15.591600553546769746)
+      - MarketV2__wstETH_fstETH_xstETH.MintXToken(owner=xMinter,recipient=xMinter,baseTokenIn=0.001,xTokenOut=15.591600553546769746,bonus=0.0,mintFee=0.0)
   - redeemXToken(MaxUint256): gas:205,777
     events:
-      - xstETH.Transfer(from=xMinter,to=0x0,value=18868036344478333471)
-      - wstETH.Transfer(from=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,to=MarketV2__wstETH_fstETH_xstETH,value=1210147695333938)
-      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=PlatformFeeSpliter,value=96811815626715)
-      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=xMinter,value=1113335879707223)
-      - MarketV2__wstETH_fstETH_xstETH.RedeemXToken(owner=xMinter,recipient=xMinter,xTokenBurned=18868036344478333471,baseTokenOut=1113335879707223,redeemFee=96811815626715)
+      - xstETH.Transfer(from=xMinter,to=0x0,value=18.868121567103685363)
+      - wstETH.Transfer(from=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,to=MarketV2__wstETH_fstETH_xstETH,value=0.001210146546680967)
+      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=PlatformFeeSpliter,value=0.000096811723734477)
+      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=xMinter,value=0.00111333482294649)
+      - MarketV2__wstETH_fstETH_xstETH.RedeemXToken(owner=xMinter,recipient=xMinter,xTokenBurned=18.868121567103685363,baseTokenOut=0.00111333482294649,redeemFee=0.000096811723734477)
 deployments:
   - contract: WrappedTokenTreasuryV2
     address: '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
     readings:
-      - emaLeverageRatio.lastValue: '+5421560178874493159'
-      - emaLeverageRatio.lastEmaValue: '+88620000000000000'
-      - harvestable: '+0.000000000000000001'
+      - emaLeverageRatio.lastValue: '+5421600317921173429'
+      - emaLeverageRatio.lastEmaValue: '+88630000000000000'
       - leverageRatio: '+0.089'
-      - totalBaseToken: '-0.000243644998066588'
+      - totalBaseToken: '-0.000243643666319644'
   - contract: xstETH
     address: '0x5a097b014C547718e79030a077A91Ae37679EfF5'
     readings:

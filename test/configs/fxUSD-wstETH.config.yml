@@ -18,7 +18,6 @@ twig:
   - "0xd11a4Ee017cA0BECA8FA45fF2abFe9C6267b7881" # FxNVoterProxy
   - "0xAffe966B27ba3E4Ebb8A0eC124C7b7019CC762f8" # Booster
   - "0x56B3c8eF8A095f8637B6A84942aA898326B82b91" # FXN depositor
-
 # show but do not analyse the frax based collateral
 prune:
   - "0xb925F8CAA6BE0BFCd1A7383168D1c932D185A748" # FxUSDShareableRebalancePool__sfrxETH_FXN
@@ -37,6 +36,7 @@ users:
       - { token: wstETH, amount: 10000 ether }
     approve:
       - MarketV2__wstETH_fstETH_xstETH
+      - fxUSD
   - name: xMinter # user who mint/redeems xTokens
     wallet:
       - { token: wstETH, amount: 10000 ether }

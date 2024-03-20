@@ -1,4 +1,15 @@
-import { IEat, Reading, parseArg, delve, readingsDeltas, users, writeReadingsDelta, doTrigger, log } from 'eat';
+import {
+    IEat,
+    Reading,
+    parseArg,
+    delve,
+    readingsDeltas,
+    users,
+    writeReadingsDelta,
+    doTrigger,
+    log,
+    transformOutcomes,
+} from 'eat';
 import {
     makeCRTrigger,
     makeMintFTokenTrigger,
@@ -12,11 +23,12 @@ import { EatCollateralRatio } from './EatCollateralRatio_fxUSD';
 export class EatFees extends EatCollateralRatio implements IEat {
     public name = 'Fees';
 
-    public doStuff = async (base: Reading[]) => {
+    public doStuff = async () => {
         // assuming that minting x and f tokens now is possible
         // fill the wallets of x and f minters with a small amount of f and x tokens
         const mintFTokenTrigger = await makeMintFTokenTrigger(parseArg('1 finney'), users.fMinter);
-        const mintFOutcome = await doTrigger(mintFTokenTrigger);
+        const mintFOutcome = await doTrigger(mintFTokenTrigger, true);
+        transformOutcomes([mintFOutcome]);
         if (mintFOutcome.error) log(`error minting FTokens: ${mintFOutcome.error}`);
         const mintXTokenTrigger = await makeMintXTokenTrigger(parseArg('1 finney'), users.xMinter);
         const mintXOutcome = await doTrigger(mintXTokenTrigger);

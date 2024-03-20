@@ -9,6 +9,12 @@ users:
 #  - name: fHolderRedeemer # user who mint/redeems fTokens
 
 format:
+  # ERC20 events
+  - reading: Transfer.value
+    unit: 18
+  - reading: Approval.value
+    unit: 18
+
   - type: uint256
     unit: ether
   - reading: latestAnswer

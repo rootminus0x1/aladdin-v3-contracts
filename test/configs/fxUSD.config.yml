@@ -1,0 +1,44 @@
+block: 19380000
+
+suffix:
+  - contract: FxUSDShareableRebalancePool
+    fields: [getActiveRewardTokens]
+  - contract: MarketV2
+    fields: [baseToken, fToken, xToken]
+  - contract: Market
+    fields: [baseToken, fToken, xToken]
+  - contract: WrappedTokenTreasuryV2
+    fields: [baseToken, fToken, xToken]
+
+format:
+  - contract: MarketV2
+    type: uint128
+    unit: 16
+  - contract: MarketV2
+    type: int128
+    unit: 16
+  - contract: MarketV2
+    type: uint64
+    unit: 18
+
+  - contract: MarketV2
+    reading: MintXToken.baseTokenIn
+    unit: 18
+  - contract: MarketV2
+    reading: MintXToken.xTokenOut
+    unit: 18
+  - contract: MarketV2
+    reading: MintXToken.mintFee
+    unit: 18
+  - contract: MarketV2
+    reading: RedeemXToken.xTokenBurned
+    unit: 18
+  - contract: MarketV2
+    reading: RedeemXToken.baseTokenOut
+    unit: 18
+  - contract: MarketV2
+    reading: RedeemXToken.redeemFee
+    unit: 18
+  - contract: fxUSD
+    reading: Wrap.amount
+    unit: 18
