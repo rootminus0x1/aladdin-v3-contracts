@@ -123,6 +123,8 @@ format:
     precision: 3
   - reading: getCurrentNav._xNav
     precision: 3
+  - reading: nav
+    precision: 3
   - reading: pendingRewards
     precision: 4
   - type: uint256

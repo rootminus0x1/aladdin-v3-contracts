@@ -19,4 +19,4 @@ deployments:
   - contract: xstETH
     address: '0x5a097b014C547718e79030a077A91Ae37679EfF5'
     readings:
-      - nav: '-1.14310079'
+      - nav: '-1.143'

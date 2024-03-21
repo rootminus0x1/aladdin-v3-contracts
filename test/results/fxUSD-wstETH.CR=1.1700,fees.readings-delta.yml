@@ -21,7 +21,7 @@ deployments:
     address: '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
     readings:
       - emaLeverageRatio.lastValue: '+5421600317921173429'
-      - emaLeverageRatio.lastEmaValue: '+88520000000000000'
+      - emaLeverageRatio.lastEmaValue: '+88630000000000000'
       - leverageRatio: '+0.089'
       - totalBaseToken: '-0.00024364'
   - contract: xstETH

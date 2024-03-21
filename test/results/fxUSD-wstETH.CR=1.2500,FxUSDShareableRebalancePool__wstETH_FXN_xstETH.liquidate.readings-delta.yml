@@ -76,5 +76,5 @@ deployments:
     address: '0x5a097b014C547718e79030a077A91Ae37679EfF5'
     readings:
       - balanceOf(FxUSDShareableRebalancePool__wstETH_FXN_xstETH): '+3500197.16'
-      - nav: '-1.18005606'
+      - nav: '-1.180'
       - totalSupply: '+3500197'
