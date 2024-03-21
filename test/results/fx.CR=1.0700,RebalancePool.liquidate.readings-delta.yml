@@ -4,18 +4,18 @@ simulation:
   - liquidate RebalancePool(RebalancePool): gas:488,408
     events:
       - fETH.Approval(owner=RebalancePool,spender=Market,value=0.0)
-      - fETH.Approval(owner=RebalancePool,spender=Market,value=33956.4926)
-      - fETH.Transfer(from=RebalancePool,to=0x0,value=33956.4926)
-      - stETH.Transfer(from=stETHTreasury,to=Market,value=24.6962)
-      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=21.3496)
-      - stETH.Transfer(from=Market,to=wstETHWrapper,value=24.6962)
-      - stETH.TransferShares(from=Market,to=wstETHWrapper,sharesValue=21.3496)
-      - Market.Redeem(owner=RebalancePool,recipient=wstETHWrapper,fTokenBurned=33956.4926,xTokenBurned=0.0,baseTokenOut=24.6962,redeemFee=0.0)
-      - RebalancePool.Liquidate(liquidated=33956.4926,baseGained=24.6962)
-      - wstETH.Transfer(from=0x0,to=wstETHWrapper,value=21.3496)
-      - stETH.Transfer(from=wstETHWrapper,to=wstETH,value=24.6962)
-      - stETH.TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=21.3496)
-      - wstETH.Transfer(from=wstETHWrapper,to=RebalancePool,value=21.3496)
+      - fETH.Approval(owner=RebalancePool,spender=Market,value=33956.49258990)
+      - fETH.Transfer(from=RebalancePool,to=0x0,value=33956.49258990)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=24.69623023)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=21.34964122)
+      - stETH.Transfer(from=Market,to=wstETHWrapper,value=24.69623023)
+      - stETH.TransferShares(from=Market,to=wstETHWrapper,sharesValue=21.34964122)
+      - Market.Redeem(owner=RebalancePool,recipient=wstETHWrapper,fTokenBurned=33956.49258990,xTokenBurned=0.0,baseTokenOut=24.69623023,redeemFee=0.0)
+      - RebalancePool.Liquidate(liquidated=33956.49258990,baseGained=24.69623023)
+      - wstETH.Transfer(from=0x0,to=wstETHWrapper,value=21.34964122)
+      - stETH.Transfer(from=wstETHWrapper,to=wstETH,value=24.69623023)
+      - stETH.TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=21.34964122)
+      - wstETH.Transfer(from=wstETHWrapper,to=RebalancePool,value=21.34964122)
       - FXN.Transfer(_from=RebalanceWithBonusToken__0,_to=liquidator,_value=2.0)
 deployments:
   - contract: fETH
@@ -38,9 +38,9 @@ deployments:
   - contract: RebalancePool
     address: '0xa677d95B91530d56791FbA72C01a862f1B01A49e'
     readings:
-      - epochState.epoch: '+0.000000000000000001'
+      - epochState.epoch: '+1'
       - totalSupply: '-14241'
-      - totalUnlocking: '-19714.952389819415148249'
+      - totalUnlocking: '-19714.95238981'
   - contract: RebalancePoolRegistry
     address: '0x4eEfea49e4D876599765d5375cF7314cD14C9d38'
     readings:
@@ -50,19 +50,19 @@ deployments:
     readings:
       - balanceOf(stETHTreasury): '-24.69'
       - balanceOf(wstETH): '+24.70'
-      - sharesOf(stETHTreasury): '-21.349641216274027207'
-      - sharesOf(wstETH): '+21.349641216274027207'
+      - sharesOf(stETHTreasury): '-21.34964121'
+      - sharesOf(wstETH): '+21.34964122'
   - contract: stETHTreasury
     address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
     readings:
       - collateralRatio: '-0.808'
-      - emaLeverageRatio.lastTime: '+00'
-      - emaLeverageRatio.lastValue: '+12.265427591538018208'
-      - emaLeverageRatio.lastEmaValue: '0000000000000'
+      - emaLeverageRatio.lastTime: '+3800'
+      - emaLeverageRatio.lastValue: '+12265427591538018208'
+      - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-1163.27'
       - getCurrentNav._fNav: '-0.063'
       - getCurrentNav._xNav: '-1.419'
-      - totalBaseToken: '-24.696230232888210767'
+      - totalBaseToken: '-24.69623023'
   - contract: wstETH
     address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
     readings:
@@ -71,4 +71,4 @@ deployments:
   - contract: xETH
     address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
     readings:
-      - nav: '-0.001584017803900294'
+      - nav: '-0.001'

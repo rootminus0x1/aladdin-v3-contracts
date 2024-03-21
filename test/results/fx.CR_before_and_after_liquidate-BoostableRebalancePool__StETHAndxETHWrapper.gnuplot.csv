@@ -1,21 +1,21 @@
 ETH v USD price,MockFxPriceOracle.getPrice._safePrice,stETHTreasury.collateralRatio-before,liquidate BoostableRebalancePool__StETHAndxETHWrapper,stETHTreasury.collateralRatio-after
-"gas:26,443",2000.0,1.543,reverted with an unrecognized custom error ,1.543
-"gas:26,443",1980.0,1.529,reverted with an unrecognized custom error ,1.529
-"gas:26,443",1960.0,1.515,reverted with an unrecognized custom error ,1.515
-"gas:26,443",1940.0,1.501,reverted with an unrecognized custom error ,1.501
-"gas:26,431",1920.0,1.487,reverted with an unrecognized custom error ,1.487
-"gas:26,443",1900.0,1.473,reverted with an unrecognized custom error ,1.473
-"gas:26,443",1880.0,1.460,reverted with an unrecognized custom error ,1.460
-"gas:26,443",1860.0,1.446,reverted with an unrecognized custom error ,1.446
-"gas:26,443",1840.0,1.432,reverted with an unrecognized custom error ,1.432
-"gas:26,443",1820.0,1.418,reverted with an unrecognized custom error ,1.418
-"gas:26,443",1800.0,1.404,reverted with an unrecognized custom error ,1.404
-"gas:26,443",1780.0,1.389,reverted with an unrecognized custom error ,1.389
-"gas:26,443",1760.0,1.375,reverted with an unrecognized custom error ,1.375
-"gas:26,443",1740.0,1.361,reverted with an unrecognized custom error ,1.361
-"gas:26,443",1720.0,1.347,reverted with an unrecognized custom error ,1.347
-"gas:26,443",1700.0,1.333,reverted with an unrecognized custom error ,1.333
-"gas:26,443",1680.0,1.319,reverted with an unrecognized custom error ,1.319
+"gas:26,443",2000.0,1.543,CannotLiquidate,1.543
+"gas:26,443",1980.0,1.529,CannotLiquidate,1.529
+"gas:26,443",1960.0,1.515,CannotLiquidate,1.515
+"gas:26,443",1940.0,1.501,CannotLiquidate,1.501
+"gas:26,431",1920.0,1.487,CannotLiquidate,1.487
+"gas:26,443",1900.0,1.473,CannotLiquidate,1.473
+"gas:26,443",1880.0,1.460,CannotLiquidate,1.460
+"gas:26,443",1860.0,1.446,CannotLiquidate,1.446
+"gas:26,443",1840.0,1.432,CannotLiquidate,1.432
+"gas:26,443",1820.0,1.418,CannotLiquidate,1.418
+"gas:26,443",1800.0,1.404,CannotLiquidate,1.404
+"gas:26,443",1780.0,1.389,CannotLiquidate,1.389
+"gas:26,443",1760.0,1.375,CannotLiquidate,1.375
+"gas:26,443",1740.0,1.361,CannotLiquidate,1.361
+"gas:26,443",1720.0,1.347,CannotLiquidate,1.347
+"gas:26,443",1700.0,1.333,CannotLiquidate,1.333
+"gas:26,443",1680.0,1.319,CannotLiquidate,1.319
 "gas:26,443",1660.0,1.304,"gas:643,016",1.309
 "gas:26,443",1640.0,1.290,"gas:643,016",1.358
 "gas:26,443",1620.0,1.276,"gas:662,916",1.412
@@ -37,11 +37,11 @@ ETH v USD price,MockFxPriceOracle.getPrice._safePrice,stETHTreasury.collateralRa
 "gas:26,443",1300.0,1.042,"gas:625,398",1.979
 "gas:26,431",1280.0,1.027,"gas:645,298",1.951
 "gas:26,443",1260.0,1.012,"gas:625,398",1.923
-"gas:26,443",1240.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-"gas:26,443",1220.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-"gas:26,443",1200.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-"gas:26,443",1180.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-"gas:26,443",1160.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-"gas:26,443",1140.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-"gas:26,443",1120.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
-"gas:26,443",1100.0,SafeMath: subtraction overflow,SafeMath: subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1240.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1220.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1200.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1180.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1160.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1140.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1120.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow
+"gas:26,443",1100.0,SafeMath: subtraction overflow,SafeMath subtraction overflow,SafeMath: subtraction overflow

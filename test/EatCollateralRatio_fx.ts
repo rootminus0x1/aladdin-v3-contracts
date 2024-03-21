@@ -54,7 +54,9 @@ export class EatCollateralRatio implements IEat {
         }
     };
 
-    public doStuff = async (base: Reading[]) => {
+    public doStuff = async () => {
+        const [base] = await delve(this.name);
+
         // above and below the 130% CR
         for (const [pool, wrapper, liquidatorContract] of [
             ['RebalancePool', 'wstETHWrapper', 'RebalanceWithBonusToken__0'],

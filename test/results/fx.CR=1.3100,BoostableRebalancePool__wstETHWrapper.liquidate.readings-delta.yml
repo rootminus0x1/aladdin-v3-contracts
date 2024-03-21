@@ -1,7 +1,7 @@
 simulation:
   - ETH(1667.8904): gas:26,467
     events: []
-  - liquidate BoostableRebalancePool__wstETHWrapper(BoostableRebalancePool__wstETHWrapper): 'reverted with an unrecognized custom error '
+  - liquidate BoostableRebalancePool__wstETHWrapper(BoostableRebalancePool__wstETHWrapper): CannotLiquidate
     events: []
 deployments:
   - contract: MockFxPriceOracle

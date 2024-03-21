@@ -4,28 +4,28 @@ simulation:
   - liquidate BoostableRebalancePool__wstETHWrapper(BoostableRebalancePool__wstETHWrapper): gas:547,079
     events:
       - fETH.Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=0.0)
-      - fETH.Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=2203863.6908)
-      - fETH.Transfer(from=BoostableRebalancePool__wstETHWrapper,to=0x0,value=2203863.6908)
-      - stETH.Transfer(from=stETHTreasury,to=Market,value=1371.9836)
-      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=1186.0659)
-      - stETH.Transfer(from=Market,to=wstETHWrapper,value=1371.9836)
-      - stETH.TransferShares(from=Market,to=wstETHWrapper,sharesValue=1186.0659)
-      - Market.Redeem(owner=BoostableRebalancePool__wstETHWrapper,recipient=wstETHWrapper,fTokenBurned=2203863.6908,xTokenBurned=0.0,baseTokenOut=1371.9836,redeemFee=0.0)
-      - BoostableRebalancePool__wstETHWrapper.Liquidate(liquidated=2203863.6908,baseGained=1371.9836)
-      - wstETH.Transfer(from=0x0,to=wstETHWrapper,value=1186.0659)
-      - stETH.Transfer(from=wstETHWrapper,to=wstETH,value=1371.9836)
-      - stETH.TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=1186.0659)
-      - wstETH.Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=1186.0659)
+      - fETH.Approval(owner=BoostableRebalancePool__wstETHWrapper,spender=Market,value=2203863.69078724)
+      - fETH.Transfer(from=BoostableRebalancePool__wstETHWrapper,to=0x0,value=2203863.69078724)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=1371.98360501)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=1186.06594794)
+      - stETH.Transfer(from=Market,to=wstETHWrapper,value=1371.98360501)
+      - stETH.TransferShares(from=Market,to=wstETHWrapper,sharesValue=1186.06594794)
+      - Market.Redeem(owner=BoostableRebalancePool__wstETHWrapper,recipient=wstETHWrapper,fTokenBurned=2203863.69078724,xTokenBurned=0.0,baseTokenOut=1371.98360501,redeemFee=0.0)
+      - BoostableRebalancePool__wstETHWrapper.Liquidate(liquidated=2203863.69078724,baseGained=1371.98360501)
+      - wstETH.Transfer(from=0x0,to=wstETHWrapper,value=1186.06594794)
+      - stETH.Transfer(from=wstETHWrapper,to=wstETH,value=1371.98360501)
+      - stETH.TransferShares(from=wstETHWrapper,to=wstETH,sharesValue=1186.06594794)
+      - wstETH.Transfer(from=wstETHWrapper,to=BoostableRebalancePool__wstETHWrapper,value=1186.06594794)
       - FXN.Transfer(_from=RebalanceWithBonusToken__1,_to=liquidator,_value=1.0)
 deployments:
   - contract: BoostableRebalancePool
     address: '0xc6dEe5913e010895F3702bc43a40d661B13a40BD'
     readings:
-      - lastAssetLossError: '+1363940.338963162005090304'
-      - numTotalSupplyHistory: '+0.000000000000000001'
+      - lastAssetLossError: '+1363940.33896316'
+      - numTotalSupplyHistory: '+1'
       - pendingRewards(wstETH).0: '-0.140'
-      - rewardData(FXN).lastUpdate: '+00'
-      - rewardData(wstETH).lastUpdate: '+00'
+      - rewardData(FXN).lastUpdate: '+63200'
+      - rewardData(wstETH).lastUpdate: '+63200'
       - totalSupply: '-2203863'
   - contract: fETH
     address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
@@ -53,19 +53,19 @@ deployments:
     readings:
       - balanceOf(stETHTreasury): '-1371.98'
       - balanceOf(wstETH): '+1371.98'
-      - sharesOf(stETHTreasury): '-1186.065947937489279861'
-      - sharesOf(wstETH): '+1186.065947937489279861'
+      - sharesOf(stETHTreasury): '-1186.06594793'
+      - sharesOf(wstETH): '+1186.06594794'
   - contract: stETHTreasury
     address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
     readings:
       - collateralRatio: '-0.572'
-      - emaLeverageRatio.lastTime: '+00'
-      - emaLeverageRatio.lastValue: '+2.670808620657095404'
-      - emaLeverageRatio.lastEmaValue: '0000000000000'
+      - emaLeverageRatio.lastTime: '+3800'
+      - emaLeverageRatio.lastValue: '+2670808620657095404'
+      - emaLeverageRatio.lastEmaValue: '-70000000000000'
       - getCurrentNav._baseNav: '-916.62'
       - getCurrentNav._fNav: '-0.049'
       - getCurrentNav._xNav: '-1.118'
-      - totalBaseToken: '-1371.983605013715117083'
+      - totalBaseToken: '-1371.98360501'
   - contract: wstETH
     address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
     readings:
@@ -74,4 +74,4 @@ deployments:
   - contract: xETH
     address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
     readings:
-      - nav: '-0.043912311683417038'
+      - nav: '-0.043'

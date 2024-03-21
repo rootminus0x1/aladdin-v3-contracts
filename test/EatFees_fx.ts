@@ -12,7 +12,9 @@ import { EatCollateralRatio } from './EatCollateralRatio_fx';
 export class EatFees extends EatCollateralRatio implements IEat {
     public name = 'Fees';
 
-    public doStuff = async (base: Reading[]) => {
+    public doStuff = async () => {
+        const [base] = await delve(this.name);
+
         // assuming that minting x and f tokens now is possible
         // fill the wallets of x and f minters with a small amount of f and x tokens
         const mintFTokenTrigger = await makeMintFTokenTrigger(parseArg('1 finney'), users.fMinter);

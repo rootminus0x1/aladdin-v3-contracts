@@ -1,40 +1,40 @@
 simulation:
   - mintFToken(0.001): gas:240,883
     events:
-      - stETH.Transfer(from=fMinter,to=PlatformFeeSpliter,value=0.0000)
-      - stETH.TransferShares(from=fMinter,to=PlatformFeeSpliter,sharesValue=0.0000)
-      - stETH.Transfer(from=fMinter,to=stETHTreasury,value=0.0010)
-      - stETH.TransferShares(from=fMinter,to=stETHTreasury,sharesValue=0.0009)
-      - fETH.Transfer(from=0x0,to=fMinter,value=1.6792)
-      - Market.Mint(owner=fMinter,recipient=fMinter,baseTokenIn=0.001,fTokenOut=1.6792,xTokenOut=0.0,mintFee=0.0000)
+      - stETH.Transfer(from=fMinter,to=PlatformFeeSpliter,value=0.0000025)
+      - stETH.TransferShares(from=fMinter,to=PlatformFeeSpliter,sharesValue=0.00000216)
+      - stETH.Transfer(from=fMinter,to=stETHTreasury,value=0.0009975)
+      - stETH.TransferShares(from=fMinter,to=stETHTreasury,sharesValue=0.00086233)
+      - fETH.Transfer(from=0x0,to=fMinter,value=1.67916075)
+      - Market.Mint(owner=fMinter,recipient=fMinter,baseTokenIn=0.001,fTokenOut=1.67916075,xTokenOut=0.0,mintFee=0.0000025)
   - redeemFToken(MaxUint256): gas:257,195
     events:
-      - fETH.Transfer(from=fMinter,to=0x0,value=4.0867)
-      - stETH.Transfer(from=stETHTreasury,to=Market,value=0.0024)
-      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=0.0021)
-      - stETH.Transfer(from=Market,to=PlatformFeeSpliter,value=0.0000)
-      - stETH.TransferShares(from=Market,to=PlatformFeeSpliter,sharesValue=0.0000)
-      - stETH.Transfer(from=Market,to=fMinter,value=0.0024)
-      - stETH.TransferShares(from=Market,to=fMinter,sharesValue=0.0021)
-      - Market.Redeem(owner=fMinter,recipient=fMinter,fTokenBurned=4.0867,xTokenBurned=0.0,baseTokenOut=0.0024,redeemFee=0.0000)
+      - fETH.Transfer(from=fMinter,to=0x0,value=4.08673589)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=0.00242771)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=0.00209873)
+      - stETH.Transfer(from=Market,to=PlatformFeeSpliter,value=0.00000607)
+      - stETH.TransferShares(from=Market,to=PlatformFeeSpliter,sharesValue=0.00000525)
+      - stETH.Transfer(from=Market,to=fMinter,value=0.00242164)
+      - stETH.TransferShares(from=Market,to=fMinter,sharesValue=0.00209349)
+      - Market.Redeem(owner=fMinter,recipient=fMinter,fTokenBurned=4.08673589,xTokenBurned=0.0,baseTokenOut=0.00242164,redeemFee=0.00000607)
   - mintXToken(0.001): gas:230,171
     events:
-      - stETH.Transfer(from=xMinter,to=PlatformFeeSpliter,value=0.0000)
-      - stETH.TransferShares(from=xMinter,to=PlatformFeeSpliter,sharesValue=0.0000)
-      - stETH.Transfer(from=xMinter,to=stETHTreasury,value=0.0010)
-      - stETH.TransferShares(from=xMinter,to=stETHTreasury,sharesValue=0.0009)
-      - xETH.Transfer(from=0x0,to=xMinter,value=3.1895)
-      - Market.Mint(owner=xMinter,recipient=xMinter,baseTokenIn=0.001,fTokenOut=0.0,xTokenOut=3.1895,mintFee=0.0000)
+      - stETH.Transfer(from=xMinter,to=PlatformFeeSpliter,value=0.00001)
+      - stETH.TransferShares(from=xMinter,to=PlatformFeeSpliter,sharesValue=0.00000864)
+      - stETH.Transfer(from=xMinter,to=stETHTreasury,value=0.00099)
+      - stETH.TransferShares(from=xMinter,to=stETHTreasury,sharesValue=0.00085584)
+      - xETH.Transfer(from=0x0,to=xMinter,value=3.18949046)
+      - Market.Mint(owner=xMinter,recipient=xMinter,baseTokenIn=0.001,fTokenOut=0.0,xTokenOut=3.18949046,mintFee=0.00001)
   - redeemXToken(MaxUint256): gas:259,918
     events:
-      - xETH.Transfer(from=xMinter,to=0x0,value=4.8036)
-      - stETH.Transfer(from=stETHTreasury,to=Market,value=0.0015)
-      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=0.0013)
-      - stETH.Transfer(from=Market,to=PlatformFeeSpliter,value=0.0000)
-      - stETH.TransferShares(from=Market,to=PlatformFeeSpliter,sharesValue=0.0000)
-      - stETH.Transfer(from=Market,to=xMinter,value=0.0015)
-      - stETH.TransferShares(from=Market,to=xMinter,sharesValue=0.0013)
-      - Market.Redeem(owner=xMinter,recipient=xMinter,fTokenBurned=0.0,xTokenBurned=4.8036,baseTokenOut=0.0015,redeemFee=0.0000)
+      - xETH.Transfer(from=xMinter,to=0x0,value=4.80356242)
+      - stETH.Transfer(from=stETHTreasury,to=Market,value=0.00149100)
+      - stETH.TransferShares(from=stETHTreasury,to=Market,sharesValue=0.00128895)
+      - stETH.Transfer(from=Market,to=PlatformFeeSpliter,value=0.00001491)
+      - stETH.TransferShares(from=Market,to=PlatformFeeSpliter,sharesValue=0.00001289)
+      - stETH.Transfer(from=Market,to=xMinter,value=0.00147609)
+      - stETH.TransferShares(from=Market,to=xMinter,sharesValue=0.00127606)
+      - Market.Redeem(owner=xMinter,recipient=xMinter,fTokenBurned=0.0,xTokenBurned=4.80356242,baseTokenOut=0.00147609,redeemFee=0.00001491)
 deployments:
   - contract: fETH
     address: '0x53805A76E1f5ebbFE7115F16f9c87C2f7e633726'
@@ -44,20 +44,18 @@ deployments:
   - contract: stETH
     address: '0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84'
     readings:
-      - sharesOf(fMinter): '+0.001228995929038689'
-      - sharesOf(Market): '+0.000000000000000001'
-      - sharesOf(PlatformFeeSpliter): '+0.000028942489901748'
-      - sharesOf(stETHTreasury): '-0.001669512473507523'
-      - sharesOf(xMinter): '+0.000411574054567085'
+      - sharesOf(fMinter): '+0.00122900'
+      - sharesOf(PlatformFeeSpliter): '+0.00002894'
+      - sharesOf(stETHTreasury): '-0.00166951'
+      - sharesOf(xMinter): '+0.00041157'
   - contract: stETHTreasury
     address: '0x0e5CAA5c889Bdf053c9A76395f62267E653AFbb0'
     readings:
-      - emaLeverageRatio.lastValue: '+1.949516054293383174'
-      - emaLeverageRatio.lastEmaValue: '+0000000000000'
-      - totalBaseToken: '-0.001931211115200937'
+      - emaLeverageRatio.lastValue: '+1949516054293383174'
+      - emaLeverageRatio.lastEmaValue: '+70000000000000'
+      - totalBaseToken: '-0.00193121'
   - contract: xETH
     address: '0xe063F04f280c60aECa68b38341C2eEcBeC703ae2'
     readings:
       - balanceOf(xMinter): '-1.61'
-      - nav: '+0.000000003964175772'
       - totalSupply: '-1'

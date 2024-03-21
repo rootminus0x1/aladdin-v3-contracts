@@ -1,21 +1,21 @@
 Collateral ratio,0x0.CR,liquidate BoostableRebalancePool__wstETHWrapper,[<-Y-axis]fETH.balanceOf(BoostableRebalancePool__wstETHWrapper),[<-Y-axis]xETH.balanceOf(BoostableRebalancePool__wstETHWrapper),[<-Y-axis]xETH.balanceOf(wstETHWrapper),[Y-axis->]stETH.balanceOf(stETHTreasury)-changes,[Y-axis->]stETH.balanceOf(Market)-changes,[Y-axis->]stETH.balanceOf(wstETHWrapper)-changes,[Y-axis->]stETH.balanceOf(wstETH)-changes,[Y-axis->]stETH.balanceOf(PlatformFeeSpliter)-changes,[Y-axis->]wstETH.balanceOf(wstETHWrapper)-changes,[Y-axis->]wstETH.balanceOf(BoostableRebalancePool__wstETHWrapper)-changes,[Y-axis->]FXN.balanceOf(RebalanceWithBonusToken__1)-changes,[Y-axis->]FXN.balanceOf(liquidator)-changes
-"gas:26,443",1.542663952536373761,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.528887393209259215,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.515081032337851767,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.501244773117100048,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,431",1.487378518322226076,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.473482170306447979,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.459555630998687878,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.445598801901264811,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.431611584087572578,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.417593878199742419,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.40354558444629038,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.389466602599749259,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.375356831994285025,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.361216171523297573,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.347044519637005719,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.332841774340016274,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.318607833188877126,reverted with an unrecognized custom error ,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.542663952536373761,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.528887393209259215,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.515081032337851767,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.501244773117100048,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.487378518322226076,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.473482170306447979,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.459555630998687878,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.445598801901264811,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.431611584087572578,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.417593878199742419,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.40354558444629038,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.389466602599749259,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.375356831994285025,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.361216171523297573,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.347044519637005719,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.332841774340016274,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.318607833188877126,CannotLiquidate,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 "gas:26,443",1.304342593289614163,"gas:547,079",5642709.34,0.0,0.0,-27.43,0.0,0.0,27.43,0.0,0.0,23.72,-1.0,1.0
 "gas:26,443",1.290045951295251939,"gas:547,079",5074729.97,0.0,0.0,-370.35,0.0,0.0,370.36,0.0,0.0,320.17,-1.0,1.0
 "gas:26,443",1.275717803403317942,"gas:547,079",4505498.92,0.0,0.0,-721.74,0.0,0.0,721.75,0.0,0.0,623.94,-1.0,1.0
@@ -37,11 +37,11 @@ Collateral ratio,0x0.CR,liquidate BoostableRebalancePool__wstETHWrapper,[<-Y-axi
 "gas:26,443",1.042096127133246976,"gas:521,640",0.0,0.0,0.0,-4248.03,0.0,0.0,4248.03,0.0,0.0,3672.38,-1.0,1.0
 "gas:26,431",1.027216043392655369,"gas:521,640",0.0,0.0,0.0,-4309.56,0.0,0.0,4309.57,0.0,0.0,3725.58,-1.0,1.0
 "gas:26,443",1.012302504473338111,"gas:521,640",0.0,0.0,0.0,-4373.05,0.0,0.0,4373.06,0.0,0.0,3780.47,-1.0,1.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",SafeMath: subtraction overflow,SafeMath: subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",SafeMath: subtraction overflow,SafeMath subtraction overflow,5688690.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
