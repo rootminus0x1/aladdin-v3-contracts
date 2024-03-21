@@ -1,16 +1,16 @@
 simulation:
-  - ETH(1285.4019): gas:26,467
+  - ETH(1285383605957031249999): gas:26,467
     events: []
   - liquidate FxUSDShareableRebalancePool__wstETH_FXN(FxUSDShareableRebalancePool__wstETH_FXN): gas:415,929
     events:
       - fstETH.Approval(owner=FxUSDShareableRebalancePool__wstETH_FXN,spender=MarketV2__wstETH_fstETH_xstETH,value=0.0)
-      - fstETH.Approval(owner=FxUSDShareableRebalancePool__wstETH_FXN,spender=MarketV2__wstETH_fstETH_xstETH,value=1378903.9019)
-      - fstETH.Transfer(from=FxUSDShareableRebalancePool__wstETH_FXN,to=0x0,value=1378903.9019)
-      - wstETH.Transfer(from=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,to=MarketV2__wstETH_fstETH_xstETH,value=925.2566)
-      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=FxUSDShareableRebalancePool__wstETH_FXN,value=925.2566)
+      - fstETH.Approval(owner=FxUSDShareableRebalancePool__wstETH_FXN,spender=MarketV2__wstETH_fstETH_xstETH,value=1378903.90187962)
+      - fstETH.Transfer(from=FxUSDShareableRebalancePool__wstETH_FXN,to=0x0,value=1378903.90187962)
+      - wstETH.Transfer(from=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,to=MarketV2__wstETH_fstETH_xstETH,value=925.26977481)
+      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=FxUSDShareableRebalancePool__wstETH_FXN,value=925.26977481)
       - >-
-        MarketV2__wstETH_fstETH_xstETH.RedeemFToken(owner=FxUSDShareableRebalancePool__wstETH_FXN,recipient=FxUSDShareableRebalancePool__wstETH_FXN,fTokenBurned=1378903.9019,baseTokenOut=925.2566,bonus=0.0,redeemFee=0.0)
-      - FxUSDShareableRebalancePool__wstETH_FXN.Liquidate(liquidated=1378903.9019,baseGained=925.2566)
+        MarketV2__wstETH_fstETH_xstETH.RedeemFToken(owner=FxUSDShareableRebalancePool__wstETH_FXN,recipient=FxUSDShareableRebalancePool__wstETH_FXN,fTokenBurned=1378903.90187962,baseTokenOut=925.26977481,bonus=0.0,redeemFee=0.0)
+      - FxUSDShareableRebalancePool__wstETH_FXN.Liquidate(liquidated=1378903.90187962,baseGained=925.26977481)
       - FXN.Transfer(_from=FxUSDRebalancer,_to=liquidator,_value=1.0)
 deployments:
   - contract: fstETH
@@ -26,7 +26,7 @@ deployments:
   - contract: FxUSDShareableRebalancePool
     address: '0x0417CE2934899d7130229CDa39Db456Ff2332685'
     readings:
-      - pendingRewards(FXN).0: '+0.002'
+      - pendingRewards(FXN).0: '+0.001'
       - pendingRewards(FXN).1: '-0.001'
   - contract: FxUSDShareableRebalancePool
     address: '0x9aD382b028e03977D446635Ba6b8492040F829b7'
@@ -42,10 +42,10 @@ deployments:
   - contract: MockFxPriceOracle
     address: '0x0D92d35D311E54aB8EEA0394d7E773Fc5144491a'
     readings:
-      - getPrice._safePrice: '-2521.8'
-      - getPrice._minUnsafePrice: '-2521.8'
-      - getPrice._maxUnsafePrice: '-2521.8'
-      - price: '-2521.8'
+      - getPrice._safePrice: '-2521.9'
+      - getPrice._minUnsafePrice: '-2521.9'
+      - getPrice._maxUnsafePrice: '-2521.9'
+      - price: '-2521.9'
   - contract: RebalancePoolRegistry
     address: '0x86e987a89Fd7345457d97b9e82906f346D61Df39'
     readings:
@@ -54,18 +54,17 @@ deployments:
     address: '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
     readings:
       - collateralRatio: '-2.039'
-      - currentBaseTokenPrice: '-2521.886232000693750001'
+      - currentBaseTokenPrice: '-2521.90454254'
       - emaLeverageRatio.lastTime: '+33800'
-      - emaLeverageRatio.lastValue: '+13809353936237564820'
+      - emaLeverageRatio.lastValue: '+13812462119868025874'
       - emaLeverageRatio.lastEmaValue: '-23850000000000000'
-      - harvestable: '+0.000000000000000001'
-      - totalBaseToken: '-1072.741439214611293077'
+      - totalBaseToken: '-1072.75672063'
   - contract: wstETH
     address: '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0'
     readings:
-      - balanceOf(FxUSDShareableRebalancePool__wstETH_FXN): '+925.26'
-      - balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH): '-925.25'
+      - balanceOf(FxUSDShareableRebalancePool__wstETH_FXN): '+925.27'
+      - balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH): '-925.26'
   - contract: xstETH
     address: '0x5a097b014C547718e79030a077A91Ae37679EfF5'
     readings:
-      - nav: '-1.290680589064514687'
+      - nav: '-1.29068996'

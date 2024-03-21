@@ -7,23 +7,23 @@ simulation:
     events:
       - wstETH.Transfer(from=xMinter,to=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,value=0.001)
       - wstETH.Approval(owner=xMinter,spender=MarketV2__wstETH_fstETH_xstETH,value=MaxUint256)
-      - xstETH.Transfer(from=0x0,to=xMinter,value=15.591600553546769746)
-      - MarketV2__wstETH_fstETH_xstETH.MintXToken(owner=xMinter,recipient=xMinter,baseTokenIn=0.001,xTokenOut=15.591600553546769746,bonus=0.0,mintFee=0.0)
+      - xstETH.Transfer(from=0x0,to=xMinter,value=15.59160055)
+      - MarketV2__wstETH_fstETH_xstETH.MintXToken(owner=xMinter,recipient=xMinter,baseTokenIn=0.001,xTokenOut=15.59160055,bonus=0.0,mintFee=0.0)
   - redeemXToken(MaxUint256): gas:205,777
     events:
-      - xstETH.Transfer(from=xMinter,to=0x0,value=18.868121567103685363)
-      - wstETH.Transfer(from=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,to=MarketV2__wstETH_fstETH_xstETH,value=0.001210146546680967)
-      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=PlatformFeeSpliter,value=0.000096811723734477)
-      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=xMinter,value=0.00111333482294649)
-      - MarketV2__wstETH_fstETH_xstETH.RedeemXToken(owner=xMinter,recipient=xMinter,xTokenBurned=18.868121567103685363,baseTokenOut=0.00111333482294649,redeemFee=0.000096811723734477)
+      - xstETH.Transfer(from=xMinter,to=0x0,value=18.86812157)
+      - wstETH.Transfer(from=WrappedTokenTreasuryV2__wstETH_fstETH_xstETH,to=MarketV2__wstETH_fstETH_xstETH,value=0.00121015)
+      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=PlatformFeeSpliter,value=0.00009681)
+      - wstETH.Transfer(from=MarketV2__wstETH_fstETH_xstETH,to=xMinter,value=0.00111333)
+      - MarketV2__wstETH_fstETH_xstETH.RedeemXToken(owner=xMinter,recipient=xMinter,xTokenBurned=18.86812157,baseTokenOut=0.00111333,redeemFee=0.00009681)
 deployments:
   - contract: WrappedTokenTreasuryV2
     address: '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
     readings:
       - emaLeverageRatio.lastValue: '+5421600317921173429'
-      - emaLeverageRatio.lastEmaValue: '+88630000000000000'
+      - emaLeverageRatio.lastEmaValue: '+88520000000000000'
       - leverageRatio: '+0.089'
-      - totalBaseToken: '-0.000243643666319644'
+      - totalBaseToken: '-0.00024364'
   - contract: xstETH
     address: '0x5a097b014C547718e79030a077A91Ae37679EfF5'
     readings:

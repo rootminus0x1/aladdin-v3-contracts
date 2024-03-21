@@ -1,26 +1,26 @@
 Collateral ratio,WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.collateralRatio,liquidate FxUSDShareableRebalancePool__wstETH_FXN,[<-Y-axis]fstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN),[<-Y-axis]xstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN),[Y-axis->]wstETH.balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(MarketV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(PlatformFeeSpliter)-changes,[Y-axis->]FXN.balanceOf(FxUSDRebalancer)-changes,[Y-axis->]FXN.balanceOf(liquidator)-changes
-"gas:26,443",1.665,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.648,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.632,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.615,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,431",1.598,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.582,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.565,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.548,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.532,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.515,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.498,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.482,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.465,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.448,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.432,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.415,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.399,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.382,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.365,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.349,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,431",1.332,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.315,reverted with an unrecognized custom error ,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.665,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.648,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.632,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.615,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.598,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.582,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.565,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.548,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.532,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.515,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.498,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.482,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.465,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.448,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.432,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.415,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.399,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.382,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.365,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.349,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.332,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.315,CannotLiquidate,1378903.90,0.0,0.0,0.0,0.0,0.0,0.0
 "gas:26,443",1.299,"gas:441,368",1311644.25,0.0,-37.18,0.0,0.0,-1.0,1.0
 "gas:26,443",1.282,"gas:441,368",1148728.35,0.0,-128.91,0.0,0.0,-1.0,1.0
 "gas:26,443",1.265,"gas:441,368",985812.46,0.0,-223.05,0.0,0.0,-1.0,1.0

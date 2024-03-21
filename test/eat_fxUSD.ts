@@ -13,13 +13,7 @@ const main = async () => {
     // small price change
     // await delve('2500 price', [{ name: 'ETH', precision: 0, setMarket: setPrice, value: parseEther('2500') }]);
 
-    await eatMain(
-        [
-            //new EatCollateralRatio(),
-            new EatFees(),
-        ],
-        true,
-    );
+    await eatMain([new EatCollateralRatio(), new EatFees()], true);
 };
 
 // use this pattern to be able to use async/await everywhere and properly handle errors.

@@ -1,15 +1,3 @@
-block: 19380000
-
-suffix:
-  - contract: FxUSDShareableRebalancePool
-    fields: [getActiveRewardTokens]
-  - contract: MarketV2
-    fields: [baseToken, fToken, xToken]
-  - contract: Market
-    fields: [baseToken, fToken, xToken]
-  - contract: WrappedTokenTreasuryV2
-    fields: [baseToken, fToken, xToken]
-
 format:
   - contract: MarketV2
     type: uint128

@@ -1,26 +1,26 @@
 Collateral ratio,WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.collateralRatio,liquidate FxUSDShareableRebalancePool__wstETH_FXN_xstETH,[<-Y-axis]fstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN_xstETH),[<-Y-axis]xstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN_xstETH),[<-Y-axis]xstETH.balanceOf(LeveragedTokenWrapper),[Y-axis->]wstETH.balanceOf(WrappedTokenTreasuryV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(MarketV2__wstETH_fstETH_xstETH)-changes,[Y-axis->]wstETH.balanceOf(LeveragedTokenWrapper)-changes,[Y-axis->]wstETH.balanceOf(PlatformFeeSpliter)-changes,[Y-axis->]xstETH.balanceOf(FxUSDShareableRebalancePool__wstETH_FXN_xstETH)-changes,[Y-axis->]FXN.balanceOf(FxUSDRebalancer)-changes,[Y-axis->]FXN.balanceOf(liquidator)-changes
-"gas:26,443",1.665,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.648,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.632,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.615,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,431",1.598,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.582,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.565,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.548,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.532,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.515,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.498,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.482,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.465,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.448,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.432,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.415,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.399,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.382,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.365,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.349,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,431",1.332,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",1.315,reverted with an unrecognized custom error ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.665,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.648,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.632,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.615,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.598,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.582,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.565,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.548,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.532,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.515,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.498,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.482,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.465,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.448,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.432,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.415,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.399,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.382,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.365,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.349,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,431",1.332,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",1.315,CannotLiquidate,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 "gas:26,443",1.299,"gas:573,151",1374252.99,362683.56,0.0,-0.37,0.0,0.0,0.37,362683.56,-1.0,1.0
 "gas:26,443",1.282,"gas:573,151",1211337.09,1314457.17,0.0,-1.28,0.0,0.0,1.29,1314457.17,-1.0,1.0
 "gas:26,443",1.265,"gas:573,151",1048421.19,2385676.24,0.0,-2.23,0.0,0.0,2.23,2385676.24,-1.0,1.0
@@ -39,9 +39,9 @@ Collateral ratio,WrappedTokenTreasuryV2__wstETH_fstETH_xstETH.collateralRatio,li
 "gas:26,443",1.049,"gas:562,713",0.0,47586944.24,0.0,-7.63,0.0,0.0,7.63,47586944.24,-1.0,1.0
 "gas:26,443",1.032,"gas:562,713",0.0,72185250.21,0.0,-7.40,0.0,0.0,7.41,72185250.21,-1.0,1.0
 "gas:26,443",1.016,"gas:562,713",0.0,149313813.27,0.0,-7.17,0.0,0.0,7.18,149313813.27,-1.0,1.0
-"gas:26,443",0.999,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",0.982,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",0.966,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",0.949,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",0.932,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-"gas:26,443",0.916,reverted with panic code 0x12 ,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.999,Division or modulo division by zero,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.982,Division or modulo division by zero,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.966,Division or modulo division by zero,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.949,Division or modulo division by zero,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.932,Division or modulo division by zero,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"gas:26,443",0.916,Division or modulo division by zero,1441512.64,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

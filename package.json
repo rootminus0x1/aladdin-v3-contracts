@@ -22,7 +22,7 @@
     "eat:svg:gp": "cd test/results && find . -name \"*.gnuplot.gp\" -exec gnuplot -e \"set output '{}.svg'\" {} \\;",
     "eat:svg": "yarn eat:svg:mmd && yarn eat:svg:gp",
     "eat:png": "cd test/results && find . -name \"*.svg\" -exec convert {} {}.png \\;",
-    "eat:run1": "ts-node test/eat_${0}.ts test/${0}${1}.config.yml && mmdc -i test/results/${0}${1}.blockchain.diagram.mmd",
+    "eat:run1": "ts-node test/eat_${0}.ts ${0}${1} && mmdc -i test/results/${0}${1}.blockchain.diagram.mmd",
     "eat1": "yarn eat:run1 ${0} ${1}",
     "eat": "yarn eat1 fxUSD  && yarn eat:svg && yarn eat:png"
   },

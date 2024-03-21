@@ -59,7 +59,7 @@ export class EatCollateralRatio implements IEat {
 
     public doStuff = async () => {
         // collect a base set of readings
-        const [base] = await delve(run.name);
+        const [base] = await delve(this.name);
 
         // above and below the 130% CR
         for (const [treasury, market, pool, collateral, fToken, xToken, xTokenWrapper] of [

@@ -29,7 +29,7 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/ts-node/dist/bin.js",
-      "args": ["${workspaceFolder}/test/eat_fxUSD.ts", "${workspaceFolder}/test/${input:debug-eat.args}"],
+      "args": ["${workspaceFolder}/test/eat_fxUSD.ts", "${input:debug-eat.args}"],
       "sourceMaps": true,
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
@@ -42,7 +42,7 @@
       "type": "pickString",
       "id": "debug-eat.args",
       "description": "What type of component do you want to create?",
-      "options": ["fxUSD-wstETH.config.yml", "debug.config.yml", "fx.config.yml"]
+      "options": ["fxUSD-wstETH", "debug", "fx"]
     }
   ]
 }

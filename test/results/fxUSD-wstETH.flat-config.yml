@@ -1,0 +1,186 @@
+diagram:
+  renderer: elk
+users:
+  - name: liquidator
+  - name: fMinter
+    wallet:
+      - token: wstETH
+        amount: 10000 ether
+    approve:
+      - MarketV2__wstETH_fstETH_xstETH
+      - fxUSD
+  - name: xMinter
+    wallet:
+      - token: wstETH
+        amount: 10000 ether
+    approve:
+      - MarketV2__wstETH_fstETH_xstETH
+format:
+  - contract: Curve DAO Token
+    reading: available_supply
+    precision: 0
+  - reading: totalSupply
+    precision: 0
+  - reading: chainlinkMinMessageCount
+  - reading: chainlinkMessageExpiration
+  - reading: start_epoch_time
+  - reading: getChainId
+  - reading: getThreshold
+  - reading: nonce
+  - reading: nonces
+  - reading: decimals
+  - reading: time_total
+  - reading: numTotalSupplyHistory
+  - reading: latestRoundData.startedAt
+  - reading: latestRoundData.updatedAt
+  - reading: latestTimestamp
+  - reading: version
+  - reading: getRewardCount
+  - reading: price
+    contract: MockFxPriceOracle
+    precision: 1
+  - reading: balanceOf
+    contract: Voting Escrow
+    precision: 1
+  - contract: FXN
+    reading: available_supply
+    precision: 1
+  - contract: MarketV2
+    reading: MintXToken.baseTokenIn
+    unit: 18
+  - contract: MarketV2
+    reading: MintXToken.xTokenOut
+    unit: 18
+  - contract: MarketV2
+    reading: MintXToken.mintFee
+    unit: 18
+  - contract: MarketV2
+    reading: RedeemXToken.xTokenBurned
+    unit: 18
+  - contract: MarketV2
+    reading: RedeemXToken.baseTokenOut
+    unit: 18
+  - contract: MarketV2
+    reading: RedeemXToken.redeemFee
+    unit: 18
+  - contract: fxUSD
+    reading: Wrap.amount
+    unit: 18
+  - reading: latestAnswer
+    type: int256
+    unit: 8
+  - reading: latestRoundData.answer
+    type: int256
+    unit: 8
+  - reading: latestAnswer
+    type: int256
+    unit: 8
+  - reading: latestRoundData.answer
+    type: int256
+    unit: 8
+  - contract: MarketV2
+    type: uint128
+    unit: 16
+  - contract: MarketV2
+    type: int128
+    unit: 16
+  - contract: MarketV2
+    type: uint64
+    unit: 18
+  - reading: Transfer.value
+    unit: 18
+  - reading: Approval.value
+    unit: 18
+  - reading: rewardData.lastUpdate
+    precision: -2
+  - reading: available_supply
+    precision: 2
+  - reading: getPrice._safePrice
+    precision: 1
+  - reading: getPrice._minUnsafePrice
+    precision: 1
+  - reading: getPrice._maxUnsafePrice
+    precision: 1
+  - reading: balanceOf
+    precision: 2
+  - reading: emaLeverageRatio.lastTime
+    precision: -2
+  - reading: emaLeverageRatio.lastEmaValue
+    precision: -13
+  - reading: pendingRewards.0
+    precision: 3
+  - reading: pendingRewards.1
+    precision: 3
+  - reading: price_oracle
+    precision: 9
+  - reading: leverageRatio
+    precision: 3
+  - reading: collateralRatio
+    precision: 3
+  - reading: getCurrentNav._baseNav
+    precision: 2
+  - reading: getCurrentNav._fNav
+    precision: 3
+  - reading: getCurrentNav._xNav
+    precision: 3
+  - reading: pendingRewards
+    precision: 4
+  - type: uint256
+    unit: ether
+    precision: 8
+configFilePath: test/configs/fxUSD-wstETH.config.yml
+configName: fxUSD-wstETH
+block: 19380000
+twig:
+  - '0xA5e2Ec4682a32605b9098Ddd7204fe84Ab932fE4'
+  - '0x085780639CC2cACd35E474e71f4d000e2405d8f6'
+  - '0x9aD382b028e03977D446635Ba6b8492040F829b7'
+  - '0x0417CE2934899d7130229CDa39Db456Ff2332685'
+  - '0x6AF422087aBF42819F764FF8DE95269036b9A8F9'
+  - '0xAD9A0E7C08bc9F747dF97a3E7E7f620632CB6155'
+  - '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
+  - '0x86e987a89Fd7345457d97b9e82906f346D61Df39'
+  - '0xb592E01dd77084b36430ffCB9c9D2F76fDE32631'
+  - '0x0084C2e1B1823564e597Ff4848a88D61ac63D703'
+  - '0x78c3aF23A4DeA2F630C130d2E42717587584BF05'
+  - '0x78Ef19714c8b3c71997970C156f59605A99C3ff3'
+  - '0xe6b953BB4c4B8eEd78b40B81e457ee4BDA461D55'
+  - '0xD6B8162e2fb9F3EFf09bb8598ca0C8958E33A23D'
+  - '0x5a097b014C547718e79030a077A91Ae37679EfF5'
+  - '0xC8b194925D55d5dE9555AD1db74c149329F71DeF'
+  - '0xd11a4Ee017cA0BECA8FA45fF2abFe9C6267b7881'
+  - '0xAffe966B27ba3E4Ebb8A0eC124C7b7019CC762f8'
+  - '0x56B3c8eF8A095f8637B6A84942aA898326B82b91'
+prune:
+  - '0xb925F8CAA6BE0BFCd1A7383168D1c932D185A748'
+  - '0x4a2ab45D27428901E826db4a52Dae00594b68022'
+  - '0xe7b9c7c9cA85340b8c06fb805f7775e3015108dB'
+  - '0x714B853b3bA73E439c652CfE79660F329E6ebB42'
+  - '0xac3E018457B222d93114458476f3E3416Abbe38F'
+  - '0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF'
+  - '0xa3C5A1e09150B75ff251c1a7815A07182c3de2FB'
+  - '0xe60eB8098B34eD775ac44B1ddE864e098C6d7f37'
+suffix:
+  - contract: FxUSDShareableRebalancePool
+    fields:
+      - getActiveRewardTokens
+  - contract: MarketV2
+    fields:
+      - baseToken
+      - fToken
+      - xToken
+  - contract: Market
+    fields:
+      - baseToken
+      - fToken
+      - xToken
+  - contract: WrappedTokenTreasuryV2
+    fields:
+      - baseToken
+      - fToken
+      - xToken
+import:
+  - fxUSD
+  - wstETH
+outputFileRoot: test/results
+sourceCodeRoot: ./eat-source

@@ -1,22 +1,22 @@
 simulation:
-  - ETH(1573.6530): gas:26,467
+  - ETH(1573760986328124999999): gas:26,467
     events: []
-  - liquidate FxUSDShareableRebalancePool__wstETH_FXN(FxUSDShareableRebalancePool__wstETH_FXN): 'reverted with an unrecognized custom error '
+  - liquidate FxUSDShareableRebalancePool__wstETH_FXN(FxUSDShareableRebalancePool__wstETH_FXN): CannotLiquidate
     events: []
 deployments:
   - contract: MockFxPriceOracle
     address: '0x0D92d35D311E54aB8EEA0394d7E773Fc5144491a'
     readings:
-      - getPrice._safePrice: '-2233.6'
-      - getPrice._minUnsafePrice: '-2233.6'
-      - getPrice._maxUnsafePrice: '-2233.6'
-      - price: '-2233.6'
+      - getPrice._safePrice: '-2233.5'
+      - getPrice._minUnsafePrice: '-2233.5'
+      - getPrice._maxUnsafePrice: '-2233.5'
+      - price: '-2233.5'
   - contract: WrappedTokenTreasuryV2
     address: '0xED803540037B0ae069c93420F89Cd653B6e3Df1f'
     readings:
       - collateralRatio: '-1.859'
-      - currentBaseTokenPrice: '-2233.635194403037500001'
+      - currentBaseTokenPrice: '-2233.52716217'
   - contract: xstETH
     address: '0x5a097b014C547718e79030a077A91Ae37679EfF5'
     readings:
-      - nav: '-1.143156083682743685'
+      - nav: '-1.14310079'

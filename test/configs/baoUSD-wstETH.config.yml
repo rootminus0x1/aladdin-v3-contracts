@@ -1,3 +1,19 @@
+import: [fxUSD, wstETH]
+
 twig:
   - "0x7945b0A6674b175695e5d1D08aE1e6F13744Abb0" # baoUSD
   - "0xf4edfad26EE0D23B69CA93112eccE52704E0006f" # baoETH
+
+users:
+  - name: fMinter #user who mints fTokens
+    wallet:
+      - { token: wstETH, amount: 10000 ether }
+    approve:
+      # TODO: update for bao
+      - MarketV2__wstETH_fstETH_xstETH
+      - fxUSD
+  - name: xMinter # user who mint/redeems xTokens
+    wallet:
+      - { token: wstETH, amount: 10000 ether }
+    approve:
+      - MarketV2__wstETH_fstETH_xstETH

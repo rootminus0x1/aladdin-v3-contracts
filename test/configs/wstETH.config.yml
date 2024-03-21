@@ -1,3 +1,5 @@
+block: 19380000
+
 twig:
   - "0xA5e2Ec4682a32605b9098Ddd7204fe84Ab932fE4" # fxUSDFacet
   - "0x085780639CC2cACd35E474e71f4d000e2405d8f6" # fxUSD
@@ -29,3 +31,13 @@ prune:
   - "0x26B2ec4E02ebe2F54583af25b647b1D619e67BbF" # main GnosisSafe
   - "0xa3C5A1e09150B75ff251c1a7815A07182c3de2FB" # booster GnosisSafe
   - "0xe60eB8098B34eD775ac44B1ddE864e098C6d7f37" # gauge contraoller for token minter
+
+suffix:
+  - contract: FxUSDShareableRebalancePool
+    fields: [getActiveRewardTokens]
+  - contract: MarketV2
+    fields: [baseToken, fToken, xToken]
+  - contract: Market
+    fields: [baseToken, fToken, xToken]
+  - contract: WrappedTokenTreasuryV2
+    fields: [baseToken, fToken, xToken]
